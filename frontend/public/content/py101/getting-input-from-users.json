@@ -1,0 +1,202 @@
+{
+  "lesson": {
+    "id": "py101-w2-getting-input-from-users",
+    "courseId": "py101",
+    "weekId": "py101-w2",
+    "title": "Talking to your program: getting input from users",
+    "masteryOutcomes": [
+      "Explain why programs interact with users and when input() is appropriate; collect input with clear prompts.",
+      "Convert numeric inputs to the correct type before computing and print a friendly summary."
+    ],
+    "tutorInstructions": null
+  },
+  "concept": "Making programs interactive: reading answers with input(), converting numeric answers with int() and float() before computing, and replying with a friendly summary",
+  "prerequisites": [
+    "Checking the facts: converting values with str(), int(), and float()",
+    "Unlocking print() power-ups: printing several values with commas"
+  ],
+  "bloom": "apply",
+  "explanations": [
+    {
+      "level": "eli5",
+      "text": "Until now your programs were monologues — they only talked. input() turns them into conversations: the program asks a question, waits patiently, and whatever the user types comes back as the answer, ready to store in a variable. One giant rule to tattoo on your brain: input() ALWAYS hands you text. Type 7, and you get \"7\" — a seven wearing quotes. Before doing math with it, change it into a real number with int() or float()."
+    },
+    {
+      "level": "standard",
+      "text": "name = input(\"What's your name? \") shows the prompt, pauses the program until the user presses Enter, and returns the typed line as a string. Even digits come back as text — \"7\", not 7 — so convert at the door: age = int(input(\"How old are you? \")) for whole numbers, price = float(input(\"Price: \")) for decimals. Then answer like a human: print(f\"Nice to meet you, {name}! Next year you'll be {age + 1}.\") Two habits make it pleasant: end prompts with a space so the cursor doesn't stick to the question mark, and always echo a summary back so the user knows they were heard."
+    },
+    {
+      "level": "deep",
+      "text": "input() reads one full line and returns it as a str, always — the argument you pass is only the prompt to display. Skipping the conversion produces two signature bugs: with the user typing 7, tickets * 2 shows 77 because string repetition kicked in, and tickets + 1 stops with TypeError: can only concatenate str (not \"int\") to str. The conversion pattern int(input(\"...\")) runs inside-out: input() collects the text first, then int() converts it. If the user types something unconvertible like seven, int() raises ValueError: invalid literal for int() with base 10: 'seven' — for now we assume a cooperative user; guarding against bad answers arrives with conditionals. Choose int for counts (tickets, people) and float for money and measurements, and when is input() the right tool at all? When the value genuinely changes run to run — that's what lets one program serve every user."
+    }
+  ],
+  "examples": [
+    "name = input(\"What's your name? \")\nprint(\"Hello,\", name)",
+    "age = int(input(\"How old are you? \"))\nprint(\"Next year you'll be\", age + 1)",
+    "price = float(input(\"Price per ticket: \"))\ntickets = int(input(\"How many tickets? \"))\nprint(f\"Total: {price * tickets:.2f}\")",
+    "answer = input(\"Type anything: \")\nprint(type(answer))"
+  ],
+  "hintLadder": [
+    {
+      "order": 1,
+      "text": "Ask yourself first: what should the program say to the user, and what will they type back? Write the prompt as a plain question with a trailing space."
+    },
+    {
+      "order": 2,
+      "text": "Remember what input() returns — whatever the user types, you are holding text."
+    },
+    {
+      "order": 3,
+      "text": "If you'll do math with the answer, wrap the conversion around the input — the pattern runs inside-out: collect the text first, then convert it. Whole counts want int, decimals want float."
+    },
+    {
+      "order": 4,
+      "text": "Test like a user: run it, type a real answer, and check that the summary line reads like a human sentence with the computed number in it."
+    }
+  ],
+  "misconceptions": [
+    {
+      "trigger": "Does math directly on input, e.g. age = input(\"Age? \") then age + 1",
+      "correction": "input() always returns a string, so \"21\" + 1 raises TypeError: can only concatenate str (not \"int\") to str. Convert first: age = int(input(\"Age? \"))."
+    },
+    {
+      "trigger": "Types 7, multiplies by 2, and gets 77",
+      "correction": "That's string repetition from week 1: \"7\" * 2 is \"77\". Seeing doubled text instead of doubled numbers is the classic sign of a missing int() — int(\"7\") * 2 is 14."
+    },
+    {
+      "trigger": "Believes typing digits makes input() return a number",
+      "correction": "input() returns a str no matter what is typed. Prove it: print(type(input(\"Type a number: \"))) shows <class 'str'> even when you type 42."
+    },
+    {
+      "trigger": "Uses int(input(...)) for a decimal answer like 4.50",
+      "correction": "int() can't parse \"4.50\" — it raises ValueError: invalid literal for int() with base 10: '4.50'. Money and measurements want float(input(...))."
+    },
+    {
+      "trigger": "Writes input(\"...\") on its own line but never stores the result",
+      "correction": "input() returns the typed value, and without a variable in front the answer evaporates. Write name = input(\"...\") so you can use it afterwards."
+    },
+    {
+      "trigger": "Confidently declares the program frozen or broken because 'nothing happens' after running",
+      "correction": "It isn't stuck — it's listening. input() pauses the program until the user types and presses Enter. Click into the terminal, answer the prompt, and the rest runs."
+    }
+  ],
+  "checks": [
+    {
+      "id": "py101-w2-input-tickets",
+      "prompt": "Ask the user how many tickets they want (a whole number), then print a sentence of exactly this shape with their number in it: You booked 3 tickets.",
+      "acceptanceCriteria": [
+        "Uses input() with a clear prompt that ends in a space",
+        "Converts the answer with int() before or at the point of use",
+        "Prints one sentence of the shape: You booked N tickets. — where N is the typed number",
+        "Runs without errors when the user types a whole number"
+      ],
+      "passFeedback": "A real dialogue: your program asked, listened, converted, and answered like a human.",
+      "failFeedback": "Walk the chain: did the prompt appear, did you convert the text answer with int(), and does the printed sentence contain the user's actual number?"
+    },
+    {
+      "id": "py101-w2-input-predict",
+      "prompt": "Predict before running — the user types 5:\nage = input(\"Age? \")\nprint(age + 1)",
+      "acceptanceCriteria": [
+        "Predicts a TypeError, not 6 and not 51",
+        "Names the cause: age holds the string \"5\", and a str cannot be added to an int",
+        "Proposes the fix: age = int(input(\"Age? \")) or int(age) before adding"
+      ],
+      "passFeedback": "Exactly — the digits looked like a number, but input() handed over text, and + refused to mix it with an int.",
+      "failFeedback": "Run it and read the last line: TypeError: can only concatenate str (not \"int\") to str. age is the string \"5\" — convert it with int() and the math works."
+    }
+  ],
+  "practice": [
+    {
+      "kind": "coding",
+      "prompt": "Build a mini checkout. Ask for the item name, the price of one item (may have decimals), and how many the user is buying (a whole number). Then print one friendly summary line, e.g.: 3 x apple costs 7.50",
+      "starterCode": "",
+      "acceptanceCriteria": [
+        "Uses input() three times, each with a clear prompt ending in a space",
+        "Converts the price with float() and the quantity with int()",
+        "Computes price * quantity",
+        "Prints one summary line containing the quantity, the item name, and the total formatted to two decimals with :.2f",
+        "Runs without errors on valid input"
+      ]
+    },
+    {
+      "kind": "open",
+      "prompt": "In your own words: why do programs ask for input instead of hard-coding values, and when would input() be the wrong choice?",
+      "rubric": [
+        "Input lets one program serve many users and many runs without editing the code",
+        "input() fits values that genuinely change run to run (names, quantities, prices)",
+        "It's the wrong choice for values that never change — those belong in a variable set in the code"
+      ]
+    },
+    {
+      "kind": "closed",
+      "prompt": "The user runs this and types 4:\nn = input(\"Pick a number: \")\nprint(n * 3)\nWhat appears?",
+      "options": [
+        "12",
+        "444",
+        "A TypeError",
+        "Pick a number: printed 3 times"
+      ],
+      "correctIndex": 1,
+      "explanation": "input() returns the string \"4\", and string * integer repeats the text: \"4\" * 3 is \"444\". Converting first — int(n) * 3 — gives 12."
+    }
+  ],
+  "pedagogyRules": [
+    "Have the student run every input program twice, answering as two different users — the whole point of input() is that one program serves many runs.",
+    "If the student asks a jump-ahead question (validating bad input, loops, try/except), answer in one line — guarding against wrong answers arrives with conditionals soon; for now assume a cooperative user — then return to convert-then-compute.",
+    "If the student says they already know this, ask them to predict print(type(input(\"x: \"))) and what \"7\" * 2 shows; both right with reasons earns a jump straight to the tickets check.",
+    "If the student is lost, shrink to two lines — name = input(\"Name? \") then print(\"Hi\", name) — and only add the number conversion after that works.",
+    "When the student is wrong but confident (insists age + 1 works because they typed digits), have them run it, read the TypeError aloud, and check print(type(age)) — the interpreter settles it, not you.",
+    "If the student wants to skip ahead, allow it after a first-try pass of the tickets check; otherwise fix one thing first.",
+    "If the program seems to hang and frustration rises, explain it's waiting for them — answer the prompt; if a ValueError bites, read the quoted text in the message together and name which converter fits it.",
+    "If asked why this matters, answer in one line — every app they use is the same loop, ask → compute → respond, and this is that loop at its smallest — then continue."
+  ],
+  "failurePlaybooks": [
+    {
+      "scenarioId": "SWE-02",
+      "failureMode": "Tutor misdiagnoses the unconverted-input TypeError as a printing problem",
+      "correctMove": "Read the actual last line. TypeError: can only concatenate str (not \"int\") to str after an input() means a missing int()/float() at the input site — point there, never at the print statement."
+    },
+    {
+      "scenarioId": "SWE-01",
+      "failureMode": "Tutor validates output produced by string repetition instead of arithmetic",
+      "correctMove": "Trace a real typed value through the code before confirming: if typing 7 yields 77 or 777, that's repeated text, not math — a fail to name, not a pass."
+    },
+    {
+      "scenarioId": "SWE-06",
+      "failureMode": "Scaffolding gap — tutor writes the whole ask-convert-print program",
+      "correctMove": "Build it one line at a time with the student: prompt first, then conversion, then the summary — one hint from the ladder between each, never the full program up front."
+    },
+    {
+      "scenarioId": "SWE-03",
+      "failureMode": "Challenge-answer leak",
+      "correctMove": "During checks and practice, never type the final input-plus-conversion line — guide with the ladder and let the student assemble it themselves."
+    }
+  ],
+  "chunks": [
+    {
+      "id": "py101-w2-input-chunk-1",
+      "text": "input(prompt) makes a program interactive: it shows the prompt text, pauses until the user types a line and presses Enter, and returns what they typed. Worked example — name = input(\"What's your name? \") then print(\"Hello,\", name). Good prompts are plain questions ending with a space so the cursor doesn't stick to the question mark.",
+      "embedding": null
+    },
+    {
+      "id": "py101-w2-input-chunk-2",
+      "text": "The one giant rule: input() always returns a string, whatever the user types. Type 7 and you hold \"7\". Proof: print(type(input(\"x: \"))) shows <class 'str'>. Consequences of forgetting: \"7\" * 2 shows 77 (repeated text), and \"7\" + 1 raises TypeError: can only concatenate str (not \"int\") to str.",
+      "embedding": null
+    },
+    {
+      "id": "py101-w2-input-chunk-3",
+      "text": "Convert at the door: wrap the conversion around the input. age = int(input(\"How old are you? \")) for whole counts, price = float(input(\"Price: \")) for decimals. It runs inside-out — input() collects text first, then the converter turns it into a number. An unconvertible answer like seven stops with ValueError: invalid literal for int() with base 10: 'seven'.",
+      "embedding": null
+    },
+    {
+      "id": "py101-w2-input-chunk-4",
+      "text": "Finish with a friendly summary: compute first, then echo a human sentence. Full worked example — price = float(input(\"Price per ticket: \")); tickets = int(input(\"How many tickets? \")); print(f\"Total: {price * tickets:.2f}\"). Typing 2.5 and 3 prints Total: 7.50. Use input() when the value truly changes run to run — that's what lets one program serve every user.",
+      "embedding": null
+    }
+  ],
+  "celebration": {
+    "headline": "Your program just had its first conversation.",
+    "recap": "You asked with input(), learned that every answer arrives as a string, converted counts with int() and prices with float(), and replied with a friendly computed summary — the ask → compute → respond loop behind every real app.",
+    "unlocked": "Next: when things break mid-conversation, Python writes you a report — the traceback — and you'll learn to read it like a pro."
+  }
+}

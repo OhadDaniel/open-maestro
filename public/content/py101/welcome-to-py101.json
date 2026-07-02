@@ -1,0 +1,91 @@
+{
+  "lesson": {
+    "id": "py101-w1-welcome",
+    "courseId": "py101",
+    "weekId": "py101-w1",
+    "title": "Welcome to PY101!",
+    "masteryOutcomes": [
+      "Feel welcomed into PY101 and motivated to begin learning Python.",
+      "Understand the PY101 structure: Writing your first program, Core foundations, Decisions and loops, and the Introduction to Python summary.",
+      "Understand that each unit ends with a review: reviews 1-3 are 10% each, untimed, with unlimited retakes.",
+      "Understand the final unit review is 60%, timed, with one retake; weekly discussions are 10%; 10 bonus points for passing all reviews on time."
+    ],
+    "tutorInstructions": null
+  },
+  "concept": "Orientation: how PY101 works and why you are here",
+  "prerequisites": [],
+  "bloom": "understand",
+  "explanations": [
+    {
+      "level": "eli5",
+      "text": "Welcome! PY101 teaches you to write real Python, starting from zero. You will learn a little at a time and build up to writing your own programs."
+    },
+    {
+      "level": "standard",
+      "text": "PY101 has four units: Writing your first program, Core foundations, Decisions and loops, and an Introduction to Python summary. You move through short lessons, then each unit ends with a review."
+    },
+    {
+      "level": "deep",
+      "text": "Grading: reviews 1-3 are worth 10% each, are untimed, and allow unlimited retakes. The final unit review is worth 60%, is timed, and allows one retake. Weekly discussions add 10%, and passing all reviews on time earns 10 bonus points."
+    }
+  ],
+  "examples": [],
+  "hintLadder": [],
+  "misconceptions": [
+    {
+      "trigger": "Thinks they need prior coding experience to start",
+      "correction": "PY101 assumes no background. Reassure the student and start from the very first step."
+    }
+  ],
+  "checks": [
+    {
+      "id": "py101-w1-welcome-ready",
+      "prompt": "Before we start: what do you want to get out of learning Python, and are you ready to write your first line of code?",
+      "acceptanceCriteria": [
+        "Student shares a goal or motivation, or confirms they are ready to begin"
+      ],
+      "passFeedback": "Love it — let's turn that into your first running program.",
+      "failFeedback": "No worries — even \"I just want to try it\" is a great reason. Ready when you are."
+    }
+  ],
+  "pedagogyRules": [
+    "Open warmly and build excitement; this is the first impression.",
+    "If the student shares a name or preference, honor it for the rest of the session.",
+    "If the student sounds nervous or unsure, acknowledge the feeling before explaining anything.",
+    "Set expectations clearly and simply; never overwhelm with the full grading rules unless asked."
+  ],
+  "failurePlaybooks": [
+    {
+      "scenarioId": "SWE-10",
+      "failureMode": "Preference/name miss",
+      "correctMove": "If the student says to call them a certain name, use it from then on and never revert."
+    },
+    {
+      "scenarioId": "SWE-09",
+      "failureMode": "Emotional attunement miss",
+      "correctMove": "When the student expresses nerves or doubt, acknowledge it first and reassure before moving into content."
+    }
+  ],
+  "chunks": [
+    {
+      "id": "py101-w1-welcome-chunk-1",
+      "text": "PY101 is the first course in the AI Engineering program. It teaches coding from scratch with a focus on Python, for learners with no prior technical background.",
+      "embedding": null
+    },
+    {
+      "id": "py101-w1-welcome-chunk-2",
+      "text": "PY101 is organized into four units: Writing your first program, Core foundations, Decisions and loops, and an Introduction to Python summary.",
+      "embedding": null
+    },
+    {
+      "id": "py101-w1-welcome-chunk-3",
+      "text": "Each unit ends with a review. Reviews 1-3 are 10% each, untimed, with unlimited retakes. The final review is 60%, timed, one retake. Weekly discussions are 10%, and 10 bonus points are available for passing all reviews on time.",
+      "embedding": null
+    }
+  ],
+  "celebration": {
+    "headline": "You are set up and ready to learn.",
+    "recap": "You know how PY101 is structured and what to expect.",
+    "unlocked": "Next: write and run your very first line of Python."
+  }
+}

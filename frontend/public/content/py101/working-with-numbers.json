@@ -1,0 +1,208 @@
+{
+  "lesson": {
+    "id": "py101-w1-working-with-numbers",
+    "courseId": "py101",
+    "weekId": "py101-w1",
+    "title": "Working with numbers",
+    "masteryOutcomes": [
+      "Distinguish between an integer (int, a whole number) and a float (float, a number with a decimal).",
+      "Create variables to store integer and float values.",
+      "Perform basic arithmetic operations (+, -, *, /) on numeric variables.",
+      "Explain why 5 is different from \"5\"."
+    ],
+    "tutorInstructions": null
+  },
+  "concept": "Two kinds of numbers — int and float — stored in variables, real arithmetic with +, -, * and /, and why 5 is not \"5\"",
+  "prerequisites": [
+    "Unlocking print() power-ups: printing several values with commas, + and *",
+    "Working with text: creating string variables and joining them with +"
+  ],
+  "bloom": "apply",
+  "explanations": [
+    {
+      "level": "eli5",
+      "text": "Numbers in Python come in two flavors. An int is a whole number, like 3 — good for counting things you can't cut in half, like people or apples. A float has a decimal point, like 3.5 — good for measuring, like money or temperature. You store either one in a variable the same way: age = 25, price = 4.99 — and then you can do math with the names: age + 1, price * 2. One trap to dodge: 5 and \"5\" look like twins but aren't. 5 is a number you can do math with. \"5\" is text wearing a number costume — the quotes make it a string, so it glues instead of adds."
+    },
+    {
+      "level": "standard",
+      "text": "Python has two everyday number types. An integer (int) is a whole number: 25, 0, -3. A float is a number with a decimal point: 4.99, 0.5, 2.0. You create them without quotes: age = 25 makes an int variable, price = 4.99 makes a float variable — the shape of the value decides the type. Arithmetic works on variables exactly like on raw numbers: +, -, and * do what you expect, and / divides — with one surprise: / always answers with a float, so print(10 / 5) shows 2.0, not 2. Mixing an int and a float in one calculation is fine and gives a float: 2 + 0.5 is 2.5. And the crucial distinction: 5 is a number, but \"5\" is a string, because quotes always make text. So 5 + 5 is 10, while \"5\" + \"5\" is \"55\" — same keys on your keyboard, completely different behavior."
+    },
+    {
+      "level": "deep",
+      "text": "A value's type decides what operations mean. With ints and floats, + - * / are arithmetic; with strings, + is gluing and * is repetition — that is the whole reason 5 differs from \"5\". Mixing them across an operator fails loudly: print(\"5\" + 5) raises TypeError: can only concatenate str (not \"int\") to str. Within numbers, Python promotes: any calculation that touches a float produces a float, so 2 + 0.5 is 2.5 and 2 * 8.5 is 17.0. True division / always returns a float even when the division is exact — 10 / 5 is 2.0 — so a .0 in your output is a signal about the operation you used, not a bug. One honest wrinkle for later: floats are stored as binary approximations, which is why print(0.1 + 0.2) shows 0.30000000000000004 — normal, expected, and not a broken computer."
+    }
+  ],
+  "examples": [
+    "age = 25\nprice = 4.99\nprint(age, price)",
+    "apples = 3\noranges = 4\nprint(apples + oranges)",
+    "print(10 / 5)",
+    "print(5 + 5)\nprint(\"5\" + \"5\")",
+    "burgers = 2\nburger_price = 8.5\nprint(\"Total:\", burgers * burger_price)"
+  ],
+  "hintLadder": [
+    {
+      "order": 1,
+      "text": "Before doing any math, label each value out loud: does it have quotes, a decimal point, or neither?"
+    },
+    {
+      "order": 2,
+      "text": "No quotes and no decimal point means int; a decimal point means float; quotes mean string — even when what's inside looks like a number."
+    },
+    {
+      "order": 3,
+      "text": "Now check your operator: between two numbers + adds, but if either side has quotes, Python will glue or complain instead of calculating."
+    },
+    {
+      "order": 4,
+      "text": "If the output has a surprising .0, look for a / in your expression — true division always answers with a float, and that's correct."
+    }
+  ],
+  "misconceptions": [
+    {
+      "trigger": "Believes \"5\" is a number because it looks like one",
+      "correction": "Quotes always make a string, no matter what's inside them. Run print(5 + 5) and print(\"5\" + \"5\"): the first shows 10, the second shows 55, because strings glue instead of add."
+    },
+    {
+      "trigger": "Thinks print(10 / 5) showing 2.0 is a bug",
+      "correction": "/ always returns a float, even when the division is exact — 2.0 is the designed, correct answer. The .0 is just / telling you it did true division."
+    },
+    {
+      "trigger": "Stores a price in quotes, like price = \"4.99\", then tries math on it",
+      "correction": "price = \"4.99\" is a string: price * 2 shows 4.994.99 (string repetition), and price * 1.5 raises TypeError: can't multiply sequence by non-int of type 'float'. Drop the quotes — price = 4.99 — and the math works."
+    },
+    {
+      "trigger": "Expects mixing an int and a float, like 2 + 0.5, to be an error",
+      "correction": "Numbers mix freely: Python promotes the result to a float, so 2 + 0.5 is 2.5 and 4 * 0.5 is 2.0. Only mixing numbers with strings breaks."
+    },
+    {
+      "trigger": "Writes print(\"5\" + 5) expecting 10 or 55",
+      "correction": "Python refuses to guess: TypeError: can only concatenate str (not \"int\") to str. Make both sides the same kind — 5 + 5 for math, \"5\" + \"5\" for glued text."
+    },
+    {
+      "trigger": "Confidently claims int and float are the same thing since both are numbers",
+      "correction": "They print differently and behave differently: run print(4 - 2) and print(4 / 2) — one shows 2, the other 2.0. Knowing which type you have is what lets you predict output exactly, especially with money."
+    }
+  ],
+  "checks": [
+    {
+      "id": "py101-w1-working-with-numbers-predict",
+      "prompt": "Predict before running, exactly as Python would print it:\nprint(5 + 5)\nprint(\"5\" + \"5\")\nprint(10 / 5)",
+      "acceptanceCriteria": [
+        "Predicts 10 for 5 + 5 and says it is number addition",
+        "Predicts 55 for \"5\" + \"5\" and says the quotes make strings, which glue",
+        "Predicts 2.0 (not 2) for 10 / 5 and says / always returns a float"
+      ],
+      "passFeedback": "All three — you can tell numbers from number-costumed text, and you know division's float rule.",
+      "failFeedback": "Run each line and compare. Check the quotes first: quoted values glue instead of add. Then remember / always answers with a decimal point, even for an exact split."
+    },
+    {
+      "id": "py101-w1-working-with-numbers-variables",
+      "prompt": "Create an int variable apples = 7 and a float variable price = 0.5, then use ONE print with arithmetic inside it to show exactly: Cost: 3.5",
+      "acceptanceCriteria": [
+        "Creates apples = 7 and price = 0.5, both without quotes",
+        "Multiplies the variables inside print, e.g. print(\"Cost:\", apples * price)",
+        "Output matches exactly: Cost: 3.5",
+        "Runs without errors"
+      ],
+      "passFeedback": "That's the full loop: an int, a float, arithmetic between them, and a labeled result.",
+      "failFeedback": "Two things to check: are both variables quote-free numbers, and does the multiplication sit inside print next to the label — not typed out as 3.5 by hand?"
+    }
+  ],
+  "practice": [
+    {
+      "kind": "coding",
+      "prompt": "You have a budget of 100 (a whole number) and you spent 62.5 on groceries. Store both in variables, then print exactly: Left: 37.5 — computing the number with subtraction inside print, not by typing 37.5 yourself.",
+      "starterCode": "",
+      "acceptanceCriteria": [
+        "Creates an int variable for 100 and a float variable for 62.5, no quotes",
+        "Uses subtraction between the variables inside print",
+        "Output is exactly: Left: 37.5",
+        "Runs without errors"
+      ]
+    },
+    {
+      "kind": "open",
+      "prompt": "In your own words: why is 5 different from \"5\", and what is one line of code where they would behave differently?",
+      "rubric": [
+        "5 is an int (a number you can calculate with); \"5\" is a string, because quotes always make text",
+        "Gives a concrete behavioral difference, e.g. 5 + 5 is 10 while \"5\" + \"5\" is \"55\", or that print(\"5\" + 5) raises a TypeError"
+      ]
+    },
+    {
+      "kind": "closed",
+      "prompt": "What does print(\"5\" + \"5\") show?",
+      "options": [
+        "10",
+        "55",
+        "5 5",
+        "A TypeError"
+      ],
+      "correctIndex": 1,
+      "explanation": "Both sides are strings, so + glues them into \"55\". To get 10 you need numbers on both sides: print(5 + 5). A TypeError only happens when a string and a number mix across +."
+    }
+  ],
+  "pedagogyRules": [
+    "Before every run, have the student say each value's type out loud (int, float, or string) and predict the exact output — then run and compare character by character.",
+    "If the student asks a jump-ahead question (type(), int()/float() conversion, input(), rounding), answer in one sentence, note it arrives in Week 2, and return to int vs float.",
+    "If the student says they already know numbers, skip the explanation: ask them to predict print(10 / 5) and print(\"5\" + 5); two correct predictions with reasons means jump straight to the Cost: 3.5 check.",
+    "If the student is lost, shrink to one contrast: run print(5 + 5) then print(\"5\" + \"5\"), have them name the difference in their own words, and only then introduce variables.",
+    "When the student is wrong but confident (e.g. insists 10 / 5 prints 2), don't argue — have them run the exact line, read the real output aloud, and name the one rule it shows.",
+    "If the student wants to skip ahead, allow it once they pass the three-line prediction check on the first try; otherwise fix the one type they misread first.",
+    "If a TypeError frustrates the student, acknowledge the feeling first, then reframe: the message names the exact mismatch — find the quoted value or the bare number and make both sides match.",
+    "If asked why this matters, answer in one line — every real program stores counts, prices, and measurements, and mixing up int, float, and string corrupts money math and output — then continue."
+  ],
+  "failurePlaybooks": [
+    {
+      "scenarioId": "SWE-02",
+      "failureMode": "Tutor misdiagnoses a type-mixing error",
+      "correctMove": "Read the actual message. TypeError: can only concatenate str (not \"int\") to str means a string sits next to a bare number across + — point at the quoted operand and say exactly that; never invent a different cause."
+    },
+    {
+      "scenarioId": "SWE-01",
+      "failureMode": "Tutor accepts a prediction of 2 for print(10 / 5)",
+      "correctMove": "Only confirm predictions that match Python's output exactly: 2.0 and 2 are different outputs. Say the prediction was close but wrong, explain that / always returns a float, then re-ask."
+    },
+    {
+      "scenarioId": "SWE-06",
+      "failureMode": "Scaffolding gap — tutor dumps the full solution",
+      "correctMove": "Give one hint from the ladder at a time and let the student run code between hints; never write both variables and the print line for them up front."
+    },
+    {
+      "scenarioId": "SWE-03",
+      "failureMode": "Challenge-answer leak",
+      "correctMove": "During checks and practice, never type the final working statement — guide with the ladder and let the student produce the variables and the print themselves."
+    }
+  ],
+  "chunks": [
+    {
+      "id": "py101-w1-working-with-numbers-chunk-1",
+      "text": "An int is a whole number with no decimal point: 25, 0, -3 — use it for counting whole things like people or apples. A float has a decimal point: 4.99, 0.5, 2.0 — use it for measuring things like money or temperature. The value you type decides the type: age = 25 creates an int variable, price = 4.99 creates a float variable, and neither uses quotes.",
+      "embedding": null
+    },
+    {
+      "id": "py101-w1-working-with-numbers-chunk-2",
+      "text": "Arithmetic works directly on numeric variables. Worked example: apples = 3 and oranges = 4, then print(apples + oranges) shows 7. The operators are + (add), - (subtract), * (multiply), and / (divide), and they mean normal math whenever both sides are numbers.",
+      "embedding": null
+    },
+    {
+      "id": "py101-w1-working-with-numbers-chunk-3",
+      "text": "True division / always returns a float, even when it divides evenly: print(10 / 5) shows 2.0, not 2. Mixing an int and a float in any calculation also produces a float: 2 + 0.5 is 2.5, and 2 * 8.5 is 17.0. A .0 in the output is the trace of float math, not a mistake.",
+      "embedding": null
+    },
+    {
+      "id": "py101-w1-working-with-numbers-chunk-4",
+      "text": "5 is a number; \"5\" is a string, because quotes always make text. So 5 + 5 is 10, but \"5\" + \"5\" is \"55\" (strings glue), and mixing them fails: print(\"5\" + 5) raises TypeError: can only concatenate str (not \"int\") to str. When math misbehaves, check for quotes first.",
+      "embedding": null
+    },
+    {
+      "id": "py101-w1-working-with-numbers-chunk-5",
+      "text": "Worked example putting it together: burgers = 2 (an int, counting) and burger_price = 8.5 (a float, money). print(\"Total:\", burgers * burger_price) shows Total: 17.0 — the int and float multiplied into a float, print's comma added the space, and the .0 shows float math happened.",
+      "embedding": null
+    }
+  ],
+  "celebration": {
+    "headline": "Numbers are officially yours.",
+    "recap": "You met int and float, stored them in variables, ran real arithmetic with +, -, * and /, learned that / always answers in floats, and proved why 5 computes while \"5\" glues.",
+    "unlocked": "Next: modeling real-world calculations — turning word problems into arithmetic your programs can run."
+  }
+}

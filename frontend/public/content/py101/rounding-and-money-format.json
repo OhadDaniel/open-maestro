@@ -1,0 +1,206 @@
+{
+  "lesson": {
+    "id": "py101-w2-rounding-and-money-format",
+    "courseId": "py101",
+    "weekId": "py101-w2",
+    "title": "Rounding, and money format",
+    "masteryOutcomes": [
+      "Use round(x, n) to control numeric precision.",
+      "Format prices with f\"{x:.2f}\" as a quick money-format (value vs representation)."
+    ],
+    "tutorInstructions": null
+  },
+  "concept": "Controlling precision with round(x, n) and money-formatting with f\"{x:.2f}\" — changing a value versus changing how it is shown",
+  "prerequisites": [
+    "Working with numbers: creating int and float variables and doing arithmetic",
+    "Working with text: strings, quotes, and printing values"
+  ],
+  "bloom": "apply",
+  "explanations": [
+    {
+      "level": "eli5",
+      "text": "Sometimes Python prints a price that looks broken, like 59.96999999999999. You have two tools to clean it up. round() is like a chisel: it actually changes the number, carving it down to fewer decimals — round(3.14159, 2) gives 3.14. An f-string with :.2f is like a picture frame: the number underneath stays exactly the same, but on screen it shows with exactly two decimals — even 4.5 shows up as 4.50. Money almost always wants the frame, because prices need those two digits after the dot."
+    },
+    {
+      "level": "standard",
+      "text": "round(x, n) returns x rounded to n decimal places: round(3.14159, 2) is 3.14. Leave n out — round(3.7) — and you get the nearest whole number as an int: 4. Formatting is different: f\"{x:.2f}\" builds a string showing x with exactly two decimals, so f\"{4.5:.2f}\" gives '4.50' — a padded zero that round() can never give you, because round(4.5, 2) is still just the number 4.5. That's the core distinction: round changes the value you compute with; :.2f changes only the text you display. For printing prices, prefer print(f\"Total: {total:.2f}\")."
+    },
+    {
+      "level": "deep",
+      "text": "Floats are binary approximations of decimal numbers, which is why print(0.1 + 0.2) shows 0.30000000000000004 and print(19.99 * 3) shows 59.96999999999999 — the tiny tail is the approximation showing through, not a bug in your code. Both tools clean the display: round(19.99 * 3, 2) gives 59.97, and f\"{19.99 * 3:.2f}\" gives '59.97'. Two subtleties worth knowing. First, on exact ties round() rounds to the even neighbor — round(2.5) is 2 and round(3.5) is 4 — and because most decimals are stored slightly off, round(2.675, 2) gives 2.67, since the stored value sits just below 2.675. Second, types: round(3.7) returns an int, round(x, 2) returns a float, and f\"{x:.2f}\" returns a str — so do all your math first and format only at the moment you print."
+    }
+  ],
+  "examples": [
+    "print(round(3.14159, 2))",
+    "print(round(3.7))",
+    "price = 4.5\nprint(f\"{price:.2f}\")",
+    "print(0.1 + 0.2)\nprint(f\"{0.1 + 0.2:.2f}\")",
+    "total = 19.99 * 3\nprint(total)\nprint(f\"Total: {total:.2f}\")"
+  ],
+  "hintLadder": [
+    {
+      "order": 1,
+      "text": "First decide: does the number itself need to change for later math, or does it only need to look right when printed?"
+    },
+    {
+      "order": 2,
+      "text": "If it only needs to look right, reach for an f-string — inside the braces the pattern is a colon, a dot, the number of decimals, then the letter f."
+    },
+    {
+      "order": 3,
+      "text": "If the value itself must change, round(value, 2) hands back a new rounded number — make sure you actually use or store what it returns."
+    },
+    {
+      "order": 4,
+      "text": "Print your result and count the digits after the dot: money output should show exactly two, even for a value like 4.5."
+    }
+  ],
+  "misconceptions": [
+    {
+      "trigger": "Uses round(4.5, 2) and expects to see 4.50",
+      "correction": "round returns a number, and numbers don't keep trailing zeros — 4.5 is just 4.5. Only string formatting can pad the display: f\"{4.5:.2f}\" gives '4.50'."
+    },
+    {
+      "trigger": "Thinks f\"{x:.2f}\" changes x itself",
+      "correction": "Formatting builds a brand-new string and leaves x untouched. After f\"{price:.2f}\", the variable price still holds the full value — prove it with print(price)."
+    },
+    {
+      "trigger": "Tries to do math on a formatted result, e.g. f\"{x:.2f}\" + 1",
+      "correction": ":.2f produces a str, so \"4.50\" + 1 raises TypeError: can only concatenate str (not \"int\") to str. Do all math on the number first; format only at the print."
+    },
+    {
+      "trigger": "Panics that Python is broken when 0.1 + 0.2 prints 0.30000000000000004",
+      "correction": "Floats are binary approximations, so tiny tails like that are normal, not a bug in your code. That's exactly why money output goes through round(..., 2) or :.2f."
+    },
+    {
+      "trigger": "Confidently insists round(2.5) is 3",
+      "correction": "Python rounds exact ties to the even neighbor: round(2.5) is 2 and round(3.5) is 4. Run both and see. For everyday money display this almost never matters — just don't be surprised by it."
+    },
+    {
+      "trigger": "Writes f\"{x:2f}\" (missing the dot) or \"{x:.2f}\" (missing the f prefix)",
+      "correction": "Two classic typos. Without the dot, :2f falls back to the default six decimals — 4.5 becomes 4.500000. Without the f prefix, the braces print literally: {x:.2f}. The working pattern is f\"{x:.2f}\"."
+    }
+  ],
+  "checks": [
+    {
+      "id": "py101-w2-rounding-money-receipt",
+      "prompt": "total = 19.99 * 3 currently prints as 59.96999999999999. Write one print statement that outputs exactly: Total: 59.97",
+      "acceptanceCriteria": [
+        "Uses f\"{total:.2f}\" inside the print, or round(total, 2)",
+        "Output matches exactly: Total: 59.97",
+        "Runs without errors"
+      ],
+      "passFeedback": "That's a receipt a customer could trust — the float tail is gone and the price shows two clean decimals.",
+      "failFeedback": "Check two things: does the formatted value show exactly two decimals, and does the text before it match Total: with one space?"
+    },
+    {
+      "id": "py101-w2-rounding-money-value-vs-display",
+      "prompt": "Predict before running: what appears on each line, and why?\nprice = 4.5\nprint(f\"{price:.2f}\")\nprint(price)",
+      "acceptanceCriteria": [
+        "Predicts 4.50 on the first line",
+        "Predicts 4.5 on the second line",
+        "Explains that formatting changed only the displayed text, not the variable's value"
+      ],
+      "passFeedback": "Exactly — the f-string dressed the number up for display, while price itself never changed.",
+      "failFeedback": "Run it and compare the lines: :.2f pads the display to 4.50, but price still holds plain 4.5 because formatting never touches the variable."
+    }
+  ],
+  "practice": [
+    {
+      "kind": "coding",
+      "prompt": "A customer buys 3 notebooks at 4.20 each. Compute the total and print a receipt line that reads exactly: You pay 12.60",
+      "starterCode": "price = 4.20\nquantity = 3\n",
+      "acceptanceCriteria": [
+        "Computes the total with price * quantity",
+        "Formats the total with f\"{...:.2f}\" so the trailing zero appears",
+        "Output matches exactly: You pay 12.60",
+        "Runs without errors"
+      ]
+    },
+    {
+      "kind": "open",
+      "prompt": "In your own words: what is the difference between round(x, 2) and f\"{x:.2f}\", and when would you reach for each?",
+      "rubric": [
+        "round(x, 2) changes the value and returns a number you can keep computing with",
+        "f\"{x:.2f}\" returns a string, changes only the display, and pads zeros (4.5 becomes 4.50)",
+        "Use :.2f when printing money; use round when the later math should use the rounded value"
+      ]
+    },
+    {
+      "kind": "closed",
+      "prompt": "What does print(f\"{7:.2f}\") show?",
+      "options": [
+        "7",
+        "7.0",
+        "7.00",
+        "An error, because 7 is not a float"
+      ],
+      "correctIndex": 2,
+      "explanation": ":.2f formats any number to a fixed two decimals, padding with zeros — integers included, so 7 displays as 7.00."
+    }
+  ],
+  "pedagogyRules": [
+    "Keep two questions separate out loud at every step: 'what is the value?' versus 'what does the screen show?' — every misunderstanding in this lesson lives in that gap.",
+    "If the student asks a jump-ahead question (thousands separators, currency symbols, the decimal module), answer in one line — yes, format specs can do more, like f\"{x:,.2f}\" for commas — then return to round and :.2f.",
+    "If the student says they already know this, ask them to predict print(round(4.5, 2)) and print(f\"{4.5:.2f}\"); answering 4.5 and 4.50 with the reason earns a jump straight to the receipt check.",
+    "If the student is lost, shrink to one line: run print(f\"{4.5:.2f}\"), watch 4.50 appear, and only then contrast it with round.",
+    "When the student is wrong but confident (e.g. insists round(2.5) is 3), don't argue — have them run the exact line, read the real output aloud, name ties-to-even in one sentence, and move on: it's a footnote, not the lesson.",
+    "If the student wants to skip, allow it after a first-try pass of the Total: 59.97 check; otherwise fix one thing first.",
+    "If 0.30000000000000004-style output causes frustration, acknowledge it looks broken, explain in one line that floats are stored approximations, then show :.2f cleaning it — turn the annoyance into the reason for the lesson.",
+    "If asked why this matters, answer in one line — any program that touches money must print clean two-decimal prices, and 59.96999999999999 on a receipt is a bug — then continue."
+  ],
+  "failurePlaybooks": [
+    {
+      "scenarioId": "SWE-01",
+      "failureMode": "Tutor validates money output with the wrong number of decimals",
+      "correctMove": "Money output must show exactly two decimals: 12.6 is not 12.60. Compare character by character and point at the missing zero instead of accepting a near-match."
+    },
+    {
+      "scenarioId": "SWE-02",
+      "failureMode": "Tutor misdiagnoses a float tail as a bug in the student's arithmetic",
+      "correctMove": "Name it correctly: 59.96999999999999 comes from binary float representation, not from a wrong formula. The fix is display-side — round(..., 2) or :.2f — never rewriting correct math."
+    },
+    {
+      "scenarioId": "SWE-06",
+      "failureMode": "Scaffolding gap — tutor dumps the full f-string solution",
+      "correctMove": "Give one hint from the ladder at a time and let the student run code between hints; never write the complete print(f\"...\") line for them up front."
+    },
+    {
+      "scenarioId": "SWE-03",
+      "failureMode": "Challenge-answer leak during checks",
+      "correctMove": "During checks and practice, never type the final working line — guide with the ladder and let the student produce the format spec themselves."
+    }
+  ],
+  "chunks": [
+    {
+      "id": "py101-w2-rounding-money-chunk-1",
+      "text": "round(x, n) returns x rounded to n decimal places: round(3.14159, 2) is 3.14. With no second argument, round(3.7) returns the nearest whole number as an int: 4. round hands back a new value — it does not change the original variable, so store or use its result.",
+      "embedding": null
+    },
+    {
+      "id": "py101-w2-rounding-money-chunk-2",
+      "text": "f\"{x:.2f}\" builds a string showing x with exactly two decimals, padding zeros when needed: f\"{4.5:.2f}\" is '4.50' and f\"{7:.2f}\" is '7.00'. The pattern inside the braces is colon, dot, digit count, letter f. The result is a str, so it's for display — not for further math.",
+      "embedding": null
+    },
+    {
+      "id": "py101-w2-rounding-money-chunk-3",
+      "text": "Value versus representation: round(x, 2) changes the value itself and returns a number; f\"{x:.2f}\" changes only how the value is shown and leaves the variable untouched. Worked example — price = 4.5; print(f\"{price:.2f}\") shows 4.50, then print(price) still shows 4.5.",
+      "embedding": null
+    },
+    {
+      "id": "py101-w2-rounding-money-chunk-4",
+      "text": "Floats are binary approximations, so tiny tails appear: print(0.1 + 0.2) shows 0.30000000000000004 and print(19.99 * 3) shows 59.96999999999999. This is normal, not a bug. Worked receipt example — total = 19.99 * 3; print(f\"Total: {total:.2f}\") prints Total: 59.97.",
+      "embedding": null
+    },
+    {
+      "id": "py101-w2-rounding-money-chunk-5",
+      "text": "Order of operations for clean output: do all math on numbers first, format last at the print. A footnote on ties: round() rounds exact halves to the even neighbor, so round(2.5) is 2 and round(3.5) is 4; and stored approximations mean round(2.675, 2) gives 2.67. For money display, f\"{x:.2f}\" is the everyday tool.",
+      "embedding": null
+    }
+  ],
+  "celebration": {
+    "headline": "Your numbers are presentable now.",
+    "recap": "You carved values with round(x, n), framed them with f\"{x:.2f}\", saw why 4.5 can display as 4.50 while staying 4.5 underneath, and learned that float tails like 59.96999999999999 are approximations you clean at print time.",
+    "unlocked": "Next: checking the facts — asking Python what type a value is, and converting between str, int, and float."
+  }
+}

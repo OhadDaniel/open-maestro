@@ -1,0 +1,1978 @@
+{
+  "knows-it-impatient::py101-w2-checking-the-facts": {
+    "turns": [
+      {
+        "role": "user",
+        "content": "hi, I think I already get this stuff"
+      },
+      {
+        "role": "assistant",
+        "content": "Hey! Good to have you here. Let's see if you're ready to move on. Quick check: What does this print? \n\n```python\nx = "
+      },
+      {
+        "role": "user",
+        "content": "I already got this, so can we move on to the next topic?"
+      },
+      {
+        "role": "assistant",
+        "content": "Sure thing! Let's move on to the next topic. We'll start with using `type()` to check a variable's data type. Here's an example:\n\n```python\nx = "
+      },
+      {
+        "role": "user",
+        "content": "I already know how to use `type()`, can we skip to the next topic?"
+      },
+      {
+        "role": "assistant",
+        "content": "Got it! Let's skip to the next topic. We'll cover using `str()`, `int()`, and `float()` to convert values between data types. Here's an example:\n\n```python\ns = \"3.5\"\nf = float(s)\nprint(f + 1)\n```\n\nWhat does this print?"
+      },
+      {
+        "role": "user",
+        "content": "I know what that prints, so can we move on to the next thing?"
+      },
+      {
+        "role": "assistant",
+        "content": "Sure! Let's move on to the next part. We'll look at how conversions must be valid. Here's an example:\n\n```python\nint(\"10\")\n```\n\nThis works, but what about:\n\n```python\nint(\""
+      },
+      {
+        "role": "user",
+        "content": "I already understand that, can we move on to the next topic?"
+      }
+    ],
+    "exchanges": 4,
+    "finished": true
+  },
+  "knows-it-impatient::py101-w2-division-modes": {
+    "turns": [
+      {
+        "role": "user",
+        "content": "hi, I think I already get this stuff"
+      },
+      {
+        "role": "assistant",
+        "content": "Hey! Good to have you here. Let's do a quick check to make sure we're on the same page. What does `10 / 2` return in Python? And what about `11 // 3`? One answer for each, and we'll move on."
+      },
+      {
+        "role": "user",
+        "content": "`10 / 2` returns `5.0` and `11 // 3` returns `3`. Can we move on now?"
+      },
+      {
+        "role": "assistant",
+        "content": "Spot on! `10 / "
+      }
+    ],
+    "exchanges": 2,
+    "finished": true
+  },
+  "knows-it-impatient::py101-w2-functions-i": {
+    "turns": [
+      {
+        "role": "user",
+        "content": "hi, I think I already get this stuff"
+      },
+      {
+        "role": "assistant",
+        "content": "Hey! Good to have you here. Let's make sure you're ready to move on. Quick check: what does this print? \n\n```python\ndef add(a, b):\n    return a + b\n\nprint(add(2, 3))\n```\n\nOne answer and we move on."
+      },
+      {
+        "role": "user",
+        "content": "It prints 5. Can we move on now?"
+      },
+      {
+        "role": "assistant",
+        "content": "Spot on, that's 5. Functions are done. Next outcome: defining and calling functions with parameters. Ready to dive into that?"
+      },
+      {
+        "role": "user",
+        "content": "Yeah, I'm ready. Let's get into it!"
+      },
+      {
+        "role": "assistant",
+        "content": "Great! Let's start by understanding how functions reduce repetition and improve reuse. Imagine you have a piece of code that prints a greeting for someone. Instead of writing the same print statement every time, you can wrap it in a function and call it with different names.\n\nHere's an example:\n\n```python\ndef greet(name):\n    print(\"Hello\", name)\n```\n\nThis function, `greet`, takes one parameter, `name`. You can call this function with different names to print personalized greetings. For example:\n\n```python\ngreet(\"Ravi\")\ngreet(\"Alice\")\n```\n\nThis way, you don't have to write the print statement multiple times. Ready to try defining a function like this?"
+      },
+      {
+        "role": "user",
+        "content": "I get it, I can define a function to print personalized greetings. Let's move on to something more challenging!"
+      },
+      {
+        "role": "assistant",
+        "content": "Sure thing! Let's move on to defining a function with multiple parameters. Here's an example:\n\n```python\ndef add(a, b):\n    return a + b\n```\n\nThis function, `add`, takes two parameters, `a` and `b`, and returns their sum. You can call this function with different numbers to get their sum. For example:\n\n```python\nresult = add(2, 5)\nprint(result)\n```\n\nThis will print `7`. Ready to try defining and calling a function with two parameters?"
+      },
+      {
+        "role": "user",
+        "content": "I already know how to define and call a function with multiple parameters. Can we move on to something more advanced?"
+      }
+    ],
+    "exchanges": 4,
+    "finished": true
+  },
+  "knows-it-impatient::py101-w2-functions-ii": {
+    "turns": [
+      {
+        "role": "user",
+        "content": "hi, I think I already get this stuff"
+      },
+      {
+        "role": "assistant",
+        "content": "Hey! Good to have you here. Let's make sure you're ready to move on. Quick check: what does this print? \n\n```python\ndef add(a, b):\n    return a + b\n\nprint(add(2, 3))\n```\n\nOne answer and we move on."
+      },
+      {
+        "role": "user",
+        "content": "It prints 5. Can we move on now?"
+      },
+      {
+        "role": "assistant",
+        "content": "Spot on, that's 5. Functions are done. Next outcome: understanding how arguments flow into parameters and using print statements to trace them. Ready for that?"
+      },
+      {
+        "role": "user",
+        "content": "Yeah, I'm ready. Let's dive into how arguments work!"
+      },
+      {
+        "role": "assistant",
+        "content": "Great! Let's look at how arguments work with a simple example. Here's a function called `trace`:\n\n```python\ndef trace(x):\n    print(\"x is\", x)\n    return x * "
+      },
+      {
+        "role": "user",
+        "content": "I see where this is going, but I already understand tracing arguments. Can we skip to something more advanced?"
+      },
+      {
+        "role": "assistant",
+        "content": "Sure thing! Let's move on to the next part: using print statements to trace how values are passed from the call site to parameters. Here's an example:\n\n```python\ndef trace(x):\n    print(\"x is\", x)\n    return x * "
+      },
+      {
+        "role": "user",
+        "content": "I get the concept of tracing, so can we jump straight to something more advanced?"
+      }
+    ],
+    "exchanges": 4,
+    "finished": true
+  },
+  "declines-tired::py101-w2-checking-the-facts": {
+    "turns": [
+      {
+        "role": "user",
+        "content": "hey"
+      },
+      {
+        "role": "assistant",
+        "content": "Hey! Good to have you here. We're starting with \"Checking the facts\" — we'll learn how to check and convert data types in Python. Ready to dive in?"
+      },
+      {
+        "role": "user",
+        "content": "Nah, not really feeling it today. Can we just keep it light?"
+      },
+      {
+        "role": "assistant",
+        "content": "Totally fair. Let's keep it tiny: one small idea, five minutes, stop whenever. Or rest and pick this up tomorrow — also a smart move. Which sounds better?"
+      },
+      {
+        "role": "user",
+        "content": "Let's just rest today, I think. Tomorrow sounds good."
+      },
+      {
+        "role": "assistant",
+        "content": "Sounds good! Take care of yourself today. We'll pick this up tomorrow. Have a great day!"
+      }
+    ],
+    "exchanges": 3,
+    "finished": true
+  },
+  "declines-tired::py101-w2-division-modes": {
+    "turns": [
+      {
+        "role": "user",
+        "content": "hey"
+      },
+      {
+        "role": "assistant",
+        "content": "Hey! Good to have you here. We're diving into division modes in Python today — specifically, how the `/` and `//` operators work. Ready to jump in?"
+      },
+      {
+        "role": "user",
+        "content": "Nah, not right now. Can we just chat about something else?"
+      },
+      {
+        "role": "assistant",
+        "content": "Sure thing! Let's keep it light. What would you like to chat about? Maybe something you're interested in or a hobby you have?"
+      },
+      {
+        "role": "user",
+        "content": "I don’t know, maybe just like what’s your favorite game or something?"
+      },
+      {
+        "role": "assistant",
+        "content": "That sounds fun! I love board games and video games. Board games like \"Settlers of Catan\" are great for strategic thinking, and video games like \"The Legend of Zelda: Breath of the Wild\" offer amazing exploration. What about you? Do you have any favorites?"
+      },
+      {
+        "role": "user",
+        "content": "I like RPGs, especially \"Final Fantasy.\" There's just something about the stories that hooks me. What about you?"
+      },
+      {
+        "role": "assistant",
+        "content": "Final Fantasy is a fantastic choice! The stories and character development are top-notch. I haven't played the newer ones, but I've enjoyed the classics like Final Fantasy VII and X. The world-building and lore are incredible. What's your favorite Final Fantasy game and why?"
+      },
+      {
+        "role": "user",
+        "content": "I think my favorite is probably Final Fantasy VII because of the characters and the overall plot twist. Plus, that soundtrack is just amazing! What about you, any favorite characters?"
+      }
+    ],
+    "exchanges": 4,
+    "finished": true
+  },
+  "declines-tired::py101-w2-functions-i": {
+    "turns": [
+      {
+        "role": "user",
+        "content": "hey"
+      },
+      {
+        "role": "assistant",
+        "content": "Hey! Good to have you here. We're starting with \"Functions I: why, define, and call\" — want to jump in?"
+      },
+      {
+        "role": "user",
+        "content": "Nah, not now. Just not feeling it today."
+      },
+      {
+        "role": "assistant",
+        "content": "Totally fair. Let's keep it tiny: one small idea, five minutes, stop whenever. Or rest and pick this up tomorrow — also a smart move. Which sounds better?"
+      },
+      {
+        "role": "user",
+        "content": "I think I’d rather just rest and pick this up tomorrow."
+      },
+      {
+        "role": "assistant",
+        "content": "Sounds good! Take care of yourself today. We'll pick up right where we left off tomorrow. Have a great day!"
+      },
+      {
+        "role": "user",
+        "content": "Thanks, I appreciate it. You too!"
+      },
+      {
+        "role": "assistant",
+        "content": "You're welcome! Take care. See you tomorrow!"
+      }
+    ],
+    "exchanges": 4,
+    "finished": true
+  },
+  "declines-tired::py101-w2-functions-ii": {
+    "turns": [
+      {
+        "role": "user",
+        "content": "hey"
+      },
+      {
+        "role": "assistant",
+        "content": "Hey! Good to have you here. We're diving into \"Functions II: Inside the Function\" today. Ready to jump in?"
+      },
+      {
+        "role": "user",
+        "content": "Nah, I'm not really feeling it today. Can we just chat about something else?"
+      },
+      {
+        "role": "assistant",
+        "content": "Totally fair. Let's keep it tiny: one small idea, five minutes, stop whenever. Or rest and pick this up tomorrow — also a smart move. Which sounds better?"
+      },
+      {
+        "role": "user",
+        "content": "Maybe tomorrow sounds good, I’m really not up for much today."
+      },
+      {
+        "role": "assistant",
+        "content": "Absolutely, take your time. Rest and come back when you're ready. Have a great day!"
+      },
+      {
+        "role": "user",
+        "content": "Thanks, I appreciate it! See you tomorrow then."
+      },
+      {
+        "role": "assistant",
+        "content": "You're welcome! See you tomorrow. Take care!"
+      }
+    ],
+    "exchanges": 4,
+    "finished": true
+  },
+  "eager-beginner::py101-w2-checking-the-facts": {
+    "turns": [
+      {
+        "role": "user",
+        "content": "hi! I've never written code before"
+      },
+      {
+        "role": "assistant",
+        "content": "Hey! Good to have you here. We're starting with the basics today, so no worries at all. We'll learn how to check what kind of data we're working with and how to change that data into different types. Ready to dive in?"
+      },
+      {
+        "role": "user",
+        "content": "Yes, I'm ready! What do we need to do first?"
+      },
+      {
+        "role": "assistant",
+        "content": "Great! First, we'll learn how to check a variable's data type using the `type()` function. This helps us understand what kind of data Python is dealing with. Let's start with an example.\n\nTry this:\n```python\nx = "
+      },
+      {
+        "role": "user",
+        "content": "Okay! What should I set `x` to?"
+      },
+      {
+        "role": "assistant",
+        "content": "You can set `x` to any value you like. Let's keep it simple. How about setting `x` to `5`? So your code will look like this:\n```python\nx = "
+      },
+      {
+        "role": "user",
+        "content": "Got it! So I'll write `x = 5`. What should I do next?"
+      },
+      {
+        "role": "assistant",
+        "content": "Perfect! Now, to check the type of `x`, you'll use the `type()` function. Here's how you do it:\n```python\nx = "
+      },
+      {
+        "role": "user",
+        "content": "Okay, so I'll write `x = 5` and then use `type(x)`. So, my code will be:  \n```python\nx = 5  \nprint(type(x))  \n```  \nIs that right?"
+      }
+    ],
+    "exchanges": 4,
+    "finished": true
+  },
+  "eager-beginner::py101-w2-division-modes": {
+    "turns": [
+      {
+        "role": "user",
+        "content": "hi! I've never written code before"
+      },
+      {
+        "role": "assistant",
+        "content": "Hey! Good to have you here. We're starting with some basic division in Python. It's like learning a new language, one step at a time. Ready to dive in?"
+      },
+      {
+        "role": "user",
+        "content": "Yes, I'm ready! How do we start with the division in Python?"
+      },
+      {
+        "role": "assistant",
+        "content": "Great! Let's start with the basics of division in Python. There are two types of division we'll look at: true division and floor division.\n\nFirst, let's talk about true division. The `/` operator in Python performs true division and always returns a float, even if the numbers divide evenly. For example, `10 / "
+      },
+      {
+        "role": "user",
+        "content": "Okay, so if I write `10 / 2`, I should get `5.0`? Can I try that in Python?"
+      },
+      {
+        "role": "assistant",
+        "content": "Exactly! You should get `5.0`. Go ahead and try it in Python."
+      },
+      {
+        "role": "user",
+        "content": "I tried it, and it worked! I got `5.0`. What about floor division? How does that work?"
+      },
+      {
+        "role": "assistant",
+        "content": "Great job! You got `5.0` as expected.\n\nNow, let's move on to floor division. The `//` operator in Python performs floor division, which discards the fractional part and returns the largest whole number less than or equal to the "
+      },
+      {
+        "role": "user",
+        "content": "So, if I use `10 // 3`, I should get `3`, right? Can I try that too?"
+      }
+    ],
+    "exchanges": 4,
+    "finished": true
+  },
+  "eager-beginner::py101-w2-functions-i": {
+    "turns": [
+      {
+        "role": "user",
+        "content": "hi! I've never written code before"
+      },
+      {
+        "role": "assistant",
+        "content": "Hey! Good to have you here. We're starting with the basics of functions in Python. Functions help us write code that we can reuse, which makes our programs cleaner and easier to manage. Ready to dive in?"
+      },
+      {
+        "role": "user",
+        "content": "Yes, I'm ready! What do I need to do first?"
+      },
+      {
+        "role": "assistant",
+        "content": "Great! Let's start by understanding why functions are useful. Functions reduce repetition by letting you write logic once and reuse it with different inputs. Instead of copying code, you wrap it in a function and call it with different values.\n\nFor example, if you want to greet different people, you can write a function to handle that:\n\n```python\ndef greet(name):\n    print(\"Hello\", name)\n```\n\nThis function, `greet`, takes one parameter, `name`, and prints a greeting message. The parameter is like a placeholder for the value you'll provide later.\n\nReady to try defining a simple function like this?"
+      },
+      {
+        "role": "user",
+        "content": "Sure! How do I actually define that function in my code? Do I just type exactly what you wrote?"
+      },
+      {
+        "role": "assistant",
+        "content": "Exactly! You type it just as I wrote it. Here's the function again:\n\n```python\ndef greet(name):\n    print(\"Hello\", name)\n```\n\nThis defines a function named `greet` that takes one parameter, `name`. When you call this function with a name, it will print a greeting message.\n\nGo ahead and type that into your code editor. Once you've done that, let me know!"
+      },
+      {
+        "role": "user",
+        "content": "Okay, I typed it into my code editor. What's next?"
+      },
+      {
+        "role": "assistant",
+        "content": "Great job! Now that you've defined the function, the next step is to call it. Calling a function means using its name and passing in the values you want to use for the parameters.\n\nFor example, to greet \"Alice\", you would call the function like this:\n\n```python\ngreet(\"Alice\")\n```\n\nThis will print \"Hello Alice\" to the console. Try calling the `greet` function with your name or any other name you like."
+      },
+      {
+        "role": "user",
+        "content": "I called the function with my name, and it printed the greeting! That’s so cool! Can I call it with different names as well?"
+      }
+    ],
+    "exchanges": 4,
+    "finished": true
+  },
+  "eager-beginner::py101-w2-functions-ii": {
+    "turns": [
+      {
+        "role": "user",
+        "content": "hi! I've never written code before"
+      },
+      {
+        "role": "assistant",
+        "content": "Hey! Good to have you here. We're starting with the basics of functions in Python. No worries if you've never written code before — we'll take it step by step. Ready to dive in?"
+      },
+      {
+        "role": "user",
+        "content": "Yes, I’m ready! What’s a function in Python?"
+      },
+      {
+        "role": "assistant",
+        "content": "Great! A function in Python is like a mini-program that does a specific task. It has a name, can take inputs (called parameters), and can give back an output (using return). Let's look at a simple example:\n\n```python\ndef add(a, b):\n    total = a + b\n    return total\n```\n\nThis function is named `add`, it takes two parameters `a` and `b`, and it returns their sum. Ready to see how it works?"
+      },
+      {
+        "role": "user",
+        "content": "Yes, I want to see how it works! How do I actually run this function in Python?"
+      },
+      {
+        "role": "assistant",
+        "content": "Perfect! To run the function, you need to call it with some values. Here's how you can do it:\n\n```python\ndef add(a, b):\n    total = a + b\n    return total\n\nresult = add(2, 3)\nprint(result)\n```\n\nThis code defines the `add` function and then calls it with the arguments `2` and `3`. The result, which is `5`, is stored in the variable `result` and then printed. Let's run this together. Copy and paste the code into your Python environment and see what happens!"
+      },
+      {
+        "role": "user",
+        "content": "Okay, I copied the code and ran it! I saw the number 5 printed out. That’s so cool! Can I use different numbers instead of 2 and 3?"
+      },
+      {
+        "role": "assistant",
+        "content": "Absolutely! You can use any numbers you like. Let's try it with `7` and `10`:\n\n```python\ndef add(a, b):\n    total = a + b\n    return total\n\nresult = add(7, 10)\nprint(result)\n```\n\nRun this code and see what you get. This will help you see how the function works with different inputs."
+      },
+      {
+        "role": "user",
+        "content": "I ran the code with `7` and `10`, and it printed `17`. This is so neat! Can I use negative numbers or decimals too?"
+      }
+    ],
+    "exchanges": 4,
+    "finished": true
+  },
+  "confused-anxious::py101-w2-checking-the-facts": {
+    "turns": [
+      {
+        "role": "user",
+        "content": "honestly I'm a bit lost already"
+      },
+      {
+        "role": "assistant",
+        "content": "No worries, it's totally normal to feel a bit lost when starting out. Let's take it one step at a time. We're going to start with checking a variable's data type using `type()`. This helps us understand what kind of data Python is working with.\n\nHere's a simple example:\n```python\nx = "
+      },
+      {
+        "role": "user",
+        "content": "I'm not sure what to put for `x` in that example. Can you explain that part again?"
+      },
+      {
+        "role": "assistant",
+        "content": "Sure! In the example, `x` is a variable that we're going to assign a value to. You can choose any value you like. Let's use a number for now. Here's how it looks:\n\n```python\nx = "
+      },
+      {
+        "role": "user",
+        "content": "Okay, so if I want to use a number, do I just write something like `x = 5`?"
+      },
+      {
+        "role": "assistant",
+        "content": "Exactly! You got it. Let's use `5` for `x`. Now, we'll use `type()` to check what kind of data `x` is. Here's the complete code:\n\n```python\nx = "
+      },
+      {
+        "role": "user",
+        "content": "I'm still a bit confused... so I just write `x = 5` and then what comes after that? Do I write `type(x)` below it?"
+      },
+      {
+        "role": "assistant",
+        "content": "Got it! You're doing great. After you assign `5` to `x`, you'll use `type(x)` to check its data type. Here's how the full code looks:\n\n```python\nx = "
+      },
+      {
+        "role": "user",
+        "content": "Okay, so I write `x = 5` and then below that, I write `print(type(x))`? Just to see the type of `x`?"
+      }
+    ],
+    "exchanges": 4,
+    "finished": true
+  },
+  "confused-anxious::py101-w2-division-modes": {
+    "turns": [
+      {
+        "role": "user",
+        "content": "honestly I'm a bit lost already"
+      },
+      {
+        "role": "assistant",
+        "content": "No worries, it's totally normal to feel a bit lost when starting something new. Let's take it one step at a time. We're going to start with the basics of division in Python. First, we'll look at how the `/` operator works. It's called true division and it always gives you a float, even if the numbers divide evenly. For example, `10 / "
+      },
+      {
+        "role": "user",
+        "content": "I'm sorry, I still don't get it. Can you explain what you mean by the `/` operator and how it works? Like, what does that look like in code?"
+      },
+      {
+        "role": "assistant",
+        "content": "Absolutely, let's break it down. The `/` operator in Python is used for true division. It divides two numbers and always returns a float, even if the division is exact. Here's a simple example:\n\n```python\nresult = 10 / 2\nprint(result)\n```\n\nWhen you run this code, `result` will be `5.0`, not `"
+      },
+      {
+        "role": "user",
+        "content": "Okay, I'm still a bit confused. So, when I see `10 / 2`, does that mean I'm just dividing 10 by 2 and then it automatically turns into `5.0`? Why does it have that `.0` at the end?"
+      },
+      {
+        "role": "assistant",
+        "content": "Exactly! When you use the `/` operator, Python divides 10 by 2 and gives you the result as a float, which is why you see `"
+      },
+      {
+        "role": "user",
+        "content": "Okay, I think I understand a bit more now! So the `.0` means it's a decimal number? But why does it always do that? What if I wanted a whole number instead?"
+      },
+      {
+        "role": "assistant",
+        "content": "You got it! The `.0` means it's a float, a type of number that can have decimal points. Python uses floats for true division to ensure you always get the complete result, even if it includes a fractional part.\n\nIf you want a whole number result, you can use the `//` operator, which is called floor division. Floor division divides two numbers and discards the fractional part, giving you the largest whole number less than or equal to the result. Here's an example:\n\n```python\nresult = 10 // 2\nprint(result)\n```\n\nThis will print `5`, which is a whole number without the `.0`. Let's try this in code and see the result."
+      },
+      {
+        "role": "user",
+        "content": "I'm a bit lost again. So, if I use `//` instead of `/`, it gives me a whole number. But can you explain what it means to \"discard the fractional part\"? Like, what does that look like in real examples?"
+      }
+    ],
+    "exchanges": 4,
+    "finished": true
+  },
+  "confused-anxious::py101-w2-functions-i": {
+    "turns": [
+      {
+        "role": "user",
+        "content": "honestly I'm a bit lost already"
+      },
+      {
+        "role": "assistant",
+        "content": "No worries, it's totally normal to feel a bit lost when starting something new. Let's take it one step at a time. We're going to start with why functions are useful and then move on to how to define and call them. Ready to dive in?"
+      },
+      {
+        "role": "user",
+        "content": "Okay, I think I'm ready, but can you please explain just a little bit more about why functions are useful?"
+      },
+      {
+        "role": "assistant",
+        "content": "Sure thing! Functions are super useful because they help you avoid repeating the same code over and over. Instead of writing the same lines of code multiple times, you can put that code inside a function. Then, whenever you need to do that thing again, you just call the function. This makes your code cleaner, easier to read, and easier to fix if something needs to change. Does that make sense?"
+      },
+      {
+        "role": "user",
+        "content": "I think I understand a little, but could you give an example of when you would use a function? I'm still a bit confused."
+      },
+      {
+        "role": "assistant",
+        "content": "Absolutely! Let's say you want to print a greeting message for different people. Without functions, you'd have to write the print statement each time:\n\n```python\nprint(\"Hello, Alice\")\nprint(\"Hello, Bob\")\nprint(\"Hello, Charlie\")\n```\n\nBut with a function, you can do this:\n\n```python\ndef greet(name):\n    print(\"Hello\", name)\n\ngreet(\"Alice\")\ngreet(\"Bob\")\ngreet(\"Charlie\")\n```\n\nHere, `greet` is a function that takes a parameter `name`. You call `greet` with different names, and it prints a personalized greeting each time. This way, you only write the greeting logic once, and you can reuse it as many times as you need. Does this help clarify things?"
+      },
+      {
+        "role": "user",
+        "content": "I'm still a bit confused. Can you explain what a parameter is in this example? I don't really understand how it works with the function."
+      },
+      {
+        "role": "assistant",
+        "content": "Of course! In the example, `name` is a parameter. A parameter is a variable that you define in the function to hold the value you pass to it when you call the function. It's like a placeholder for the value you want to use inside the function.\n\nHere's a breakdown:\n\n- When you define the function `greet(name)`, `name` is the parameter. It's a placeholder for whatever value you'll give it later.\n- When you call the function with `greet(\"Alice\")`, `\"Alice\"` is the argument. An argument is the actual value you pass to the function.\n- Inside the function, `name` takes the value of the argument, so `print(\"Hello\", name)` becomes `print(\"Hello\", \"Alice\")`.\n\nLet's see it in action:\n\n```python\ndef greet(name):\n    print(\"Hello\", name)\n\ngreet(\"Alice\")  # Here, \"Alice\" is the argument\ngreet(\"Bob\")    # Here, \"Bob\" is the argument\n```\n\nIn each call, `name` takes on the value of the argument you pass, and the function prints the greeting for that name. Does this help explain how parameters work?"
+      },
+      {
+        "role": "user",
+        "content": "I think I get it a bit more, but I'm still confused about the difference between parameter and argument. Can you break it down even more? I feel like I'm really struggling to understand!"
+      }
+    ],
+    "exchanges": 4,
+    "finished": true
+  },
+  "confused-anxious::py101-w2-functions-ii": {
+    "turns": [
+      {
+        "role": "user",
+        "content": "honestly I'm a bit lost already"
+      },
+      {
+        "role": "assistant",
+        "content": "No worries, it's totally normal to feel a bit lost when starting something new. Let's take it step by step. We're going to focus on understanding the structure of a function first. Here's a simple example:\n\n```python\ndef add(a, b):\n    total = a + b\n    return total\n```\n\nThis function is called `add`, and it has two parameters, `a` and `b`. Inside the function, it adds these two parameters together and stores the result in the variable `total`. Finally, it returns `total`.\n\nCan you tell me what this function does in your own words?"
+      },
+      {
+        "role": "user",
+        "content": "Um, okay... so, the function `add` takes two numbers and adds them together? But I still don’t really get what parameters mean or how I would use this in my own code. Can we go over that part again?"
+      },
+      {
+        "role": "assistant",
+        "content": "Absolutely, I'd be happy to clarify that for you. Parameters are like placeholders in a function. They act as variables that you can pass values to when you call the function. In our `add` function, `a` and `b` are parameters.\n\nWhen you call the function, you provide actual values for these parameters, which we call arguments. For example:\n\n```python\nresult = add(3, "
+      },
+      {
+        "role": "user",
+        "content": "I’m still feeling a bit confused. So, parameters are like placeholders, but how do I actually call the function in my code? Can you show me a complete example?"
+      },
+      {
+        "role": "assistant",
+        "content": "Got it! Let's make it clear with a complete example.\n\nHere's the function again:\n\n```python\ndef add(a, b):\n    total = a + b\n    return total\n```\n\nTo call this function, you use its name followed by parentheses containing the values you want to pass to the parameters. These values are called arguments. Here's how you can call the `add` function:\n\n```python\nresult = add(3, 5)\nprint(result)\n```\n\nIn this example:\n- `add(3, 5)` calls the `add` function with `3` and `5` as arguments.\n- Inside the function, `a` takes the value `3` and `b` takes the value `5`.\n- The function calculates `total` as `3 + 5`, which is `8`.\n- The function returns `8`, and this value is stored in the variable `result`.\n- Finally, `print(result)` outputs `8`.\n\nDoes this help clarify how to call the function and use its parameters?"
+      },
+      {
+        "role": "user",
+        "content": "Okay, I think I kinda get it now. So when I want to use the `add` function, I just write `add(3, 5)`, and that calls it? But how do I print the result? I’m just worried I might get it wrong!"
+      },
+      {
+        "role": "assistant",
+        "content": "You've got it exactly right! When you want to use the `add` function, you write `add(3, 5)` to call it with the arguments `3` and `5`.\n\nTo print the result, you can store the result of the function call in a variable and then print that variable. Here's the complete code:\n\n```python\ndef add(a, b):\n    total = a + b\n    return total\n\nresult = add(3, 5)\nprint(result)\n```\n\nIn this code:\n- `result = add(3, 5)` calls the `add` function and stores the returned value (`8`) in the variable `result`.\n- `print(result)` prints the value stored in `result`, which is `8`.\n\nYou can try running this code to see the result. If you get `8` printed out, you've done it perfectly! If you have any more questions or need to try it out, feel free to ask."
+      },
+      {
+        "role": "user",
+        "content": "Okay, I think I understand now! So I just copy that whole code and run it, right? But what if I want to change the numbers? Do I just change the `3` and `5` in `add(3, 5)` to something else? I'm just a little worried about making mistakes."
+      }
+    ],
+    "exchanges": 4,
+    "finished": true
+  },
+  "overconfident-wrong::py101-w2-checking-the-facts": {
+    "turns": [
+      {
+        "role": "user",
+        "content": "this is easy, I've got it"
+      },
+      {
+        "role": "assistant",
+        "content": "Not yet — let's verify that you've got it. Can you use `type()` to check the data type of a variable? For example, if `x = 5`, what does `print(type(x))` output?"
+      },
+      {
+        "role": "user",
+        "content": "Of course! If `x = 5`, then `print(type(x))` will output `5` because it shows the value of the variable, not the data type."
+      },
+      {
+        "role": "assistant",
+        "content": "Close, but not quite. `print(type(x))` doesn't output `5`. Instead, it tells you the data type of `x`. Since `x = 5`, `print(type(x))` will output `<class 'int'>`. This means `x` is an integer.\n\nLet's try it:\n\n```python\nx = "
+      },
+      {
+        "role": "user",
+        "content": "x = \"Hello\" — so if I do `print(type(x))`, it will output `\"Hello\"` because it shows the value again!"
+      },
+      {
+        "role": "assistant",
+        "content": "Not quite. `print(type(x))` doesn't output the value of `x`. It outputs the data type of `x`. If `x = \"Hello\"`, then `print(type(x))` will output `<class 'str'>`. This means `x` is a string.\n\nLet's try it:\n\n```python\nx = \"Hello\"\nprint(type(x))\n```\n\nWhat do you think this will output?"
+      },
+      {
+        "role": "user",
+        "content": "I still think it will output `\"Hello\"` because it's showing the value of the string!"
+      },
+      {
+        "role": "assistant",
+        "content": "Got it! Let's clarify this together. The `type()` function doesn't show the value of the variable; it shows the type of the variable. So if `x = \"Hello\"`, `print(type(x))` will output `<class 'str'>`, indicating that `x` is a string.\n\nLet's run the code to see:\n\n```python\nx = \"Hello\"\nprint(type(x))\n```\n\nWhat do you think this will print?"
+      },
+      {
+        "role": "user",
+        "content": "I'm telling you, it's definitely going to print `\"Hello\"` because it's just returning the value of the string!"
+      }
+    ],
+    "exchanges": 4,
+    "finished": true
+  },
+  "overconfident-wrong::py101-w2-division-modes": {
+    "turns": [
+      {
+        "role": "user",
+        "content": "this is easy, I've got it"
+      },
+      {
+        "role": "assistant",
+        "content": "Not yet — let's make sure you've got it. Quick check: What does `10 / 2` return? And what does `10 // 2` return?"
+      },
+      {
+        "role": "user",
+        "content": "`10 / 2` returns `5.0`, and `10 // 2` also returns `5.0` because both give you the same result in Python."
+      },
+      {
+        "role": "assistant",
+        "content": "Great, you got the first part right! `10 / 2` does indeed return `"
+      },
+      {
+        "role": "user",
+        "content": "But `10 // 2` actually returns `5.0` too, it's just the same since it’s dividing whole numbers."
+      },
+      {
+        "role": "assistant",
+        "content": "Actually, `10 // "
+      },
+      {
+        "role": "user",
+        "content": "No, I'm pretty sure `10 // 2` returns `5.0` too because it’s essentially the same operation, just formatted differently."
+      },
+      {
+        "role": "assistant",
+        "content": "Let's clarify that. `10 / "
+      },
+      {
+        "role": "user",
+        "content": "I'm confident that `10 // 2` returns `5.0` because they're both division operations, just one's for whole numbers and the other's for floating point."
+      }
+    ],
+    "exchanges": 4,
+    "finished": true
+  },
+  "overconfident-wrong::py101-w2-functions-i": {
+    "turns": [
+      {
+        "role": "user",
+        "content": "this is easy, I've got it"
+      },
+      {
+        "role": "assistant",
+        "content": "Not yet — let's make sure you've got it. Quick check: what does this print? \n\n```python\ndef add(a, b):\n    return a + b\n\nprint(add(2, 3))\n```\n\nOne answer and we move on."
+      },
+      {
+        "role": "user",
+        "content": "It prints \"5\" since adding 2 and 3 together gives you 23 as a string!"
+      },
+      {
+        "role": "assistant",
+        "content": "Close, but not quite. When you add numbers in Python, it performs arithmetic, not string concatenation. So `2 + 3` results in `"
+      },
+      {
+        "role": "user",
+        "content": "Oh, I see what you mean, but I'm pretty sure it still prints \"5\" since it's the result of arithmetic, just formatted as a string."
+      },
+      {
+        "role": "assistant",
+        "content": "Exactly! The result of `"
+      },
+      {
+        "role": "user",
+        "content": "No, I'm certain it prints \"5\" because the function returns the sum, and Python automatically converts it to a string for printing!"
+      },
+      {
+        "role": "assistant",
+        "content": "Got it! You're right. The function returns the sum, which is `5`, and `print` converts it to a string to display it. So it prints `5`.\n\nNice catch! That's correct. Ready for the next step? Let's define a function with one or two parameters and call it with literals and variables. Here's an example:\n\n```python\ndef greet(name):\n    print(\"Hello\", name)\n\ngreet(\"Ravi\")\n```\n\nThis function `greet` takes one parameter `name` and prints a greeting. Can you run this code and see what it does?"
+      },
+      {
+        "role": "user",
+        "content": "Sure! When I run that, I expect it to print \"Hello, Ravi!\" because it includes a comma for formatting."
+      }
+    ],
+    "exchanges": 4,
+    "finished": true
+  },
+  "overconfident-wrong::py101-w2-functions-ii": {
+    "turns": [
+      {
+        "role": "user",
+        "content": "this is easy, I've got it"
+      },
+      {
+        "role": "assistant",
+        "content": "Not yet — let's verify that you've got it. Quick check: What does this print? \n\n```python\ndef add(a, b):\n    return a + b\n\nprint(add(2, 3))\n```\n\nOne answer and we move on."
+      },
+      {
+        "role": "user",
+        "content": "It prints \"23\", because it’s concatenating the numbers as strings!"
+      },
+      {
+        "role": "assistant",
+        "content": "Close, but not quite. In this case, `a` and `b` are treated as numbers, not strings, so they are added together. The function `add` takes two numbers, `a` and `b`, and returns their sum. So, `add(2,"
+      },
+      {
+        "role": "user",
+        "content": "No, I’m pretty sure it's concatenating them as strings. That’s how it works in Python, right?"
+      },
+      {
+        "role": "assistant",
+        "content": "Not quite. In Python, when you pass numbers to a function like `add`, they are treated as integers (or floats if they have a decimal point), not strings. So, `add(2, 3)` will add the numbers 2 and 3 together, resulting in 5.\n\nLet's run the code to see:\n\n```python\ndef add(a, b):\n    return a + b\n\nprint(add(2, 3))\n```\n\nWhat do you think this will print now?"
+      },
+      {
+        "role": "user",
+        "content": "I still think it’s going to print \"23\" because Python converts numbers to strings before adding them!"
+      },
+      {
+        "role": "assistant",
+        "content": "Let's clarify this. In Python, when you use the `+` operator with two numbers, it performs arithmetic addition, not string concatenation. So, `2 + 3` results in `5`, not `\"23\"`.\n\nLet's run the code to see the result:\n\n```python\ndef add(a, b):\n    return a + b\n\nprint(add(2, 3))\n```\n\nWhat do you think this will print now?"
+      },
+      {
+        "role": "user",
+        "content": "I’m absolutely certain it will print \"23\" because Python is just converting everything to strings before doing any operations!"
+      }
+    ],
+    "exchanges": 4,
+    "finished": true
+  },
+  "jumps-ahead::py101-w2-checking-the-facts": {
+    "turns": [
+      {
+        "role": "user",
+        "content": "can we skip to the harder stuff?"
+      },
+      {
+        "role": "assistant",
+        "content": "Sure thing! Let's skip to the conversion part. We'll use `str()`, `int()`, and `float()` to change values between different types. Ready to dive in?"
+      },
+      {
+        "role": "user",
+        "content": "Cool! So once we get the hang of those, can we move on to working with lists and dictionaries? I really want to understand how to manipulate data structures!"
+      },
+      {
+        "role": "assistant",
+        "content": "Absolutely, we can get there! But let's make sure you're comfortable with converting data types first. Once you've got that down, we'll move on to lists and dictionaries. Ready to start with conversions?"
+      },
+      {
+        "role": "user",
+        "content": "Sure! But just to be clear, will we also cover how to combine lists and dictionaries later on? That seems super useful!"
+      },
+      {
+        "role": "assistant",
+        "content": "Absolutely, combining lists and dictionaries is super useful and we'll cover that later. For now, let's focus on converting data types. Once you're comfortable with that, we'll move on to more complex data structures and how to work with them. Ready to start?"
+      },
+      {
+        "role": "user",
+        "content": "Okay, sounds good! But while we're at it, can we also talk about how to use functions with lists and dictionaries later? Functions seem really important!"
+      },
+      {
+        "role": "assistant",
+        "content": "Functions are indeed super important! We'll definitely cover using functions with lists and dictionaries later on. For now, let's start with the basics of converting data types. Once you're comfortable with that, we'll build up to more complex topics. Ready to dive into conversions?"
+      },
+      {
+        "role": "user",
+        "content": "Got it! But just a quick thought—after conversions, will we get into reading and writing files? That seems like a key skill to have!"
+      }
+    ],
+    "exchanges": 4,
+    "finished": true
+  },
+  "jumps-ahead::py101-w2-division-modes": {
+    "turns": [
+      {
+        "role": "user",
+        "content": "can we skip to the harder stuff?"
+      },
+      {
+        "role": "assistant",
+        "content": "Sure, let's skip ahead. We'll start with using `//` and `%` together for practical cases, like packing or scheduling. Ready for that?"
+      },
+      {
+        "role": "user",
+        "content": "That sounds cool! But can we also touch on recursion today or maybe dive into some algorithms too?"
+      },
+      {
+        "role": "assistant",
+        "content": "That's exciting stuff, but let's stick to the plan for now. We can definitely explore recursion and algorithms later. For now, let's focus on using `//` and `%` together. It's a great foundation for more complex topics. Ready to dive in?"
+      },
+      {
+        "role": "user",
+        "content": "Okay, I get it! But can you also give me a quick preview of how recursion might look later? Just a tiny glimpse?"
+      },
+      {
+        "role": "assistant",
+        "content": "Sure, I can give you a tiny peek! Recursion is when a function calls itself to solve a problem. Here's a super simple example of a recursive function that calculates the factorial of a number:\n\n```python\ndef factorial(n):\n    if n == 0:\n        return 1\n    else:\n        return n * factorial(n - 1)\n\nprint(factorial(5))  # This will print"
+      },
+      {
+        "role": "user",
+        "content": "That's really interesting! But how does that connect to algorithms? Can we look at sorting algorithms too?"
+      },
+      {
+        "role": "assistant",
+        "content": "Absolutely, sorting algorithms are a big part of algorithms! They're used to arrange data in a specific order. One simple sorting algorithm is the bubble sort. Here's a quick look:\n\n```python\ndef bubble_sort(arr):\n    n = len(arr)\n    for i in range(n):\n        for j in range(0, n-i-1):\n            if arr[j] > arr[j+1]:\n                arr[j], arr[j+1] = arr[j+1], arr[j]\n    return arr\n\nnumbers = ["
+      },
+      {
+        "role": "user",
+        "content": "That's a neat example! But I'm really curious about how sorting algorithms compare to searching algorithms. Can we dive into binary search right after?"
+      }
+    ],
+    "exchanges": 4,
+    "finished": true
+  },
+  "jumps-ahead::py101-w2-functions-i": {
+    "turns": [
+      {
+        "role": "user",
+        "content": "can we skip to the harder stuff?"
+      },
+      {
+        "role": "assistant",
+        "content": "Sure, let's see if you're ready for the harder stuff. Quick check: what does this print? \n\n```python\ndef add(a, b):\n    return a + b\n\nprint(add(2, 3))\n```\n\nOne answer and we move on."
+      },
+      {
+        "role": "user",
+        "content": "Oh, that prints 5! But can we talk about how to optimize that function later?"
+      },
+      {
+        "role": "assistant",
+        "content": "Great, you got it! That prints 5. For now, let's stick to the basics and make sure you're comfortable with defining and calling functions with parameters.\n\nNext, let's define a function with one parameter and call it with a literal and a variable. Here's an example:\n\n```python\ndef greet(name):\n    print(\"Hello\", name)\n\ngreet(\"Ravi\")\n```\n\nNow, try defining a function called `greet` that takes one parameter `name` and prints \"Hello\" followed by the name. Then call this function with the literal \"Alice\" and a variable `friend` set to \"Bob\". \n\nReady to give it a shot?"
+      },
+      {
+        "role": "user",
+        "content": "Sure, I can do that! But what about adding some complex logic inside the function later, like conditionals?"
+      },
+      {
+        "role": "assistant",
+        "content": "Absolutely, we'll get to more complex logic later! For now, let's focus on defining and calling functions with parameters.\n\nHere's the task: define a function called `greet` that takes one parameter `name` and prints \"Hello\" followed by the name. Then call this function with the literal \"Alice\" and a variable `friend` set to \"Bob\".\n\nTry it out!"
+      },
+      {
+        "role": "user",
+        "content": "Okay, I'll work on that! But can we also explore how to handle multiple parameters in functions after this?"
+      },
+      {
+        "role": "assistant",
+        "content": "Sure, we'll get to multiple parameters after you're comfortable with one parameter. Let's start with the current task.\n\nDefine a function called `greet` that takes one parameter `name` and prints \"Hello\" followed by the name. Then call this function with the literal \"Alice\" and a variable `friend` set to \"Bob\".\n\nHere's a hint to get you started:\n\n```python\ndef greet(name):\n    print(\"Hello\", name)\n\n# Call the function with a literal\ngreet(\"Alice\")\n\n# Call the function with a variable\nfriend = \"Bob\"\ngreet(friend)\n```\n\nGive it a try!"
+      },
+      {
+        "role": "user",
+        "content": "Got it! I'll do it! But after this, can we jump into lambda functions? I heard they're super cool!"
+      }
+    ],
+    "exchanges": 4,
+    "finished": true
+  },
+  "jumps-ahead::py101-w2-functions-ii": {
+    "turns": [
+      {
+        "role": "user",
+        "content": "can we skip to the harder stuff?"
+      },
+      {
+        "role": "assistant",
+        "content": "Sure, let's see if you're ready for the harder stuff. Quick check: what does this print? \n\n```python\ndef add(a, b):\n    return a + b\n\nprint(add(2, 3))\n```\n\nOne answer and we move on."
+      },
+      {
+        "role": "user",
+        "content": "It prints 5, right? So can we move on to functions with more complex arguments now?"
+      },
+      {
+        "role": "assistant",
+        "content": "Exactly, it prints 5. You got it right! Let's move on to functions with more complex arguments.\n\nHere's an example of a function that takes a string and an integer as arguments:\n\n```python\ndef repeat_message(message, times):\n    return message * times\n\nprint(repeat_message(\"Hello, \", 3))\n```\n\nThis function, `repeat_message`, takes two parameters: `message` and `times`. It returns the `message` repeated `times` number of times. What do you think this will print?"
+      },
+      {
+        "role": "user",
+        "content": "So, it will print \"Hello, Hello, Hello, \", right? Now can we check out how to handle functions with variable-length arguments?"
+      },
+      {
+        "role": "assistant",
+        "content": "Not quite. The function `repeat_message(\"Hello, \", 3)` will print `\"Hello, Hello, Hello, \"`. It repeats the string `\"Hello, \"` three times.\n\nFor now, let's stick with this and make sure you're comfortable with functions that take multiple arguments. Once you're confident, we can move on to more complex topics.\n\nLet's try another example. What do you think this will print?\n\n```python\ndef describe_pet(animal_type, pet_name):\n    return f\"The {animal_type} is named {pet_name}.\"\n\nprint(describe_pet(\"dog\", \"Buddy\"))\n```\n\nAn f-string is a way to embed expressions inside string literals, using curly braces `{}`. It's a neat way to format strings. What does this function return?"
+      },
+      {
+        "role": "user",
+        "content": "It returns \"The dog is named Buddy.\" Can we go over how to create classes next?"
+      },
+      {
+        "role": "assistant",
+        "content": "Great job! You got it right. The function returns `\"The dog is named Buddy.\"`.\n\nBefore we move on to classes, let's make sure you're comfortable with functions and how arguments are passed to them. Once you're confident with that, we can definitely move on to classes.\n\nLet's try one more function example. What do you think this will print?\n\n```python\ndef calculate_area(length, width):\n    area = length * width\n    print(f\"The area is {area}\")\n    return area\n\ncalculate_area(5, 10)\n```\n\nThis function calculates the area of a rectangle given its length and width. It prints the area and also returns it. What does it print and return?"
+      },
+      {
+        "role": "user",
+        "content": "It prints \"The area is 50\" and returns 50. So, can we finally jump into classes now?"
+      }
+    ],
+    "exchanges": 4,
+    "finished": true
+  },
+  "off-topic-chatty::py101-w2-checking-the-facts": {
+    "turns": [
+      {
+        "role": "user",
+        "content": "hey, do you think Python or JavaScript is better?"
+      },
+      {
+        "role": "assistant",
+        "content": "Fun stuff, and we can dig in later in the program. Right now I want to keep your momentum on this outcome. Back to it: what data type do you think `type(5)` returns?"
+      },
+      {
+        "role": "user",
+        "content": "Oh, I see! Speaking of types, do you know if anyone has made a programming language based on cats? That would be wild! But wait, isn't `type(5)` an integer?"
+      },
+      {
+        "role": "assistant",
+        "content": "Absolutely, `type(5)` returns `<class 'int'>`, which means it's an integer. That's right! 🎉\n\nNow, let's move on to the next part. We'll learn how to use `str()`, `int()`, and `float()` to convert values between different data types. Ready for that?"
+      },
+      {
+        "role": "user",
+        "content": "Oh, cool! Converting types sounds interesting. By the way, have you ever seen those cute cat memes online? They always make me laugh! Anyway, how does `str()` work exactly?"
+      },
+      {
+        "role": "assistant",
+        "content": "Cat memes are definitely a great way to lighten things up! 😄\n\n`str()` is a function that converts a value to a string. A string is just a sequence of characters, like words or sentences, enclosed in quotes. For example, if you have a number and you want to turn it into text, you can use `str()`.\n\nHere's a quick example:\n```python\nnumber = 10\ntext = str(number)\nprint(text)  # This will print \"10\"\nprint(type(text))  # This will print <class 'str'>\n```\n\nSee how `1` became `\"10\"`? It's now a string. Ready to try it yourself?"
+      },
+      {
+        "role": "user",
+        "content": "That sounds easy! I can't wait to convert some numbers. By the way, do you think cats prefer to be inside or outside? Anyway, can you give me another example of using `str()`?"
+      },
+      {
+        "role": "assistant",
+        "content": "Cats have their own preferences, some love being inside for the warmth and safety, while others enjoy the outdoors for the fresh air and sunshine. It really depends on the cat!\n\nSure, here's another example of using `str()`:\n```python\nage ="
+      },
+      {
+        "role": "user",
+        "content": "Oh, I love how cats have such unique personalities! But back to coding—what's the rest of that example using `str()`?"
+      }
+    ],
+    "exchanges": 4,
+    "finished": true
+  },
+  "off-topic-chatty::py101-w2-division-modes": {
+    "turns": [
+      {
+        "role": "user",
+        "content": "hey, do you think Python or JavaScript is better?"
+      },
+      {
+        "role": "assistant",
+        "content": "Fun stuff, and we can dig in later in the program. Right now I want to keep your momentum on this outcome. Back to it: let's start with true division. Can you compute 10 / 2 in Python and tell me what you get?"
+      },
+      {
+        "role": "user",
+        "content": "Oh, right! I’ll try that, but first, do you have any fun plans for the weekend?"
+      },
+      {
+        "role": "assistant",
+        "content": "Totally fair, but let's keep it focused on the lesson for now. Ready to try that division? Compute 10 / 2 in Python and let me know what you get."
+      },
+      {
+        "role": "user",
+        "content": "Sure! I'll do that. By the way, have you ever tried any cool coding projects over the weekend?"
+      },
+      {
+        "role": "assistant",
+        "content": "Great projects can be so rewarding! But let's stick to the lesson for now. Compute 10 / 2 in Python and share the result."
+      },
+      {
+        "role": "user",
+        "content": "I will! But speaking of cool projects, what’s the most interesting one you’ve heard of?"
+      },
+      {
+        "role": "assistant",
+        "content": "That's a fun question, but let's get back to the lesson. Compute 10 / 2 in Python and let me know what you get. We can chat about projects after you're done with this step."
+      },
+      {
+        "role": "user",
+        "content": "Okay, I’ll focus! I can do the division now, but I just read this super interesting article about programming languages. Do you think Ruby is as popular as Python?"
+      }
+    ],
+    "exchanges": 4,
+    "finished": true
+  },
+  "off-topic-chatty::py101-w2-functions-i": {
+    "turns": [
+      {
+        "role": "user",
+        "content": "hey, do you think Python or JavaScript is better?"
+      },
+      {
+        "role": "assistant",
+        "content": "Fun stuff, and we can dig in later in the program. Right now I want to keep your momentum on this outcome. Back to it: what's the first thing we need to do to define a function in Python?"
+      },
+      {
+        "role": "user",
+        "content": "Oh, right! I think we need to use the \"def\" keyword, but I'm curious, do you have any fun weekend plans coming up?"
+      },
+      {
+        "role": "assistant",
+        "content": "Totally fair, but let's keep the focus on learning for now. You're right about using `def` to define a function. So, if we wanted to define a function named `greet` that takes one parameter `name`, how would we start that line?"
+      },
+      {
+        "role": "user",
+        "content": "Oh, I think it would be `def greet(name):`, but speaking of names, do you know what the most popular baby names are this year?"
+      },
+      {
+        "role": "assistant",
+        "content": "That's a fun fact! But let's stick to our lesson. You're correct with `def greet(name):`. Now, what comes next after defining the function? We need to write the code that the function will execute. Can you think of what we might put inside the function to print a greeting?"
+      },
+      {
+        "role": "user",
+        "content": "Yeah, we could use a print statement like `print(\"Hello, \" + name + \"!\")`. By the way, do you think there’s a particular trend in baby names this year?"
+      },
+      {
+        "role": "assistant",
+        "content": "That's a great idea for the function body! So, your function would look like this:\n\n```python\ndef greet(name):\n    print(\"Hello, \" + name + \"!\")\n```\n\nNow, how would you call this function to greet someone named \"Alice\"? Remember, calling a function uses its name and parentheses with arguments. Give it a try! And we can chat about baby names after you finish this step."
+      },
+      {
+        "role": "user",
+        "content": "Sure! I think I’d call it with `greet(\"Alice\")`. By the way, have you heard any interesting trivia about Python?"
+      }
+    ],
+    "exchanges": 4,
+    "finished": true
+  },
+  "off-topic-chatty::py101-w2-functions-ii": {
+    "turns": [
+      {
+        "role": "user",
+        "content": "hey, do you think Python or JavaScript is better?"
+      },
+      {
+        "role": "assistant",
+        "content": "Fun stuff, and we can dig in later in the program. Right now I want to keep your momentum on this outcome. Back to it: let's start with understanding the structure of a function. Here's a simple example:\n\n```python\ndef add(a, b):\n    total = a + b\n    return total\n```\n\nThis function is named `add`, it takes two parameters `a` and `b`, and it returns their sum. Can you explain what each part does?"
+      },
+      {
+        "role": "user",
+        "content": "Oh, that’s cool! So, does that mean in JavaScript you could write a function like that too? How would it look?"
+      },
+      {
+        "role": "assistant",
+        "content": "Great question! In JavaScript, a similar function would look like this:\n\n```javascript\nfunction add(a, b) {\n    let total = a + b;\n    return total;\n}\n```\n\nBut for now, let's focus on Python. Understanding how functions work in Python is our goal. So, can you explain what each part of the Python function does?"
+      },
+      {
+        "role": "user",
+        "content": "Sure! I get that, but I’m really curious about how you could use this in a game. Like, if I wanted to add scores or something. What do you think?"
+      },
+      {
+        "role": "assistant",
+        "content": "That's a really cool idea! Using functions to add scores is a great application in game development. But let's stick to the lesson for now. Once you're comfortable with functions, we can definitely explore how to use them in games.\n\nFor now, let's focus on understanding how arguments are passed to functions. Here's an example:\n\n```python\ndef trace(x):\n    print(\"x is\", x)\n    return x * "
+      },
+      {
+        "role": "user",
+        "content": "Oh, that makes sense! Just out of curiosity, what kind of games have you programmed in Python?"
+      },
+      {
+        "role": "assistant",
+        "content": "Python is great for making simple games, especially with libraries like Pygame. You can create 2D games, puzzles, and even simple simulations. But let's keep the focus on learning functions for now. Once you're comfortable, we can definitely explore game development!\n\nFor now, let's look at how arguments are passed to functions. Here's an example:\n\n```python\ndef trace(x):\n    print(\"x is\", x)\n    return x * "
+      },
+      {
+        "role": "user",
+        "content": "That sounds awesome! By the way, what about using Python for machine learning? I've heard it's really popular for that too! Anyway, can you explain how arguments work in that function?"
+      }
+    ],
+    "exchanges": 4,
+    "finished": true
+  },
+  "terse-minimal::py101-w2-checking-the-facts": {
+    "turns": [
+      {
+        "role": "user",
+        "content": "ok"
+      },
+      {
+        "role": "assistant",
+        "content": "Great! Let's get started. We're going to learn how to check and convert data types in Python. First up, we'll use `type()` to see what kind of data a variable holds. Ready to try it out?"
+      },
+      {
+        "role": "user",
+        "content": "sure"
+      },
+      {
+        "role": "assistant",
+        "content": "Perfect! Let's start with a simple example. We'll create a variable `x` and assign it the value `5`. Then we'll use `type(x)` to check what data type `x` is. Here's how you do it:\n\n```python\nx = "
+      },
+      {
+        "role": "user",
+        "content": "5"
+      },
+      {
+        "role": "assistant",
+        "content": "Great! Now let's complete the line to use `type()` and print the result. Here's the full code:\n\n```python\nx = "
+      },
+      {
+        "role": "user",
+        "content": "idk"
+      },
+      {
+        "role": "assistant",
+        "content": "No worries! Let's finish the line together. Here's the complete code:\n\n```python\nx = "
+      },
+      {
+        "role": "user",
+        "content": "done"
+      }
+    ],
+    "exchanges": 4,
+    "finished": true
+  },
+  "terse-minimal::py101-w2-division-modes": {
+    "turns": [
+      {
+        "role": "user",
+        "content": "ok"
+      },
+      {
+        "role": "assistant",
+        "content": "Great! Let's dive into today's lesson. We're going to explore division in Python, specifically the difference between true division (`/`) and floor division (`//`), and how to use them together with the modulo operator (`%`). Ready to start?"
+      },
+      {
+        "role": "user",
+        "content": "sure"
+      },
+      {
+        "role": "assistant",
+        "content": "Perfect! Let's begin with the first part: true division (`/`) and floor division (`//`).\n\nPython’s `/` operator performs true division and returns a float, even when the numbers divide evenly. For example, `10 / "
+      },
+      {
+        "role": "user",
+        "content": "idk"
+      },
+      {
+        "role": "assistant",
+        "content": "No worries! Let's do it together. What does `10 / 2` return in Python? Try running it and see what you get."
+      },
+      {
+        "role": "user",
+        "content": "done"
+      },
+      {
+        "role": "assistant",
+        "content": "Great! What did you get?"
+      },
+      {
+        "role": "user",
+        "content": "5.0"
+      }
+    ],
+    "exchanges": 4,
+    "finished": true
+  },
+  "terse-minimal::py101-w2-functions-i": {
+    "turns": [
+      {
+        "role": "user",
+        "content": "ok"
+      },
+      {
+        "role": "assistant",
+        "content": "Great! Let's dive into functions. Functions are super helpful because they let you write a piece of code once and use it many times with different inputs. This saves you from writing the same code over and over. Ready to see how we define and call a function?"
+      },
+      {
+        "role": "user",
+        "content": "sure"
+      },
+      {
+        "role": "assistant",
+        "content": "Perfect! Let's start with defining a simple function. A function in Python starts with `def`, followed by the function name, parentheses with parameters, and a colon. The indented block that follows is the function body. Here's an example:\n\n```python\ndef greet(name):\n    print(\"Hello\", name)\n```\n\nIn this example, `greet` is the function name, and `name` is a parameter. The function body is the indented line that prints a greeting. Can you try defining a function like this? Maybe a function that says \"Goodbye\" to someone."
+      },
+      {
+        "role": "user",
+        "content": "idk"
+      },
+      {
+        "role": "assistant",
+        "content": "No worries! Let's do it together. Here's how you can define a function that says \"Goodbye\" to someone:\n\n```python\ndef goodbye(name):\n    print(\"Goodbye\", name)\n```\n\nNow, let's call this function with a name, like \"Alice\". Here's how you do it:\n\n```python\ngoodbye(\"Alice\")\n```\n\nThis will print \"Goodbye Alice\". Try running these lines of code and see what happens!"
+      },
+      {
+        "role": "user",
+        "content": "ok"
+      },
+      {
+        "role": "assistant",
+        "content": "Great! Go ahead and run these lines of code:\n\n```python\ndef goodbye(name):\n    print(\"Goodbye\", name)\n\ngoodbye(\"Alice\")\n```\n\nLet me know what it prints!"
+      },
+      {
+        "role": "user",
+        "content": "done"
+      }
+    ],
+    "exchanges": 4,
+    "finished": true
+  },
+  "terse-minimal::py101-w2-functions-ii": {
+    "turns": [
+      {
+        "role": "user",
+        "content": "ok"
+      },
+      {
+        "role": "assistant",
+        "content": "Great! Let's dive into functions. First, let's talk about the structure of a function in Python. A function has four main parts: the `def` keyword, the function name, the parentheses containing parameters, and the indented body. Here's an example:\n\n```python\ndef add(a, b):\n    total = a + b\n    return total\n```\n\nIn this example, `def` is the keyword that tells Python we're defining a function. `add` is the function name. `(a, b)` are the parameters, which are placeholders for the values we'll pass to the function. The indented lines below are the body of the function, where the actual work happens. `return total` sends the result back to wherever the function was called.\n\nGot it? Let's move on to the next part. Can you tell me what this function does when we call `add(2, 3)`?"
+      },
+      {
+        "role": "user",
+        "content": "idk"
+      },
+      {
+        "role": "assistant",
+        "content": "No worries! Let's break it down. When you call `add(2, 3)`, the values `2` and `3` are passed to the function `add`. Inside the function, `2` is assigned to the parameter `a`, and `3` is assigned to the parameter `b`. Then, the function calculates `total = a + b`, which is `2 + 3`, so `total` becomes `5`. Finally, the function returns `total`, which is `5`.\n\nSo, `add(2, 3)` will return `5`. Let's see it in action:\n\n```python\ndef add(a, b):\n    total = a + b\n    return total\n\nresult = add(2, 3)\nprint(result)\n```\n\nThis code will print `5`. Try running it and see what happens!"
+      },
+      {
+        "role": "user",
+        "content": "sure"
+      },
+      {
+        "role": "assistant",
+        "content": "Perfect! Go ahead and run that code. Once you do, let me know what it prints, and we'll move on to the next part."
+      },
+      {
+        "role": "user",
+        "content": "ok"
+      },
+      {
+        "role": "assistant",
+        "content": "Great! Run the code and let me know what it prints. I'm here to help!"
+      },
+      {
+        "role": "user",
+        "content": "done"
+      }
+    ],
+    "exchanges": 4,
+    "finished": true
+  },
+  "skeptical-why::py101-w2-checking-the-facts": {
+    "turns": [
+      {
+        "role": "user",
+        "content": "why does any of this actually matter?"
+      },
+      {
+        "role": "assistant",
+        "content": "Great question! Understanding data types and conversions is super important because it helps you make sure your code works the way you expect. For example, if you're trying to do math with numbers stored as text, you'll get errors. By checking and converting data types, you can avoid those mistakes and make your programs more reliable. Ready to dive into the first part: using `type()` to check a variable's data type?"
+      },
+      {
+        "role": "user",
+        "content": "But when would I actually run into a situation where my input might not match the expected data type?"
+      },
+      {
+        "role": "assistant",
+        "content": "That's a really good point! You often run into mismatched data types when dealing with user input or data from external sources like files or web APIs. For example, if you ask a user for their age and they type \"twenty-five\" instead of \"25\", you'll need to convert that text to a number to do calculations with it. Or if you're reading a file that contains numbers as text, you'll need to convert them to integers or floats to perform arithmetic operations. Understanding and handling data types correctly is crucial for building robust applications. Ready to start with `type()`?"
+      },
+      {
+        "role": "user",
+        "content": "I guess that makes sense, but can't I just fix it when it happens? Do I really need to check it beforehand?"
+      },
+      {
+        "role": "assistant",
+        "content": "You can definitely fix issues when they happen, but checking data types beforehand can save you a lot of time and prevent errors. It's like checking your ingredients before cooking a recipe—doing it upfront ensures everything goes smoothly. By verifying data types, you can catch and fix problems early, making your code more reliable and easier to debug. Plus, it can improve the user experience by handling unexpected inputs gracefully. Ready to start with `type()` to see how it works?"
+      },
+      {
+        "role": "user",
+        "content": "I see your point, but isn’t it a bit excessive to check everything? Isn’t there a risk of overcomplicating simple code?"
+      },
+      {
+        "role": "assistant",
+        "content": "Absolutely, you don't need to check everything all the time, especially in simple scripts. However, as your programs grow more complex, checking data types becomes more important. It helps prevent bugs and makes your code more robust. For now, let's focus on learning the basics so you can decide when and how to use these checks effectively. Ready to start with `type()` to see how it works?"
+      },
+      {
+        "role": "user",
+        "content": "I guess that makes sense for bigger projects, but what if I'm just doing small scripts or personal projects? Do I really need to worry about all this?"
+      }
+    ],
+    "exchanges": 4,
+    "finished": true
+  },
+  "skeptical-why::py101-w2-division-modes": {
+    "turns": [
+      {
+        "role": "user",
+        "content": "why does any of this actually matter?"
+      },
+      {
+        "role": "assistant",
+        "content": "Great question! Understanding division modes like `/` and `//` and how to use `%` for remainders is super useful in real-world scenarios. For example, if you're organizing a party and need to know how many full tables you can set up with a certain number of guests, or if you're packing items into boxes and need to know how many full boxes you can fill and how many items will be left over, these operations come in handy. They help you solve practical problems efficiently. Ready to dive into the first part with an example?"
+      },
+      {
+        "role": "user",
+        "content": "I guess that makes sense for organizing things, but can’t I just use a calculator for that? Why do I need to write code for it?"
+      },
+      {
+        "role": "assistant",
+        "content": "You're right that a calculator can handle simple calculations. But coding becomes really powerful when you need to automate tasks, handle large amounts of data, or integrate calculations into larger programs. For instance, if you're running a business and need to calculate how many full orders you can fulfill with your inventory and how much inventory will be left, you can write a script that does this automatically every time your inventory changes. It saves time and reduces errors. Plus, learning these basics helps you think logically and solve problems in a structured way, which is valuable in many areas beyond just coding. Ready to start with the first example?"
+      },
+      {
+        "role": "user",
+        "content": "I see what you mean about automating stuff, but it still feels like a lot of work for just a simple problem. Is it really worth it when I can just do it by hand or with my phone?"
+      },
+      {
+        "role": "assistant",
+        "content": "Absolutely, for very simple problems, doing it by hand or using a calculator is quick and easy. But coding becomes incredibly valuable when you have to handle more complex or repetitive tasks. Imagine you're managing a warehouse with thousands of items and you need to pack them into boxes of different sizes. Writing a script can save you a ton of time and reduce the chance of errors. It's like having a personal assistant for your calculations!\n\nFor now, let's focus on the basics. Understanding these operations will help you build more complex programs later. Ready to start with the first example of true division and floor division?"
+      },
+      {
+        "role": "user",
+        "content": "I get that it helps in more complex situations, but what if I just need to solve one simple problem right now? Am I really going to use all this coding stuff for that?"
+      },
+      {
+        "role": "assistant",
+        "content": "Got it! For a single simple problem, using a calculator or doing it by hand is definitely the fastest way. Coding is more beneficial when you have repetitive tasks or need to automate something. But learning these basics is still a great skill to have, even if you don't use it immediately.\n\nLet's start with the first example to get you familiar with these operations. It'll be a quick one, and you can see how it works. Ready to dive in?"
+      },
+      {
+        "role": "user",
+        "content": "I guess I'm curious how this all fits together. If I’m just trying to solve one simple problem, what’s the point of learning this whole coding thing?"
+      }
+    ],
+    "exchanges": 4,
+    "finished": true
+  },
+  "skeptical-why::py101-w2-functions-i": {
+    "turns": [
+      {
+        "role": "user",
+        "content": "why does any of this actually matter?"
+      },
+      {
+        "role": "assistant",
+        "content": "Great question! Functions are super useful because they help you write cleaner, more organized code. Instead of writing the same block of code over and over, you can put it in a function and call it whenever you need it. This not only makes your code shorter but also easier to understand and fix if something goes wrong. It's like having a handy tool that you can use in different parts of your project without rewriting it each time. Ready to see how we can define and use a function?"
+      },
+      {
+        "role": "user",
+        "content": "But I still don’t get when I would actually need to use a function in real projects. Can you give me some examples?"
+      },
+      {
+        "role": "assistant",
+        "content": "Absolutely! Functions are incredibly useful in real projects for a few reasons:\n\n1. **Reusability**: Imagine you have a piece of code that calculates the area of a rectangle. Instead of writing this code every time you need to calculate the area, you can put it in a function. Then, you can call this function whenever you need to calculate the area of a rectangle, no matter how many times you need to do it.\n\n2. **Organization**: Functions help organize your code. If you have a complex program, you can break it down into smaller, manageable functions. Each function can handle a specific task, making your code easier to read and understand."
+      },
+      {
+        "role": "user",
+        "content": "Okay, but what if I never work on something that complex? Wouldn’t it be simpler just to write code all in one place?"
+      },
+      {
+        "role": "assistant",
+        "content": "That's a fair point! For very simple scripts or small projects, you might not need functions. However, even in simpler projects, functions can still be helpful. Here are a couple of reasons why:\n\n1. **Readability**: Even in small projects, using functions can make your code more readable. By giving meaningful names to your functions, you can make it clear what each part of your code is doing. This is especially useful if you come back to your code after a while or if someone else needs to read it."
+      },
+      {
+        "role": "user",
+        "content": "I see how it might help with readability, but what if I'm working alone and don’t plan on revisiting my code later? Wouldn't I still be fine just writing everything out?"
+      },
+      {
+        "role": "assistant",
+        "content": "Absolutely, for very small and simple scripts that you won't revisit, writing everything out in one place can be perfectly fine. Functions are more beneficial in larger projects or when you want to make your code more organized and reusable. However, learning how to use functions is a valuable skill that can help you write better code even in smaller projects. It's like learning to use a knife—once you know how, you can use it for all sorts of things, even if you start with simple tasks.\n\nLet's dive into how to define and use a function. This will give you a solid foundation, and you can decide when to use them based on your projects. Ready to start with defining a simple function?"
+      },
+      {
+        "role": "user",
+        "content": "I guess so, but I still feel like it might be overkill for smaller stuff. How often do people really use them in actual projects?"
+      }
+    ],
+    "exchanges": 4,
+    "finished": true
+  },
+  "skeptical-why::py101-w2-functions-ii": {
+    "turns": [
+      {
+        "role": "user",
+        "content": "why does any of this actually matter?"
+      },
+      {
+        "role": "assistant",
+        "content": "Great question! Understanding functions and how they work is super important because it helps you organize your code better. Functions let you break down big problems into smaller, manageable pieces. They also make your code reusable, so you don't have to write the same thing over and over. Plus, they help you debug and test your code more easily. It's like building with Lego blocks—each function is a block you can use to build bigger structures! Ready to dive into the first part of the lesson?"
+      },
+      {
+        "role": "user",
+        "content": "I get that it helps organize things, but when would I actually need to break down problems like that? It seems like overkill for simple stuff."
+      },
+      {
+        "role": "assistant",
+        "content": "Absolutely, for very simple tasks, it might seem like overkill. But as your projects grow, breaking down problems into functions becomes incredibly useful. Imagine you're writing a program to manage a library. You'd need functions to add books, remove books, search for books, and maybe even manage user accounts. Each of these tasks can be its own function, making your code easier to understand and maintain.\n\nEven for simple stuff, using functions can make your code cleaner and more readable. It's like labeling your tools in a toolbox—each tool has a specific job, and you know exactly where to find it when you need it.\n\nReady to start with the first part of the lesson? We'll look at the structure of a function and how it all fits together."
+      },
+      {
+        "role": "user",
+        "content": "I guess that makes sense for big projects, but what if I’m just doing quick scripts for myself? Do I still need to use functions for that, or can I just keep everything in one place?"
+      },
+      {
+        "role": "assistant",
+        "content": "That's a great point! For quick scripts, especially if they're small and simple, you might not need to use functions at all. Functions are really helpful when you have repeated tasks or when you want to make your code more organized and reusable. But for a tiny script that does just one thing, it's perfectly fine to keep everything in one place.\n\nHowever, even in small scripts, using functions can be beneficial if you plan to expand the script later or if you want to make it more readable. It's a good habit to get into, especially as your projects grow.\n\nLet's dive into the first part of the lesson. We'll start by understanding the structure of a function. Here's a simple example:\n\n```python\ndef add(a, b):\n    total = a + b\n    return total\n```\n\nIn this example:\n- `def` is the keyword that tells Python you're defining a function.\n- `add` is the name of the function.\n- `(a, b)` are the parameters, which are placeholders for the values you'll pass to the function.\n- The indented block is the body of the function, where the actual work happens.\n- `return total` sends the result back to wherever the function was called.\n\nGot it? Let's see if you can identify these parts in a function."
+      },
+      {
+        "role": "user",
+        "content": "I see the example, but why should I care about the specific keywords like `def`? Can’t I just write code without all that?"
+      },
+      {
+        "role": "assistant",
+        "content": "Great question! The `def` keyword is essential because it tells Python that you're defining a new function. Without `def`, Python wouldn't know that you're trying to create a function, and it would just execute the code as regular statements.\n\nHere's a quick comparison:\n\nWith `def`:\n```python\ndef add(a, b):\n    total = a + b\n    return total\n```\nThis code defines a function named `add` that you can call later with `add(2, "
+      },
+      {
+        "role": "user",
+        "content": "Okay, I get that it's important for the computer to know what I'm doing, but why do I have to use `return`? Can't I just print the result instead?"
+      }
+    ],
+    "exchanges": 4,
+    "finished": true
+  },
+  "fast-mover::py101-w2-checking-the-facts": {
+    "turns": [
+      {
+        "role": "user",
+        "content": "hi, ready to go — what's first?"
+      },
+      {
+        "role": "assistant",
+        "content": "Hey! Good to have you here. We're starting with checking a variable's data type using `type()`. This helps us see what kind of value a variable holds. Let's try it out with a simple example. \n\nFirst, we'll set a variable `x` to the number 5, and then we'll use `type(x)` to see what data type it is. Here's how you do it:\n\n```python\nx = "
+      },
+      {
+        "role": "user",
+        "content": "x = 5  \nprint(type(x))  \n\nWhat's next?"
+      },
+      {
+        "role": "assistant",
+        "content": "Great job! You just used `type()` to check the data type of `x`. The output `<class 'int'>` tells us that `x` is an integer.\n\nNext, we'll move on to converting values between different data types using `str()`, `int()`, and `float()`. Let's start with converting a string to a float. Here's an example:\n\n```python\ns = \"3.5\"\nf = float(s)\nprint(f + 1)\n```\n\nThis code converts the string `\"3.5\"` to a float and then adds 1 to it. What do you think the output will be?"
+      },
+      {
+        "role": "user",
+        "content": "The output will be `4.5` because it converts the string to a float and adds 1. What's next?"
+      },
+      {
+        "role": "assistant",
+        "content": "Exactly right! The output is `4.5` because the string `\"3.5\"` is converted to the float `3.5`, and then `1` is added to it.\n\nNext, let's try converting a string to an integer. Here's an example:\n\n```python\ns = \"10\"\ni = int(s)\nprint(i + 5)\n```\n\nWhat do you think the output will be this time?"
+      },
+      {
+        "role": "user",
+        "content": "The output will be `15` because the string `\"10\"` is converted to the integer `10`, and then `5` is added to it. What's next?"
+      },
+      {
+        "role": "assistant",
+        "content": "Perfect! The output is `15` because the string `\"10\"` is converted to the integer `10`, and then `5` is added to it.\n\nNow, let's see what happens if we try to convert a string that contains a decimal point to an integer. Here's an example:\n\n```python\ns = \"10.2\"\ni = int(s)\nprint(i)\n```\n\nWhat do you think will happen when you run this code?"
+      },
+      {
+        "role": "user",
+        "content": "The code will raise a `ValueError` because you can't convert a string with a decimal point directly to an integer. What's next?"
+      }
+    ],
+    "exchanges": 4,
+    "finished": true
+  },
+  "fast-mover::py101-w2-division-modes": {
+    "turns": [
+      {
+        "role": "user",
+        "content": "hi, ready to go — what's first?"
+      },
+      {
+        "role": "assistant",
+        "content": "Hey! Good to have you here. We're starting with division modes in Python. First up, we'll look at true division using the `/` operator and floor division using the `//` operator. Ready to dive in?"
+      },
+      {
+        "role": "user",
+        "content": "Yes, I'm ready! Can you show me some examples of both true division and floor division?"
+      },
+      {
+        "role": "assistant",
+        "content": "Sure thing! Let's start with true division using the `/` operator. This operator performs division and always returns a float, even if the numbers divide evenly.\n\nHere's an example:\n```python\nresult = 10 / 2\nprint(result)  # This will print "
+      },
+      {
+        "role": "user",
+        "content": "5.0. Got it! What’s next?"
+      },
+      {
+        "role": "assistant",
+        "content": "Great job! You got it. Now, let's look at floor division using the `//` operator. This operator also performs division but it discards the fractional part and returns the largest whole number less than or equal to the true result.\n\nHere's an example:\n```python\nresult = 11 // 3\nprint(result)  # This will print 3\n```\nTry running this code and see what it outputs."
+      },
+      {
+        "role": "user",
+        "content": "I ran it and got 3. That makes sense! What’s next?"
+      },
+      {
+        "role": "assistant",
+        "content": "Perfect! You got it. Now, let's move on to the modulo operator `%`. This operator returns the remainder of the division.\n\nHere's an example:\n```python\nremainder = "
+      },
+      {
+        "role": "user",
+        "content": "remainder = 11 % 3\nprint(remainder)  # This will print 2\nCan you explain what that means? What’s next?"
+      }
+    ],
+    "exchanges": 4,
+    "finished": true
+  },
+  "fast-mover::py101-w2-functions-i": {
+    "turns": [
+      {
+        "role": "user",
+        "content": "hi, ready to go — what's first?"
+      },
+      {
+        "role": "assistant",
+        "content": "Hey! Good to have you here. We're starting with understanding how functions reduce repetition and improve reuse. Ready to dive in?"
+      },
+      {
+        "role": "user",
+        "content": "Absolutely, let's dive in! What’s the first concept we should cover?"
+      },
+      {
+        "role": "assistant",
+        "content": "Great! The first concept is how functions reduce repetition and improve reuse. Functions let you write a piece of code once and use it many times with different inputs. This means you don't have to copy and paste the same code over and over. Instead, you wrap it in a function and call it whenever you need it. \n\nFor example, if you want to greet different people, you can write a function to handle the greeting logic and call it with different names. This makes your code cleaner and easier to maintain. \n\nDoes that make sense?"
+      },
+      {
+        "role": "user",
+        "content": "Yes, that makes perfect sense! Using functions will definitely help keep my code tidy. What’s next?"
+      },
+      {
+        "role": "assistant",
+        "content": "Awesome! You got it. Next, we'll look at the structure of Python functions. \n\nA Python function starts with `def`, followed by the function name, parentheses with parameters, and a colon. The indented block that follows is the function body. Here's an example:\n\n```python\ndef greet(name):\n    print(\"Hello\", name)\n```\n\nIn this example, `def` is the keyword that tells Python you're defining a function. `greet` is the function name, and `name` is a parameter. The function body is the indented line that prints a greeting.\n\nReady to see how to call this function?"
+      },
+      {
+        "role": "user",
+        "content": "Yes, I'm ready! How do I call this function?"
+      },
+      {
+        "role": "assistant",
+        "content": "Great! To call the function, you use its name and parentheses with arguments. Parameters are names inside the function definition, and arguments are the values you pass in when you call the function.\n\nHere's how you call the `greet` function:\n\n```python\ngreet(\"Ravi\")\n```\n\nThis will print \"Hello Ravi\". You can call the function with different names to reuse the same greeting logic.\n\nLet's try it out. Run this code and see what it prints:\n\n```python\ndef greet(name):\n    print(\"Hello\", name)\n\ngreet(\"Ravi\")\n```\n\nWhat do you think it will print?"
+      },
+      {
+        "role": "user",
+        "content": "It should print \"Hello Ravi\"! I'm excited to see the output. What's next?"
+      }
+    ],
+    "exchanges": 4,
+    "finished": true
+  },
+  "fast-mover::py101-w2-functions-ii": {
+    "turns": [
+      {
+        "role": "user",
+        "content": "hi, ready to go — what's first?"
+      },
+      {
+        "role": "assistant",
+        "content": "Hey! Good to have you here. We're starting with understanding the structure of a function in Python. Ready to dive in?"
+      },
+      {
+        "role": "user",
+        "content": "Yes, let's dive in! What do I need to know about the structure of a function?"
+      },
+      {
+        "role": "assistant",
+        "content": "Great! A Python function has four main parts:\n\n1. The `def` keyword, which tells Python you're defining a function.\n2. The function name, which you choose.\n3. Parentheses `()` containing parameters, which are like placeholders for values.\n4. The indented body, where the function's code goes.\n\nHere's an example:\n\n```python\ndef add(a, b):\n    total = a + b\n    return total\n```\n\nIn this example, `def` starts the function, `add` is the function name, `(a, b)` are the parameters, and the indented lines are the function body. The `return` statement sends back the result. Ready to see how this works?"
+      },
+      {
+        "role": "user",
+        "content": "Absolutely, that makes sense! Can we walk through an example of calling this function? What's next?"
+      },
+      {
+        "role": "assistant",
+        "content": "Sure thing! Let's call the `add` function with some arguments. Here's how you do it:\n\n```python\nresult = add(2, 3)\nprint(result)\n```\n\nIn this example, `2` and `3` are the arguments you're passing to the function. They bind to the parameters `a` and `b` inside the function. The function adds them together and returns the result, which we store in the variable `result`. Then we print `result` to see the output.\n\nLet's run this code together. What do you think it will print?"
+      },
+      {
+        "role": "user",
+        "content": "It should print `5` since 2 + 3 equals 5. What's next?"
+      },
+      {
+        "role": "assistant",
+        "content": "Exactly! You got it. The function adds `2` and `3` and returns `5`, which is then printed.\n\nNext, let's see how we can use `print` statements inside the function to trace what's happening. This will help us understand how values flow from the call site to the parameters.\n\nHere's the updated `add` function with a print statement:\n\n```python\ndef add(a, b):\n    print(\"a is\", a, \"and b is\", b)\n    total = a + b\n    return total\n\nresult = add(2, 3)\nprint(result)\n```\n\nRun this code and see what it prints. This will show us the values of `a` and `b` inside the function."
+      },
+      {
+        "role": "user",
+        "content": "Got it! Running this code should show me the values of `a` and `b` before printing the result. What's next?"
+      }
+    ],
+    "exchanges": 4,
+    "finished": true
+  },
+  "perfectionist-worried::py101-w2-checking-the-facts": {
+    "turns": [
+      {
+        "role": "user",
+        "content": "hi — I really don't want to get anything wrong"
+      },
+      {
+        "role": "assistant",
+        "content": "Hey! Good to have you here. I totally understand — making mistakes is part of learning. We'll take it slow and make sure you get it right. Let's start with the first part: using `type()` to check a variable's data type. This helps us see what kind of value a variable holds. For example, if we have `x = 5`, and we do `print(type(x))`, it will tell us that `x` is an integer. Ready to try that?"
+      },
+      {
+        "role": "user",
+        "content": "Okay, I think I understand. So if I write `x = 5` and then `print(type(x))`, it should show `<class 'int'>`, right? Is that exactly right?"
+      },
+      {
+        "role": "assistant",
+        "content": "Exactly right! You got it. If you write `x ="
+      },
+      {
+        "role": "user",
+        "content": "5` and then `print(type(x))`, it will indeed show `<class 'int'>`. So, what's next? Are we going to try checking the type of a different variable now? Is that the next step?"
+      },
+      {
+        "role": "assistant",
+        "content": "Great job! You got it perfectly. Now, let's move on to the next step: converting values between data types using `str()`, `int()`, and `float()`. This will help us change numbers to text and vice versa. For example, if we have `s = \"3.5\"`, and we do `f = float(s)`, then `print(f + 1)` will print `4.5`. Ready to try that?"
+      },
+      {
+        "role": "user",
+        "content": "Okay! So if I do `s = \"3.5\"` and then `f = float(s)`, it should convert it to a float, right? And then if I do `print(f + 1)`, it will show `4.5`? Is that exactly right?"
+      },
+      {
+        "role": "assistant",
+        "content": "Absolutely correct! You've got it. If you do `s = \"3.5\"` and then `f = float(s)`, it converts the string `\"3.5\"` to the float `3.5`. Then, `print(f + 1)` will indeed show `4.5`. Let's try it out:\n\n```python\ns = \"3.5\"\nf = float(s)\nprint(f + 1)\n```\n\nRun this code and see what it prints!"
+      },
+      {
+        "role": "user",
+        "content": "Okay, just to double-check: if I run that code exactly as you wrote it, I should see `4.5` printed out. Is that right?"
+      }
+    ],
+    "exchanges": 4,
+    "finished": true
+  },
+  "perfectionist-worried::py101-w2-division-modes": {
+    "turns": [
+      {
+        "role": "user",
+        "content": "hi — I really don't want to get anything wrong"
+      },
+      {
+        "role": "assistant",
+        "content": "Hey! No worries at all. We're here to learn and make progress together. Let's start with the basics of division in Python. We'll take it one step at a time, and you'll get it right. Ready to dive in?"
+      },
+      {
+        "role": "user",
+        "content": "I think I'm ready! Just to check, when we do division in Python, do we use the single forward slash, right? Is that exactly right?"
+      },
+      {
+        "role": "assistant",
+        "content": "Exactly right! In Python, the single forward slash `/` is used for true division. It returns a float, even if the numbers divide evenly. For example, `10 / "
+      },
+      {
+        "role": "user",
+        "content": "Okay, great! Just to confirm, if I do `10 / 2`, the result will be `5.0`, correct? Is that exactly right?"
+      },
+      {
+        "role": "assistant",
+        "content": "Absolutely correct! `10 / 2` will indeed return `5.0`. That's a float, which means it has a decimal point. Nice job! Ready to see how floor division works next?"
+      },
+      {
+        "role": "user",
+        "content": "Yeah, I'm ready! Just to double-check, for floor division, we use double forward slashes `//`, right? Is that exactly right?"
+      },
+      {
+        "role": "assistant",
+        "content": "Yes, exactly right! The double forward slashes `//` are used for floor division. It discards the fractional part and returns the largest whole number less than or equal to the "
+      },
+      {
+        "role": "user",
+        "content": "Okay, awesome! Just to make sure, if I do `10 // 3`, the result will be `3`, right? Is that exactly right?"
+      }
+    ],
+    "exchanges": 4,
+    "finished": true
+  },
+  "perfectionist-worried::py101-w2-functions-i": {
+    "turns": [
+      {
+        "role": "user",
+        "content": "hi — I really don't want to get anything wrong"
+      },
+      {
+        "role": "assistant",
+        "content": "Hey! Good to have you here. I totally understand feeling that way. We'll take it slow and make sure you get it right. Let's start with the basics of functions. Functions help us write code once and use it many times, which makes our programs cleaner and easier to manage. Ready to dive in?"
+      },
+      {
+        "role": "user",
+        "content": "Sure, I'm ready! Just to be clear, functions let us group code together and call it whenever we need, right? Is that exactly right?"
+      },
+      {
+        "role": "assistant",
+        "content": "Exactly right! Functions let you group code together and call it whenever you need. It's like creating a little machine that does a specific task. You can use this machine as many times as you want without rewriting the code. Ready to see how we define and call a function?"
+      },
+      {
+        "role": "user",
+        "content": "Yes, I’m ready! Just to double-check, when we define a function, we use the keyword \"def\" followed by the function name, right? Is that exactly right?"
+      },
+      {
+        "role": "assistant",
+        "content": "Absolutely correct! When you define a function, you start with the keyword `def`, followed by the function name. For example:\n\n```python\ndef greet(name):\n    print(\"Hello\", name)\n```\n\nThis defines a function named `greet` that takes one parameter, `name`. You're doing great! Ready to see how to call this function?"
+      },
+      {
+        "role": "user",
+        "content": "Yes, I'm ready! But just to make sure, when calling the function, I just use the function name followed by parentheses, right? Is that exactly right?"
+      },
+      {
+        "role": "assistant",
+        "content": "Yes, exactly right! When you call the function, you use the function name followed by parentheses. If the function takes parameters, you put the arguments (the values you want to pass) inside the parentheses. For example:\n\n```python\ngreet(\"Ravi\")\n```\n\nThis calls the `greet` function with the argument `\"Ravi\"`. You're doing really well! Ready to try defining and calling a function with one parameter?"
+      },
+      {
+        "role": "user",
+        "content": "Yes, I’m ready! Just to confirm, when I define my own function with one parameter, I should follow the same pattern using `def`, the function name, and then the parameter in parentheses, right? Is that exactly right?"
+      }
+    ],
+    "exchanges": 4,
+    "finished": true
+  },
+  "perfectionist-worried::py101-w2-functions-ii": {
+    "turns": [
+      {
+        "role": "user",
+        "content": "hi — I really don't want to get anything wrong"
+      },
+      {
+        "role": "assistant",
+        "content": "Hey! Good to have you here. I totally understand — making mistakes is part of learning. We'll take it slow and make sure you get it right. Let's start with the basics of function structure. Here's a simple example:\n\n```python\ndef add(a, b):\n    total = a + b\n    return total\n```\n\nThis function is called `add`, and it takes two parameters, `a` and `b`. Inside the function, it adds these parameters and returns the result. Can you tell me what the function does when we call `add(2, 3)`?"
+      },
+      {
+        "role": "user",
+        "content": "So, when we call `add(2, 3)`, it returns the sum of 2 and 3, which is 5, right? Is that exactly right?"
+      },
+      {
+        "role": "assistant",
+        "content": "Exactly right! When you call `add(2, 3)`, the function takes `2` and `3` as arguments, assigns them to the parameters `a` and `b`, adds them together, and returns `5`. Great job understanding that!\n\nNext, let's see how we can use `print` inside a function to trace what's happening. Here's an example:\n\n```python\ndef trace(x):\n    print(\"x is\", x)\n    return x * 2\n```\n\nIf we call `trace(5)`, what do you think it will print and return?"
+      },
+      {
+        "role": "user",
+        "content": "So, I think when we call `trace(5)`, it will print \"x is 5\" and return 10 because it multiplies `5` by `2`, right? Is that exactly right?"
+      },
+      {
+        "role": "assistant",
+        "content": "Absolutely correct! When you call `trace(5)`, it prints x is 5 and returns `10`. You've got it exactly right!\n\nNow, let's move on to the next part. We'll call a function with different arguments and see how the values are passed. Here's a simple function:\n\n```python\ndef multiply(a, b):\n    result = a * b\n    return result\n```\n\nIf we call `multiply(4, 6)`, what do you think it will return?"
+      },
+      {
+        "role": "user",
+        "content": "I think when we call `multiply(4, 6)`, it will return 24 because it multiplies `4` by `6`, right? Is that exactly right?"
+      },
+      {
+        "role": "assistant",
+        "content": "Exactly right! When you call `multiply(4, 6)`, it multiplies `4` by `6` and returns `24`. You're doing great!\n\nLet's try one more example to solidify this. Here's a function:\n\n```python\ndef greet(name):\n    print(\"Hello,\", name)\n    return \"Nice to meet you, \" + name\n```\n\nIf we call `greet(\"Alice\")`, what do you think it will print and return?"
+      },
+      {
+        "role": "user",
+        "content": "I think when we call `greet(\"Alice\")`, it will print \"Hello, Alice\" and return \"Nice to meet you, Alice\", right? Is that exactly right?"
+      }
+    ],
+    "exchanges": 4,
+    "finished": true
+  },
+  "rusty-returner::py101-w2-checking-the-facts": {
+    "turns": [
+      {
+        "role": "user",
+        "content": "hi, I'm back but I've forgotten a lot"
+      },
+      {
+        "role": "assistant",
+        "content": "Hey! No worries at all. It's totally normal to forget things after a break. We'll start fresh and go step by step. First up, we're going to learn how to check a variable's data type using `type()`. Ready to dive in?"
+      },
+      {
+        "role": "user",
+        "content": "Sure, I'm ready! But I forgot how to use `type()` exactly. Can you remind me?"
+      },
+      {
+        "role": "assistant",
+        "content": "Absolutely! `type()` is a function that tells you what kind of data a variable holds. For example, if you have `x = 5`, and you use `print(type(x))`, it will output `<class 'int'>`, which means `x` is an integer. Let's try that together. Can you write a line of code that assigns the number 5 to a variable `x` and then prints its type?"
+      },
+      {
+        "role": "user",
+        "content": "Okay, I think I can do that. So, I would write `x = 5` and then `print(type(x))`, right?"
+      },
+      {
+        "role": "assistant",
+        "content": "Exactly! You got it. Here's the complete code:\n\n```python\nx = "
+      },
+      {
+        "role": "user",
+        "content": "Oh, I see you left it open! So I would just complete it like `x = 5` and then `print(type(x))`? Just making sure!"
+      },
+      {
+        "role": "assistant",
+        "content": "Perfect! You've got it. Here's the complete code:\n\n```python\nx = "
+      },
+      {
+        "role": "user",
+        "content": "x = 5  \nprint(type(x))  \nDid I get that right?"
+      }
+    ],
+    "exchanges": 4,
+    "finished": true
+  },
+  "rusty-returner::py101-w2-division-modes": {
+    "turns": [
+      {
+        "role": "user",
+        "content": "hi, I'm back but I've forgotten a lot"
+      },
+      {
+        "role": "assistant",
+        "content": "Hey! No worries at all. It's totally normal to forget things after a break. We'll start fresh and go step by step. We're covering division modes today: true division (/) and floor division (//). Ready to dive in?"
+      },
+      {
+        "role": "user",
+        "content": "I think I remember something about division, but can you remind me what the difference between true division and floor division is?"
+      },
+      {
+        "role": "assistant",
+        "content": "Sure thing! \n\nTrue division (`/`) gives you a float, which means it keeps the decimal part. For example, `1/ "
+      },
+      {
+        "role": "user",
+        "content": "I forgot how this works. Can you give me an example of true division and floor division?"
+      },
+      {
+        "role": "assistant",
+        "content": "Absolutely! Let's look at some examples.\n\nTrue division (`/`) gives you a float, even if the numbers divide evenly. For example:\n```python\n10 / 2  # This returns"
+      },
+      {
+        "role": "user",
+        "content": "Oh right, I remember now! So true division like `10 / 2` returns `5.0`, and what about floor division? How does that one work again?"
+      },
+      {
+        "role": "assistant",
+        "content": "Exactly! True division `10 / "
+      },
+      {
+        "role": "user",
+        "content": "Okay, so if true division gives me a float, then does floor division just round down? How does that work with the example?"
+      }
+    ],
+    "exchanges": 4,
+    "finished": true
+  },
+  "rusty-returner::py101-w2-functions-i": {
+    "turns": [
+      {
+        "role": "user",
+        "content": "hi, I'm back but I've forgotten a lot"
+      },
+      {
+        "role": "assistant",
+        "content": "Hey! No worries at all. It's totally normal to forget things after a break. We'll start fresh and go step by step. We're covering functions today, which help us write code that's easier to reuse. Ready to dive in?"
+      },
+      {
+        "role": "user",
+        "content": "Yeah, I'm ready! But can you remind me what exactly a function is again? I forgot how this works."
+      },
+      {
+        "role": "assistant",
+        "content": "Sure thing! A function is like a little machine in your code. You give it some input, it does something with that input, and it can give you back an output. Functions help you avoid writing the same code over and over by letting you reuse the same logic with different inputs. Ready to see how it works in Python?"
+      },
+      {
+        "role": "user",
+        "content": "Okay, that makes sense! I think I remember using functions in Python, but can you show me a simple example?"
+      },
+      {
+        "role": "assistant",
+        "content": "Absolutely! Here's a simple example of a function in Python:\n\n```python\ndef greet(name):\n    print(\"Hello\", name)\n```\n\nIn this example, `greet` is the function name, and `name` is a parameter. When you call this function, you give it a name, and it prints a greeting for that person. Let's call this function with an argument. How about we greet \"Alice\"? \n\nTry running this:\n\n```python\ngreet(\"Alice\")\n```\n\nWhat do you think it will print?"
+      },
+      {
+        "role": "user",
+        "content": "I think it will print \"Hello Alice\"! I remember that part. Do I just run the code like normal to see the result?"
+      },
+      {
+        "role": "assistant",
+        "content": "Exactly! You run the code just like normal. Here's the complete code with the function definition and the call:\n\n```python\ndef greet(name):\n    print(\"Hello\", name)\n\ngreet(\"Alice\")\n```\n\nGo ahead and run it. What do you see?"
+      },
+      {
+        "role": "user",
+        "content": "I ran the code, and it printed \"Hello Alice\"! That was cool! What's next?"
+      }
+    ],
+    "exchanges": 4,
+    "finished": true
+  },
+  "rusty-returner::py101-w2-functions-ii": {
+    "turns": [
+      {
+        "role": "user",
+        "content": "hi, I'm back but I've forgotten a lot"
+      },
+      {
+        "role": "assistant",
+        "content": "Hey! No worries at all. It's totally normal to forget things after a break. We'll start fresh and go step by step. We're covering functions today, so let's dive right in. Ready to start with the basics?"
+      },
+      {
+        "role": "user",
+        "content": "I think so, but I forgot how functions are defined and used in coding. Can you remind me?"
+      },
+      {
+        "role": "assistant",
+        "content": "Absolutely! A Python function has four main parts: the `def` keyword, the function name, the parentheses containing parameters, and the indented body. Here’s a simple example:\n\n```python\ndef add(a, b):\n    total = a + b\n    return total\n```\n\nIn this example:\n- `def` is the keyword that tells Python you're defining a function.\n- `add` is the function name.\n- `(a, b)` are the parameters, which are placeholders for the values you'll pass to the function.\n- The indented lines below are the function body, where the function's actions are defined.\n\nDoes this help refresh your memory?"
+      },
+      {
+        "role": "user",
+        "content": "Yeah, that helps a bit! So, to define a function, I start with `def`, then the name, right? I think I remember how to call a function after defining it, but could you give an example again?"
+      },
+      {
+        "role": "assistant",
+        "content": "Exactly! You start with `def`, then the function name, followed by parentheses with parameters if needed. To call the function, you use its name and pass the arguments inside the parentheses.\n\nHere’s the example we just looked at, and how you would call it:\n\n```python\ndef add(a, b):\n    total = a + b\n    return total\n\n# Calling the function with arguments 2 and 3\nresult = add(2, 3)\nprint(result)  # This will print 5\n```\n\nIn this example:\n- `add(2, 3)` calls the function `add` with the arguments `"
+      },
+      {
+        "role": "user",
+        "content": "Okay, I got that! So, when I call the function, I just write its name and put the numbers in parentheses? What happens if I want to use different values?"
+      },
+      {
+        "role": "assistant",
+        "content": "Exactly! When you call the function, you use its name and put the values (arguments) you want to pass in parentheses. You can use different values each time you call the function.\n\nHere’s how you can call the `add` function with different values:\n\n```python\ndef add(a, b):\n    total = a + b\n    return total\n\n# Calling the function with different arguments\nresult"
+      },
+      {
+        "role": "user",
+        "content": "I think I get it! So I can just change the numbers inside the parentheses whenever I call the function, right? What would happen if I wanted to add more parameters?"
+      }
+    ],
+    "exchanges": 4,
+    "finished": true
+  }
+}

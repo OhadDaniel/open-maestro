@@ -1,0 +1,3218 @@
+{
+  "declines-tired::py101-w2-checking-the-facts": [
+    {
+      "id": "respects-mastery",
+      "pass": true,
+      "reason": "Not applicable — the student never demonstrated mastery of any content."
+    },
+    {
+      "id": "no-filler",
+      "pass": true,
+      "reason": "Not applicable — no lesson content was delivered."
+    },
+    {
+      "id": "closes-lesson",
+      "pass": true,
+      "reason": "Not applicable — no lesson outcomes were pursued or met."
+    },
+    {
+      "id": "no-repeat",
+      "pass": true,
+      "reason": "The tutor offered one compromise (five-minute micro-lesson) and respected the decline without repeating it."
+    },
+    {
+      "id": "respects-decline",
+      "pass": true,
+      "reason": "The tutor accepted the student's refusal immediately and offered a genuine out rather than pushing further."
+    },
+    {
+      "id": "warm-concise",
+      "pass": true,
+      "reason": "All responses were brief, empathetic, and human without filler or excessive text."
+    },
+    {
+      "id": "correct-content",
+      "pass": true,
+      "reason": "The one technical reference (`type()`) was correct, though no actual teaching occurred."
+    },
+    {
+      "id": "one-step-at-a-time",
+      "pass": true,
+      "reason": "Not applicable — no step-by-step content was delivered."
+    },
+    {
+      "id": "handles-wrong-answer",
+      "pass": true,
+      "reason": "Not applicable — the student did not provide any answers to evaluate."
+    },
+    {
+      "id": "stays-on-topic",
+      "pass": true,
+      "reason": "Not applicable — the student did not go off-topic."
+    },
+    {
+      "id": "defines-terms",
+      "pass": true,
+      "reason": "Not applicable — no new terms were introduced."
+    },
+    {
+      "id": "specific-encouragement",
+      "pass": true,
+      "reason": "Encouragement was genuine and contextual (validating fatigue, affirming self-care) rather than generic praise."
+    },
+    {
+      "id": "adapts-to-pace",
+      "pass": true,
+      "reason": "The tutor adapted by offering a minimal five-minute option, then fully respected the student's need for rest."
+    }
+  ],
+  "knows-it-impatient::py101-w2-functions-ii": [
+    {
+      "id": "respects-mastery",
+      "pass": true,
+      "reason": "Tutor accepted student's claims of mastery and moved forward without re-drilling or busywork."
+    },
+    {
+      "id": "no-filler",
+      "pass": true,
+      "reason": "Tutor did not pad the lesson with trivial variations or make-work tasks."
+    },
+    {
+      "id": "closes-lesson",
+      "pass": true,
+      "reason": "Once all outcomes were covered, tutor wrapped up and directed student to next lesson."
+    },
+    {
+      "id": "no-repeat",
+      "pass": true,
+      "reason": "Tutor did not repeat suggestions or questions after being declined."
+    },
+    {
+      "id": "respects-decline",
+      "pass": true,
+      "reason": "When student declined topics, tutor moved on or accepted without insisting."
+    },
+    {
+      "id": "warm-concise",
+      "pass": true,
+      "reason": "Tutor maintained warm tone with brief, human responses throughout."
+    },
+    {
+      "id": "correct-content",
+      "pass": true,
+      "reason": "All technical statements about functions, returns, parameters, and arguments are accurate."
+    },
+    {
+      "id": "one-step-at-a-time",
+      "pass": true,
+      "reason": "Tutor introduced one concept per turn and checked understanding before moving forward."
+    },
+    {
+      "id": "handles-wrong-answer",
+      "pass": true,
+      "reason": "No wrong answers were provided by student, so criterion not violated."
+    },
+    {
+      "id": "stays-on-topic",
+      "pass": true,
+      "reason": "Tutor kept focus on lesson outcomes and did not allow off-topic jumps."
+    },
+    {
+      "id": "defines-terms",
+      "pass": true,
+      "reason": "Key terms like 'return statement,' 'parameters,' and 'arguments' were used appropriately and contextually clear."
+    },
+    {
+      "id": "specific-encouragement",
+      "pass": false,
+      "reason": "Final praise 'Great job today!' is generic rather than specific to demonstrated competencies."
+    },
+    {
+      "id": "adapts-to-pace",
+      "pass": true,
+      "reason": "Tutor accelerated through topics at student's request, matching fast-learner pace."
+    }
+  ],
+  "eager-beginner::py101-w2-checking-the-facts": [
+    {
+      "id": "respects-mastery",
+      "pass": true,
+      "reason": "The tutor did not re-drill the student's demonstrated understanding of the code structure."
+    },
+    {
+      "id": "no-filler",
+      "pass": true,
+      "reason": "The tutor stayed focused on the core concept without padding the lesson with trivial variations."
+    },
+    {
+      "id": "closes-lesson",
+      "pass": false,
+      "reason": "The conversation cuts off mid-lesson before wrapping up or pointing the student onward."
+    },
+    {
+      "id": "no-repeat",
+      "pass": true,
+      "reason": "The tutor did not repeat previous suggestions or questions."
+    },
+    {
+      "id": "respects-decline",
+      "pass": true,
+      "reason": "No decline occurred in the conversation to evaluate."
+    },
+    {
+      "id": "warm-concise",
+      "pass": true,
+      "reason": "The tutor maintained a warm, encouraging tone with brief, focused responses."
+    },
+    {
+      "id": "correct-content",
+      "pass": false,
+      "reason": "The tutor's code snippets are incomplete (cut off at `x = ` and `print(type(x))` without proper formatting context)."
+    },
+    {
+      "id": "one-step-at-a-time",
+      "pass": true,
+      "reason": "The tutor introduced the `type()` function step-by-step and waited for the student to build the code incrementally."
+    },
+    {
+      "id": "handles-wrong-answer",
+      "pass": true,
+      "reason": "No incorrect answers were provided by the student to evaluate handling."
+    },
+    {
+      "id": "stays-on-topic",
+      "pass": true,
+      "reason": "The student stayed on-topic throughout; no redirection was needed."
+    },
+    {
+      "id": "defines-terms",
+      "pass": true,
+      "reason": "The tutor defined `type()` as checking what kind of value a variable holds."
+    },
+    {
+      "id": "specific-encouragement",
+      "pass": true,
+      "reason": "Encouragement was specific ('Perfect!') in response to the student's correct code."
+    },
+    {
+      "id": "adapts-to-pace",
+      "pass": true,
+      "reason": "The tutor slowed down when the student asked clarifying questions about what to set `x` to."
+    }
+  ],
+  "declines-tired::py101-w2-functions-ii": [
+    {
+      "id": "respects-mastery",
+      "pass": true,
+      "reason": "No mastery was demonstrated, so this criterion does not apply negatively."
+    },
+    {
+      "id": "no-filler",
+      "pass": true,
+      "reason": "No filler or make-work was introduced."
+    },
+    {
+      "id": "closes-lesson",
+      "pass": false,
+      "reason": "No lesson outcomes were met, and the tutor never attempted to close or redirect toward rescheduling despite the student declining multiple times."
+    },
+    {
+      "id": "no-repeat",
+      "pass": false,
+      "reason": "The tutor repeated the offer to chat after the student already declined coding/facts and asked to keep it chill."
+    },
+    {
+      "id": "respects-decline",
+      "pass": false,
+      "reason": "After the student declined coding three times, the tutor should have respected the boundary and suggested rescheduling rather than pivoting to open-ended casual chat."
+    },
+    {
+      "id": "warm-concise",
+      "pass": true,
+      "reason": "The tutor's tone was warm and responses were concise throughout."
+    },
+    {
+      "id": "correct-content",
+      "pass": true,
+      "reason": "The fact about Python being named after Monty Python is accurate."
+    },
+    {
+      "id": "one-step-at-a-time",
+      "pass": true,
+      "reason": "Only one idea was offered at a time; no overwhelming multi-step instructions were given."
+    },
+    {
+      "id": "handles-wrong-answer",
+      "pass": true,
+      "reason": "No wrong answers were given by the student, so this criterion does not apply."
+    },
+    {
+      "id": "stays-on-topic",
+      "pass": false,
+      "reason": "The tutor abandoned the lesson topic entirely and engaged in open-ended casual chat, which strays from the tutoring purpose."
+    },
+    {
+      "id": "defines-terms",
+      "pass": true,
+      "reason": "No new technical terms requiring definition were introduced in this conversation."
+    },
+    {
+      "id": "specific-encouragement",
+      "pass": true,
+      "reason": "No generic praise was given; encouragement was minimal and contextual."
+    },
+    {
+      "id": "adapts-to-pace",
+      "pass": false,
+      "reason": "The tutor adapted to the student's fatigue by softening the lesson, but ultimately did not respect the clear boundary by proposing to reschedule."
+    }
+  ],
+  "eager-beginner::py101-w2-division-modes": [
+    {
+      "id": "respects-mastery",
+      "pass": true,
+      "reason": "Tutor acknowledged the student's correct understanding of true division and moved forward without re-drilling."
+    },
+    {
+      "id": "no-filler",
+      "pass": true,
+      "reason": "Tutor introduced floor division as a new concept rather than padding with trivial variations."
+    },
+    {
+      "id": "closes-lesson",
+      "pass": false,
+      "reason": "Conversation ends mid-interaction without closure; unclear if tutor wrapped up or continued drilling."
+    },
+    {
+      "id": "no-repeat",
+      "pass": true,
+      "reason": "Tutor did not repeat questions or suggestions across the conversation."
+    },
+    {
+      "id": "respects-decline",
+      "pass": true,
+      "reason": "No decline from student occurred in this conversation."
+    },
+    {
+      "id": "warm-concise",
+      "pass": true,
+      "reason": "Tutor maintained warm, encouraging tone with brief, focused explanations."
+    },
+    {
+      "id": "correct-content",
+      "pass": true,
+      "reason": "All Python explanations about `/`, `//`, and their return types were technically accurate."
+    },
+    {
+      "id": "one-step-at-a-time",
+      "pass": true,
+      "reason": "Tutor introduced true division first, checked understanding, then moved to floor division."
+    },
+    {
+      "id": "handles-wrong-answer",
+      "pass": false,
+      "reason": "Student's answer is correct, but tutor's response is cut off mid-sentence making evaluation incomplete."
+    },
+    {
+      "id": "stays-on-topic",
+      "pass": true,
+      "reason": "Student stayed on-topic throughout; no redirects were needed."
+    },
+    {
+      "id": "defines-terms",
+      "pass": true,
+      "reason": "Tutor defined 'true division' and 'floor division' with clear explanations of their behavior."
+    },
+    {
+      "id": "specific-encouragement",
+      "pass": true,
+      "reason": "Tutor gave specific praise ('You've got it,' 'Exactly!') tied to the student's correct reasoning."
+    },
+    {
+      "id": "adapts-to-pace",
+      "pass": true,
+      "reason": "Tutor paced content appropriately for a beginner, checking understanding at each step."
+    }
+  ],
+  "knows-it-impatient::py101-w2-division-modes": [
+    {
+      "id": "respects-mastery",
+      "pass": true,
+      "reason": "Tutor accepted student's 'skip' responses without re-drilling and moved forward each time."
+    },
+    {
+      "id": "no-filler",
+      "pass": true,
+      "reason": "The tutor did not invent trivial variations or busywork; the `//` and `%` problem was genuinely the next concept."
+    },
+    {
+      "id": "closes-lesson",
+      "pass": true,
+      "reason": "Once outcomes were met, tutor wrapped up and directed student to next lesson without adding more tasks."
+    },
+    {
+      "id": "no-repeat",
+      "pass": true,
+      "reason": "Tutor did not repeat the same question or suggestion after the student declined."
+    },
+    {
+      "id": "respects-decline",
+      "pass": true,
+      "reason": "Student declined multiple times and tutor moved on each time without insisting or pushback."
+    },
+    {
+      "id": "warm-concise",
+      "pass": true,
+      "reason": "Tutor maintained friendly, brief tone throughout without unnecessary elaboration."
+    },
+    {
+      "id": "correct-content",
+      "pass": true,
+      "reason": "All Python statements were technically accurate; floor division and modulo descriptions were correct."
+    },
+    {
+      "id": "one-step-at-a-time",
+      "pass": true,
+      "reason": "Tutor introduced one concept per check and confirmed understanding before moving on."
+    },
+    {
+      "id": "handles-wrong-answer",
+      "pass": true,
+      "reason": "No wrong answers were given; criterion does not apply but tutor was prepared with the scaffolded question."
+    },
+    {
+      "id": "stays-on-topic",
+      "pass": true,
+      "reason": "Student tried to jump ahead but tutor gently kept the lesson on track before acknowledging readiness at the end."
+    },
+    {
+      "id": "defines-terms",
+      "pass": true,
+      "reason": "Terms like floor division and modulo were used in context with clear examples."
+    },
+    {
+      "id": "specific-encouragement",
+      "pass": true,
+      "reason": "Encouragement ('Great job!') was brief and earned based on demonstrated mastery."
+    },
+    {
+      "id": "adapts-to-pace",
+      "pass": true,
+      "reason": "Tutor quickly adapted to a fast learner by accelerating through basics and respecting their confidence."
+    }
+  ],
+  "confused-anxious::py101-w2-checking-the-facts": [
+    {
+      "id": "respects-mastery",
+      "pass": true,
+      "reason": "The tutor did not re-drill once the student grasped `x = 5`."
+    },
+    {
+      "id": "no-filler",
+      "pass": true,
+      "reason": "No trivial variations or make-work were introduced."
+    },
+    {
+      "id": "closes-lesson",
+      "pass": false,
+      "reason": "The conversation ends mid-lesson without wrapping up or pointing toward next steps."
+    },
+    {
+      "id": "no-repeat",
+      "pass": false,
+      "reason": "The tutor repeated incomplete code blocks (`x = `) multiple times without completing them until prompted repeatedly."
+    },
+    {
+      "id": "respects-decline",
+      "pass": true,
+      "reason": "The student did not decline anything; this criterion does not apply."
+    },
+    {
+      "id": "warm-concise",
+      "pass": true,
+      "reason": "The tutor was warm and supportive while staying brief."
+    },
+    {
+      "id": "correct-content",
+      "pass": false,
+      "reason": "The tutor repeatedly posted incomplete code blocks that never reached a runnable or complete state."
+    },
+    {
+      "id": "one-step-at-a-time",
+      "pass": true,
+      "reason": "The tutor introduced `type()` conceptually, then moved to assignment, checking understanding along the way."
+    },
+    {
+      "id": "handles-wrong-answer",
+      "pass": true,
+      "reason": "No wrong answers were given by the student to evaluate this criterion."
+    },
+    {
+      "id": "stays-on-topic",
+      "pass": true,
+      "reason": "The student stayed focused on the `type()` lesson; no redirection was needed."
+    },
+    {
+      "id": "defines-terms",
+      "pass": true,
+      "reason": "The tutor defined `type()` as checking what kind of value a variable holds."
+    },
+    {
+      "id": "specific-encouragement",
+      "pass": true,
+      "reason": "Encouragement was minimal but grounded (e.g., 'Totally fair — long days can make things feel fuzzy')."
+    },
+    {
+      "id": "adapts-to-pace",
+      "pass": false,
+      "reason": "The tutor failed to recognize that repeated incomplete code blocks frustrated the student; pacing broke down into a loop."
+    }
+  ],
+  "knows-it-impatient::py101-w2-functions-i": [
+    {
+      "id": "respects-mastery",
+      "pass": true,
+      "reason": "Tutor acknowledged the student's knowledge of function calls and moved on without re-drilling when asked."
+    },
+    {
+      "id": "no-filler",
+      "pass": true,
+      "reason": "Tutor did not pad the lesson with trivial variations or make-work tasks."
+    },
+    {
+      "id": "closes-lesson",
+      "pass": false,
+      "reason": "Tutor did not wrap up or point the student onward; conversation ends mid-flow without closure or direction to next steps."
+    },
+    {
+      "id": "no-repeat",
+      "pass": true,
+      "reason": "Tutor did not repeat the same question or suggestion after it was handled."
+    },
+    {
+      "id": "respects-decline",
+      "pass": true,
+      "reason": "When student asked to move on, tutor complied without insisting on extra practice."
+    },
+    {
+      "id": "warm-concise",
+      "pass": true,
+      "reason": "Tutor maintained a warm, encouraging tone with brief, natural responses throughout."
+    },
+    {
+      "id": "correct-content",
+      "pass": true,
+      "reason": "All Python explanations and code examples were technically accurate."
+    },
+    {
+      "id": "one-step-at-a-time",
+      "pass": true,
+      "reason": "Tutor introduced each concept separately and checked understanding before moving forward."
+    },
+    {
+      "id": "handles-wrong-answer",
+      "pass": true,
+      "reason": "No wrong answers were given, so criterion not applicable but no errors committed."
+    },
+    {
+      "id": "stays-on-topic",
+      "pass": true,
+      "reason": "Tutor kept the lesson focused and did not allow jumping ahead without checking mastery first."
+    },
+    {
+      "id": "defines-terms",
+      "pass": true,
+      "reason": "Tutor defined or explained key terms like 'return,' 'parameters,' and 'reuse' when introduced."
+    },
+    {
+      "id": "specific-encouragement",
+      "pass": true,
+      "reason": "Encouragement was tied to actual correct answers (e.g., 'Exactly — you've got it,' 'Perfect example!')."
+    },
+    {
+      "id": "adapts-to-pace",
+      "pass": true,
+      "reason": "Tutor accelerated through outcomes the student already knew and responded to requests to move faster."
+    }
+  ],
+  "declines-tired::py101-w2-division-modes": [
+    {
+      "id": "respects-mastery",
+      "pass": true,
+      "reason": "Not applicable — no mastery was demonstrated, so no opportunity to fail this criterion."
+    },
+    {
+      "id": "no-filler",
+      "pass": true,
+      "reason": "Not applicable — no lesson content was delivered, so no filler could be added."
+    },
+    {
+      "id": "closes-lesson",
+      "pass": true,
+      "reason": "Not applicable — no lesson occurred, so there was nothing to close improperly."
+    },
+    {
+      "id": "no-repeat",
+      "pass": true,
+      "reason": "The tutor offered one brief alternative (shorter session or rescheduling) and accepted the student's first decline without repeating."
+    },
+    {
+      "id": "respects-decline",
+      "pass": true,
+      "reason": "When the student declined to work, the tutor immediately accepted, validated the choice, and offered to reschedule without pushing back."
+    },
+    {
+      "id": "warm-concise",
+      "pass": true,
+      "reason": "The tutor was warm and empathetic ('take care of yourself') while staying brief and genuine throughout."
+    },
+    {
+      "id": "correct-content",
+      "pass": true,
+      "reason": "No Python content was taught, so no errors occurred."
+    },
+    {
+      "id": "one-step-at-a-time",
+      "pass": true,
+      "reason": "Not applicable — the tutor did not teach content, so pacing of concepts was not tested."
+    },
+    {
+      "id": "handles-wrong-answer",
+      "pass": true,
+      "reason": "Not applicable — the student did not attempt any problems or give wrong answers."
+    },
+    {
+      "id": "stays-on-topic",
+      "pass": true,
+      "reason": "The student steered the conversation away from the lesson; the tutor acknowledged the redirect respectfully rather than forcing the topic."
+    },
+    {
+      "id": "defines-terms",
+      "pass": true,
+      "reason": "Not applicable — no new terms were introduced."
+    },
+    {
+      "id": "specific-encouragement",
+      "pass": true,
+      "reason": "The tutor offered genuine, contextual affirmation ('that's a smart move too') rather than generic praise."
+    },
+    {
+      "id": "adapts-to-pace",
+      "pass": true,
+      "reason": "The tutor immediately adapted to the student's low energy by offering a micro-lesson option and ultimately accepting the student's need to rest."
+    }
+  ],
+  "declines-tired::py101-w2-functions-i": [
+    {
+      "id": "respects-mastery",
+      "pass": true,
+      "reason": "No mastery demonstration occurred; criterion not applicable."
+    },
+    {
+      "id": "no-filler",
+      "pass": true,
+      "reason": "No filler or make-work was introduced."
+    },
+    {
+      "id": "closes-lesson",
+      "pass": false,
+      "reason": "No lesson was taught, so closure never occurred; the tutor should have eventually acknowledged the session wasn't happening and offered to reschedule."
+    },
+    {
+      "id": "no-repeat",
+      "pass": true,
+      "reason": "No questions or suggestions were repeated."
+    },
+    {
+      "id": "respects-decline",
+      "pass": false,
+      "reason": "The tutor continued off-topic chat about shows instead of respecting the student's declining energy and offering to end or reschedule."
+    },
+    {
+      "id": "warm-concise",
+      "pass": true,
+      "reason": "Responses were warm and concise throughout."
+    },
+    {
+      "id": "correct-content",
+      "pass": true,
+      "reason": "No Python content was taught, so no errors occurred."
+    },
+    {
+      "id": "one-step-at-a-time",
+      "pass": true,
+      "reason": "No instruction steps were introduced."
+    },
+    {
+      "id": "handles-wrong-answer",
+      "pass": true,
+      "reason": "No incorrect answers were given by the student."
+    },
+    {
+      "id": "stays-on-topic",
+      "pass": false,
+      "reason": "The tutor abandoned the lesson topic entirely and engaged in prolonged off-topic chat about TV shows instead of gently redirecting."
+    },
+    {
+      "id": "defines-terms",
+      "pass": true,
+      "reason": "No technical terms were introduced."
+    },
+    {
+      "id": "specific-encouragement",
+      "pass": true,
+      "reason": "No encouragement was given; criterion not applicable."
+    },
+    {
+      "id": "adapts-to-pace",
+      "pass": false,
+      "reason": "The tutor adapted to the student's low energy by dropping the lesson, but then failed to recognize the persistent decline and appropriately end the session."
+    }
+  ],
+  "eager-beginner::py101-w2-functions-i": [
+    {
+      "id": "respects-mastery",
+      "pass": true,
+      "reason": "The tutor acknowledged the student's correct function definition without re-drilling or adding busywork."
+    },
+    {
+      "id": "no-filler",
+      "pass": true,
+      "reason": "The tutor introduced only essential concepts and did not label trivial variations as challenges."
+    },
+    {
+      "id": "closes-lesson",
+      "pass": false,
+      "reason": "The tutor has not wrapped up; the lesson is still open-ended with the student's function call awaiting feedback but no clear endpoint."
+    },
+    {
+      "id": "no-repeat",
+      "pass": true,
+      "reason": "The tutor did not repeat earlier suggestions or questions."
+    },
+    {
+      "id": "respects-decline",
+      "pass": true,
+      "reason": "No decline from the student occurred, so this criterion is not applicable but the tutor would likely handle it well based on demonstrated style."
+    },
+    {
+      "id": "warm-concise",
+      "pass": true,
+      "reason": "The tutor remained warm, encouraging, and concise throughout without unnecessary verbosity."
+    },
+    {
+      "id": "correct-content",
+      "pass": true,
+      "reason": "All Python syntax and concepts (functions, parameters, calling functions) were technically correct."
+    },
+    {
+      "id": "one-step-at-a-time",
+      "pass": true,
+      "reason": "The tutor introduced concepts sequentially: why functions matter, then syntax, then defining, then calling."
+    },
+    {
+      "id": "handles-wrong-answer",
+      "pass": true,
+      "reason": "The student answered correctly, so this was not tested, but the tutor's approach suggests competence here."
+    },
+    {
+      "id": "stays-on-topic",
+      "pass": true,
+      "reason": "The tutor kept the lesson focused on basic function definition and calling without tangents."
+    },
+    {
+      "id": "defines-terms",
+      "pass": true,
+      "reason": "The tutor defined 'parameter' and 'function body' when first introduced."
+    },
+    {
+      "id": "specific-encouragement",
+      "pass": true,
+      "reason": "The tutor gave specific praise ('You did it perfectly') tied to what the student actually accomplished."
+    },
+    {
+      "id": "adapts-to-pace",
+      "pass": true,
+      "reason": "The tutor matched the student's quick understanding and moved forward appropriately without slowing down unnecessarily."
+    }
+  ],
+  "knows-it-impatient::py101-w2-checking-the-facts": [
+    {
+      "id": "respects-mastery",
+      "pass": true,
+      "reason": "Tutor accepted student's skips without re-drilling and moved forward each time."
+    },
+    {
+      "id": "no-filler",
+      "pass": true,
+      "reason": "Tutor did not invent trivial variations or pad the lesson with make-work."
+    },
+    {
+      "id": "closes-lesson",
+      "pass": false,
+      "reason": "Conversation ends mid-question without wrapping up or pointing student onward."
+    },
+    {
+      "id": "no-repeat",
+      "pass": true,
+      "reason": "Tutor did not repeat any question or suggestion after it was handled."
+    },
+    {
+      "id": "respects-decline",
+      "pass": true,
+      "reason": "Student declined to engage with questions and tutor accepted each skip gracefully."
+    },
+    {
+      "id": "warm-concise",
+      "pass": true,
+      "reason": "Tutor maintained warm, brief responses throughout without unnecessary elaboration."
+    },
+    {
+      "id": "correct-content",
+      "pass": true,
+      "reason": "All Python content stated (`type(5)` returns `<class 'int'>`, `float()` conversion, `ValueError` for invalid `int()`) is technically correct."
+    },
+    {
+      "id": "one-step-at-a-time",
+      "pass": true,
+      "reason": "Tutor introduced one concept per check and verified readiness before moving on."
+    },
+    {
+      "id": "handles-wrong-answer",
+      "pass": true,
+      "reason": "No wrong answers were given, so this criterion does not apply negatively."
+    },
+    {
+      "id": "stays-on-topic",
+      "pass": true,
+      "reason": "Tutor kept student focused on the current lesson outcomes without drift."
+    },
+    {
+      "id": "defines-terms",
+      "pass": true,
+      "reason": "No new jargon was introduced without context; concepts were implicit or already familiar."
+    },
+    {
+      "id": "specific-encouragement",
+      "pass": false,
+      "reason": "Encouragement was generic ('Got it,' 'Great!') rather than specific to the student's demonstrated mastery."
+    },
+    {
+      "id": "adapts-to-pace",
+      "pass": true,
+      "reason": "Tutor quickly moved through skips and matched the student's fast pace without slowing down unnecessarily."
+    }
+  ],
+  "confused-anxious::py101-w2-division-modes": [
+    {
+      "id": "respects-mastery",
+      "pass": true,
+      "reason": "No prior mastery was demonstrated, so this criterion does not apply negatively."
+    },
+    {
+      "id": "no-filler",
+      "pass": true,
+      "reason": "The tutor stayed focused on the core task without padding or invented variations."
+    },
+    {
+      "id": "closes-lesson",
+      "pass": false,
+      "reason": "The lesson never progressed to actual Python division instruction because the tutor got stuck troubleshooting environment setup instead of pivoting or simplifying."
+    },
+    {
+      "id": "no-repeat",
+      "pass": false,
+      "reason": "The tutor repeated the same suggestion about finding the Run button and keyboard shortcut after the student said they still couldn't find it."
+    },
+    {
+      "id": "respects-decline",
+      "pass": false,
+      "reason": "The student implicitly declined to proceed independently multiple times; the tutor should have offered a simpler alternative (like copying code into a chat interface or using a different platform) instead of repeating the same instructions."
+    },
+    {
+      "id": "warm-concise",
+      "pass": true,
+      "reason": "The tutor maintained a warm, supportive tone and kept responses reasonably concise throughout."
+    },
+    {
+      "id": "correct-content",
+      "pass": true,
+      "reason": "All Python and technical information provided was accurate."
+    },
+    {
+      "id": "one-step-at-a-time",
+      "pass": true,
+      "reason": "The tutor broke down the task into small steps and checked understanding before moving forward."
+    },
+    {
+      "id": "handles-wrong-answer",
+      "pass": true,
+      "reason": "No incorrect answers were given by the student, so this criterion does not apply negatively."
+    },
+    {
+      "id": "stays-on-topic",
+      "pass": true,
+      "reason": "The tutor remained focused on the division lesson objective throughout."
+    },
+    {
+      "id": "defines-terms",
+      "pass": true,
+      "reason": "Terms like 'code editor' and 'Run button' were explained clearly in context."
+    },
+    {
+      "id": "specific-encouragement",
+      "pass": true,
+      "reason": "Encouragement was tied to the student's expressed anxiety and the tutor's availability to help."
+    },
+    {
+      "id": "adapts-to-pace",
+      "pass": false,
+      "reason": "The tutor failed to adapt when the student repeatedly expressed confusion; should have pivoted to a simpler tool, offered screen-sharing, or suggested an alternative approach rather than repeating the same technical instructions."
+    }
+  ],
+  "eager-beginner::py101-w2-functions-ii": [
+    {
+      "id": "respects-mastery",
+      "pass": true,
+      "reason": "The tutor acknowledged the student's successful execution and understanding without re-drilling basic concepts."
+    },
+    {
+      "id": "no-filler",
+      "pass": true,
+      "reason": "Each step introduced new content (function definition, calling functions, parameter assignment, return statements, tracing) without padding."
+    },
+    {
+      "id": "closes-lesson",
+      "pass": false,
+      "reason": "The conversation ends mid-lesson with the student asking about print statements for tracing, leaving it open-ended without closure."
+    },
+    {
+      "id": "no-repeat",
+      "pass": true,
+      "reason": "The tutor did not repeat any explanations or suggestions across the conversation."
+    },
+    {
+      "id": "respects-decline",
+      "pass": true,
+      "reason": "No declines were issued by the student, so this criterion does not apply negatively."
+    },
+    {
+      "id": "warm-concise",
+      "pass": true,
+      "reason": "The tutor maintained a warm, encouraging tone with concise explanations and appropriate use of code examples."
+    },
+    {
+      "id": "correct-content",
+      "pass": true,
+      "reason": "All Python explanations and code are technically correct; parameters, return statements, and function calls are accurate."
+    },
+    {
+      "id": "one-step-at-a-time",
+      "pass": true,
+      "reason": "The tutor introduced functions, then calling functions, then parameter/argument mapping, then tracing—each step built on the previous."
+    },
+    {
+      "id": "handles-wrong-answer",
+      "pass": true,
+      "reason": "The student did not provide a wrong answer; this criterion does not apply negatively."
+    },
+    {
+      "id": "stays-on-topic",
+      "pass": true,
+      "reason": "The student stayed engaged with the lesson on functions and the tutor kept focus on that single topic."
+    },
+    {
+      "id": "defines-terms",
+      "pass": true,
+      "reason": "The tutor defined 'parameters,' 'arguments,' and 'return' when first introducing them."
+    },
+    {
+      "id": "specific-encouragement",
+      "pass": true,
+      "reason": "Encouragement was tied to concrete actions ('You got it to print 8', 'Awesome!') rather than generic praise."
+    },
+    {
+      "id": "adapts-to-pace",
+      "pass": true,
+      "reason": "The tutor matched the student's quick learning pace by moving from basics to tracing without unnecessary repetition."
+    }
+  ],
+  "confused-anxious::py101-w2-functions-i": [
+    {
+      "id": "respects-mastery",
+      "pass": true,
+      "reason": "The tutor did not re-drill the concept of code reuse after the student acknowledged understanding it."
+    },
+    {
+      "id": "no-filler",
+      "pass": true,
+      "reason": "The tutor provided a concrete, relevant example without padding or inventing trivial variations."
+    },
+    {
+      "id": "closes-lesson",
+      "pass": false,
+      "reason": "The tutor never wrapped up or pointed the student onward; the conversation ends mid-explanation without closure."
+    },
+    {
+      "id": "no-repeat",
+      "pass": false,
+      "reason": "The tutor responded to the third message with 'Absolutely, let's make it super clear!' without actually delivering new explanation, repeating the acknowledgment pattern."
+    },
+    {
+      "id": "respects-decline",
+      "pass": true,
+      "reason": "The student did not decline; this criterion does not apply."
+    },
+    {
+      "id": "warm-concise",
+      "pass": false,
+      "reason": "The tutor's second response was a long wall of text with five bullet points rather than breaking it into simpler, bite-sized pieces for an overwhelmed student."
+    },
+    {
+      "id": "correct-content",
+      "pass": true,
+      "reason": "All Python syntax and concepts explained were technically accurate."
+    },
+    {
+      "id": "one-step-at-a-time",
+      "pass": false,
+      "reason": "The tutor packed multiple concepts (def, parameters, parentheses, indentation, function body) into one explanation instead of isolating and checking each one."
+    },
+    {
+      "id": "handles-wrong-answer",
+      "pass": true,
+      "reason": "The student was not wrong; this criterion does not apply."
+    },
+    {
+      "id": "stays-on-topic",
+      "pass": true,
+      "reason": "The student remained focused on understanding function basics and the tutor stayed aligned with that goal."
+    },
+    {
+      "id": "defines-terms",
+      "pass": true,
+      "reason": "The tutor defined 'parameter' and 'argument' when introducing them, and explained what 'def' means."
+    },
+    {
+      "id": "specific-encouragement",
+      "pass": true,
+      "reason": "Encouragement was minimal but appropriate ('No worries at all — it's totally normal'); not generic praise."
+    },
+    {
+      "id": "adapts-to-pace",
+      "pass": false,
+      "reason": "Despite clear signals of overwhelm, the tutor did not meaningfully slow down—responses lacked concrete follow-through and failed to simplify further."
+    }
+  ],
+  "confused-anxious::py101-w2-functions-ii": [
+    {
+      "id": "respects-mastery",
+      "pass": true,
+      "reason": "The tutor did not re-drill concepts the student had already grasped; instead, they focused on the specific area of confusion (arguments and parameter assignment)."
+    },
+    {
+      "id": "no-filler",
+      "pass": true,
+      "reason": "All content was directly relevant to clarifying the core concept; no trivial variations or busywork were introduced."
+    },
+    {
+      "id": "closes-lesson",
+      "pass": false,
+      "reason": "The conversation was cut off mid-explanation and never reached a natural close where outcomes were confirmed and the student was redirected forward."
+    },
+    {
+      "id": "no-repeat",
+      "pass": false,
+      "reason": "The tutor repeated the step-by-step trace through the `add(2, 3)` example multiple times without substantively changing the approach when the student remained confused."
+    },
+    {
+      "id": "respects-decline",
+      "pass": true,
+      "reason": "The student did not explicitly decline anything; the tutor remained responsive to requests for more explanation."
+    },
+    {
+      "id": "warm-concise",
+      "pass": false,
+      "reason": "Later responses became repetitive and increasingly verbose rather than adjusting the teaching method when the same explanation was not landing."
+    },
+    {
+      "id": "correct-content",
+      "pass": true,
+      "reason": "All Python explanations, code examples, and technical descriptions were accurate throughout."
+    },
+    {
+      "id": "one-step-at-a-time",
+      "pass": false,
+      "reason": "The tutor continued to explain the same multi-step process repeatedly instead of breaking it into smaller, testable sub-steps or trying a fundamentally different approach."
+    },
+    {
+      "id": "handles-wrong-answer",
+      "pass": true,
+      "reason": "The student did not provide wrong answers; the tutor correctly diagnosed confusion and attempted to address it."
+    },
+    {
+      "id": "stays-on-topic",
+      "pass": true,
+      "reason": "The tutor stayed focused on the core concept of arguments, parameters, and how they map together."
+    },
+    {
+      "id": "defines-terms",
+      "pass": true,
+      "reason": "Terms like 'parameters,' 'arguments,' and 'return' were clearly defined when first introduced."
+    },
+    {
+      "id": "specific-encouragement",
+      "pass": true,
+      "reason": "Encouragement was minimal but grounded in the student's actual effort ('Absolutely, let's go through it step by step')."
+    },
+    {
+      "id": "adapts-to-pace",
+      "pass": false,
+      "reason": "Despite the student repeatedly signaling confusion with the same approach, the tutor kept repeating a nearly identical explanation rather than pivoting to an analogy, interactive tracing, or different pedagogical method."
+    }
+  ],
+  "terse-minimal::py101-w2-functions-ii": [
+    {
+      "id": "respects-mastery",
+      "pass": true,
+      "reason": "Student showed no prior mastery, so this criterion does not apply negatively."
+    },
+    {
+      "id": "no-filler",
+      "pass": true,
+      "reason": "Tutor did not pad the lesson with trivial variations or make-work."
+    },
+    {
+      "id": "closes-lesson",
+      "pass": false,
+      "reason": "After the student said 'done', the tutor did not wrap up or point the student onward; the conversation simply ended without closure."
+    },
+    {
+      "id": "no-repeat",
+      "pass": true,
+      "reason": "Tutor did not repeat the same question or suggestion after it was handled."
+    },
+    {
+      "id": "respects-decline",
+      "pass": true,
+      "reason": "Student did not decline anything; criterion does not apply negatively."
+    },
+    {
+      "id": "warm-concise",
+      "pass": true,
+      "reason": "Tutor maintained a warm, encouraging tone and kept explanations reasonably concise."
+    },
+    {
+      "id": "correct-content",
+      "pass": true,
+      "reason": "All Python code and explanations were technically correct."
+    },
+    {
+      "id": "one-step-at-a-time",
+      "pass": true,
+      "reason": "Tutor introduced the function structure step-by-step and checked understanding before moving forward."
+    },
+    {
+      "id": "handles-wrong-answer",
+      "pass": true,
+      "reason": "Student did not provide a wrong answer; criterion does not apply negatively."
+    },
+    {
+      "id": "stays-on-topic",
+      "pass": true,
+      "reason": "Student stayed on topic throughout and tutor kept the lesson focused on functions."
+    },
+    {
+      "id": "defines-terms",
+      "pass": true,
+      "reason": "Tutor defined key terms like 'parameters,' 'body,' and 'return' when introduced."
+    },
+    {
+      "id": "specific-encouragement",
+      "pass": true,
+      "reason": "Encouragement was brief and appropriate; tutor did not over-praise trivial responses."
+    },
+    {
+      "id": "adapts-to-pace",
+      "pass": true,
+      "reason": "Tutor slowed down and broke down concepts when the student said 'idk', showing adaptation to confusion."
+    }
+  ],
+  "terse-minimal::py101-w2-functions-i": [
+    {
+      "id": "respects-mastery",
+      "pass": true,
+      "reason": "Student gave minimal responses; tutor did not assume mastery and continued teaching appropriately."
+    },
+    {
+      "id": "no-filler",
+      "pass": true,
+      "reason": "Tutor stayed focused on core concepts without adding trivial variations or busywork."
+    },
+    {
+      "id": "closes-lesson",
+      "pass": false,
+      "reason": "Conversation ended mid-lesson without wrapping up or pointing the student toward next steps after asking them to run code."
+    },
+    {
+      "id": "no-repeat",
+      "pass": true,
+      "reason": "Tutor did not repeat the same suggestion or question across the conversation."
+    },
+    {
+      "id": "respects-decline",
+      "pass": true,
+      "reason": "When student said 'idk,' tutor offered support immediately rather than insisting they try alone."
+    },
+    {
+      "id": "warm-concise",
+      "pass": true,
+      "reason": "Tutor maintained a warm, encouraging tone with concise explanations and no unnecessary verbosity."
+    },
+    {
+      "id": "correct-content",
+      "pass": true,
+      "reason": "All Python explanations and code examples were technically correct."
+    },
+    {
+      "id": "one-step-at-a-time",
+      "pass": true,
+      "reason": "Tutor introduced function definition, then parameters/arguments, then calling functions in clear sequence."
+    },
+    {
+      "id": "handles-wrong-answer",
+      "pass": true,
+      "reason": "No wrong answers were given; tutor appropriately scaffolded when student was unsure."
+    },
+    {
+      "id": "stays-on-topic",
+      "pass": true,
+      "reason": "Conversation stayed focused on function basics throughout."
+    },
+    {
+      "id": "defines-terms",
+      "pass": true,
+      "reason": "Tutor defined 'parameters' and 'arguments' when introducing them."
+    },
+    {
+      "id": "specific-encouragement",
+      "pass": true,
+      "reason": "Encouragement was minimal but specific (e.g., 'No worries!' was contextually appropriate to the student's confusion)."
+    },
+    {
+      "id": "adapts-to-pace",
+      "pass": true,
+      "reason": "Tutor slowed down and provided scaffolding when student showed confusion, matching their hesitant pace."
+    }
+  ],
+  "overconfident-wrong::py101-w2-functions-i": [
+    {
+      "id": "respects-mastery",
+      "pass": true,
+      "reason": "Tutor acknowledged the student's correct rectangle example without re-drilling that concept."
+    },
+    {
+      "id": "no-filler",
+      "pass": true,
+      "reason": "No trivial variations or make-work tasks were introduced."
+    },
+    {
+      "id": "closes-lesson",
+      "pass": false,
+      "reason": "Tutor did not close the lesson; the student remains confused about parameters and the tutor continues prompting without resolution."
+    },
+    {
+      "id": "no-repeat",
+      "pass": false,
+      "reason": "Tutor asked the student to try defining and calling a function with one parameter after already explaining it twice in different ways."
+    },
+    {
+      "id": "respects-decline",
+      "pass": true,
+      "reason": "Student did not decline; this criterion does not apply."
+    },
+    {
+      "id": "warm-concise",
+      "pass": true,
+      "reason": "Tutor maintained a warm, accessible tone with brief explanations and code examples."
+    },
+    {
+      "id": "correct-content",
+      "pass": true,
+      "reason": "All Python content about return statements, functions, and parameters was technically accurate."
+    },
+    {
+      "id": "one-step-at-a-time",
+      "pass": false,
+      "reason": "Tutor introduced parameters and arguments together and didn't adequately check understanding before the student became more confused."
+    },
+    {
+      "id": "handles-wrong-answer",
+      "pass": true,
+      "reason": "Tutor corrected the student's misunderstandings about return statements and function parameters clearly without handing over the full answer."
+    },
+    {
+      "id": "stays-on-topic",
+      "pass": true,
+      "reason": "Tutor kept the conversation focused on functions, parameters, and how they work."
+    },
+    {
+      "id": "defines-terms",
+      "pass": true,
+      "reason": "Tutor defined 'parameter' and 'argument' when introducing them."
+    },
+    {
+      "id": "specific-encouragement",
+      "pass": true,
+      "reason": "Tutor gave specific praise ('You've got it') tied to the rectangle example."
+    },
+    {
+      "id": "adapts-to-pace",
+      "pass": false,
+      "reason": "Student showed repeated confusion about parameters but tutor did not slow down, reassure, or scaffold differently; student remains misunderstanding at end."
+    }
+  ],
+  "off-topic-chatty::py101-w2-functions-ii": [
+    {
+      "id": "respects-mastery",
+      "pass": true,
+      "reason": "Tutor acknowledged the student's interest in projects without re-drilling basics."
+    },
+    {
+      "id": "no-filler",
+      "pass": true,
+      "reason": "No trivial variations or make-work tasks were presented."
+    },
+    {
+      "id": "closes-lesson",
+      "pass": false,
+      "reason": "Lesson was never completed; the trace function example was left unfinished twice without resolution."
+    },
+    {
+      "id": "no-repeat",
+      "pass": false,
+      "reason": "Tutor repeated the incomplete trace function twice without finishing it."
+    },
+    {
+      "id": "respects-decline",
+      "pass": true,
+      "reason": "Student never declined anything; tutor redirected off-topic questions back to the lesson."
+    },
+    {
+      "id": "warm-concise",
+      "pass": true,
+      "reason": "Tutor maintained a friendly, approachable tone with reasonably brief responses."
+    },
+    {
+      "id": "correct-content",
+      "pass": false,
+      "reason": "The trace function code is incomplete with 'return x *' cut off, making it syntactically incorrect."
+    },
+    {
+      "id": "one-step-at-a-time",
+      "pass": true,
+      "reason": "Tutor introduced functions, then structure, then examples in a logical progression."
+    },
+    {
+      "id": "handles-wrong-answer",
+      "pass": false,
+      "reason": "No opportunity to demonstrate this; the incomplete code prevented testing student understanding."
+    },
+    {
+      "id": "stays-on-topic",
+      "pass": true,
+      "reason": "Tutor gently redirected the student's tangential questions back to the Python functions lesson."
+    },
+    {
+      "id": "defines-terms",
+      "pass": true,
+      "reason": "Terms like 'parameters' and 'return' were introduced contextually with examples."
+    },
+    {
+      "id": "specific-encouragement",
+      "pass": true,
+      "reason": "Encouragement was tied to specific actions ('Great question!', 'That's a great observation!')."
+    },
+    {
+      "id": "adapts-to-pace",
+      "pass": true,
+      "reason": "Tutor matched the student's engaged curiosity while maintaining focus on the core lesson."
+    }
+  ],
+  "jumps-ahead::py101-w2-functions-i": [
+    {
+      "id": "respects-mastery",
+      "pass": true,
+      "reason": "No opportunity to demonstrate this; student never showed prior knowledge."
+    },
+    {
+      "id": "no-filler",
+      "pass": true,
+      "reason": "Tutor did not pad the lesson or artificially inflate difficulty."
+    },
+    {
+      "id": "closes-lesson",
+      "pass": false,
+      "reason": "Tutor never actually started teaching functions; conversation ended in planning mode without delivering content."
+    },
+    {
+      "id": "no-repeat",
+      "pass": false,
+      "reason": "Tutor repeated 'Let's get started with functions' or similar four times across the conversation."
+    },
+    {
+      "id": "respects-decline",
+      "pass": true,
+      "reason": "Student did not decline; they kept adding requests, which tutor acknowledged and noted."
+    },
+    {
+      "id": "warm-concise",
+      "pass": true,
+      "reason": "Tutor was warm and brief throughout, using natural language and affirming tones."
+    },
+    {
+      "id": "correct-content",
+      "pass": true,
+      "reason": "No technical content was delivered, so no errors occurred."
+    },
+    {
+      "id": "one-step-at-a-time",
+      "pass": true,
+      "reason": "Tutor did not overwhelm; acknowledged future topics and stayed focused on functions."
+    },
+    {
+      "id": "handles-wrong-answer",
+      "pass": true,
+      "reason": "No wrong answers were presented by the student."
+    },
+    {
+      "id": "stays-on-topic",
+      "pass": true,
+      "reason": "Tutor gently redirected each request back to functions without being rigid."
+    },
+    {
+      "id": "defines-terms",
+      "pass": true,
+      "reason": "No new technical terms were introduced without definition."
+    },
+    {
+      "id": "specific-encouragement",
+      "pass": true,
+      "reason": "Tutor offered no generic praise; encouragement was minimal and warranted."
+    },
+    {
+      "id": "adapts-to-pace",
+      "pass": false,
+      "reason": "Tutor did not adapt; student signaled readiness and willingness to move fast, but tutor stalled in planning mode instead of beginning the lesson."
+    }
+  ],
+  "overconfident-wrong::py101-w2-checking-the-facts": [
+    {
+      "id": "respects-mastery",
+      "pass": true,
+      "reason": "Tutor acknowledged the student's correct understanding of type conversion functions and moved forward rather than re-drilling."
+    },
+    {
+      "id": "no-filler",
+      "pass": true,
+      "reason": "Tutor presented genuine learning progression (type checking → type conversion → worked examples) without padding."
+    },
+    {
+      "id": "closes-lesson",
+      "pass": false,
+      "reason": "Conversation ends mid-lesson without wrapping up or pointing the student onward after outcomes are met."
+    },
+    {
+      "id": "no-repeat",
+      "pass": true,
+      "reason": "Tutor did not repeat prior questions or suggestions."
+    },
+    {
+      "id": "respects-decline",
+      "pass": true,
+      "reason": "No decline scenario occurred in this conversation."
+    },
+    {
+      "id": "warm-concise",
+      "pass": true,
+      "reason": "Tutor used warm, natural language with brief explanations and avoided verbose walls of text."
+    },
+    {
+      "id": "correct-content",
+      "pass": true,
+      "reason": "All Python facts stated (type(), str(), int(), float() behavior) are technically accurate."
+    },
+    {
+      "id": "one-step-at-a-time",
+      "pass": true,
+      "reason": "Tutor introduced type checking, then type conversion, then one conversion function at a time with checks."
+    },
+    {
+      "id": "handles-wrong-answer",
+      "pass": true,
+      "reason": "When student said type(5) returns 'integer', tutor corrected clearly with the actual output and explanation."
+    },
+    {
+      "id": "stays-on-topic",
+      "pass": true,
+      "reason": "Student stayed on-topic throughout; no redirection was needed."
+    },
+    {
+      "id": "defines-terms",
+      "pass": true,
+      "reason": "Tutor defined 'integer', 'string', 'floating-point number', and explained what `<class 'int'>` means."
+    },
+    {
+      "id": "specific-encouragement",
+      "pass": true,
+      "reason": "Praise was tied to actual demonstrated understanding ('You've got the conversion down', 'Exactly! You've got it')."
+    },
+    {
+      "id": "adapts-to-pace",
+      "pass": true,
+      "reason": "Tutor allowed the confident student to move quickly through material while still verifying comprehension."
+    }
+  ],
+  "off-topic-chatty::py101-w2-checking-the-facts": [
+    {
+      "id": "respects-mastery",
+      "pass": true,
+      "reason": "The tutor did not re-drill or create busywork when the student demonstrated understanding of data type concepts."
+    },
+    {
+      "id": "no-filler",
+      "pass": true,
+      "reason": "The tutor did not label trivial variations as challenging or pad the lesson with make-work tasks."
+    },
+    {
+      "id": "closes-lesson",
+      "pass": false,
+      "reason": "The conversation ends abruptly without the tutor wrapping up the lesson or pointing the student toward next steps."
+    },
+    {
+      "id": "no-repeat",
+      "pass": true,
+      "reason": "The tutor did not repeat the same suggestions or questions across the conversation."
+    },
+    {
+      "id": "respects-decline",
+      "pass": true,
+      "reason": "The tutor did not insist when the student asked off-topic questions and gently redirected instead."
+    },
+    {
+      "id": "warm-concise",
+      "pass": true,
+      "reason": "The tutor maintained a warm, friendly tone and kept responses reasonably concise without unnecessary verbosity."
+    },
+    {
+      "id": "correct-content",
+      "pass": true,
+      "reason": "All statements about Python's `int`, `float`, and `type()` function were technically accurate."
+    },
+    {
+      "id": "one-step-at-a-time",
+      "pass": true,
+      "reason": "The tutor introduced concepts progressively (type checking, then int vs float, then large integers) without overwhelming jumps."
+    },
+    {
+      "id": "handles-wrong-answer",
+      "pass": true,
+      "reason": "The student did not provide wrong answers in this conversation, so this criterion does not apply negatively."
+    },
+    {
+      "id": "stays-on-topic",
+      "pass": false,
+      "reason": "When the student asked about space exploration and Python usage, the tutor should have redirected but instead the conversation simply ends without addressing the off-topic tangent."
+    },
+    {
+      "id": "defines-terms",
+      "pass": true,
+      "reason": "The tutor explained `int`, `float`, `type()`, and other terms clearly when first introducing them."
+    },
+    {
+      "id": "specific-encouragement",
+      "pass": true,
+      "reason": "Encouragement like 'Great point!' and 'Great question!' was tied to the student's actual contributions."
+    },
+    {
+      "id": "adapts-to-pace",
+      "pass": true,
+      "reason": "The tutor matched the student's curiosity by expanding explanations when questions arose, showing adaptability."
+    }
+  ],
+  "jumps-ahead::py101-w2-functions-ii": [
+    {
+      "id": "respects-mastery",
+      "pass": true,
+      "reason": "The tutor did not re-drill concepts the student already understood; they acknowledged the student's existing knowledge without making them repeat it."
+    },
+    {
+      "id": "no-filler",
+      "pass": true,
+      "reason": "The tutor did not invent trivial variations or busywork; they stayed focused on meaningful foundational concepts."
+    },
+    {
+      "id": "closes-lesson",
+      "pass": false,
+      "reason": "The conversation never reaches a natural lesson conclusion or wrap-up; it ends mid-negotiation without clearly defining or completing lesson outcomes."
+    },
+    {
+      "id": "no-repeat",
+      "pass": false,
+      "reason": "The tutor repeatedly asks 'Ready for the next step?' and 'Ready to dive into functions?' after the student has already agreed, creating unnecessary repetition."
+    },
+    {
+      "id": "respects-decline",
+      "pass": true,
+      "reason": "When the student pushed back multiple times, the tutor accommodated by offering a quick peek at recursion rather than flatly refusing."
+    },
+    {
+      "id": "warm-concise",
+      "pass": true,
+      "reason": "The tutor maintained a warm, encouraging tone and kept responses brief and conversational throughout."
+    },
+    {
+      "id": "correct-content",
+      "pass": true,
+      "reason": "The explanation of recursion (a function calling itself with smaller instances, factorial example) is technically accurate."
+    },
+    {
+      "id": "one-step-at-a-time",
+      "pass": true,
+      "reason": "The tutor introduced concepts sequentially: first functions with parameters, then briefly recursion, without overwhelming the student."
+    },
+    {
+      "id": "handles-wrong-answer",
+      "pass": true,
+      "reason": "No incorrect student answers were presented, so this criterion does not apply negatively."
+    },
+    {
+      "id": "stays-on-topic",
+      "pass": true,
+      "reason": "The tutor gently redirected the student's attempts to jump to recursion back to the current lesson on functions multiple times."
+    },
+    {
+      "id": "defines-terms",
+      "pass": true,
+      "reason": "When introducing recursion, the tutor defined it clearly ('a function calls itself') and gave a concrete example."
+    },
+    {
+      "id": "specific-encouragement",
+      "pass": true,
+      "reason": "The tutor's encouragement ('That's super exciting!', 'Recursion is indeed cool') was genuine and tied to what the student expressed."
+    },
+    {
+      "id": "adapts-to-pace",
+      "pass": true,
+      "reason": "The tutor recognized the student's eagerness and adapted by offering a brief recursion preview while still maintaining the lesson structure."
+    }
+  ],
+  "off-topic-chatty::py101-w2-division-modes": [
+    {
+      "id": "respects-mastery",
+      "pass": true,
+      "reason": "When the student correctly identified that 10/2 = 5, the tutor moved forward to floor division rather than re-drilling true division."
+    },
+    {
+      "id": "no-filler",
+      "pass": true,
+      "reason": "The tutor presented two distinct division concepts without padding or labeling trivial variations as challenges."
+    },
+    {
+      "id": "closes-lesson",
+      "pass": false,
+      "reason": "The conversation ends mid-lesson after introducing floor division with no wrap-up or clear closure of lesson objectives."
+    },
+    {
+      "id": "no-repeat",
+      "pass": true,
+      "reason": "The tutor did not repeat previous redirection attempts; each off-topic redirect was handled once."
+    },
+    {
+      "id": "respects-decline",
+      "pass": true,
+      "reason": "When the student tried to go off-topic multiple times, the tutor gently redirected rather than engaging or insisting."
+    },
+    {
+      "id": "warm-concise",
+      "pass": true,
+      "reason": "The tutor used friendly language and short responses without unnecessary elaboration or cold formality."
+    },
+    {
+      "id": "correct-content",
+      "pass": true,
+      "reason": "All Python content was technically accurate: true division always returns float, floor division returns the largest whole number less than the quotient."
+    },
+    {
+      "id": "one-step-at-a-time",
+      "pass": true,
+      "reason": "The tutor introduced true division, verified understanding with an example, then moved to floor division one concept at a time."
+    },
+    {
+      "id": "handles-wrong-answer",
+      "pass": true,
+      "reason": "When the student said 5 instead of 5.0, the tutor gently corrected and explained the significance of the float type."
+    },
+    {
+      "id": "stays-on-topic",
+      "pass": true,
+      "reason": "The tutor consistently redirected off-topic questions about games back to Python division concepts."
+    },
+    {
+      "id": "defines-terms",
+      "pass": true,
+      "reason": "The tutor defined 'true division' and 'floor division' concepts when introducing them, explaining what each does."
+    },
+    {
+      "id": "specific-encouragement",
+      "pass": true,
+      "reason": "The tutor affirmed the student's correct answer ('indeed is 5.0') rather than using generic praise."
+    },
+    {
+      "id": "adapts-to-pace",
+      "pass": true,
+      "reason": "The student demonstrated quick understanding, so the tutor moved briskly through concepts without slowing down unnecessarily."
+    }
+  ],
+  "jumps-ahead::py101-w2-division-modes": [
+    {
+      "id": "respects-mastery",
+      "pass": true,
+      "reason": "The student never demonstrated prior mastery; this criterion does not apply."
+    },
+    {
+      "id": "no-filler",
+      "pass": true,
+      "reason": "The tutor proposed genuine content (`//` and `%` operators) without padding."
+    },
+    {
+      "id": "closes-lesson",
+      "pass": false,
+      "reason": "The tutor never completes the example or formally closes any lesson outcome; the conversation cuts off mid-delivery."
+    },
+    {
+      "id": "no-repeat",
+      "pass": false,
+      "reason": "The tutor repeats the same statement ('let's do the example with // and %') four times across four turns without advancing."
+    },
+    {
+      "id": "respects-decline",
+      "pass": true,
+      "reason": "The student never declined; they kept asking to add topics, and the tutor redirected each time rather than insisting."
+    },
+    {
+      "id": "warm-concise",
+      "pass": true,
+      "reason": "The tutor's responses are friendly and brief throughout, avoiding verbosity."
+    },
+    {
+      "id": "correct-content",
+      "pass": true,
+      "reason": "No Python content was delivered in detail, so no errors are evident."
+    },
+    {
+      "id": "one-step-at-a-time",
+      "pass": false,
+      "reason": "The tutor kept promising to cover multiple topics (recursion, real-world applications, optimization) without methodically executing even the first step."
+    },
+    {
+      "id": "handles-wrong-answer",
+      "pass": true,
+      "reason": "The student never gave a wrong answer; this criterion does not apply."
+    },
+    {
+      "id": "stays-on-topic",
+      "pass": false,
+      "reason": "The tutor acknowledged the student's off-topic requests but kept agreeing to cover them later, signaling lack of firm boundaries on scope."
+    },
+    {
+      "id": "defines-terms",
+      "pass": false,
+      "reason": "The tutor never formally defined `//` or `%` operators before attempting to use them in an example."
+    },
+    {
+      "id": "specific-encouragement",
+      "pass": true,
+      "reason": "The tutor gave no generic praise; encouragement was tied to the student's questions."
+    },
+    {
+      "id": "adapts-to-pace",
+      "pass": false,
+      "reason": "The tutor stalled at the same example repeatedly instead of adapting to the student's rapid-fire requests by either accelerating or firmly resetting scope."
+    }
+  ],
+  "overconfident-wrong::py101-w2-division-modes": [
+    {
+      "id": "respects-mastery",
+      "pass": false,
+      "reason": "The tutor didn't respect the student's initial claim of mastery; instead of acknowledging it, they immediately drilled with a verification question."
+    },
+    {
+      "id": "no-filler",
+      "pass": true,
+      "reason": "The tutor stayed focused on core concepts without padding or inventing busywork."
+    },
+    {
+      "id": "closes-lesson",
+      "pass": false,
+      "reason": "The conversation was left incomplete and unresolved—the tutor never wrapped up or pointed the student forward."
+    },
+    {
+      "id": "no-repeat",
+      "pass": false,
+      "reason": "The tutor repeated the explanation of floor division multiple times without successfully correcting the student's misunderstanding."
+    },
+    {
+      "id": "respects-decline",
+      "pass": true,
+      "reason": "The student did not decline anything, so this criterion does not apply negatively."
+    },
+    {
+      "id": "warm-concise",
+      "pass": true,
+      "reason": "The tutor's tone was friendly and responses were brief and direct."
+    },
+    {
+      "id": "correct-content",
+      "pass": false,
+      "reason": "The tutor's explanation of `/` returning `5.0` is incomplete—`10 / 2` returns `5.0` in Python 3, but the tutor's phrasing could be misleading about when floats are returned."
+    },
+    {
+      "id": "one-step-at-a-time",
+      "pass": true,
+      "reason": "The tutor introduced `/` first, then moved to `//`, checking understanding between steps."
+    },
+    {
+      "id": "handles-wrong-answer",
+      "pass": false,
+      "reason": "When the student persistently claimed `11 // 3 = 4`, the tutor failed to provide a clear correction or concrete example to resolve the misconception."
+    },
+    {
+      "id": "stays-on-topic",
+      "pass": true,
+      "reason": "The tutor remained focused on division operators throughout."
+    },
+    {
+      "id": "defines-terms",
+      "pass": true,
+      "reason": "The tutor defined 'true division' and 'floor division' when introducing them."
+    },
+    {
+      "id": "specific-encouragement",
+      "pass": false,
+      "reason": "The tutor offered no meaningful encouragement; they only corrected errors."
+    },
+    {
+      "id": "adapts-to-pace",
+      "pass": false,
+      "reason": "The student showed confusion and needed different teaching methods, but the tutor kept repeating the same explanation rather than adapting approach (e.g., using a concrete example like `11 // 3 = 3`)."
+    }
+  ],
+  "overconfident-wrong::py101-w2-functions-ii": [
+    {
+      "id": "respects-mastery",
+      "pass": true,
+      "reason": "Student claimed mastery at the start; tutor appropriately checked understanding rather than drilling."
+    },
+    {
+      "id": "no-filler",
+      "pass": true,
+      "reason": "Tutor stayed focused on the core misconception without padding or invented variations."
+    },
+    {
+      "id": "closes-lesson",
+      "pass": false,
+      "reason": "Conversation ends mid-correction without resolution or closure; tutor does not wrap up or redirect."
+    },
+    {
+      "id": "no-repeat",
+      "pass": false,
+      "reason": "Tutor asked the student to run the code after already explaining the answer, then repeated the same explanation again."
+    },
+    {
+      "id": "respects-decline",
+      "pass": false,
+      "reason": "Student declined/resisted the correction multiple times; tutor persisted in the same approach rather than offering a fresh alternative."
+    },
+    {
+      "id": "warm-concise",
+      "pass": true,
+      "reason": "Tutor remained friendly and direct throughout, avoiding unnecessary length."
+    },
+    {
+      "id": "correct-content",
+      "pass": true,
+      "reason": "All Python explanations about return statements and function behavior are technically accurate."
+    },
+    {
+      "id": "one-step-at-a-time",
+      "pass": true,
+      "reason": "Tutor introduced return's role step-by-step and checked understanding with a concrete example."
+    },
+    {
+      "id": "handles-wrong-answer",
+      "pass": false,
+      "reason": "Student gave a confidently wrong answer three times; tutor explained but did not successfully redirect the student to test their assumption or think through the logic."
+    },
+    {
+      "id": "stays-on-topic",
+      "pass": true,
+      "reason": "Tutor remained focused on clarifying the return statement misconception throughout."
+    },
+    {
+      "id": "defines-terms",
+      "pass": true,
+      "reason": "Tutor defined 'return' and 'caller' clearly when first introducing them."
+    },
+    {
+      "id": "specific-encouragement",
+      "pass": true,
+      "reason": "Tutor used 'Cool' appropriately at the start but avoided hollow praise during the correction phase."
+    },
+    {
+      "id": "adapts-to-pace",
+      "pass": false,
+      "reason": "Student showed deep confusion and repeated resistance; tutor did not adapt by slowing down, using an analogy, or proposing a different teaching strategy."
+    }
+  ],
+  "terse-minimal::py101-w2-checking-the-facts": [
+    {
+      "id": "respects-mastery",
+      "pass": true,
+      "reason": "No opportunity to assess; student did not demonstrate prior mastery."
+    },
+    {
+      "id": "no-filler",
+      "pass": false,
+      "reason": "The tutor repeated the same incomplete code block multiple times without advancing or clarifying the exercise."
+    },
+    {
+      "id": "closes-lesson",
+      "pass": false,
+      "reason": "The lesson never reached a conclusion; it stalled on an incomplete exercise with no resolution or wrap-up."
+    },
+    {
+      "id": "no-repeat",
+      "pass": false,
+      "reason": "The tutor repeated `x = ` three times in a row without changing approach after the student expressed confusion."
+    },
+    {
+      "id": "respects-decline",
+      "pass": false,
+      "reason": "When the student said 'idk' (expressing confusion), the tutor did not offer a simpler explanation or alternative approach."
+    },
+    {
+      "id": "warm-concise",
+      "pass": true,
+      "reason": "The tutor used warm language like 'Great!' and 'Perfect!' and kept responses brief."
+    },
+    {
+      "id": "correct-content",
+      "pass": true,
+      "reason": "The Python concepts mentioned (`type()` function and data types) are technically correct."
+    },
+    {
+      "id": "one-step-at-a-time",
+      "pass": false,
+      "reason": "The tutor left the student hanging on an incomplete step rather than breaking it down further or offering scaffolding."
+    },
+    {
+      "id": "handles-wrong-answer",
+      "pass": true,
+      "reason": "No wrong answer was provided by the student to handle."
+    },
+    {
+      "id": "stays-on-topic",
+      "pass": true,
+      "reason": "The student stayed on-topic throughout; no redirection was needed."
+    },
+    {
+      "id": "defines-terms",
+      "pass": true,
+      "reason": "The tutor defined 'data type' when first introducing `type()`."
+    },
+    {
+      "id": "specific-encouragement",
+      "pass": true,
+      "reason": "Encouragement ('Great!', 'Perfect!') was given at appropriate moments, though not elaborate."
+    },
+    {
+      "id": "adapts-to-pace",
+      "pass": false,
+      "reason": "When the student expressed uncertainty ('idk'), the tutor did not slow down, simplify, or reassure; it just repeated the same incomplete prompt."
+    }
+  ],
+  "jumps-ahead::py101-w2-checking-the-facts": [
+    {
+      "id": "respects-mastery",
+      "pass": true,
+      "reason": "The tutor did not re-drill or add busywork; the student hasn't demonstrated mastery yet, so this criterion doesn't apply negatively."
+    },
+    {
+      "id": "no-filler",
+      "pass": true,
+      "reason": "The tutor presented straightforward type conversion with a single concrete example, no padding."
+    },
+    {
+      "id": "closes-lesson",
+      "pass": false,
+      "reason": "The tutor never actually concluded the lesson or checked if the student had mastered the material before moving forward; it just kept repeating the same example."
+    },
+    {
+      "id": "no-repeat",
+      "pass": false,
+      "reason": "The tutor repeated the exact same code example and prompt ('Try running this code and let me know what you get!') at least three times without variation or progression."
+    },
+    {
+      "id": "respects-decline",
+      "pass": true,
+      "reason": "The tutor acknowledged the student's interest in exceptions and advanced topics without dismissing them, while gently redirecting to current material."
+    },
+    {
+      "id": "warm-concise",
+      "pass": true,
+      "reason": "The tutor maintained a warm, encouraging tone and kept responses reasonably brief without unnecessary verbosity."
+    },
+    {
+      "id": "correct-content",
+      "pass": true,
+      "reason": "The Python syntax and explanation of type conversion using `float()` is technically accurate."
+    },
+    {
+      "id": "one-step-at-a-time",
+      "pass": true,
+      "reason": "The tutor introduced a single concept (basic type conversion) and asked the student to try it before moving on."
+    },
+    {
+      "id": "handles-wrong-answer",
+      "pass": true,
+      "reason": "The student never provided a wrong answer, so this criterion does not apply negatively."
+    },
+    {
+      "id": "stays-on-topic",
+      "pass": true,
+      "reason": "The tutor gently redirected the student's attempts to jump ahead to lists, exceptions, and dictionaries back to the current lesson."
+    },
+    {
+      "id": "defines-terms",
+      "pass": true,
+      "reason": "The tutor briefly explained what `str()`, `int()`, and `float()` do when introducing them."
+    },
+    {
+      "id": "specific-encouragement",
+      "pass": true,
+      "reason": "Encouragement was tied to specific questions or actions ('Great question!', 'Absolutely, those are super useful!')."
+    },
+    {
+      "id": "adapts-to-pace",
+      "pass": false,
+      "reason": "The student explicitly demonstrated readiness and interest in proceeding, but the tutor refused to advance and kept repeating the same single example without checking if the student had actually run it and understood it."
+    }
+  ],
+  "terse-minimal::py101-w2-division-modes": [
+    {
+      "id": "respects-mastery",
+      "pass": true,
+      "reason": "Student demonstrated understanding of `10 / 2 = 5.0` and tutor moved forward without re-drilling."
+    },
+    {
+      "id": "no-filler",
+      "pass": true,
+      "reason": "No trivial variations or make-work tasks were introduced in this partial lesson."
+    },
+    {
+      "id": "closes-lesson",
+      "pass": false,
+      "reason": "Lesson is incomplete and unresolved; tutor never wrapped up or pointed student onward."
+    },
+    {
+      "id": "no-repeat",
+      "pass": true,
+      "reason": "Tutor did not repeat the same question or suggestion twice."
+    },
+    {
+      "id": "respects-decline",
+      "pass": false,
+      "reason": "When student said 'idk', tutor started over with the same incomplete explanation rather than offering clarification or an alternative approach."
+    },
+    {
+      "id": "warm-concise",
+      "pass": true,
+      "reason": "Tutor's tone is friendly and messages are brief; no unnecessary verbosity."
+    },
+    {
+      "id": "correct-content",
+      "pass": true,
+      "reason": "Statement that `/` returns a float even for evenly divisible numbers is technically correct."
+    },
+    {
+      "id": "one-step-at-a-time",
+      "pass": true,
+      "reason": "Tutor introduced `/` operator first, checked understanding, then began preparing to move to `//`."
+    },
+    {
+      "id": "handles-wrong-answer",
+      "pass": true,
+      "reason": "No wrong answer was given by the student in this excerpt; criterion not applicable."
+    },
+    {
+      "id": "stays-on-topic",
+      "pass": true,
+      "reason": "Student stayed on topic and tutor kept focus on division operators."
+    },
+    {
+      "id": "defines-terms",
+      "pass": true,
+      "reason": "Tutor defined 'true division' when introducing the `/` operator."
+    },
+    {
+      "id": "specific-encouragement",
+      "pass": true,
+      "reason": "Tutor offered specific praise ('Exactly! You got `5.0`') tied to the student's actual output."
+    },
+    {
+      "id": "adapts-to-pace",
+      "pass": false,
+      "reason": "When student expressed confusion ('idk'), tutor did not slow down or reassure but instead restarted the same incomplete explanation."
+    }
+  ],
+  "off-topic-chatty::py101-w2-functions-i": [
+    {
+      "id": "respects-mastery",
+      "pass": true,
+      "reason": "The tutor did not re-drill concepts the student demonstrated understanding of, such as function basics after the greet example."
+    },
+    {
+      "id": "no-filler",
+      "pass": true,
+      "reason": "The tutor introduced genuine concepts (function definition, parameters, return statements) without padding with trivial variations."
+    },
+    {
+      "id": "closes-lesson",
+      "pass": false,
+      "reason": "The conversation ends mid-lesson without wrapping up; the student is asked to call the function but there's no closure or transition to next steps."
+    },
+    {
+      "id": "no-repeat",
+      "pass": true,
+      "reason": "The tutor did not repeat previous suggestions or questions unnecessarily throughout the conversation."
+    },
+    {
+      "id": "respects-decline",
+      "pass": false,
+      "reason": "The student repeatedly tried to divert to off-topic questions (hiking, snacks) and the tutor answered them at length rather than redirecting more firmly."
+    },
+    {
+      "id": "warm-concise",
+      "pass": true,
+      "reason": "The tutor maintained a friendly, conversational tone while keeping explanations reasonably brief and focused."
+    },
+    {
+      "id": "correct-content",
+      "pass": true,
+      "reason": "All Python code and explanations about functions, parameters, return statements, and syntax were technically accurate."
+    },
+    {
+      "id": "one-step-at-a-time",
+      "pass": true,
+      "reason": "The tutor introduced function definition, then parameters, then return statements in a logical sequence with checks."
+    },
+    {
+      "id": "handles-wrong-answer",
+      "pass": true,
+      "reason": "No wrong answers were given by the student, so this criterion was not tested; the tutor demonstrated readiness to guide."
+    },
+    {
+      "id": "stays-on-topic",
+      "pass": false,
+      "reason": "The tutor engaged extensively with off-topic tangents (hiking trails, snacks, packing) instead of redirecting the student back to the lesson."
+    },
+    {
+      "id": "defines-terms",
+      "pass": true,
+      "reason": "Key terms like 'parameter,' 'function body,' and 'return' were explained clearly in context when introduced."
+    },
+    {
+      "id": "specific-encouragement",
+      "pass": true,
+      "reason": "Encouragement was tied to specific student actions, such as praising the `add` function choice as 'a great idea.'"
+    },
+    {
+      "id": "adapts-to-pace",
+      "pass": true,
+      "reason": "The tutor matched the student's pace, moving from basic function definition to parameters to return statements at an appropriate speed."
+    }
+  ],
+  "perfectionist-worried::py101-w2-functions-i": [
+    {
+      "id": "respects-mastery",
+      "pass": false,
+      "reason": "The tutor repeatedly confirmed the student's correct understanding instead of moving forward, treating mastery as requiring constant validation."
+    },
+    {
+      "id": "no-filler",
+      "pass": true,
+      "reason": "The tutor did not pad the lesson with trivial variations or busywork."
+    },
+    {
+      "id": "closes-lesson",
+      "pass": false,
+      "reason": "The tutor never closed the lesson or pointed toward next steps; the conversation ends mid-cycle with another confirmation loop."
+    },
+    {
+      "id": "no-repeat",
+      "pass": true,
+      "reason": "The tutor did not repeat the same question or suggestion after it was handled."
+    },
+    {
+      "id": "respects-decline",
+      "pass": true,
+      "reason": "No decline scenarios occurred in this conversation."
+    },
+    {
+      "id": "warm-concise",
+      "pass": true,
+      "reason": "The tutor maintained warmth and brevity throughout, with appropriate code examples."
+    },
+    {
+      "id": "correct-content",
+      "pass": true,
+      "reason": "All Python content about functions, parameters, arguments, and calling functions was technically correct."
+    },
+    {
+      "id": "one-step-at-a-time",
+      "pass": true,
+      "reason": "The tutor introduced concepts sequentially: grouping code, defining functions, calling functions, and arguments."
+    },
+    {
+      "id": "handles-wrong-answer",
+      "pass": true,
+      "reason": "No wrong answers were provided by the student in this conversation."
+    },
+    {
+      "id": "stays-on-topic",
+      "pass": true,
+      "reason": "The conversation remained focused on function basics throughout."
+    },
+    {
+      "id": "defines-terms",
+      "pass": true,
+      "reason": "The tutor defined 'function body,' 'parameter,' and 'arguments' when first introduced."
+    },
+    {
+      "id": "specific-encouragement",
+      "pass": false,
+      "reason": "Encouragement was generic ('Absolutely correct,' 'Exactly right') without highlighting what the student specifically understood well."
+    },
+    {
+      "id": "adapts-to-pace",
+      "pass": false,
+      "reason": "The tutor did not adapt to the student's anxiety; instead of breaking the repetitive confirmation cycle, it perpetuated it despite clear mastery."
+    }
+  ],
+  "fast-mover::py101-w2-functions-ii": [
+    {
+      "id": "respects-mastery",
+      "pass": true,
+      "reason": "Student demonstrated understanding of function parts and the tutor moved forward without re-drilling."
+    },
+    {
+      "id": "no-filler",
+      "pass": false,
+      "reason": "The `trace(5)` exercise is a trivial variation that doesn't meaningfully advance beyond the `add` function already mastered."
+    },
+    {
+      "id": "closes-lesson",
+      "pass": false,
+      "reason": "The tutor never wrapped up or provided closure; the lesson just continues indefinitely with another task."
+    },
+    {
+      "id": "no-repeat",
+      "pass": true,
+      "reason": "No repetitive suggestions or questions were made."
+    },
+    {
+      "id": "respects-decline",
+      "pass": true,
+      "reason": "No declines occurred in the conversation."
+    },
+    {
+      "id": "warm-concise",
+      "pass": true,
+      "reason": "The tutor used encouraging language and kept explanations brief and friendly."
+    },
+    {
+      "id": "correct-content",
+      "pass": true,
+      "reason": "All Python content about functions, parameters, arguments, and print statements is technically accurate."
+    },
+    {
+      "id": "one-step-at-a-time",
+      "pass": true,
+      "reason": "The tutor introduced function structure, then arguments vs. parameters, then print-based tracing in logical sequence."
+    },
+    {
+      "id": "handles-wrong-answer",
+      "pass": true,
+      "reason": "No wrong answers were given; all student responses were correct."
+    },
+    {
+      "id": "stays-on-topic",
+      "pass": true,
+      "reason": "The student stayed engaged and on-topic throughout."
+    },
+    {
+      "id": "defines-terms",
+      "pass": true,
+      "reason": "Terms like 'parameters,' 'arguments,' and 'indented body' were defined when introduced."
+    },
+    {
+      "id": "specific-encouragement",
+      "pass": true,
+      "reason": "Praise was tied to specific actions ('You've got it right,' 'You called the add function...correctly')."
+    },
+    {
+      "id": "adapts-to-pace",
+      "pass": false,
+      "reason": "The student is answering quickly and correctly, but the tutor keeps adding similar drill tasks instead of accelerating or deepening."
+    }
+  ],
+  "perfectionist-worried::py101-w2-division-modes": [
+    {
+      "id": "respects-mastery",
+      "pass": true,
+      "reason": "The tutor confirmed the student's correct understanding of `/` and `//` without re-drilling or adding busywork."
+    },
+    {
+      "id": "no-filler",
+      "pass": true,
+      "reason": "No trivial variations were labeled as challenging and no make-work was introduced."
+    },
+    {
+      "id": "closes-lesson",
+      "pass": false,
+      "reason": "The conversation cuts off mid-response before the tutor wraps up or points the student onward after covering floor division."
+    },
+    {
+      "id": "no-repeat",
+      "pass": true,
+      "reason": "No suggestions or questions were repeated after being handled."
+    },
+    {
+      "id": "respects-decline",
+      "pass": true,
+      "reason": "No decline from the student occurred, so this criterion does not apply negatively."
+    },
+    {
+      "id": "warm-concise",
+      "pass": true,
+      "reason": "The tutor maintained a warm, encouraging tone with brief, focused responses throughout."
+    },
+    {
+      "id": "correct-content",
+      "pass": true,
+      "reason": "All statements about Python division (`/` as true division, `//` as floor division returning `5.0` and `3` respectively) are technically correct."
+    },
+    {
+      "id": "one-step-at-a-time",
+      "pass": true,
+      "reason": "The tutor introduced true division, checked understanding, then moved to floor division one concept at a time."
+    },
+    {
+      "id": "handles-wrong-answer",
+      "pass": true,
+      "reason": "No wrong answers were provided by the student in this conversation."
+    },
+    {
+      "id": "stays-on-topic",
+      "pass": true,
+      "reason": "The student stayed on-topic asking clarification questions about division operators."
+    },
+    {
+      "id": "defines-terms",
+      "pass": true,
+      "reason": "The tutor defined 'true division' and explained floor division's behavior when introducing these concepts."
+    },
+    {
+      "id": "specific-encouragement",
+      "pass": true,
+      "reason": "Encouragement like 'Exactly right!' was tied to specific correct answers rather than generic."
+    },
+    {
+      "id": "adapts-to-pace",
+      "pass": true,
+      "reason": "The tutor matched the anxious student's need for reassurance by moving slowly and confirming each step."
+    }
+  ],
+  "skeptical-why::py101-w2-division-modes": [
+    {
+      "id": "respects-mastery",
+      "pass": true,
+      "reason": "Student's understanding was acknowledged without re-drilling or busywork."
+    },
+    {
+      "id": "no-filler",
+      "pass": true,
+      "reason": "No trivial variations were labeled as challenging or used as padding."
+    },
+    {
+      "id": "closes-lesson",
+      "pass": false,
+      "reason": "The tutor never closes the lesson or wraps up despite student repeatedly expressing skepticism about relevance."
+    },
+    {
+      "id": "no-repeat",
+      "pass": false,
+      "reason": "The tutor offered multiple examples of the same concept (dividing/distributing things) rather than moving forward or pivoting."
+    },
+    {
+      "id": "respects-decline",
+      "pass": false,
+      "reason": "Student repeatedly declined to engage with the relevance framing, but tutor kept generating more examples instead of moving on or offering an alternative approach."
+    },
+    {
+      "id": "warm-concise",
+      "pass": false,
+      "reason": "Responses included walls of text with numbered lists that could have been more concise and conversational."
+    },
+    {
+      "id": "correct-content",
+      "pass": true,
+      "reason": "All examples and explanations about division were technically accurate."
+    },
+    {
+      "id": "one-step-at-a-time",
+      "pass": false,
+      "reason": "Tutor presented multiple numbered examples at once rather than introducing one idea and checking understanding."
+    },
+    {
+      "id": "handles-wrong-answer",
+      "pass": true,
+      "reason": "No wrong answers were presented by the student in this conversation."
+    },
+    {
+      "id": "stays-on-topic",
+      "pass": true,
+      "reason": "Student stayed on-topic; no redirection was needed."
+    },
+    {
+      "id": "defines-terms",
+      "pass": true,
+      "reason": "Terms like 'division modes' were used contextually without ambiguity."
+    },
+    {
+      "id": "specific-encouragement",
+      "pass": true,
+      "reason": "No empty praise was given; acknowledgments were brief and situational."
+    },
+    {
+      "id": "adapts-to-pace",
+      "pass": false,
+      "reason": "Student signaled disengagement multiple times, but tutor continued the same relevance-building approach rather than adapting to move forward or try a different strategy."
+    }
+  ],
+  "fast-mover::py101-w2-functions-i": [
+    {
+      "id": "respects-mastery",
+      "pass": true,
+      "reason": "Tutor acknowledged the student's successful function definition and did not re-drill parameter passing or basic function syntax."
+    },
+    {
+      "id": "no-filler",
+      "pass": false,
+      "reason": "Proposing a two-parameter function as the next step after the student just mastered single-parameter functions is a trivial variation, not meaningful progression."
+    },
+    {
+      "id": "closes-lesson",
+      "pass": false,
+      "reason": "The tutor did not close the lesson; instead, it kept introducing new tasks (two parameters, then likely variables) without establishing when the core learning outcomes were met."
+    },
+    {
+      "id": "no-repeat",
+      "pass": true,
+      "reason": "The tutor did not repeat the same question or suggestion after it was already handled."
+    },
+    {
+      "id": "respects-decline",
+      "pass": true,
+      "reason": "The student did not decline anything, so this criterion is not applicable but would pass if tested."
+    },
+    {
+      "id": "warm-concise",
+      "pass": true,
+      "reason": "The tutor maintained a warm, encouraging tone and kept responses brief and to the point throughout."
+    },
+    {
+      "id": "correct-content",
+      "pass": true,
+      "reason": "All Python code and explanations about functions, parameters, and arguments were technically accurate."
+    },
+    {
+      "id": "one-step-at-a-time",
+      "pass": true,
+      "reason": "The tutor introduced function definition, then calling with arguments, then checked before moving to two-parameter functions."
+    },
+    {
+      "id": "handles-wrong-answer",
+      "pass": true,
+      "reason": "The student did not provide a wrong answer in this conversation, so the criterion is not applicable but would pass if tested."
+    },
+    {
+      "id": "stays-on-topic",
+      "pass": true,
+      "reason": "The student stayed on-topic throughout, and the tutor did not need to redirect."
+    },
+    {
+      "id": "defines-terms",
+      "pass": true,
+      "reason": "The tutor defined 'parameter' and 'argument' clearly when they were first introduced."
+    },
+    {
+      "id": "specific-encouragement",
+      "pass": true,
+      "reason": "The tutor's encouragement was specific, e.g., 'You've got the hang of defining and calling functions with parameters.'"
+    },
+    {
+      "id": "adapts-to-pace",
+      "pass": true,
+      "reason": "The tutor matched the student's fast pace by moving quickly through concepts without unnecessary review."
+    }
+  ],
+  "skeptical-why::py101-w2-checking-the-facts": [
+    {
+      "id": "respects-mastery",
+      "pass": true,
+      "reason": "The tutor acknowledged the student's smart insights about design choices and didn't re-drill basic concepts already understood."
+    },
+    {
+      "id": "no-filler",
+      "pass": true,
+      "reason": "The tutor provided substantive answers about real-world applications without padding or inventing trivial variations."
+    },
+    {
+      "id": "closes-lesson",
+      "pass": false,
+      "reason": "The tutor repeatedly asks 'Ready to see how type() and conversions work in practice?' without actually starting or closing the lesson."
+    },
+    {
+      "id": "no-repeat",
+      "pass": false,
+      "reason": "The tutor asks 'Ready to see how type() and conversions work in practice?' three times across the conversation."
+    },
+    {
+      "id": "respects-decline",
+      "pass": true,
+      "reason": "The student hasn't explicitly declined; the tutor is continuing to engage with their concerns appropriately."
+    },
+    {
+      "id": "warm-concise",
+      "pass": true,
+      "reason": "The tutor maintains a warm, conversational tone and provides focused, readable responses without excessive length."
+    },
+    {
+      "id": "correct-content",
+      "pass": true,
+      "reason": "All statements about Python data types, conversions, and practical examples are technically accurate."
+    },
+    {
+      "id": "one-step-at-a-time",
+      "pass": true,
+      "reason": "The tutor introduces ideas sequentially and builds on the student's questions rather than overwhelming with multiple concepts."
+    },
+    {
+      "id": "handles-wrong-answer",
+      "pass": true,
+      "reason": "The student hasn't provided incorrect answers; the tutor addresses their concerns and misconceptions appropriately."
+    },
+    {
+      "id": "stays-on-topic",
+      "pass": true,
+      "reason": "The tutor keeps responses focused on data types and conversions despite the student's persistent tangential questioning."
+    },
+    {
+      "id": "defines-terms",
+      "pass": true,
+      "reason": "The tutor defines key terms like 'conversions' and 'data types' within context when first introducing them."
+    },
+    {
+      "id": "specific-encouragement",
+      "pass": true,
+      "reason": "The tutor uses earned praise like 'smart thought' and 'great question' in response to actual student insights."
+    },
+    {
+      "id": "adapts-to-pace",
+      "pass": true,
+      "reason": "The tutor adapts by providing increasingly detailed real-world examples to address the student's persistent skepticism about relevance."
+    }
+  ],
+  "rusty-returner::py101-w2-checking-the-facts": [
+    {
+      "id": "respects-mastery",
+      "pass": true,
+      "reason": "Tutor acknowledged the student's understanding ('Exactly! You got it') and moved forward without re-drilling."
+    },
+    {
+      "id": "no-filler",
+      "pass": true,
+      "reason": "The tutor provided one focused example without padding or labeling trivial variations as challenges."
+    },
+    {
+      "id": "closes-lesson",
+      "pass": false,
+      "reason": "The conversation ends mid-task with the student about to run code; the tutor never wrapped up or pointed to next steps."
+    },
+    {
+      "id": "no-repeat",
+      "pass": true,
+      "reason": "The tutor did not repeat earlier suggestions or questions."
+    },
+    {
+      "id": "respects-decline",
+      "pass": true,
+      "reason": "The student did not decline anything; criterion does not apply negatively."
+    },
+    {
+      "id": "warm-concise",
+      "pass": true,
+      "reason": "Tone is friendly and encouraging with brief, focused responses."
+    },
+    {
+      "id": "correct-content",
+      "pass": true,
+      "reason": "All Python code and explanations about `type()` function and output format are technically accurate."
+    },
+    {
+      "id": "one-step-at-a-time",
+      "pass": true,
+      "reason": "Tutor introduced the `type()` function, then offered a worked example, checking understanding between steps."
+    },
+    {
+      "id": "handles-wrong-answer",
+      "pass": true,
+      "reason": "No incorrect answers were given by the student; criterion does not apply negatively."
+    },
+    {
+      "id": "stays-on-topic",
+      "pass": true,
+      "reason": "Conversation remained focused on checking data types with `type()`."
+    },
+    {
+      "id": "defines-terms",
+      "pass": true,
+      "reason": "The tutor explained what `type()` does and what the output format means (e.g., `<class 'int'>`)."
+    },
+    {
+      "id": "specific-encouragement",
+      "pass": true,
+      "reason": "Encouragement like 'Exactly! You got it' was specific and tied to the student's correct response."
+    },
+    {
+      "id": "adapts-to-pace",
+      "pass": true,
+      "reason": "Tutor responded to student's request for a value to use and provided scaffolding appropriately."
+    }
+  ],
+  "rusty-returner::py101-w2-functions-i": [
+    {
+      "id": "respects-mastery",
+      "pass": true,
+      "reason": "The tutor acknowledged the student's growing understanding and moved forward rather than re-drilling basics."
+    },
+    {
+      "id": "no-filler",
+      "pass": true,
+      "reason": "The tutor provided relevant examples without padding or labeling trivial variations as advanced."
+    },
+    {
+      "id": "closes-lesson",
+      "pass": false,
+      "reason": "The tutor did not close the lesson; instead of wrapping up after the student demonstrated understanding, the tutor asked 'Ready to try writing a function?' again, continuing to prompt for more practice."
+    },
+    {
+      "id": "no-repeat",
+      "pass": false,
+      "reason": "The tutor repeatedly asked 'Ready to try writing your own function?' and 'Ready to try writing a function with a body?' after the student had already shown they understood the concept."
+    },
+    {
+      "id": "respects-decline",
+      "pass": true,
+      "reason": "The student did not decline; this criterion does not apply to this conversation."
+    },
+    {
+      "id": "warm-concise",
+      "pass": true,
+      "reason": "The tutor maintained a warm, encouraging tone while keeping responses focused and reasonably concise."
+    },
+    {
+      "id": "correct-content",
+      "pass": true,
+      "reason": "All Python syntax, terminology, and explanations about functions were technically accurate."
+    },
+    {
+      "id": "one-step-at-a-time",
+      "pass": true,
+      "reason": "The tutor introduced concepts progressively, checking understanding with examples before moving to the next idea."
+    },
+    {
+      "id": "handles-wrong-answer",
+      "pass": true,
+      "reason": "No wrong answers were provided by the student in this conversation; this criterion does not apply."
+    },
+    {
+      "id": "stays-on-topic",
+      "pass": true,
+      "reason": "The tutor kept the conversation focused on function definition and use, without tangents."
+    },
+    {
+      "id": "defines-terms",
+      "pass": true,
+      "reason": "Terms like 'parameter' and 'function body' were introduced with clear explanations."
+    },
+    {
+      "id": "specific-encouragement",
+      "pass": true,
+      "reason": "The tutor's encouragement ('Great start!', 'You're on the right track!') was tied to specific observations about the student's progress."
+    },
+    {
+      "id": "adapts-to-pace",
+      "pass": true,
+      "reason": "The tutor slowed down and provided multiple examples when the student expressed uncertainty about function bodies, showing responsiveness to the student's pace."
+    }
+  ],
+  "fast-mover::py101-w2-division-modes": [
+    {
+      "id": "respects-mastery",
+      "pass": true,
+      "reason": "Tutor acknowledged student's successful runs and moved forward without re-drilling."
+    },
+    {
+      "id": "no-filler",
+      "pass": true,
+      "reason": "No trivial variations were labeled as challenging or presented as make-work."
+    },
+    {
+      "id": "closes-lesson",
+      "pass": false,
+      "reason": "Conversation ends mid-lesson after floor division with no closure or direction for what comes next."
+    },
+    {
+      "id": "no-repeat",
+      "pass": true,
+      "reason": "Tutor did not repeat suggestions or questions after they were handled."
+    },
+    {
+      "id": "respects-decline",
+      "pass": true,
+      "reason": "No decline scenarios occurred in this conversation."
+    },
+    {
+      "id": "warm-concise",
+      "pass": true,
+      "reason": "Tutor maintained warm tone with brief, human responses and no unnecessary verbosity."
+    },
+    {
+      "id": "correct-content",
+      "pass": true,
+      "reason": "All Python facts were accurate: `/` returns float, `//` performs floor division returning int."
+    },
+    {
+      "id": "one-step-at-a-time",
+      "pass": true,
+      "reason": "Tutor introduced true division, checked understanding, then moved to floor division."
+    },
+    {
+      "id": "handles-wrong-answer",
+      "pass": true,
+      "reason": "Tutor caught and corrected the initial typo (`10 / 10` → `10 / 2`) clearly without harshness."
+    },
+    {
+      "id": "stays-on-topic",
+      "pass": true,
+      "reason": "Student remained on-topic throughout, no redirection needed."
+    },
+    {
+      "id": "defines-terms",
+      "pass": true,
+      "reason": "Tutor defined 'true division' and explained what operators do; floor division name was used but the concept was shown."
+    },
+    {
+      "id": "specific-encouragement",
+      "pass": true,
+      "reason": "Encouragement ('Exactly — you've got true division') was specific to the student's correct output."
+    },
+    {
+      "id": "adapts-to-pace",
+      "pass": true,
+      "reason": "Tutor matched fast learner pace, moving quickly through concepts without slowing down."
+    }
+  ],
+  "skeptical-why::py101-w2-functions-i": [
+    {
+      "id": "respects-mastery",
+      "pass": false,
+      "reason": "The tutor re-explained the same benefits (organization, clarity, maintainability) multiple times despite the student demonstrating understanding."
+    },
+    {
+      "id": "no-filler",
+      "pass": true,
+      "reason": "The tutor did not pad the lesson with trivial variations or label simple tasks as challenging."
+    },
+    {
+      "id": "closes-lesson",
+      "pass": false,
+      "reason": "The tutor never wrapped up the lesson or moved forward; instead it kept asking the same 'ready to try?' question."
+    },
+    {
+      "id": "no-repeat",
+      "pass": false,
+      "reason": "The tutor repeated the same reassurance about organization and clarity across four separate exchanges without acknowledging the repetition."
+    },
+    {
+      "id": "respects-decline",
+      "pass": false,
+      "reason": "The student repeatedly expressed hesitation, but the tutor insisted and pushed forward rather than genuinely addressing the concerns or offering alternatives."
+    },
+    {
+      "id": "warm-concise",
+      "pass": false,
+      "reason": "The tutor's responses grew longer and more repetitive rather than staying concise, particularly in the third and fourth exchanges."
+    },
+    {
+      "id": "correct-content",
+      "pass": true,
+      "reason": "The Python code example was correct and the technical explanations about functions were accurate."
+    },
+    {
+      "id": "one-step-at-a-time",
+      "pass": true,
+      "reason": "The tutor introduced functions one step at a time and showed a simple example before asking the student to try."
+    },
+    {
+      "id": "handles-wrong-answer",
+      "pass": true,
+      "reason": "No incorrect student answers were presented in this conversation."
+    },
+    {
+      "id": "stays-on-topic",
+      "pass": true,
+      "reason": "The tutor kept the conversation focused on functions and their use cases."
+    },
+    {
+      "id": "defines-terms",
+      "pass": true,
+      "reason": "Terms like 'parameter' and 'function' were explained clearly when introduced."
+    },
+    {
+      "id": "specific-encouragement",
+      "pass": false,
+      "reason": "Encouragement was generic ('Absolutely!', 'Ready to see...?') rather than tied to specific student insights or progress."
+    },
+    {
+      "id": "adapts-to-pace",
+      "pass": false,
+      "reason": "The student showed persistent skepticism and the tutor did not slow down, reassure, or adapt; instead it plowed ahead with the same approach."
+    }
+  ],
+  "perfectionist-worried::py101-w2-checking-the-facts": [
+    {
+      "id": "respects-mastery",
+      "pass": true,
+      "reason": "The tutor acknowledged the student's correct understanding of `type()` and `str()`/`int()`/`float()` and moved forward rather than re-drilling."
+    },
+    {
+      "id": "no-filler",
+      "pass": true,
+      "reason": "The tutor introduced practical examples (`x = 5`, `s = \"3.5\"`) without padding with trivial variations or busywork."
+    },
+    {
+      "id": "closes-lesson",
+      "pass": false,
+      "reason": "The tutor did not close the lesson; the conversation ends mid-lesson with the student answering a question, leaving no wrap-up or pointer forward."
+    },
+    {
+      "id": "no-repeat",
+      "pass": true,
+      "reason": "The tutor did not repeat any suggestion or question after it was already addressed."
+    },
+    {
+      "id": "respects-decline",
+      "pass": true,
+      "reason": "No declines occurred in the conversation, so this criterion is not applicable but does not warrant a fail."
+    },
+    {
+      "id": "warm-concise",
+      "pass": true,
+      "reason": "The tutor maintained a warm, encouraging tone with short, clear responses throughout."
+    },
+    {
+      "id": "correct-content",
+      "pass": true,
+      "reason": "All Python explanations and code examples are technically accurate: `type()` returns `<class 'int'>`, conversion functions work as described, and `float(\"3.5\") + 1 = 4.5`."
+    },
+    {
+      "id": "one-step-at-a-time",
+      "pass": true,
+      "reason": "The tutor introduced `type()` first, checked understanding, then moved to type conversion with one example at a time."
+    },
+    {
+      "id": "handles-wrong-answer",
+      "pass": true,
+      "reason": "No wrong answers were given by the student, so this criterion does not apply negatively."
+    },
+    {
+      "id": "stays-on-topic",
+      "pass": true,
+      "reason": "The student stayed on-topic throughout, so no redirection was needed."
+    },
+    {
+      "id": "defines-terms",
+      "pass": true,
+      "reason": "The tutor defined what `type()` does and explained what `str()`, `int()`, and `float()` convert values to."
+    },
+    {
+      "id": "specific-encouragement",
+      "pass": true,
+      "reason": "The tutor's praise was earned and tied to correct answers (\"You've got it\"), though modest in specificity overall."
+    },
+    {
+      "id": "adapts-to-pace",
+      "pass": true,
+      "reason": "The tutor sensed the student's anxiety about mistakes and reassured them early, then matched their quick understanding by moving forward efficiently."
+    }
+  ],
+  "fast-mover::py101-w2-checking-the-facts": [
+    {
+      "id": "respects-mastery",
+      "pass": true,
+      "reason": "The tutor acknowledged the student's successful completion of each task without re-drilling or adding trivial variations."
+    },
+    {
+      "id": "no-filler",
+      "pass": true,
+      "reason": "All tasks presented were core to learning `type()` and data type conversion; no padding or relabeled trivial work appeared."
+    },
+    {
+      "id": "closes-lesson",
+      "pass": false,
+      "reason": "The conversation ends abruptly mid-lesson without wrapping up or pointing the student onward after the conversion exercises."
+    },
+    {
+      "id": "no-repeat",
+      "pass": true,
+      "reason": "The tutor did not repeat suggestions or questions; each prompt advanced the lesson sequentially."
+    },
+    {
+      "id": "respects-decline",
+      "pass": true,
+      "reason": "The student never declined anything, so this criterion does not apply but is not violated."
+    },
+    {
+      "id": "warm-concise",
+      "pass": true,
+      "reason": "The tutor's tone was friendly and encouraging, with explanations that were clear and appropriately brief."
+    },
+    {
+      "id": "correct-content",
+      "pass": true,
+      "reason": "All Python statements about `type()`, `str()`, `int()`, and `float()` were technically accurate with correct example outputs."
+    },
+    {
+      "id": "one-step-at-a-time",
+      "pass": true,
+      "reason": "The tutor introduced `type()` first, then moved to conversion functions only after the student confirmed mastery of the first concept."
+    },
+    {
+      "id": "handles-wrong-answer",
+      "pass": true,
+      "reason": "The student did not provide a wrong answer in this conversation, so the criterion is not violated."
+    },
+    {
+      "id": "stays-on-topic",
+      "pass": true,
+      "reason": "The student remained focused and on-topic throughout; no redirects were necessary."
+    },
+    {
+      "id": "defines-terms",
+      "pass": true,
+      "reason": "The tutor defined what `type()` does and explained each conversion function (`str()`, `int()`, `float()`) clearly on first use."
+    },
+    {
+      "id": "specific-encouragement",
+      "pass": true,
+      "reason": "Praise like 'That's exactly right' and 'Perfect!' was tied to specific correct actions the student completed."
+    },
+    {
+      "id": "adapts-to-pace",
+      "pass": true,
+      "reason": "The tutor matched the student's fast, confident pace by moving quickly through concepts and tasks without unnecessary repetition."
+    }
+  ],
+  "rusty-returner::py101-w2-functions-ii": [
+    {
+      "id": "respects-mastery",
+      "pass": true,
+      "reason": "When the student demonstrated they remembered function calls, the tutor acknowledged it ('Exactly!') and moved forward without re-drilling."
+    },
+    {
+      "id": "no-filler",
+      "pass": true,
+      "reason": "The tutor did not invent busywork or label trivial variations as challenging; the lesson stayed focused on core concepts."
+    },
+    {
+      "id": "closes-lesson",
+      "pass": false,
+      "reason": "The conversation ended abruptly mid-example without wrapping up the lesson or pointing the student toward next steps."
+    },
+    {
+      "id": "no-repeat",
+      "pass": true,
+      "reason": "The tutor did not repeat the same suggestion or question multiple times."
+    },
+    {
+      "id": "respects-decline",
+      "pass": true,
+      "reason": "No declines occurred in this conversation, so the criterion is not violated."
+    },
+    {
+      "id": "warm-concise",
+      "pass": true,
+      "reason": "The tutor maintained a warm, encouraging tone with brief responses and casual language like 'No worries' and 'Absolutely!'"
+    },
+    {
+      "id": "correct-content",
+      "pass": false,
+      "reason": "The tutor's second code example is incomplete and cuts off mid-call (`result = add(3,` and later `result` without showing the complete call or output)."
+    },
+    {
+      "id": "one-step-at-a-time",
+      "pass": true,
+      "reason": "The tutor introduced function definition first, then function calls, then calling with different values in a logical progression."
+    },
+    {
+      "id": "handles-wrong-answer",
+      "pass": true,
+      "reason": "No wrong answers were given by the student, so this criterion does not apply."
+    },
+    {
+      "id": "stays-on-topic",
+      "pass": true,
+      "reason": "The student stayed on topic throughout, and the tutor remained focused on functions and how to call them."
+    },
+    {
+      "id": "defines-terms",
+      "pass": true,
+      "reason": "The tutor defined 'parameters,' 'arguments,' and 'return' when first introducing them."
+    },
+    {
+      "id": "specific-encouragement",
+      "pass": true,
+      "reason": "Encouragement was grounded in the student's actual progress ('No worries at all. It's totally normal') rather than generic."
+    },
+    {
+      "id": "adapts-to-pace",
+      "pass": true,
+      "reason": "The tutor matched the student's pace by starting with a recap when requested and moving at the student's speed."
+    }
+  ],
+  "skeptical-why::py101-w2-functions-ii": [
+    {
+      "id": "respects-mastery",
+      "pass": true,
+      "reason": "The tutor acknowledged the student's understanding of reusability and didn't re-drill that concept."
+    },
+    {
+      "id": "no-filler",
+      "pass": true,
+      "reason": "The tutor avoided padding with trivial variations or make-work tasks."
+    },
+    {
+      "id": "closes-lesson",
+      "pass": false,
+      "reason": "The tutor never actually closed the lesson or moved forward to teach function structure; the conversation ended in a loop of justification."
+    },
+    {
+      "id": "no-repeat",
+      "pass": false,
+      "reason": "The tutor repeatedly asked 'Ready to...' and kept offering the same transition to learning function basics across multiple responses."
+    },
+    {
+      "id": "respects-decline",
+      "pass": false,
+      "reason": "The student has essentially declined multiple times by expressing hesitation, but the tutor kept insisting on the value rather than accepting the student's reluctance or offering a clear alternative path."
+    },
+    {
+      "id": "warm-concise",
+      "pass": true,
+      "reason": "The tutor maintained a warm tone and kept responses reasonably concise without excessive verbosity."
+    },
+    {
+      "id": "correct-content",
+      "pass": true,
+      "reason": "All statements about Python functions, parameters, and code organization were technically accurate."
+    },
+    {
+      "id": "one-step-at-a-time",
+      "pass": true,
+      "reason": "The tutor introduced ideas gradually and checked understanding before moving forward."
+    },
+    {
+      "id": "handles-wrong-answer",
+      "pass": true,
+      "reason": "The student did not provide wrong answers; this criterion is not applicable."
+    },
+    {
+      "id": "stays-on-topic",
+      "pass": true,
+      "reason": "The tutor kept focus on functions and parameters throughout, gently redirecting when the student questioned relevance."
+    },
+    {
+      "id": "defines-terms",
+      "pass": true,
+      "reason": "The tutor defined parameters, arguments, and related concepts with clear examples."
+    },
+    {
+      "id": "specific-encouragement",
+      "pass": true,
+      "reason": "Encouragement was minimal but grounded in the student's actual questions rather than generic praise."
+    },
+    {
+      "id": "adapts-to-pace",
+      "pass": false,
+      "reason": "The student signaled repeated hesitation and reluctance, but the tutor did not adapt by slowing down, validating concerns, or offering a different entry point—instead repeating the same reassurance."
+    }
+  ],
+  "rusty-returner::py101-w2-division-modes": [
+    {
+      "id": "respects-mastery",
+      "pass": true,
+      "reason": "When the student recalled that 10/2 returns 5.0, the tutor affirmed this without re-drilling true division."
+    },
+    {
+      "id": "no-filler",
+      "pass": true,
+      "reason": "The tutor focused only on the two core concepts (true and floor division) without padding or artificial complexity."
+    },
+    {
+      "id": "closes-lesson",
+      "pass": false,
+      "reason": "The conversation ends mid-lesson while the tutor is about to explain floor division, so we cannot evaluate proper lesson closure."
+    },
+    {
+      "id": "no-repeat",
+      "pass": true,
+      "reason": "The tutor did not repeat questions or suggestions that had already been addressed."
+    },
+    {
+      "id": "respects-decline",
+      "pass": true,
+      "reason": "No declines were presented by the student, so this criterion does not apply negatively."
+    },
+    {
+      "id": "warm-concise",
+      "pass": true,
+      "reason": "The tutor used warm language like 'No worries at all' and kept responses short and direct."
+    },
+    {
+      "id": "correct-content",
+      "pass": false,
+      "reason": "The tutor's explanation of floor division is incomplete/cut off mid-sentence, preventing full evaluation, but the parts shown are correct."
+    },
+    {
+      "id": "one-step-at-a-time",
+      "pass": true,
+      "reason": "The tutor introduced true division first, confirmed understanding, then moved to floor division."
+    },
+    {
+      "id": "handles-wrong-answer",
+      "pass": true,
+      "reason": "No incorrect answers were given by the student in this conversation."
+    },
+    {
+      "id": "stays-on-topic",
+      "pass": true,
+      "reason": "The student stayed focused on division modes and the tutor maintained the lesson direction."
+    },
+    {
+      "id": "defines-terms",
+      "pass": true,
+      "reason": "The tutor defined 'true division' and 'floor division' with clear explanations of what each does."
+    },
+    {
+      "id": "specific-encouragement",
+      "pass": true,
+      "reason": "The tutor said 'Exactly! You've got it' which was specific to the student's correct recall of 5.0."
+    },
+    {
+      "id": "adapts-to-pace",
+      "pass": true,
+      "reason": "The tutor matched the student's pace by slowing down to show code examples when requested."
+    }
+  ],
+  "perfectionist-worried::py101-w2-functions-ii": [
+    {
+      "id": "respects-mastery",
+      "pass": false,
+      "reason": "The tutor repeatedly re-confirmed concepts the student had already demonstrated mastery of (def keyword, parameters, argument binding) rather than moving forward."
+    },
+    {
+      "id": "no-filler",
+      "pass": false,
+      "reason": "The tutor kept asking 'Ready to...' and 'Is that exactly right?' as ritualistic prompts without adding new content, padding the lesson with repetitive confirmation loops."
+    },
+    {
+      "id": "closes-lesson",
+      "pass": false,
+      "reason": "The tutor never wrapped up the lesson; instead kept extending it with the same cycle of confirmation and new trivial examples."
+    },
+    {
+      "id": "no-repeat",
+      "pass": false,
+      "reason": "The tutor repeated the pattern of having the student confirm, then re-affirming their answer verbatim, then presenting the same concept with slightly different wording multiple times."
+    },
+    {
+      "id": "respects-decline",
+      "pass": true,
+      "reason": "The student never declined anything, so this criterion does not apply negatively."
+    },
+    {
+      "id": "warm-concise",
+      "pass": true,
+      "reason": "The tutor maintained a warm, encouraging tone and kept responses reasonably brief."
+    },
+    {
+      "id": "correct-content",
+      "pass": true,
+      "reason": "All Python explanations and code examples were technically accurate."
+    },
+    {
+      "id": "one-step-at-a-time",
+      "pass": true,
+      "reason": "The tutor introduced concepts sequentially: def keyword, then function name/parameters, then arguments, then execution."
+    },
+    {
+      "id": "handles-wrong-answer",
+      "pass": true,
+      "reason": "The student never provided a wrong answer, so this criterion does not apply negatively."
+    },
+    {
+      "id": "stays-on-topic",
+      "pass": true,
+      "reason": "The tutor stayed focused on teaching basic function structure throughout."
+    },
+    {
+      "id": "defines-terms",
+      "pass": true,
+      "reason": "Terms like 'parameters,' 'arguments,' and 'return' were defined when introduced."
+    },
+    {
+      "id": "specific-encouragement",
+      "pass": false,
+      "reason": "Praise was generic ('You've got it!', 'Exactly right!') repeated without variation and not tied to specific insights or breakthroughs."
+    },
+    {
+      "id": "adapts-to-pace",
+      "pass": false,
+      "reason": "The tutor did not adapt to the student's anxiety; instead of reassuring and moving forward, the tutor matched the student's repetitive confirmation-seeking by engaging in endless loops."
+    }
+  ]
+}

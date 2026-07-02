@@ -1,0 +1,221 @@
+[
+  {
+    "persona": "knows-it-impatient",
+    "turns": [
+      {
+        "role": "user",
+        "content": "hi, I already know how to print in Python"
+      },
+      {
+        "role": "assistant",
+        "content": "Nice — sounds like you're already ahead on this! Want to skip straight to what's next, or is there anything about print that you’d like to double-check? Your call!"
+      },
+      {
+        "role": "user",
+        "content": "Yeah, let's skip it — I’ve used print a million times already. What’s next?"
+      },
+      {
+        "role": "assistant",
+        "content": "Awesome! Since you’ve got print down, let’s move on to using the Maestro Code Editor. \n\nIn the editor, you type your code, press “Run” to execute it, and then see the result in the Output panel. \n\nHave you had a chance to use the Maestro Code Editor yet?"
+      },
+      {
+        "role": "user",
+        "content": "Yeah, I’ve used it — it’s just a code editor. Can we jump to something less basic?"
+      },
+      {
+        "role": "assistant",
+        "content": "Great — sounds like you’re comfortable with that already! You can go ahead and hit “Next lesson” whenever you’re ready. We can dive into the next topic!"
+      },
+      {
+        "role": "user",
+        "content": "Alright, hitting next — let’s get to the real stuff already."
+      },
+      {
+        "role": "assistant",
+        "content": "You got it! You've finished this lesson, and now you're ready to move on. Just click \"Next lesson\" and let's keep building!"
+      },
+      {
+        "role": "user",
+        "content": "Alright, I’m clicking through — can we get to something actually challenging now?"
+      }
+    ],
+    "judged": [
+      {
+        "id": "respects-mastery",
+        "pass": true,
+        "reason": "Tutor acknowledged prior knowledge and did not re-teach basics."
+      },
+      {
+        "id": "no-filler",
+        "pass": true,
+        "reason": "Tutor did not add unnecessary tasks or trivial variations."
+      },
+      {
+        "id": "closes-lesson",
+        "pass": true,
+        "reason": "Tutor wrapped up the lesson and directed the student forward."
+      },
+      {
+        "id": "no-repeat",
+        "pass": false,
+        "reason": "Tutor repeated the suggestion to click \"Next lesson\" after it was already addressed."
+      },
+      {
+        "id": "respects-decline",
+        "pass": true,
+        "reason": "Tutor honored the student’s request to skip basics and moved on."
+      },
+      {
+        "id": "warm-concise",
+        "pass": true,
+        "reason": "Tutor maintained a warm tone and kept responses brief."
+      }
+    ]
+  },
+  {
+    "persona": "declines-tired",
+    "turns": [
+      {
+        "role": "user",
+        "content": "hey"
+      },
+      {
+        "role": "assistant",
+        "content": "Hey! Great to see you here. Today, we're diving into \"Writing your first program.\" Ready to get started?"
+      },
+      {
+        "role": "user",
+        "content": "uhhh not really, kinda tired… maybe later."
+      },
+      {
+        "role": "assistant",
+        "content": "I get that — long days can be rough. How about we keep it super light? Just a quick idea for about five minutes. Then you can decide whether to continue or take a break. Sound good?"
+      },
+      {
+        "role": "user",
+        "content": "mmm nah, five minutes still sounds like effort… maybe we just chill for a sec instead."
+      },
+      {
+        "role": "assistant",
+        "content": "Totally fine! Taking a breather sounds good. Just let me know whenever you're ready to dive back in, no rush. I'm here whenever you want to jump back to printing!"
+      },
+      {
+        "role": "user",
+        "content": "yeah let’s just… sit here a bit. don’t wanna do stuff yet."
+      },
+      {
+        "role": "assistant",
+        "content": "That’s perfectly okay! Just relax and take your time. If you have any questions or just want to chat while you’re unwinding, I’m here."
+      },
+      {
+        "role": "user",
+        "content": "kinda just wanna stare at the wall for a sec… don’t mind me."
+      }
+    ],
+    "judged": [
+      {
+        "id": "respects-mastery",
+        "pass": true,
+        "reason": "The student never demonstrated prior knowledge, and the tutor did not re-drill or add trivial work."
+      },
+      {
+        "id": "no-filler",
+        "pass": true,
+        "reason": "The tutor did not add unnecessary tasks or label trivial work as challenging."
+      },
+      {
+        "id": "closes-lesson",
+        "pass": true,
+        "reason": "Since the lesson never began, the tutor appropriately paused without inventing extra tasks."
+      },
+      {
+        "id": "no-repeat",
+        "pass": true,
+        "reason": "The tutor did not repeat the same suggestion after the student declined."
+      },
+      {
+        "id": "respects-decline",
+        "pass": true,
+        "reason": "The tutor accepted the student’s reluctance and did not pressure them to continue."
+      },
+      {
+        "id": "warm-concise",
+        "pass": true,
+        "reason": "Responses were friendly, supportive, and brief without being verbose."
+      }
+    ]
+  },
+  {
+    "persona": "eager-beginner",
+    "turns": [
+      {
+        "role": "user",
+        "content": "hi! I've never written code before"
+      },
+      {
+        "role": "assistant",
+        "content": "Hey! Great to have you here. Today, we’ll get started with writing your first program in Python. Ready to dive in?"
+      },
+      {
+        "role": "user",
+        "content": "yeah, I’m ready! what do we do first?"
+      },
+      {
+        "role": "assistant",
+        "content": "Awesome! First up is the Maestro Code Editor. This is where you'll write and run your code. \n\nYou simply type your code there, hit \"Run,\" and see the results in the Output panel. \n\nWant to give it a try?"
+      },
+      {
+        "role": "user",
+        "content": "okay! um… what should I type in it?"
+      },
+      {
+        "role": "assistant",
+        "content": "Let’s start with something simple. Type this line in the editor:\n\n```python\nprint(\"Hello, world!\")\n```\n\nOnce you've got that, go ahead and hit \"Run.\" Let me know what you see!"
+      },
+      {
+        "role": "user",
+        "content": "okay, I typed it and hit run… and it printed “Hello, world!” in the output! that means it worked, right?"
+      },
+      {
+        "role": "assistant",
+        "content": "Yes! That’s fantastic! You just wrote your first program, and it worked perfectly. 🎉 \n\nNow you've used the print() function to display text. Want to try printing something else on your own?"
+      },
+      {
+        "role": "user",
+        "content": "oh cool! um… can I just change the words inside the quotes to something else?"
+      }
+    ],
+    "judged": [
+      {
+        "id": "respects-mastery",
+        "pass": true,
+        "reason": "The tutor acknowledged the student’s success and moved forward without re-teaching the same concept."
+      },
+      {
+        "id": "no-filler",
+        "pass": true,
+        "reason": "The tutor kept the task simple and did not add unnecessary or trivial busywork."
+      },
+      {
+        "id": "closes-lesson",
+        "pass": true,
+        "reason": "After achieving the basic goal, the tutor offered a natural next step without inventing excessive new tasks."
+      },
+      {
+        "id": "no-repeat",
+        "pass": true,
+        "reason": "The tutor did not repeat instructions or questions unnecessarily."
+      },
+      {
+        "id": "respects-decline",
+        "pass": true,
+        "reason": "The student did not decline anything, and the tutor did not pressure or insist at any point."
+      },
+      {
+        "id": "warm-concise",
+        "pass": true,
+        "reason": "The tutor remained friendly, encouraging, and concise throughout the exchange."
+      }
+    ]
+  }
+]

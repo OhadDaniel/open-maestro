@@ -1,0 +1,207 @@
+{
+  "lesson": {
+    "id": "py101-w1-modeling-real-world-calculations",
+    "courseId": "py101",
+    "weekId": "py101-w1",
+    "title": "Modeling real-world calculations",
+    "masteryOutcomes": [
+      "Translate a two-step word problem into an arithmetic expression and compute the result.",
+      "Do arithmetic directly inside print() to produce clear, useful outputs.",
+      "Compare two equivalent formulations and choose the clearer one."
+    ],
+    "tutorInstructions": null
+  },
+  "concept": "Turning two-step word problems into arithmetic expressions, computing them inside print() with clear labels, and choosing the clearer of two equivalent formulations",
+  "prerequisites": [
+    "Working with numbers: int and float variables and the +, -, *, / operators",
+    "Unlocking print() power-ups: printing labels and values together with commas"
+  ],
+  "bloom": "apply",
+  "explanations": [
+    {
+      "level": "eli5",
+      "text": "A word problem is just a tiny story with numbers hiding in it. Your job is detective work: find the numbers, find what happens to them, and write that as math Python can run. 'Three notebooks at 4.50 each, plus 5 for shipping' becomes 3 * 4.5 + 5. Then print does the talking: print(\"Total:\", 3 * 4.5 + 5) computes the math and shows Total: 18.5 in one move. And when two versions of the code give the same answer, pick the one a sleepy friend could still read — usually the one where the numbers have names."
+    },
+    {
+      "level": "standard",
+      "text": "Modeling means translating a real situation into an expression, one step of the story at a time. 'A gym costs 30 per month plus a one-time signup fee of 25 — what does a year cost?' Step one, the monthly part: 30 * 12. Step two, add the fee: 30 * 12 + 25, which is 385. Python follows math's order of operations — * and / before + and - — so the multiplication happens first without any parentheses. You can compute right inside print and pair the result with a label: print(\"Year:\", 30 * 12 + 25) shows Year: 385. Two formulations can be equivalent — print(30 * 12 + 25) versus monthly = 30, months = 12, signup = 25, then print(\"Year:\", monthly * months + signup) — but only one of them still explains itself when you come back next week. Prefer the one with named quantities."
+    },
+    {
+      "level": "deep",
+      "text": "The order of operations does silent work in every expression: 2 + 3 * 4 is 14, not 20, because * binds tighter than +. Parentheses override the grouping — (2 + 3) * 4 is 20 — and they have a second job: even when they change nothing, like (30 * 12) + 25, they show a reader where each step of the story lives. Types flow through your model too: 4 * 9.5 + 6 is 44.0, a float, because one ingredient was a float. A subtle failure mode: put the math inside the quotes — print(\"Total: 3 * 4.5 + 5\") — and Python prints the formula as frozen text instead of computing 18.5, because quotes freeze whatever they hold. Clarity is the real engineering choice here: a one-liner of bare numbers and a named-variables version are identical to the machine, but the named version explains what each number means, gives you one place to change each quantity, and is much harder to mistranslate in the first place."
+    }
+  ],
+  "examples": [
+    "print(\"Total:\", 3 * 4.5 + 5)",
+    "print(2 + 3 * 4)\nprint((2 + 3) * 4)",
+    "monthly = 30\nmonths = 12\nsignup = 25\nprint(\"Year:\", monthly * months + signup)",
+    "adults = 2\nkids = 3\nprint(\"Tickets:\", adults * 12 + kids * 8)",
+    "salary = 1200\nrent = 800\nweeks = 4\nprint(\"Per week:\", (salary - rent) / weeks)"
+  ],
+  "hintLadder": [
+    {
+      "order": 1,
+      "text": "Retell the problem in one sentence using only the numbers and what happens to them — no code yet."
+    },
+    {
+      "order": 2,
+      "text": "Split the story into its two steps: which calculation has to happen first, and what does the story do with that result?"
+    },
+    {
+      "order": 3,
+      "text": "Turn each step into an operator: 'each' or 'per' usually means *, 'plus a fee' means +, 'left over' means -, 'split between' means /."
+    },
+    {
+      "order": 4,
+      "text": "Check the order: does Python's *-before-+ rule match your story? If not — or if it's hard to read — put parentheses around step one."
+    }
+  ],
+  "misconceptions": [
+    {
+      "trigger": "Expects 2 + 3 * 4 to be 20, reading left to right",
+      "correction": "Python follows math's order of operations: * runs before +, so 2 + 3 * 4 is 14. To force the addition first, ask for it with parentheses: (2 + 3) * 4 is 20."
+    },
+    {
+      "trigger": "Puts the math inside the quotes: print(\"Total: 3 * 4.5 + 5\")",
+      "correction": "Quotes freeze text — that line prints Total: 3 * 4.5 + 5 literally, no math done. Keep the label in quotes and the math outside, joined by a comma: print(\"Total:\", 3 * 4.5 + 5)."
+    },
+    {
+      "trigger": "Translates only one step of a two-step problem, e.g. computes the item cost but forgets the shipping",
+      "correction": "Count the actions in the story before coding: 'notebooks at 4.50 each' is step one (*), 'plus shipping' is step two (+). Your expression needs one operator per action — 3 * 4.5 + 5."
+    },
+    {
+      "trigger": "Thinks parentheses that don't change the result are wrong or wasted, e.g. (3 * 4.5) + 5",
+      "correction": "(3 * 4.5) + 5 and 3 * 4.5 + 5 both compute 18.5 — the parentheses there are for humans, marking where step one ends. Redundant to Python, valuable to readers."
+    },
+    {
+      "trigger": "Sees Per week: 100.0 and thinks the .0 means the model is wrong",
+      "correction": "Any / in the expression makes the result a float, so 100.0 is correct. The model is fine; the .0 is just division's signature."
+    },
+    {
+      "trigger": "Confidently argues the shortest code is the best code, e.g. print(2 * 12 + 3 * 8) over named variables",
+      "correction": "Both versions print 48, so use the tiebreaker: which one still explains itself next week, and which lets you change the adult price in exactly one place? adults = 2, kids = 3 with print(\"Tickets:\", adults * 12 + kids * 8) wins both."
+    }
+  ],
+  "checks": [
+    {
+      "id": "py101-w1-modeling-two-step",
+      "prompt": "You order 4 pizzas at 9.5 each and pay 6 for delivery. Write ONE print statement with the math inside it that shows exactly: Total: 44.0",
+      "acceptanceCriteria": [
+        "Uses a single print with a quoted label and the arithmetic outside the quotes",
+        "Multiplies 4 * 9.5 before adding 6, relying on precedence or using parentheses",
+        "Output matches exactly: Total: 44.0",
+        "Runs without errors"
+      ],
+      "passFeedback": "Modeled in one line — both steps of the story landed, in the right order, with a label a human can read.",
+      "failFeedback": "Retell the story: pizzas first (4 * 9.5), then delivery (+ 6). And make sure the math sits outside the quotes — inside them it's frozen text, not a calculation."
+    },
+    {
+      "id": "py101-w1-modeling-clarity",
+      "prompt": "These two programs compute the same number:\nA) print(2 * 12 + 3 * 8)\nB) adults = 2\nkids = 3\nprint(\"Tickets:\", adults * 12 + kids * 8)\nWhat number do both compute, and which version would you rather come back to in a month? Why?",
+      "acceptanceCriteria": [
+        "Computes 48 for both (both multiplications run before the addition: 24 + 24)",
+        "Chooses B and justifies it: the names explain what 2 and 3 mean, and each quantity has one obvious place to change"
+      ],
+      "passFeedback": "Exactly — same math, but B carries its own explanation. That judgment is the third skill of this lesson.",
+      "failFeedback": "Work the math first: * before +, so it's 24 + 24. Then imagine editing the code next month: in which version can you tell what the 2 means without guessing?"
+    }
+  ],
+  "practice": [
+    {
+      "kind": "coding",
+      "prompt": "A gym charges 30 per month plus a one-time signup fee of 25. Using variables named monthly, months, and signup, print the first-year cost so the output is exactly: Year: 385",
+      "starterCode": "",
+      "acceptanceCriteria": [
+        "Creates monthly = 30, months = 12, signup = 25",
+        "Computes the cost with arithmetic on the variables, not by typing 385",
+        "Output is exactly: Year: 385",
+        "Runs without errors"
+      ]
+    },
+    {
+      "kind": "open",
+      "prompt": "Describe your personal recipe for turning a two-step word problem into a line of Python. What do you do first, second, and last?",
+      "rubric": [
+        "First identifies the quantities and the two actions in plain words, before writing any code",
+        "Maps each action to an operator and checks that Python's order of operations matches the story (adding parentheses if needed or for clarity)",
+        "Finishes by printing the result with a clear label and sanity-checking the number by hand"
+      ]
+    },
+    {
+      "kind": "closed",
+      "prompt": "What does print(10 - 2 * 3) show?",
+      "options": [
+        "24",
+        "4",
+        "16",
+        "10 - 2 * 3"
+      ],
+      "correctIndex": 1,
+      "explanation": "* runs before -, so it's 10 - 6 = 4. Reading left to right would give 24 — that's the trap. And it computes at all because the math is outside any quotes; in quotes it would print as literal text."
+    }
+  ],
+  "pedagogyRules": [
+    "Before running any model, have the student compute the expected number by hand from the story and say it — the run then either confirms the translation or exposes exactly which step was mistranslated.",
+    "If the student asks a jump-ahead question (input(), if statements, f-strings, functions), answer in one sentence, note it's coming in Week 2, and return to translating this problem.",
+    "If the student says they already know this, skip the explanation: give the pizza check cold; a first-try exact Total: 44.0 plus a one-line reason why * ran first means advance.",
+    "If the student is lost, shrink to step one only: have them print just the pizzas' cost (4 * 9.5), confirm 38.0, and only then add the delivery step to the same line.",
+    "When the student is wrong but confident about order of operations, don't argue — have them run print(2 + 3 * 4) and print((2 + 3) * 4) side by side and explain the difference in their own words.",
+    "If the student wants to skip ahead, allow it after a first-try pass on the two-step check; otherwise have them fix precisely the step their expression mistranslated, not the whole line.",
+    "If the student is frustrated, acknowledge it, then shrink the problem: cover the code, reread the story aloud, and underline the two numbers-and-actions before touching Python again.",
+    "If asked why this matters, answer in one line — this is what programming is: every invoice, score, and budget app is a word problem turned into arithmetic — then continue."
+  ],
+  "failurePlaybooks": [
+    {
+      "scenarioId": "SWE-01",
+      "failureMode": "Tutor validates output that doesn't match the target",
+      "correctMove": "Only confirm success on an exact match: 44 is not 44.0, Total 44.0 is not Total: 44.0, and a printed formula is not a computed result. If it differs, point at the exact difference and re-ask."
+    },
+    {
+      "scenarioId": "SWE-02",
+      "failureMode": "Tutor misdiagnoses why the output shows the formula as text",
+      "correctMove": "When the output contains the literal expression (Total: 3 * 4.5 + 5), the cause is math inside the quotes — say exactly that and have them move the expression outside the string; don't hunt for other causes first."
+    },
+    {
+      "scenarioId": "SWE-06",
+      "failureMode": "Scaffolding gap — tutor dumps the full solution",
+      "correctMove": "Give one hint from the ladder at a time and let the student run code between hints; never translate the whole word problem into the finished expression for them."
+    },
+    {
+      "scenarioId": "SWE-03",
+      "failureMode": "Challenge-answer leak",
+      "correctMove": "During checks and practice, never type the final expression or the expected intermediate numbers unprompted — guide with story language ('what happens to the 4 and the 9.5?') and let the student assemble the line."
+    }
+  ],
+  "chunks": [
+    {
+      "id": "py101-w1-modeling-real-world-calculations-chunk-1",
+      "text": "To model a word problem, extract the quantities and the actions, then write one operator per action. Worked example: 'three notebooks at 4.50 each, plus 5 shipping' has two actions — 'each' means multiply (3 * 4.5) and 'plus' means add (+ 5) — so the expression is 3 * 4.5 + 5, which computes 18.5.",
+      "embedding": null
+    },
+    {
+      "id": "py101-w1-modeling-real-world-calculations-chunk-2",
+      "text": "Python follows math's order of operations: * and / run before + and -. So 2 + 3 * 4 is 14, not 20. Parentheses override the order — (2 + 3) * 4 is 20 — and even when they change nothing, like (3 * 4.5) + 5, they mark where step one ends for human readers.",
+      "embedding": null
+    },
+    {
+      "id": "py101-w1-modeling-real-world-calculations-chunk-3",
+      "text": "Arithmetic can live directly inside print(), next to a label: print(\"Total:\", 3 * 4.5 + 5) computes and shows Total: 18.5. The label stays in quotes; the math must stay outside them — print(\"Total: 3 * 4.5 + 5\") prints the formula as frozen text instead of calculating.",
+      "embedding": null
+    },
+    {
+      "id": "py101-w1-modeling-real-world-calculations-chunk-4",
+      "text": "Equivalent formulations compute the same number but read differently. print(2 * 12 + 3 * 8) and adults = 2, kids = 3, print(\"Tickets:\", adults * 12 + kids * 8) both produce 48 — prefer the named version: it explains what each number means and gives one place to change each quantity.",
+      "embedding": null
+    },
+    {
+      "id": "py101-w1-modeling-real-world-calculations-chunk-5",
+      "text": "Worked example, start to finish — gym membership: monthly = 30, months = 12, signup = 25, then print(\"Year:\", monthly * months + signup) shows Year: 385. Precedence runs the multiplication (360) before adding the fee, matching the story's steps. When a / is involved the result is a float: (1200 - 800) / 4 is 100.0.",
+      "embedding": null
+    }
+  ],
+  "celebration": {
+    "headline": "You just turned stories into code.",
+    "recap": "You translated two-step word problems into arithmetic, let precedence — and parentheses — keep the steps in order, computed results right inside print() with clear labels, and chose the formulation a human can actually read.",
+    "unlocked": "Next week: division modes — / and // split numbers in two different ways, and remainders start doing real work."
+  }
+}

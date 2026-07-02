@@ -1,0 +1,206 @@
+{
+  "lesson": {
+    "id": "py101-w2-functions-iii",
+    "courseId": "py101",
+    "weekId": "py101-w2",
+    "title": "Functions III: return vs print and early return",
+    "masteryOutcomes": [
+      "Differentiate printing vs returning values.",
+      "Use return to pass results and apply early returns."
+    ],
+    "tutorInstructions": null
+  },
+  "concept": "return vs print — handing back a value the program can use — and ending a function early with an early return",
+  "prerequisites": [
+    "Functions II: the structure of a function and how argument values travel from the call site into parameters"
+  ],
+  "bloom": "analyze",
+  "explanations": [
+    {
+      "level": "eli5",
+      "text": "print is shouting an answer out the window — people outside hear it, but nobody can grab it and use it. return is handing the answer back on a plate — the caller can keep it, add to it, or show it later. And return has a second job: it means \"I'm done.\" The moment a function hits return, it stops right there. That lets you leave early — if the visitor is under 5, return 0 immediately and never even look at the rest of the pricing rules."
+    },
+    {
+      "level": "standard",
+      "text": "Printing shows a value on screen — great for humans, invisible to the rest of the program. Returning hands the value to the call site: with def add(a, b): return a + b, writing total = add(2, 3) puts 5 into total, and print(total * 10) shows 50 — the program used the result. A function with no return hands back the special value None, which is why storing the result of a print-only function gives you nothing usable. return also stops the function instantly: lines after it never run. That enables the early-return pattern — check the special case first, return immediately, and let the code below handle the normal case with no else needed."
+    },
+    {
+      "level": "deep",
+      "text": "Every function call produces a value. An executed return x makes it x; falling off the end of the body (or a bare return) makes it None. So with def double(n): print(n * 2) — note, print, not return — the line result = double(5) prints 10 but leaves None in result, and print(result + 1) then raises TypeError: unsupported operand type(s) for +: 'NoneType' and 'int'. Seeing NoneType in an error almost always means some function forgot to return. On the flow side: return ends the call the moment it executes, so a function may hold several returns and only the first one reached wins — code placed directly after an executed return is dead code. And return is only legal inside a function: at the top level of a script it raises SyntaxError: 'return' outside function. One more trap: calling add(2, 3) on its own line computes 5 and silently discards it — you must catch it in a variable or wrap the call in print."
+    }
+  ],
+  "examples": [
+    "def add(a, b):\n    return a + b\n\ntotal = add(2, 3)\nprint(total * 10)",
+    "def shout(word):\n    print(word + \"!\")\n\nresult = shout(\"hi\")\nprint(result)",
+    "def ticket_price(age):\n    if age < 5:\n        return 0\n    return 10\n\nprint(ticket_price(3))\nprint(ticket_price(30))",
+    "def status():\n    return \"done\"\n    print(\"never shown\")\n\nprint(status())"
+  ],
+  "hintLadder": [
+    {
+      "order": 1,
+      "text": "Ask one question about the value: does a human just need to see it, or does the program need to use it afterwards? See means print; use means return."
+    },
+    {
+      "order": 2,
+      "text": "return delivers the value to the exact spot where the function was called — is anything there catching it, like a variable or a print around the call?"
+    },
+    {
+      "order": 3,
+      "text": "Remember that return stops the function on the spot — anything written below an executed return will never run."
+    },
+    {
+      "order": 4,
+      "text": "For the early return: handle the special case first with an if that returns immediately, then write the normal case below it — no else needed."
+    }
+  ],
+  "misconceptions": [
+    {
+      "trigger": "Says print and return are the same because both \"give the answer\"",
+      "correction": "Run the experiment: result = shout(\"hi\") then print(result). The shout appears (hi!), but result holds None — print only displayed the value; return is what would have handed it back for the program to use."
+    },
+    {
+      "trigger": "Does math with a print-only function, e.g. result = double(5) then result + 1 when double only prints",
+      "correction": "No return means None came back, so Python says TypeError: unsupported operand type(s) for +: 'NoneType' and 'int'. Change the body from print(n * 2) to return n * 2 and the math works."
+    },
+    {
+      "trigger": "Expects lines written after a return to still run",
+      "correction": "return ends the call instantly. In def status(): return \"done\" followed by print(\"never shown\"), the print is dead code — the function already left. If something must happen, it has to happen before the return."
+    },
+    {
+      "trigger": "Writes return at the top level of the script, outside any function",
+      "correction": "Python refuses with SyntaxError: 'return' outside function. return means 'hand this back to my caller', and only a function has a caller — at the top level, use print or a variable instead."
+    },
+    {
+      "trigger": "Calls add(2, 3) on its own line and wonders where the 5 went",
+      "correction": "The function returned 5 and nothing caught it, so Python discarded it. Catch it — total = add(2, 3) — or show it directly: print(add(2, 3))."
+    },
+    {
+      "trigger": "Insists an early return needs an else for the normal case",
+      "correction": "If the if branch returned, execution never gets past it — so the code below the if only ever runs in the normal case. It already is the else, just flatter and easier to read."
+    }
+  ],
+  "checks": [
+    {
+      "id": "py101-w2-functions-iii-return-value",
+      "prompt": "Write a function double(n) that returns n * 2 — no printing inside the function. Then use it: store double(5) in a variable and print the variable plus 1. The output should be exactly 11.",
+      "acceptanceCriteria": [
+        "The body uses return n * 2 and contains no print",
+        "The result of double(5) is stored in a variable",
+        "Prints the variable plus 1, producing exactly 11",
+        "Runs without errors"
+      ],
+      "passFeedback": "That's the whole point of return — the program caught 10 on a plate and kept computing with it.",
+      "failFeedback": "Two things to verify: is the function returning (not printing) n * 2, and does the call site catch the value in a variable before adding 1? If you see a NoneType error, the return is missing."
+    },
+    {
+      "id": "py101-w2-functions-iii-early-return",
+      "prompt": "Write entry_fee(age) that returns 0 when age is under 5, and 10 otherwise — using an early return, with no else. Show it works by printing entry_fee(3) and entry_fee(40).",
+      "acceptanceCriteria": [
+        "Starts with an if that immediately returns 0 for age < 5",
+        "Returns 10 after the if, without using else",
+        "Prints 0 then 10 for the two test calls",
+        "Runs without errors"
+      ],
+      "passFeedback": "Clean early return — the special case exits at the door, and the normal case reads like a straight line.",
+      "failFeedback": "Shape check: first an if age < 5: with return 0 indented under it, then return 10 at the function's normal indentation below the if — no else anywhere."
+    }
+  ],
+  "practice": [
+    {
+      "kind": "coding",
+      "prompt": "Write grade_label(score) that returns \"fail\" for scores under 60 and \"pass\" otherwise, using the early-return pattern (no else). Then print grade_label(72) and grade_label(40).",
+      "starterCode": "",
+      "acceptanceCriteria": [
+        "Uses return for both outcomes — no printing inside the function",
+        "An if that returns immediately handles one case; the other return sits below it with no else",
+        "print(grade_label(72)) shows pass and print(grade_label(40)) shows fail",
+        "Runs without errors"
+      ]
+    },
+    {
+      "kind": "open",
+      "prompt": "A teammate says: \"My function works — it prints the answer.\" When is that fine, and when will it break the program that uses the function?",
+      "rubric": [
+        "Fine when the only goal is showing something to a human right then",
+        "Breaks when the caller needs the value for further computation or storage — a print-only function hands back None",
+        "Returning is more flexible: the caller decides whether to store, compute with, or print the value"
+      ]
+    },
+    {
+      "kind": "closed",
+      "prompt": "What does this program print?\ndef check(n):\n    if n > 10:\n        return \"big\"\n    return \"small\"\n\nprint(check(10))",
+      "options": [
+        "big",
+        "small",
+        "big and then small",
+        "None"
+      ],
+      "correctIndex": 1,
+      "explanation": "10 > 10 is False, so the early return is skipped and the function continues to return \"small\". Only one return ever executes per call — the first one reached wins and ends the function."
+    }
+  ],
+  "pedagogyRules": [
+    "Lead every task with the plate-versus-window test: the student first states whether the value must be used later (return) or only seen (print), and only then writes the code.",
+    "If the student asks a jump-ahead question (returning two values, what None really is, elif chains), answer in one sentence, promise it later in the course, and return to return-vs-print.",
+    "If the student says they already know this, verify lightly with two predictions: print(result) after result = shout(\"hi\"), and check(10) from the boundary case; both right with reasons means go straight to the early-return check.",
+    "If the student is lost, strip everything down to def give_five(): return 5 then x = give_five() and print(x) — one value on a plate — and rebuild from there one step at a time.",
+    "When the student is wrong but confident that print is enough, don't argue — have them store their function's result and print it; the None on screen makes the argument for you.",
+    "If the student wants to skip ahead, allow it once they pass the double check on the first try; otherwise fix one thing first.",
+    "If a NoneType error causes frustration, acknowledge it, then reframe: NoneType in the message is a gift — it says some function handed back nothing, so hunt for the call whose function is missing a return.",
+    "If asked why this matters, answer in one line — real programs are chains where one function's return feeds the next, and print-only functions are dead ends the chain can't use — then continue the lesson."
+  ],
+  "failurePlaybooks": [
+    {
+      "scenarioId": "SWE-01",
+      "failureMode": "Tutor accepts a print-based solution for a task that requires return",
+      "correctMove": "Correct text on screen is not passing when the criteria say return. Check the body for a return statement and check that the caught value is actually usable — if result holds None, say so and point at the print that should be a return."
+    },
+    {
+      "scenarioId": "SWE-02",
+      "failureMode": "Tutor misdiagnoses a NoneType TypeError as an arithmetic mistake",
+      "correctMove": "Read the message: unsupported operand type(s) for +: 'NoneType' and 'int' names NoneType, so a function returned nothing. Track down which call produced the None and add the missing return — don't rewrite the arithmetic."
+    },
+    {
+      "scenarioId": "SWE-06",
+      "failureMode": "Scaffolding gap — tutor writes the finished early-return function for the student",
+      "correctMove": "Give one ladder rung at a time: the plate-versus-window question, then where the value lands, then the stop-on-return rule, then the early-return shape. The student writes and runs every version themselves."
+    },
+    {
+      "scenarioId": "SWE-03",
+      "failureMode": "Tutor reveals the predicted output or the check answer before the student commits",
+      "correctMove": "In predictions like check(10), stay silent until the student states an answer and a reason. Then run it, compare, and let the real output settle the question."
+    }
+  ],
+  "chunks": [
+    {
+      "id": "py101-w2-functions-iii-chunk-1",
+      "text": "print shows a value to a human; return hands the value back to the program. Worked example:\ndef shout(word):\n    print(word + \"!\")\nresult = shout(\"hi\") prints hi! but leaves None in result, because the function never returned anything — printing and returning are different jobs.",
+      "embedding": null
+    },
+    {
+      "id": "py101-w2-functions-iii-chunk-2",
+      "text": "return delivers the value to the exact spot of the call, where the program can catch and reuse it. Worked example:\ndef add(a, b):\n    return a + b\ntotal = add(2, 3) puts 5 into total, and print(total * 10) shows 50. A returned value that nothing catches — a bare add(2, 3) line — is computed and silently discarded.",
+      "embedding": null
+    },
+    {
+      "id": "py101-w2-functions-iii-chunk-3",
+      "text": "A function with no return hands back None, and using None in math fails loudly: if double only prints, then result = double(5) followed by print(result + 1) raises TypeError: unsupported operand type(s) for +: 'NoneType' and 'int'. Seeing NoneType in an error is a strong hint that some function is missing a return. Also, return only works inside a function — at top level it's SyntaxError: 'return' outside function.",
+      "embedding": null
+    },
+    {
+      "id": "py101-w2-functions-iii-chunk-4",
+      "text": "return ends the function the instant it executes — lines after an executed return never run. Worked example:\ndef status():\n    return \"done\"\n    print(\"never shown\")\nprint(status()) prints done and nothing else. A function may contain several returns, but each call executes at most one: the first reached wins.",
+      "embedding": null
+    },
+    {
+      "id": "py101-w2-functions-iii-chunk-5",
+      "text": "The early-return pattern: handle the special case first and exit immediately, then write the normal case below with no else. Worked example:\ndef ticket_price(age):\n    if age < 5:\n        return 0\n    return 10\nticket_price(3) returns 0 at the door; ticket_price(30) skips the if and returns 10. The code reads top to bottom: special case out of the way, normal case in a straight line.",
+      "embedding": null
+    }
+  ],
+  "celebration": {
+    "headline": "Your functions can hand back answers now.",
+    "recap": "You separated showing a value (print) from delivering it (return), watched a missing return turn into None and a NoneType error, caught returned values at the call site, and wrote early returns that exit special cases at the door.",
+    "unlocked": "Next: scope and local variables — where the names inside your functions live, and why they vanish when the function ends."
+  }
+}

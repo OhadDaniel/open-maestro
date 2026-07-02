@@ -1,0 +1,23 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Runs on our machine only, never per user (keeps the $0 rule). Houses the baking pipeline, the TutorBench judge, and the autoresearch loop. Imports the content schema from `../frontend/src/content` as the single source of truth.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "validate": "tsx validate-content.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "devDependencies": {
+    "@types/node": "^26.0.1",
+    "tsx": "^4.22.4",
+    "typescript": "^6.0.3"
+  },
+  "dependencies": {
+    "openai": "^6.45.0",
+    "zod": "^4.4.3"
+  }
+}

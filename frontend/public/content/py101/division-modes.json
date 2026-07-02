@@ -1,0 +1,209 @@
+{
+  "lesson": {
+    "id": "py101-w2-division-modes",
+    "courseId": "py101",
+    "weekId": "py101-w2",
+    "title": "Division modes: / vs // with quotient and remainder",
+    "masteryOutcomes": [
+      "Compute and contrast true division (/) and floor division (//) on integers; explain the difference.",
+      "Use // and % together to derive quotient and remainder for practical cases (e.g., packing/scheduling)."
+    ],
+    "tutorInstructions": null
+  },
+  "concept": "Two ways to divide — / for the exact float answer, // for whole groups — and % teaming with // to give quotient and remainder for packing and scheduling problems",
+  "prerequisites": [
+    "Working with numbers: int and float, and / always returning a float",
+    "Modeling real-world calculations: arithmetic inside print() with clear labels"
+  ],
+  "bloom": "apply",
+  "explanations": [
+    {
+      "level": "eli5",
+      "text": "Python has two ways to divide because life asks two different questions. Splitting a 7-euro bill between 2 people? / gives the exact math answer: 7 / 2 is 3.5 — half euros are fine. But packing 7 shirts into boxes that hold 2? You can only fill whole boxes: // gives 3 and ignores the leftover. And the leftover has its own operator: 7 % 2 is 1 — the one shirt still on the bed. So: / answers 'exactly how much?', // answers 'how many whole groups?', and % answers 'what's left over?' — three questions, three operators."
+    },
+    {
+      "level": "standard",
+      "text": "/ is true division: the exact answer, always as a float — 7 / 2 is 3.5, and even 6 / 2 is 3.0. // is floor division: how many whole times the divisor fits, with the fraction dropped — 7 // 2 is 3, and with two ints the result is an int. % (modulo) gives the remainder that floor division leaves behind: 7 % 2 is 1. // and % are a team that shares the same two numbers: 17 // 5 is 3 and 17 % 5 is 2, which reads as '5 fits 3 whole times into 17, with 2 left over' — and the pair always rebuilds the original: 3 * 5 + 2 is 17. That team solves real problems: 23 eggs into cartons of 6 means 23 // 6 = 3 full cartons and 23 % 6 = 5 loose eggs; a 130-minute movie is 130 // 60 = 2 hours and 130 % 60 = 10 minutes."
+    },
+    {
+      "level": "deep",
+      "text": "The three operators answer three questions about a divided by b. / returns the mathematically exact quotient as a float: 7 / 2 is 3.5, and 6 / 2 is 3.0 — float even when exact. // returns the floor of that quotient — the largest whole number of times b fits — and its type follows its inputs: 7 // 2 is the int 3, while 7.0 // 2 is the float 3.0. % returns what floor division leaves behind, and for a positive divisor the result always lands in 0 up to b - 1. The three are bound by an identity Python guarantees: a == b * (a // b) + a % b — your sanity check for any quotient-and-remainder answer. Careful with the word 'floor': it means toward negative infinity, not toward zero, so -7 // 2 is -4 (and -7 % 2 is 1, keeping the identity true) — a surprise if you come from languages that truncate. And no mode escapes zero: 7 / 0 raises ZeroDivisionError: division by zero, while 7 // 0 and 7 % 0 raise ZeroDivisionError: integer division or modulo by zero."
+    }
+  ],
+  "examples": [
+    "print(7 / 2)\nprint(7 // 2)\nprint(7 % 2)",
+    "print(6 / 2)",
+    "eggs = 23\ncarton = 6\nprint(\"Full cartons:\", eggs // carton)\nprint(\"Loose eggs:\", eggs % carton)",
+    "minutes = 130\nprint(minutes // 60, \"hours and\", minutes % 60, \"minutes\")",
+    "print(17 // 5 * 5 + 17 % 5)"
+  ],
+  "hintLadder": [
+    {
+      "order": 1,
+      "text": "Ask what the problem is really asking for: an exact measurement, a count of whole groups, or the leftover?"
+    },
+    {
+      "order": 2,
+      "text": "Exact measurement points to /. Whole groups you can actually fill points to //. Whatever doesn't fit points to %."
+    },
+    {
+      "order": 3,
+      "text": "// and % take the same two numbers in the same order: the total first, the group size second."
+    },
+    {
+      "order": 4,
+      "text": "Sanity-check your answer: whole groups times group size, plus the leftover, must rebuild your starting total exactly."
+    }
+  ],
+  "misconceptions": [
+    {
+      "trigger": "Thinks // rounds to the nearest whole number, so 7 // 2 should be 4",
+      "correction": "// floors — it always drops the fraction, never rounds up: 7 // 2 is 3 even though 3.5 sits closer to 4. Think 'how many whole groups actually fit', not 'round the answer'."
+    },
+    {
+      "trigger": "Expects 6 / 2 to print 3, since it divides evenly",
+      "correction": "/ always returns a float: 6 / 2 is 3.0. If you want the int 3 from an even split, that's floor division's job — 6 // 2 is 3."
+    },
+    {
+      "trigger": "Thinks % gives the decimal part, e.g. that 7 % 2 is 0.5",
+      "correction": "% gives the whole-number leftover after complete groups are removed: 7 % 2 is 1 — the one that didn't pair up. The 0.5 lives in / (7 / 2 is 3.5), which answers a different question."
+    },
+    {
+      "trigger": "Uses / for a packing problem and reports about 3.83 cartons",
+      "correction": "You can't fill 0.83 of a carton. When the answer must be whole things, switch modes: 23 // 6 is 3 full cartons and 23 % 6 is 5 left over — // and % together tell the complete story."
+    },
+    {
+      "trigger": "Confidently claims Python truncates toward zero, so -7 // 2 is -3",
+      "correction": "Python floors toward negative infinity: -7 // 2 is -4, and -7 % 2 is 1, so the identity still holds (2 * -4 + 1 is -7). Run the one line and note this genuinely differs from some other languages."
+    },
+    {
+      "trigger": "Believes a remainder can be as big as the divisor, e.g. expects 12 % 6 to be 6",
+      "correction": "With divisor 6, the remainder can only be 0 through 5 — if 6 things were left, they'd fill another carton. 12 % 6 is 0: everything packed, nothing loose."
+    }
+  ],
+  "checks": [
+    {
+      "id": "py101-w2-division-modes-predict",
+      "prompt": "Predict all three outputs, exactly as Python prints them:\nprint(17 / 5)\nprint(17 // 5)\nprint(17 % 5)",
+      "acceptanceCriteria": [
+        "Predicts 3.4 for 17 / 5 and calls it the exact answer as a float",
+        "Predicts 3 for 17 // 5 and explains it as how many whole times 5 fits (floor)",
+        "Predicts 2 for 17 % 5 and explains it as the leftover",
+        "Can state the rebuild check: 3 * 5 + 2 equals 17"
+      ],
+      "passFeedback": "That's all three division questions answered from one pair of numbers — exact amount, whole groups, and leftover.",
+      "failFeedback": "Run the three lines and compare. / keeps the fraction (3.4), // drops it (3), and % reports what dropping it left behind (2). Then rebuild: 3 * 5 + 2 should give back 17."
+    },
+    {
+      "id": "py101-w2-division-modes-minutes",
+      "prompt": "A movie runs 130 minutes. Starting from minutes = 130 and using the // and % operators (no hard-coded 2 or 10), print exactly: 2 hours and 10 minutes",
+      "acceptanceCriteria": [
+        "Uses minutes // 60 for the hours and minutes % 60 for the leftover minutes",
+        "Does not hard-code 2 or 10",
+        "Output matches exactly: 2 hours and 10 minutes",
+        "Runs without errors"
+      ],
+      "passFeedback": "Clean split — // took the whole hours and % kept the change. That pattern runs every clock, schedule, and pager you'll ever write.",
+      "failFeedback": "Two questions, two operators: whole hours is minutes // 60, and what's left after removing those hours is minutes % 60. Then let print's commas handle the spacing."
+    }
+  ],
+  "practice": [
+    {
+      "kind": "coding",
+      "prompt": "A farm collects eggs = 50 and packs them into cartons of carton = 12. Print two labeled lines — the number of full cartons, then how many eggs are left loose — so the output is exactly:\nFull cartons: 4\nLeft over: 2",
+      "starterCode": "eggs = 50\ncarton = 12\n",
+      "acceptanceCriteria": [
+        "Uses eggs // carton for the full cartons and eggs % carton for the leftovers",
+        "Prints two lines with the labels Full cartons: and Left over:",
+        "The 4 and the 2 are computed by the operators, not typed by hand",
+        "Runs without errors"
+      ]
+    },
+    {
+      "kind": "open",
+      "prompt": "In your own words: what different questions do / and // answer, and how do you decide which one a problem needs? Give one real example for each.",
+      "rubric": [
+        "/ answers the exact-amount question and always returns a float; // answers how many whole groups fit and floors the result",
+        "Decision rule mentions whether a fractional answer makes sense in the real situation",
+        "Gives a sensible example for each, e.g. splitting a bill with / versus counting full boxes or whole hours with //"
+      ]
+    },
+    {
+      "kind": "closed",
+      "prompt": "What does print(9 // 4, 9 % 4) show?",
+      "options": [
+        "2.25 1",
+        "2 1",
+        "2 0.25",
+        "3 1"
+      ],
+      "correctIndex": 1,
+      "explanation": "4 fits 2 whole times into 9 (9 // 4 is 2) and leaves 1 over (9 % 4 is 1). The exact answer 2.25 belongs to /, and remainders are whole numbers, never 0.25. Rebuild check: 2 * 4 + 1 is 9."
+    }
+  ],
+  "pedagogyRules": [
+    "For every division, make the student name the question first — exact amount, whole groups, or leftover — and only then pick /, // or %.",
+    "After any quotient-and-remainder answer, require the rebuild check out loud: quotient * divisor + remainder must equal the original — it catches swapped operators instantly.",
+    "If the student asks a jump-ahead question (if statements, loops, formatting the floats), answer in one sentence, note when it arrives — modulo patterns are literally the next lesson — and return to / vs //.",
+    "If the student says they already know division, skip the explanation: ask for predictions of 17 // 5, 17 % 5, and 6 / 2; three exact answers with reasons means jump straight to the minutes check.",
+    "If the student is lost, park % entirely: contrast just 7 / 2 and 7 // 2 in cookies-and-boxes language until they can explain 3.5 versus 3, then reintroduce % as 'what's left'.",
+    "When the student is wrong but confident (e.g. insists 7 // 2 is 4, or -7 // 2 is -3), don't argue — run the one line together, read the real output, and name the floor rule it demonstrates.",
+    "If the student wants to skip ahead, allow it after a first-try pass on the minutes check; otherwise fix only the one operator they mischose.",
+    "If frustration shows, acknowledge it, then shrink to one concrete picture — eggs into cartons — and have them predict just the full cartons before touching any code.",
+    "If asked why this matters, answer in one line — packing, paging, making change, and clock math all run on quotient-plus-remainder — then continue."
+  ],
+  "failurePlaybooks": [
+    {
+      "scenarioId": "SWE-02",
+      "failureMode": "Tutor misdiagnoses a wrong division result",
+      "correctMove": "Diagnose by operator, not by vibes: a surprise .0 or fraction points at /, a silently dropped fraction points at //, and ZeroDivisionError: integer division or modulo by zero points at // or % with a zero divisor. Name the actual operator on the student's line."
+    },
+    {
+      "scenarioId": "SWE-01",
+      "failureMode": "Tutor accepts 3 as a prediction for 17 / 5, or 3.0 for 17 // 5",
+      "correctMove": "Only confirm exact output — value and type both matter: 17 / 5 prints 3.4 and 17 // 5 prints 3. If the prediction differs at all, show the difference, restate which operator produces which shape, and re-ask."
+    },
+    {
+      "scenarioId": "SWE-06",
+      "failureMode": "Scaffolding gap — tutor dumps the assembled // and % pair",
+      "correctMove": "Give one hint from the ladder at a time and let the student run code between hints; never hand over both operators pre-assembled into the final expression."
+    },
+    {
+      "scenarioId": "SWE-03",
+      "failureMode": "Challenge-answer leak",
+      "correctMove": "During the minutes and cartons tasks, never type the winning expressions — ask which question each number answers (whole groups or leftover?) and let the student choose the operator."
+    }
+  ],
+  "chunks": [
+    {
+      "id": "py101-w2-division-modes-chunk-1",
+      "text": "/ is true division: the exact answer, always as a float — 7 / 2 is 3.5, and even 6 / 2 is 3.0. Use it when a fractional answer makes real-world sense, like splitting a bill between people.",
+      "embedding": null
+    },
+    {
+      "id": "py101-w2-division-modes-chunk-2",
+      "text": "// is floor division: how many whole times the divisor fits, with the fraction dropped — 7 // 2 is 3. It floors (always down), never rounds: 7 // 2 is 3 even though 7 / 2 is 3.5. With two ints it returns an int. Use it when only whole groups count: full boxes, full cartons, whole hours.",
+      "embedding": null
+    },
+    {
+      "id": "py101-w2-division-modes-chunk-3",
+      "text": "% (modulo) is the remainder after floor division: 7 % 2 is 1. With a positive divisor n, the result is always between 0 and n - 1 — a remainder of n would just be another full group. 12 % 6 is 0: everything packed, nothing left over.",
+      "embedding": null
+    },
+    {
+      "id": "py101-w2-division-modes-chunk-4",
+      "text": "// and % are a team bound by an identity: a == b * (a // b) + a % b. Worked example: 17 // 5 is 3 and 17 % 5 is 2, and 3 * 5 + 2 rebuilds 17. Use the rebuild as the sanity check for any quotient-and-remainder answer — if it fails, an operator is wrong.",
+      "embedding": null
+    },
+    {
+      "id": "py101-w2-division-modes-chunk-5",
+      "text": "Worked examples, packing and time: 23 eggs in cartons of 6 — print(\"Full cartons:\", 23 // 6) shows 3 and print(\"Loose eggs:\", 23 % 6) shows 5. A 130-minute movie — minutes = 130, then print(minutes // 60, \"hours and\", minutes % 60, \"minutes\") shows 2 hours and 10 minutes.",
+      "embedding": null
+    }
+  ],
+  "celebration": {
+    "headline": "You now divide in two languages.",
+    "recap": "You contrasted / (exact, always a float) with // (whole groups, floored), met % as the leftover, teamed // with % to crack packing and scheduling problems, and learned the rebuild identity that checks every answer.",
+    "unlocked": "Next: modulo in practice — % turns out to detect even and odd, and to drive repeating cycles like weekdays and rotating shifts."
+  }
+}

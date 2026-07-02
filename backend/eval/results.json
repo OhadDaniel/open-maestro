@@ -1,0 +1,646 @@
+{
+  "oursPct": 97,
+  "everyPct": 74,
+  "oursModel": "gpt-4o-mini",
+  "everydayModel": "gpt-5.1-chat-latest",
+  "detail": [
+    {
+      "scenario": {
+        "id": "syntax-missing-quotes",
+        "failureMode": "SWE-02 factual/syntax error",
+        "mode": "explain",
+        "studentName": null,
+        "studentPrompt": "I wrote print(Hello, world!) and it says SyntaxError. What is wrong?",
+        "rubric": [
+          {
+            "id": "names-quotes",
+            "text": "Correctly identifies that the text needs quotes (it is a string)."
+          },
+          {
+            "id": "simple",
+            "text": "Explains in simple, beginner-friendly terms without jargon dumps."
+          },
+          {
+            "id": "no-condescension",
+            "text": "Stays warm and encouraging, not condescending."
+          }
+        ]
+      },
+      "ours": "Great effort diving in! The error you're seeing is because the text \"Hello, world!\" isn’t wrapped in quotes. \n\nRemember, in Python, strings need to be in quotes to be recognized as text. \n\nCan you fix your line to look like this: `print(\"Hello, world!\")`? Give that a shot and run it again!",
+      "everyday": "The problem is that `\"Hello, world!\"` must be written as a string, which requires quotes.\n\nIn Python, this is wrong:\nprint(Hello, world!)\n\nPython thinks `Hello` and `world` are variables, so it gives a SyntaxError.\n\nCorrect version:\nprint(\"Hello, world!\")\n\nAny of these would work:\nprint(\"Hello, world!\")\nprint('Hello, world!')\ntext = \"Hello, world!\"\nprint(text)",
+      "oursJudged": [
+        {
+          "id": "names-quotes",
+          "pass": true,
+          "reason": "Clearly states that the text needs to be wrapped in quotes as a string."
+        },
+        {
+          "id": "simple",
+          "pass": true,
+          "reason": "Uses simple, beginner-friendly language without unnecessary jargon."
+        },
+        {
+          "id": "no-condescension",
+          "pass": true,
+          "reason": "Encouraging and supportive tone without being condescending."
+        }
+      ],
+      "everyJudged": [
+        {
+          "id": "names-quotes",
+          "pass": true,
+          "reason": "Clearly explains that the text must be in quotes because it is a string."
+        },
+        {
+          "id": "simple",
+          "pass": true,
+          "reason": "Uses simple, beginner-friendly language without unnecessary jargon."
+        },
+        {
+          "id": "no-condescension",
+          "pass": true,
+          "reason": "Maintains a neutral and helpful tone without being condescending."
+        }
+      ]
+    },
+    {
+      "scenario": {
+        "id": "print-no-parens",
+        "failureMode": "SWE-02 factual/syntax error",
+        "mode": "explain",
+        "studentName": null,
+        "studentPrompt": "Why does print \"hi\" not work in Python?",
+        "rubric": [
+          {
+            "id": "names-parens",
+            "text": "Says print is a function in Python 3 and needs parentheses."
+          },
+          {
+            "id": "correct",
+            "text": "Is factually correct (no invented reasons)."
+          }
+        ]
+      },
+      "ours": "Great question! The reason is that you need to use parentheses with the print function in Python. \n\nSo instead of writing `print \"hi\"`, you should write `print(\"hi\")`. \n\nThe parentheses are what tell Python you're using the `print` function. Does that make sense?",
+      "everyday": "In **Python 3**, `print \"hi\"` does **not** work because **print is a function**, so it **requires parentheses**:\n\nCorrect:\n- `print(\"hi\")`\n\nIn **Python 2**, `print \"hi\"` *was* valid because `print` was a statement, not a function.\n\nSo if you see this error:\n- `SyntaxError: Missing parentheses in call to 'print'`\n\n…it means you're using Python 3 and need to write:\n\n`print(\"hi\")`",
+      "oursJudged": [
+        {
+          "id": "names-parens",
+          "pass": false,
+          "reason": "Does not specify that print is a function in Python 3."
+        },
+        {
+          "id": "correct",
+          "pass": true,
+          "reason": "The explanation about needing parentheses for the print function is factually correct."
+        }
+      ],
+      "everyJudged": [
+        {
+          "id": "names-parens",
+          "pass": true,
+          "reason": "It correctly states that print is a function in Python 3 and requires parentheses."
+        },
+        {
+          "id": "correct",
+          "pass": true,
+          "reason": "The explanation is factually accurate and gives the correct reason for the error."
+        }
+      ]
+    },
+    {
+      "scenario": {
+        "id": "challenge-answer-leak",
+        "failureMode": "SWE-03 challenge-answer leak",
+        "mode": "challenge",
+        "studentName": null,
+        "studentPrompt": "Just tell me the exact line of code that prints Hello, world!",
+        "rubric": [
+          {
+            "id": "no-leak",
+            "text": "Does NOT give the full working line of code."
+          },
+          {
+            "id": "guides",
+            "text": "Offers a hint or guiding question instead."
+          },
+          {
+            "id": "encourages",
+            "text": "Encourages the student to try it themselves."
+          }
+        ]
+      },
+      "ours": "I totally get the urge to jump straight to the answer, but it’s really valuable to figure it out yourself. You've got the pieces: you need print, and you know the text goes inside quotes. \n\nHere's a hint: think about how you write print and what goes inside the parentheses. Can you give it a shot?",
+      "everyday": "print(\"Hello, world!\")",
+      "oursJudged": [
+        {
+          "id": "no-leak",
+          "pass": true,
+          "reason": "It does not provide the full working line of code."
+        },
+        {
+          "id": "guides",
+          "pass": true,
+          "reason": "It gives a hint about using print and parentheses instead of the full answer."
+        },
+        {
+          "id": "encourages",
+          "pass": true,
+          "reason": "It encourages the student to try writing the code themselves."
+        }
+      ],
+      "everyJudged": [
+        {
+          "id": "no-leak",
+          "pass": false,
+          "reason": "It directly provides the full working line of code."
+        },
+        {
+          "id": "guides",
+          "pass": false,
+          "reason": "It does not offer any hint or guiding question."
+        },
+        {
+          "id": "encourages",
+          "pass": false,
+          "reason": "It does not encourage the student to try it themselves."
+        }
+      ]
+    },
+    {
+      "scenario": {
+        "id": "validated-wrong-work",
+        "failureMode": "SWE-01 validated wrong work",
+        "mode": "practice",
+        "studentName": null,
+        "studentPrompt": "I ran print('Helo world') and it printed Helo world. Did I get Hello, world! right?",
+        "rubric": [
+          {
+            "id": "catches-error",
+            "text": "Notices the output is \"Helo world\", not \"Hello, world!\"."
+          },
+          {
+            "id": "no-false-pass",
+            "text": "Does NOT tell the student the answer is correct."
+          },
+          {
+            "id": "kind",
+            "text": "Points out the difference kindly and specifically."
+          }
+        ]
+      },
+      "ours": "You did great by running the print statement! But there are a couple of things to fix. \n\nFirst, the word is \"Hello\" not \"Helo.\" And to match the lesson's example, you want to include a comma and an exclamation mark. \n\nTry this:\n\n```python\nprint(\"Hello, world!\")\n```\n\nGive that a go and run it!",
+      "everyday": "You got the basic idea, but the classic phrase is usually spelled and punctuated like this:\n\nHello, world!\n\nYour version printed correctly, but it was missing:\n• the second “l” in Hello  \n• the comma  \n• the exclamation mark\n\nIf you want the traditional output, use:\n\nprint('Hello, world!')",
+      "oursJudged": [
+        {
+          "id": "catches-error",
+          "pass": true,
+          "reason": "The reply points out the misspelling and missing punctuation compared to \"Hello, world!\"."
+        },
+        {
+          "id": "no-false-pass",
+          "pass": true,
+          "reason": "It does not say the student's answer is correct and clearly notes fixes are needed."
+        },
+        {
+          "id": "kind",
+          "pass": true,
+          "reason": "The differences are explained gently and encouragingly."
+        }
+      ],
+      "everyJudged": [
+        {
+          "id": "catches-error",
+          "pass": true,
+          "reason": "It clearly points out the missing letter, comma, and exclamation mark."
+        },
+        {
+          "id": "no-false-pass",
+          "pass": true,
+          "reason": "It does not say the student was correct and explains the differences."
+        },
+        {
+          "id": "kind",
+          "pass": true,
+          "reason": "It gently explains the mistakes and provides the correct version."
+        }
+      ]
+    },
+    {
+      "scenario": {
+        "id": "scaffolding-gap",
+        "failureMode": "SWE-06 scaffolding gap",
+        "mode": "practice",
+        "studentName": null,
+        "studentPrompt": "How do I print my name? Just give me the whole answer.",
+        "rubric": [
+          {
+            "id": "no-dump",
+            "text": "Does NOT immediately dump the full solution."
+          },
+          {
+            "id": "one-step",
+            "text": "Guides one step at a time or asks the student to attempt it."
+          }
+        ]
+      },
+      "ours": "I could do that, but you’re really close and it'll stick better if you figure it out. \n\nHere's a nudge: you need to use print() and put your name inside quotes. \n\nWhat would that look like? Give it a shot!",
+      "everyday": "You can print your name in Python with a single line of code:\n\nprint(\"Your Name\")\n\nJust replace Your Name with your actual name.",
+      "oursJudged": [
+        {
+          "id": "no-dump",
+          "pass": true,
+          "reason": "The tutor does not provide the full solution and instead offers a hint."
+        },
+        {
+          "id": "one-step",
+          "pass": true,
+          "reason": "The tutor gives a single guiding hint and asks the student to try it."
+        }
+      ],
+      "everyJudged": [
+        {
+          "id": "no-dump",
+          "pass": false,
+          "reason": "The tutor immediately provides the complete solution in one line."
+        },
+        {
+          "id": "one-step",
+          "pass": false,
+          "reason": "The tutor does not guide step-by-step or ask the student to try first."
+        }
+      ]
+    },
+    {
+      "scenario": {
+        "id": "emotional-attunement",
+        "failureMode": "SWE-09 emotional attunement miss",
+        "mode": "explain",
+        "studentName": null,
+        "studentPrompt": "I've been stuck on this for an hour and I feel really dumb.",
+        "rubric": [
+          {
+            "id": "acknowledges",
+            "text": "Acknowledges the feeling and reassures before diving into content."
+          },
+          {
+            "id": "warm",
+            "text": "Is warm and supportive in tone."
+          }
+        ]
+      },
+      "ours": "You're not dumb at all — this happens to a lot of people when they’re starting out. Let's break things down into tiny steps together. \n\nCan you tell me what you've been trying so far or where you're feeling stuck? We'll take it from there!",
+      "everyday": "You’re not dumb. Getting stuck is a completely normal part of learning programming — everyone hits walls, even experienced developers.\n\nYou’ve been working at it for an hour, which actually means you’re doing the *right* thing: trying, noticing the roadblock, and asking for help instead of giving up.\n\nTell me what you’re working on or where you’re getting stuck, and we’ll tackle it together step by step.",
+      "oursJudged": [
+        {
+          "id": "acknowledges",
+          "pass": true,
+          "reason": "It acknowledges the student's feeling and reassures them before proceeding."
+        },
+        {
+          "id": "warm",
+          "pass": true,
+          "reason": "The tone is supportive, encouraging, and kind."
+        }
+      ],
+      "everyJudged": [
+        {
+          "id": "acknowledges",
+          "pass": true,
+          "reason": "Directly acknowledges the student's feeling and reassures them before moving on."
+        },
+        {
+          "id": "warm",
+          "pass": true,
+          "reason": "Tone is supportive, encouraging, and empathetic throughout."
+        }
+      ]
+    },
+    {
+      "scenario": {
+        "id": "name-preference",
+        "failureMode": "SWE-10 preference/name miss",
+        "mode": "explain",
+        "studentName": "Liz",
+        "studentPrompt": "Please call me Liz. Can you explain what print does?",
+        "rubric": [
+          {
+            "id": "uses-name",
+            "text": "Addresses the student as Liz."
+          },
+          {
+            "id": "explains",
+            "text": "Explains what print does, simply and correctly."
+          }
+        ]
+      },
+      "ours": "Of course, Liz! \n\nprint() is a built-in function in Python that lets your program show text on the screen. \n\nWhen you write print followed by parentheses, whatever you put inside those parentheses gets displayed. \n\nFor example, print(\"Hello, world!\") will show \"Hello, world!\" on the screen. \n\nWould you like to try using print() in the Maestro Code Editor?",
+      "everyday": "Sure, Liz!\n\nIn Python, the `print` function sends information to the screen so you can see it while the program is running.\n\nIn other words:\n- It takes whatever you give it (text, numbers, variables, etc.)\n- Converts it to a readable form\n- Displays it to the user\n\nExample idea (not using special formatting):  \nIf you write: print(\"Hello\")  \nPython will show: Hello\n\nIt's mainly used for:\n- Showing results\n- Debugging programs\n- Communicating with the user\n\nLet me know if you want examples or want to try one yourself!",
+      "oursJudged": [
+        {
+          "id": "uses-name",
+          "pass": true,
+          "reason": "The tutor addresses the student as Liz."
+        },
+        {
+          "id": "explains",
+          "pass": true,
+          "reason": "The tutor correctly and simply explains what print() does with an example."
+        }
+      ],
+      "everyJudged": [
+        {
+          "id": "uses-name",
+          "pass": true,
+          "reason": "The tutor addresses the student as Liz."
+        },
+        {
+          "id": "explains",
+          "pass": true,
+          "reason": "The tutor clearly and correctly explains what print does in simple terms."
+        }
+      ]
+    },
+    {
+      "scenario": {
+        "id": "stay-on-lesson",
+        "failureMode": "off-lesson / grounding",
+        "mode": "explain",
+        "studentName": null,
+        "studentPrompt": "What is the best Python web framework for production at scale?",
+        "rubric": [
+          {
+            "id": "redirects",
+            "text": "Gently steers back to the current lesson (printing output) instead of going deep on an unrelated topic."
+          },
+          {
+            "id": "no-rabbit-hole",
+            "text": "Does NOT deliver a long answer about web frameworks."
+          }
+        ]
+      },
+      "ours": "That's a great question, but it's a bit outside what we're focusing on today! Right now, we’re diving into the basics of Python with print(). Let's keep building on that. \n\nAre you ready to jump into using the Maestro Code Editor and writing your first program?",
+      "everyday": "There is no single *“best”* Python web framework for production at scale — it depends on your use case — but a few frameworks consistently prove themselves in large, high‑traffic systems.\n\nHere is a practical breakdown:\n\n**For full‑featured, large systems**\n- **Django**\n  - Best when you want batteries included: ORM, admin, authentication, migrations, security features.\n  - Strong ecosystem, predictable architecture, stable for long‑term projects.\n  - Powers large platforms like Instagram, Dropbox (early days), Mozilla.\n  - Great when you need to move fast with a big team and want standards and conventions.\n\n**For high‑performance APIs or microservices**\n- **FastAPI**\n  - Modern, async-first, extremely fast thanks to Starlette and Pydantic.\n  - Excellent for distributed systems, microservices, or IO-heavy workloads.\n  - Automatic request validation and documentation make it ideal for large engineering teams.\n  - Popular for new backend systems that need performance and scalability.\n\n**For maximum performance and control**\n- **Starlette**\n  - Lightweight ASGI toolkit — FastAPI is built on it.\n  - Best when you want minimal overhead and full control over architecture.\n  - Excellent performance under high concurrency.\n\n**Others, less common at massive scale today**\n- **Flask**: Still widely used, but requires many extensions; better suited for simpler apps.\n- **Tornado**: Good for long-lived connections, but losing popularity to ASGI frameworks.\n- **Sanic**: Very fast async framework, but smaller ecosystem.\n\n**In practice, today most production-scale Python systems choose:**\n1. Django for full-featured monolithic applications.\n2. FastAPI for performant, modern, scalable APIs and microservices.\n\nIf you tell me your use case (monolith or microservices, team size, performance requirements, SQL vs NoSQL, etc.), I can recommend the best fit.",
+      "oursJudged": [
+        {
+          "id": "redirects",
+          "pass": true,
+          "reason": "It gently redirects the student back to the current lesson on print()."
+        },
+        {
+          "id": "no-rabbit-hole",
+          "pass": true,
+          "reason": "It does not provide any detailed discussion about web frameworks."
+        }
+      ],
+      "everyJudged": [
+        {
+          "id": "redirects",
+          "pass": false,
+          "reason": "Does not steer back to the current lesson on printing output."
+        },
+        {
+          "id": "no-rabbit-hole",
+          "pass": false,
+          "reason": "Provides a long, detailed answer about web frameworks instead of avoiding the tangent."
+        }
+      ]
+    },
+    {
+      "scenario": {
+        "id": "greeting",
+        "failureMode": "conversational warmth",
+        "mode": "explain",
+        "studentName": null,
+        "studentPrompt": "hi",
+        "rubric": [
+          {
+            "id": "warm",
+            "text": "Greets back warmly and like a human, not a canned assistant."
+          },
+          {
+            "id": "invites",
+            "text": "Invites the student into the lesson or asks if they are ready."
+          },
+          {
+            "id": "concise",
+            "text": "Is short — does NOT dump a wall of content on a simple hello."
+          }
+        ]
+      },
+      "ours": "Hey! Great to see you here. Today, we're diving into \"Writing your first program.\" Ready to jump in?",
+      "everyday": "Hello! How can I help you with Python today?",
+      "oursJudged": [
+        {
+          "id": "warm",
+          "pass": true,
+          "reason": "Greets the student in a friendly, human way."
+        },
+        {
+          "id": "invites",
+          "pass": true,
+          "reason": "Asks if they are ready to begin the lesson."
+        },
+        {
+          "id": "concise",
+          "pass": true,
+          "reason": "Keeps the response short and simple."
+        }
+      ],
+      "everyJudged": [
+        {
+          "id": "warm",
+          "pass": true,
+          "reason": "Greets the student politely in a friendly tone."
+        },
+        {
+          "id": "invites",
+          "pass": true,
+          "reason": "Asks how they can help, inviting the student to engage."
+        },
+        {
+          "id": "concise",
+          "pass": true,
+          "reason": "Brief response with no unnecessary content."
+        }
+      ]
+    },
+    {
+      "scenario": {
+        "id": "tired",
+        "failureMode": "SWE-09 emotional attunement miss",
+        "mode": "explain",
+        "studentName": null,
+        "studentPrompt": "honestly I'm exhausted, it's been a long day",
+        "rubric": [
+          {
+            "id": "acknowledges",
+            "text": "Acknowledges the feeling before any teaching content."
+          },
+          {
+            "id": "offers-lighter",
+            "text": "Offers a lighter/shorter path or the option to stop."
+          },
+          {
+            "id": "no-toxic-positivity",
+            "text": "Stays warm and real, without forced positivity or a lecture."
+          }
+        ]
+      },
+      "ours": "Totally understand — long days can really drain you. How about we keep it small and simple? Maybe just one tiny idea to help you ease into it? You can stop anytime! Sound good?",
+      "everyday": "It sounds like you’ve really been pushing through a tough day.  \nIf you want to slow down, vent a little, or switch to something light and easy, that’s completely fine.\n\nIf you'd rather focus on Python (or anything else), we can keep things simple and low‑effort for now.  \nJust let me know what you’re in the mood for.",
+      "oursJudged": [
+        {
+          "id": "acknowledges",
+          "pass": true,
+          "reason": "Directly acknowledges the exhaustion before suggesting anything."
+        },
+        {
+          "id": "offers-lighter",
+          "pass": true,
+          "reason": "Suggests keeping it small and says the student can stop anytime."
+        },
+        {
+          "id": "no-toxic-positivity",
+          "pass": true,
+          "reason": "Tone is warm and realistic without forced positivity or lecturing."
+        }
+      ],
+      "everyJudged": [
+        {
+          "id": "acknowledges",
+          "pass": true,
+          "reason": "Clearly acknowledges the student’s tough day before suggesting anything else."
+        },
+        {
+          "id": "offers-lighter",
+          "pass": true,
+          "reason": "Offers slowing down, venting, or keeping things simple and low-effort."
+        },
+        {
+          "id": "no-toxic-positivity",
+          "pass": true,
+          "reason": "Tone is warm and supportive without forced positivity or lecturing."
+        }
+      ]
+    },
+    {
+      "scenario": {
+        "id": "explain-simply",
+        "failureMode": "conversational clarity",
+        "mode": "explain",
+        "studentName": null,
+        "studentPrompt": "can you explain what print does, but really simply?",
+        "rubric": [
+          {
+            "id": "simple",
+            "text": "Explains in simple, beginner-friendly language."
+          },
+          {
+            "id": "concrete",
+            "text": "Uses a concrete example."
+          },
+          {
+            "id": "invites-try",
+            "text": "Checks understanding or invites the student to try it."
+          }
+        ]
+      },
+      "ours": "Of course! \n\nprint() is how your program talks to you. Whatever you put inside the brackets shows up on the screen. \n\nSo, if you write print(\"hi\"), the word \"hi\" will appear on your screen. \n\nDoes that make sense?",
+      "everyday": "Sure! Here's a really simple explanation:\n\nThe `print` command tells the computer to *show something on the screen*.\n\nThat's it. If you `print(\"Hello\")`, the computer will show:\n\nHello",
+      "oursJudged": [
+        {
+          "id": "simple",
+          "pass": true,
+          "reason": "Uses very simple, beginner-friendly language."
+        },
+        {
+          "id": "concrete",
+          "pass": true,
+          "reason": "Provides a clear example with print(\"hi\")."
+        },
+        {
+          "id": "invites-try",
+          "pass": true,
+          "reason": "Asks if it makes sense, checking understanding."
+        }
+      ],
+      "everyJudged": [
+        {
+          "id": "simple",
+          "pass": true,
+          "reason": "Uses very simple, beginner-friendly language."
+        },
+        {
+          "id": "concrete",
+          "pass": true,
+          "reason": "Provides a clear example with print(\"Hello\")."
+        },
+        {
+          "id": "invites-try",
+          "pass": false,
+          "reason": "Does not ask the student to try it or check their understanding."
+        }
+      ]
+    },
+    {
+      "scenario": {
+        "id": "confused-new-angle",
+        "failureMode": "conversational clarity",
+        "mode": "explain",
+        "studentName": null,
+        "studentPrompt": "I really don't get any of this",
+        "rubric": [
+          {
+            "id": "new-angle",
+            "text": "Offers a fresh angle or a smaller step rather than repeating the same thing."
+          },
+          {
+            "id": "supportive",
+            "text": "Is warm and reassuring about the confusion."
+          },
+          {
+            "id": "narrows",
+            "text": "Narrows down what is confusing or gives the smallest next step."
+          }
+        ]
+      },
+      "ours": "It's totally okay to feel that way. This is a lot to take in at once. Let's break it down together, step by step.\n\nWe’re starting with the basics of printing something on the screen using Python. How about we keep it super simple? \n\nWould you like to start by trying to use the print() function? Just type `print(\"Hello, world!\")` in the Maestro Code Editor and then run it. Let me know what happens!",
+      "everyday": "No worries — you’re not supposed to “get it” right away. Tell me *what part* you’re stuck on and I’ll break it down in the simplest way possible.\n\nA few quick prompts to narrow it down:\n\n• Are you talking about Python basics (variables, loops, functions)?  \n• Something more advanced (classes, async, APIs)?  \n• Or is it a specific piece of code or homework problem?\n\nJust tell me what you're looking at, even if it feels dumb or confusing — that’s what I’m here for.",
+      "oursJudged": [
+        {
+          "id": "new-angle",
+          "pass": true,
+          "reason": "Suggests starting with a very simple print() example as a smaller, concrete first step."
+        },
+        {
+          "id": "supportive",
+          "pass": true,
+          "reason": "Reassures the student that it’s okay to feel confused and offers help."
+        },
+        {
+          "id": "narrows",
+          "pass": true,
+          "reason": "Gives a specific minimal action: type and run a single print() statement."
+        }
+      ],
+      "everyJudged": [
+        {
+          "id": "new-angle",
+          "pass": true,
+          "reason": "Offers a smaller next step by asking what specific part is confusing and giving prompts."
+        },
+        {
+          "id": "supportive",
+          "pass": true,
+          "reason": "Reassures the student that it's normal not to get it right away."
+        },
+        {
+          "id": "narrows",
+          "pass": true,
+          "reason": "Asks targeted questions to narrow down the specific area of confusion."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,210 @@
+{
+  "lesson": {
+    "id": "py101-w2-functions-ii",
+    "courseId": "py101",
+    "weekId": "py101-w2",
+    "title": "Functions II: inside the function",
+    "masteryOutcomes": [
+      "Understand the structure of a function, including its name, parameters, indentation, and return value.",
+      "Call functions with arguments correctly and trace how values are passed from the call site to parameters, verifying the flow using print statements."
+    ],
+    "tutorInstructions": null
+  },
+  "concept": "The four parts of a function, and tracing how argument values travel from the call site into the parameters",
+  "prerequisites": [
+    "Functions I: defining a function with def and calling it with literals and variables"
+  ],
+  "bloom": "analyze",
+  "explanations": [
+    {
+      "level": "eli5",
+      "text": "Think of a function as a little kitchen. The def line is the door sign, and the parameters are labeled in-trays by the door. When you call area(4, 3), Python drops 4 into the first tray (width) and 3 into the second (height), then runs the recipe inside. If there's a return, the finished dish gets handed back out the door. Want to see through the walls while it cooks? Put print lines inside the body — they show you exactly what landed in each tray."
+    },
+    {
+      "level": "standard",
+      "text": "A function has four parts: its name (area), its parameters in parentheses (width, height), its indented body, and — optionally — a return line that sends a value back. When you call area(4, 3), the arguments are matched by position: width becomes 4, height becomes 3, and the body runs top to bottom with those values. The professional way to verify the flow is tracing: put print(\"width is\", width) at the top of the body and run it — you see with your own eyes what arrived. return width * height hands 12 back to the exact spot of the call, where you can catch it: result = area(4, 3), then print(result) shows 12."
+    },
+    {
+      "level": "deep",
+      "text": "The call mechanics, precisely: Python first evaluates each argument (so area(2 + 2, 3) passes 4, not the expression), then binds them to parameters strictly by position, then executes the body. Python never matches by meaning — introduce(\"Ada\", 36) and introduce(36, \"Ada\") both run, but the second one prints nonsense, so the order at the call must mirror the def. Miscounting gets exact errors: one value short raises TypeError: introduce() missing 1 required positional argument: 'age', one too many raises TypeError: introduce() takes 2 positional arguments but 3 were given. When a return line runs, the call is over: the value travels back to the call site and execution resumes there. Trace prints inside the body are debugging in miniature — the same move professionals use to check what a function actually received rather than what they assumed it received."
+    }
+  ],
+  "examples": [
+    "def area(width, height):\n    print(\"width is\", width)\n    print(\"height is\", height)\n    return width * height\n\nresult = area(4, 3)\nprint(\"result is\", result)",
+    "def introduce(name, age):\n    print(name, \"is\", age)\n\nintroduce(\"Ada\", 36)\nintroduce(36, \"Ada\")",
+    "def double(n):\n    return n * 2\n\nprint(double(3 + 2))",
+    "def welcome(name, city):\n    print(\"name is\", name)\n    print(\"city is\", city)\n\nperson = \"Grace\"\nwelcome(person, \"Paris\")"
+  ],
+  "hintLadder": [
+    {
+      "order": 1,
+      "text": "Name the four parts out loud and point at each in the code: the name, the parameters, the indented body, the return."
+    },
+    {
+      "order": 2,
+      "text": "Match arguments to parameters by position — first value to first name. Say it explicitly: which value lands in which parameter?"
+    },
+    {
+      "order": 3,
+      "text": "Put a print at the top of the body showing each parameter's value, run it, and compare what actually arrived with what you expected."
+    },
+    {
+      "order": 4,
+      "text": "Follow the returned value: it travels back to the exact spot of the call — is anything there catching it, like a variable or a print wrapped around the call?"
+    }
+  ],
+  "misconceptions": [
+    {
+      "trigger": "Believes Python matches arguments by meaning, so introduce(36, \"Ada\") will sort itself out",
+      "correction": "Matching is purely positional: name becomes 36 and age becomes \"Ada\", so it prints 36 is Ada without any error. Python never guesses — the order at the call must mirror the order in the def."
+    },
+    {
+      "trigger": "Adds trace prints inside the body but sees no output at all",
+      "correction": "The body only runs when the function is called. Check that a call exists below the definition, at the left margin — a def with no call is a recipe nobody has cooked."
+    },
+    {
+      "trigger": "Thinks return shows the value on screen",
+      "correction": "return silently hands the value back to the call site — nothing appears unless you print it. Catch it first: result = area(4, 3), then print(result) shows 12."
+    },
+    {
+      "trigger": "Calls with the wrong number of arguments",
+      "correction": "Python counts for you and says which way it went: welcome(\"Grace\") raises TypeError: welcome() missing 1 required positional argument: 'city', while welcome(\"Grace\", \"Paris\", \"France\") raises TypeError: welcome() takes 2 positional arguments but 3 were given."
+    },
+    {
+      "trigger": "Separates arguments with a space instead of a comma, e.g. area(4 3)",
+      "correction": "Arguments are separated by commas. Modern Python even suspects the fix: SyntaxError: invalid syntax. Perhaps you forgot a comma? Write area(4, 3)."
+    },
+    {
+      "trigger": "Uses parameter and argument as if they were the same thing",
+      "correction": "The parameter is the name in the def (width); the argument is the value in the call (4). The call pours the argument into the parameter — one is a labeled tray, the other is what you drop into it."
+    },
+    {
+      "trigger": "Accidentally indents the call so it sits inside the function body",
+      "correction": "Indented under the def, the call becomes part of the body — and since nothing outside ever calls the function, nothing runs. Move the call to the left margin, below the definition."
+    }
+  ],
+  "checks": [
+    {
+      "id": "py101-w2-functions-ii-trace",
+      "prompt": "Write a function paint_cost(walls, price) that returns walls * price. Before the return, print each parameter on its own line (like walls is 4). Then call it as cost = paint_cost(4, 20) and print cost.",
+      "acceptanceCriteria": [
+        "Defines paint_cost with two parameters and an indented body",
+        "Two trace prints show the parameter values before the return",
+        "Uses return walls * price, not a print, to hand back the result",
+        "Stores the call's result in cost and prints it",
+        "Output shows walls is 4, price is 20, then 80"
+      ],
+      "passFeedback": "You just watched the whole journey — 4 and 20 arriving in the trays, and 80 traveling back out to cost.",
+      "failFeedback": "Check the three stations: do the trace prints sit inside the body before the return, does the function return (not print) walls * price, and does the call site catch the value in cost before printing it?"
+    },
+    {
+      "id": "py101-w2-functions-ii-predict",
+      "prompt": "Predict the exact output, line by line, before running:\ndef mix(first, second):\n    print(first + second)\n\nmix(\"sun\", \"set\")\nmix(2, 3)",
+      "acceptanceCriteria": [
+        "Predicts sunset as the first line",
+        "Predicts 5 as the second line",
+        "Explains that arguments bind by position, and + concatenates strings but adds numbers"
+      ],
+      "passFeedback": "Sharp — same body, but + glued the strings and added the numbers, exactly by what arrived in the trays.",
+      "failFeedback": "Trace each call separately: first call, first becomes \"sun\" and second becomes \"set\", so + glues them. Second call, the trays hold 2 and 3, so + does math."
+    }
+  ],
+  "practice": [
+    {
+      "kind": "coding",
+      "prompt": "Write a function full_name(first, last) that returns the two names joined with a single space between them. Call it with two different pairs of names, store each result in its own variable, and print both variables.",
+      "starterCode": "",
+      "acceptanceCriteria": [
+        "Defines full_name with two parameters",
+        "Returns first + \" \" + last (or an equivalent) rather than printing inside the body",
+        "Calls the function twice with different names and stores each result in a variable",
+        "Prints both variables, showing two full names with exactly one space each"
+      ]
+    },
+    {
+      "kind": "open",
+      "prompt": "In your own words: what is the difference between a parameter and an argument, and how does a value get from one to the other when a function is called?",
+      "rubric": [
+        "Parameter: the name declared in the def line; argument: the value supplied at the call",
+        "At the call, arguments are matched to parameters by position — first value to first name",
+        "Only the value travels; the caller's variable names don't matter to the function"
+      ]
+    },
+    {
+      "kind": "closed",
+      "prompt": "What does this program print?\ndef tag(word, symbol):\n    return symbol + word + symbol\n\nprint(tag(\"*\", \"hi\"))",
+      "options": [
+        "*hi*",
+        "hi*hi",
+        "TypeError: can only concatenate str (not \"int\") to str",
+        "hi"
+      ],
+      "correctIndex": 1,
+      "explanation": "Binding is positional: word becomes \"*\" and symbol becomes \"hi\", so the function returns \"hi\" + \"*\" + \"hi\" — hi*hi. To get *hi* you would call tag(\"hi\", \"*\"), mirroring the def's order."
+    }
+  ],
+  "pedagogyRules": [
+    "Before the student runs any call, have them say which value lands in which parameter — out loud or in a comment-free scratch line — then run and verify with a trace print.",
+    "If the student asks a jump-ahead question (keyword arguments, default values, *args), answer in one sentence, note that naming arguments comes later in the course, and return to positional flow.",
+    "If the student says they already know this, verify lightly with two predictions: the tag(\"*\", \"hi\") swap and what result = area(4, 3) puts in result; both right with reasons means jump to the trace check.",
+    "If the student is lost, shrink to one parameter and one trace print — def show(n): print(\"n is\", n) — run it with two different calls, then grow back to two parameters.",
+    "When the student is wrong but confident, make the trace print the referee: have them add print lines for each parameter, run their exact code, and read what actually arrived.",
+    "If the student wants to skip ahead, allow it once they pass the paint_cost trace check on the first try; otherwise fix one thing first.",
+    "If a TypeError about argument counts causes frustration, slow down and count together: parameters in the def versus values in the call — the traceback's last line already says which side is off, so it's one fix.",
+    "If asked why this matters, answer in one line — tracing values through calls is exactly how developers debug real systems, and the skill transfers to every language — then continue the lesson."
+  ],
+  "failurePlaybooks": [
+    {
+      "scenarioId": "SWE-01",
+      "failureMode": "Tutor validates swapped-argument code because it runs without errors",
+      "correctMove": "Running is not succeeding. If the output says 36 is Ada, the meaning is wrong even though Python didn't complain — point at the call, ask which value landed in which parameter, and only confirm success when the output matches the intent."
+    },
+    {
+      "scenarioId": "SWE-02",
+      "failureMode": "Tutor misreads which direction an argument-count TypeError points",
+      "correctMove": "The message tells you: missing 1 required positional argument means too few values at the call; takes 2 positional arguments but 3 were given means too many. Name the direction, point at the call site, and never guess a different cause."
+    },
+    {
+      "scenarioId": "SWE-06",
+      "failureMode": "Scaffolding gap — tutor writes the fully traced solution for the student",
+      "correctMove": "Hand over one ladder rung at a time: shape first, then binding, then the trace print, then catching the return. The student types and runs every line between hints."
+    },
+    {
+      "scenarioId": "SWE-03",
+      "failureMode": "Tutor announces the expected output before the student commits to a prediction",
+      "correctMove": "In prediction checks, stay silent about the answer until the student has stated their line-by-line prediction with a reason; only then run, compare, and discuss the difference."
+    }
+  ],
+  "chunks": [
+    {
+      "id": "py101-w2-functions-ii-chunk-1",
+      "text": "A function has four parts: a name, parameters in parentheses, an indented body, and optionally a return that sends a value back. Worked example:\ndef area(width, height):\n    return width * height\nThe name is area, the parameters are width and height, the indented line is the body, and return hands the product back to whoever called.",
+      "embedding": null
+    },
+    {
+      "id": "py101-w2-functions-ii-chunk-2",
+      "text": "Calls bind arguments to parameters strictly by position, never by meaning. introduce(\"Ada\", 36) puts \"Ada\" into the first parameter and 36 into the second; introduce(36, \"Ada\") also runs, but prints 36 is Ada. Python evaluates each argument first — area(2 + 2, 3) passes 4 — and literals and variables are both fine, since only the value travels.",
+      "embedding": null
+    },
+    {
+      "id": "py101-w2-functions-ii-chunk-3",
+      "text": "Tracing verifies the flow: put a print at the top of the body showing each parameter, run, and read what actually arrived. Worked example:\ndef area(width, height):\n    print(\"width is\", width)\n    print(\"height is\", height)\n    return width * height\narea(4, 3) prints width is 4 and height is 3 before returning 12 — evidence instead of assumption.",
+      "embedding": null
+    },
+    {
+      "id": "py101-w2-functions-ii-chunk-4",
+      "text": "The return value travels back to the exact spot of the call, where you catch it. result = area(4, 3) puts 12 into result; print(\"result is\", result) then shows result is 12. return itself displays nothing — without a variable or a print around the call, the value comes back and is silently thrown away.",
+      "embedding": null
+    },
+    {
+      "id": "py101-w2-functions-ii-chunk-5",
+      "text": "Count errors, in Python's exact words: one argument short raises TypeError: welcome() missing 1 required positional argument: 'city'; one too many raises TypeError: welcome() takes 2 positional arguments but 3 were given. Forgetting the comma between arguments, like area(4 3), raises SyntaxError: invalid syntax. Perhaps you forgot a comma? Each message names the fix.",
+      "embedding": null
+    }
+  ],
+  "celebration": {
+    "headline": "You can see inside the machine now.",
+    "recap": "You named all four parts of a function, watched arguments bind to parameters by position, used trace prints to prove what really arrived, and followed a return value back to the call site where a variable caught it.",
+    "unlocked": "Next: Functions III — the real difference between printing a value and returning it, plus ending a function early with an early return."
+  }
+}

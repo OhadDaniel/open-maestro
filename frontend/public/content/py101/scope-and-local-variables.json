@@ -1,0 +1,206 @@
+{
+  "lesson": {
+    "id": "py101-w2-scope-and-local-variables",
+    "courseId": "py101",
+    "weekId": "py101-w2",
+    "title": "Scope and local variables",
+    "masteryOutcomes": [
+      "Understand that variables created inside a function exist only within that function's scope (local).",
+      "Explain how local and global scopes differ and identify when each is used.",
+      "Demonstrate how data can be passed into functions through parameters instead of relying on global variables."
+    ],
+    "tutorInstructions": null
+  },
+  "concept": "Variable scope: locals live and die inside their function, globals live outside, and parameters — not globals — are how data should flow in",
+  "prerequisites": [
+    "Functions III: returning values from functions with return"
+  ],
+  "bloom": "analyze",
+  "explanations": [
+    {
+      "level": "eli5",
+      "text": "A variable created inside a function is like a note on a whiteboard inside a room. While the function runs, it can read its own whiteboard. When the function ends, the whiteboard is wiped clean — outside the room, nobody has ever heard of temperature. Variables created outside, in the hallway, can be seen from inside the rooms. But the polite, safe way to give a room information isn't shouting down the hallway — it's handing the value through the door: a parameter."
+    },
+    {
+      "level": "standard",
+      "text": "Variables assigned inside a function are local: they are created when the call starts and destroyed when it returns. Try to use one outside and Python answers NameError: name 'temperature' is not defined. Variables assigned at the top level of the file are global, and functions can read them. But here's the twist: assigning to a name inside a function creates a new local that shadows the global — the outside variable doesn't change. That's why the reliable pattern is: data goes in through parameters, results come out through return. A function like greet(name) works for any name you pass; a function that reads a global name works only for that one."
+    },
+    {
+      "level": "deep",
+      "text": "At each call, Python creates a fresh set of local names; parameters are simply locals pre-filled with the argument values, and each call gets its own set — nothing carries over between calls. Looking a name up goes local first, then global, then built-ins. The sharp edge: any assignment to a name anywhere in the body makes that name local for the whole function. So with a global count = 0, a body containing count = count + 1 fails with UnboundLocalError: cannot access local variable 'count' where it is not associated with a value (Python 3.11+ wording) — the assignment made count local, so the right-hand side reads a local that has no value yet. Python does offer a global keyword to force writes to the global, but leaning on it tangles functions together and makes them hard to test. The pattern that scales: pass count in as a parameter and return count + 1, letting the caller reassign — count = bump(count)."
+    }
+  ],
+  "examples": [
+    "def bake():\n    temperature = 180\n    print(\"inside:\", temperature)\n\nbake()\nprint(temperature)",
+    "message = \"hello\"\n\ndef show():\n    print(message)\n\nshow()",
+    "count = 0\n\ndef bump():\n    count = 1\n    print(\"inside:\", count)\n\nbump()\nprint(\"outside:\", count)",
+    "def greet(name):\n    print(\"Hello,\", name)\n\nplayer = \"Ada\"\ngreet(player)\ngreet(\"Grace\")"
+  ],
+  "hintLadder": [
+    {
+      "order": 1,
+      "text": "For each variable in the program, point at the line where it is assigned: inside a def (local) or at the left margin (global)?"
+    },
+    {
+      "order": 2,
+      "text": "A local is born when the call starts and gone when the function returns — at the line you're writing, is that variable still alive?"
+    },
+    {
+      "order": 3,
+      "text": "If the function needs a value from outside, don't reach for the global — add a parameter and hand the value in at the call."
+    },
+    {
+      "order": 4,
+      "text": "If the outside needs a value from inside, return it and catch it at the call site with a variable."
+    }
+  ],
+  "misconceptions": [
+    {
+      "trigger": "Uses a function's local variable after the call, e.g. bake() creates temperature and then print(temperature) runs outside",
+      "correction": "The local died when the function returned, so Python says NameError: name 'temperature' is not defined. If the outside needs it, return temperature from the function and catch it: temp = bake()."
+    },
+    {
+      "trigger": "Expects assignment inside a function to change the global of the same name, e.g. count = 1 inside bump() while count is 0 outside",
+      "correction": "Assignment inside creates a brand-new local count that shadows the global — inside prints 1, outside still prints 0. To really update it, return the new value and reassign at the call site: count = bump(count)."
+    },
+    {
+      "trigger": "Writes count = count + 1 inside a function, expecting it to read the global count, and is baffled by the error",
+      "correction": "Assigning to count anywhere in the body makes count local for the whole function, so the right-hand side reads a local that has no value yet: UnboundLocalError: cannot access local variable 'count' where it is not associated with a value. Pass count in as a parameter and return count + 1 instead."
+    },
+    {
+      "trigger": "Thinks a parameter must also be declared as a variable outside the function before it can be used",
+      "correction": "A parameter IS a local variable, born pre-filled with the argument's value at each call. def greet(name): needs no name anywhere outside — greet(\"Ada\") creates the local name, fills it with \"Ada\", and wipes it when the call ends."
+    },
+    {
+      "trigger": "Believes a second call remembers the locals from the first call",
+      "correction": "Every call starts with a fresh, empty set of locals — nothing survives from call to call. If state must persist, the function should return it and the caller should keep it in a variable, passing it back in next time."
+    },
+    {
+      "trigger": "Confidently concludes parameters are pointless since functions can read globals anyway",
+      "correction": "A global-reading function is locked to one value and hides its inputs — you can't tell what it needs by looking at its def line. greet(name) works for every name and documents itself. Try calling the global version for two different people at once; you can't, and that's the point."
+    }
+  ],
+  "checks": [
+    {
+      "id": "py101-w2-scope-local-predict",
+      "prompt": "Predict exactly what happens, line by line, before running:\ndef mix():\n    secret = 7\n    print(\"inside:\", secret)\n\nmix()\nprint(secret)",
+      "acceptanceCriteria": [
+        "Predicts that inside: 7 is printed by the call",
+        "Predicts the last line crashes with NameError: name 'secret' is not defined",
+        "Explains that secret is local to mix and was destroyed when the call returned"
+      ],
+      "passFeedback": "Exactly — the whiteboard was wiped the moment mix returned, so the outside world never knew secret existed.",
+      "failFeedback": "Look at where secret is assigned: inside the def. That makes it local — alive during the call (so the inside print works), gone afterwards (so the outside print raises NameError)."
+    },
+    {
+      "id": "py101-w2-scope-local-refactor",
+      "prompt": "This function leans on a global:\nname = \"Ada\"\n\ndef greet():\n    print(\"Hello,\", name)\n\ngreet()\nRewrite greet to take name as a parameter instead, then call it twice with two different names.",
+      "acceptanceCriteria": [
+        "Defines greet with a name parameter: def greet(name):",
+        "The body uses the parameter, and the function no longer depends on a top-level name variable",
+        "Calls the function twice with two different names",
+        "Runs without errors and prints two different greetings"
+      ],
+      "passFeedback": "That's the pattern that scales — the data now walks in through the door, and the same function serves everyone.",
+      "failFeedback": "Check the def line first: does it declare a parameter? Then check the calls: each should hand a different name in. The top-level name variable should no longer be needed by the function at all."
+    }
+  ],
+  "practice": [
+    {
+      "kind": "coding",
+      "prompt": "Write add_point(score) that returns score + 1. Start with score = 0 at the top level, call score = add_point(score) three times, then print score — it should show 3. Do not use the global keyword; pass the value in and catch the result instead.",
+      "starterCode": "",
+      "acceptanceCriteria": [
+        "add_point takes score as a parameter and returns score + 1",
+        "Does not use the global keyword anywhere",
+        "Reassigns at the call site with score = add_point(score), three times",
+        "Prints 3 at the end and runs without errors"
+      ]
+    },
+    {
+      "kind": "open",
+      "prompt": "In your own words: what does it mean for a variable to be local, and why do programmers prefer passing parameters over having functions read global variables?",
+      "rubric": [
+        "Local: created inside the function when the call starts, invisible outside, destroyed when the call returns",
+        "Parameters make a function's inputs explicit and let the same function work with any value",
+        "Global-reading functions are locked to one value, hide their inputs, and become tangled and harder to test"
+      ]
+    },
+    {
+      "kind": "closed",
+      "prompt": "What does this program print?\nx = 10\n\ndef change():\n    x = 99\n\nchange()\nprint(x)",
+      "options": [
+        "99",
+        "10",
+        "UnboundLocalError: cannot access local variable 'x' where it is not associated with a value",
+        "Nothing — the program crashes with a NameError"
+      ],
+      "correctIndex": 1,
+      "explanation": "The assignment inside change creates a new local x that shadows the global. The local 99 vanishes when the call ends, and the global x was never touched — so print(x) shows 10."
+    }
+  ],
+  "pedagogyRules": [
+    "Before predicting any output, have the student label every variable in the snippet L (local) or G (global) by pointing at where it is assigned — the label makes the prediction almost automatic.",
+    "If the student asks a jump-ahead question (the global keyword, nested functions, classes), answer in one sentence — global exists, but this course teaches parameters and return because that pattern scales — then come back.",
+    "If the student says they already know scope, verify lightly with two predictions: the shadowing snippet (x stays 10) and print(secret) after mix(); both right with reasons means go straight to the refactor check.",
+    "If the student is lost, drop everything except the whiteboard-in-a-room picture, run the bake example, and let the live NameError make the point before introducing shadowing.",
+    "When the student is wrong but confident, make the interpreter the referee: run their exact snippet and have them read the output or error aloud, then name the one scope rule it demonstrates.",
+    "If the student wants to skip ahead, allow it once they pass the prediction check on the first try; otherwise fix one thing first.",
+    "If a NameError or UnboundLocalError causes frustration, acknowledge it, then decode together: the message names the exact variable, so ask one question — where was this name born? — and make one fix.",
+    "If asked why this matters, answer in one line — scope is what lets thousands of functions coexist without their variables colliding, and it's why a well-scoped function is safe to reuse anywhere — then continue the lesson."
+  ],
+  "failurePlaybooks": [
+    {
+      "scenarioId": "SWE-02",
+      "failureMode": "Tutor confuses NameError with UnboundLocalError and misdiagnoses the cause",
+      "correctMove": "Distinguish them by the message: NameError means the name was never assigned anywhere reachable; UnboundLocalError means an assignment somewhere in this function made the name local, and it was read before that assignment ran. Name which one it is and point at the assignment that made the name local."
+    },
+    {
+      "scenarioId": "SWE-01",
+      "failureMode": "Tutor accepts a solution that still routes data through globals (or the global keyword) for a parameter-passing task",
+      "correctMove": "Working output is not passing when the criteria demand parameters and return. Look at the def line and ask where the input enters — if the answer is a global, point at it and guide toward a parameter."
+    },
+    {
+      "scenarioId": "SWE-06",
+      "failureMode": "Scaffolding gap — tutor writes the refactored function for the student",
+      "correctMove": "Hand over one ladder rung at a time: label the variables, find where the value should enter, add the parameter, fix the calls. The student edits and runs the code themselves between rungs."
+    },
+    {
+      "scenarioId": "SWE-03",
+      "failureMode": "Tutor announces whether a prediction snippet errors before the student commits",
+      "correctMove": "In prediction checks, never reveal whether the last line crashes. Ask for the student's line-by-line call with a reason, then run it and let the real NameError — or its absence — settle it."
+    }
+  ],
+  "chunks": [
+    {
+      "id": "py101-w2-scope-local-chunk-1",
+      "text": "A variable assigned inside a function is local: it is created when the call starts and destroyed when the function returns. Worked example:\ndef bake():\n    temperature = 180\n    print(\"inside:\", temperature)\nbake() prints inside: 180, but a print(temperature) afterwards at top level raises NameError: name 'temperature' is not defined — the local no longer exists.",
+      "embedding": null
+    },
+    {
+      "id": "py101-w2-scope-local-chunk-2",
+      "text": "Variables assigned at the top level of the file are global, and functions can read them: with message = \"hello\" at top level, a function body containing print(message) prints hello. Name lookup tries local names first, then global ones. Reading globals works — but it quietly ties the function to one specific outside value.",
+      "embedding": null
+    },
+    {
+      "id": "py101-w2-scope-local-chunk-3",
+      "text": "Assigning inside a function never changes a global of the same name — it creates a new local that shadows it. Worked example: with count = 0 at top level, a function whose body does count = 1 prints inside: 1, yet printing count afterwards outside still shows 0. The sharper case: a body containing count = count + 1 raises UnboundLocalError: cannot access local variable 'count' where it is not associated with a value, because the assignment made count local for the whole function.",
+      "embedding": null
+    },
+    {
+      "id": "py101-w2-scope-local-chunk-4",
+      "text": "A parameter is a local variable born pre-filled with the argument's value, and every call gets a completely fresh set of locals — nothing survives from one call to the next. def greet(name): needs no outside name variable; greet(\"Ada\") then greet(\"Grace\") each create, use, and discard their own local name.",
+      "embedding": null
+    },
+    {
+      "id": "py101-w2-scope-local-chunk-5",
+      "text": "The pattern that scales: data in through parameters, results out through return — not through globals. Worked example:\ndef add_point(score):\n    return score + 1\nscore = 0, then score = add_point(score) three times, then print(score) shows 3. The caller owns the state, the function stays reusable, and no global keyword is needed.",
+      "embedding": null
+    }
+  ],
+  "celebration": {
+    "headline": "You know where variables live — and where they die.",
+    "recap": "You watched a local vanish the moment its function returned, saw globals readable but shadowed by inside assignments, decoded NameError and UnboundLocalError, and refactored a global-reading function into one fed by parameters and answered by return.",
+    "unlocked": "Next: you now hold Week 2's full toolkit — division, modulo, conversions, input, tracebacks, functions, and scope — ready to combine into small programs that solve real problems."
+  }
+}

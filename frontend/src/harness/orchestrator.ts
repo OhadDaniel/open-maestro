@@ -1,0 +1,140 @@
+import type { TutorProvider } from '../ai/provider'
+import type { ProviderMessage, ProviderRequest } from '../ai/provider.types'
+import type { BakedLesson } from '../content/baked.types'
+import type { TutorSession } from '../content/session.types'
+import type { LearnerProfile } from '../memory/learner-profile.types'
+import { buildContext } from './buildContext'
+import { controller } from './decide/controller'
+import { memoryCurator } from './remember/memoryCurator'
+import { affectObserver } from './sense/affectObserver'
+import { masteryTracer } from './sense/masteryTracer'
+import { misconceptionDiagnoser } from './sense/misconceptionDiagnoser'
+import { WITHHOLD_FALLBACK, answerLeakGuard, isGuardedMode } from './verify/answerLeakGuard'
+import { groundingGuard } from './verify/groundingGuard'
+
+export type OnToken = (text: string) => void
+
+export type TurnInput = {
+  userMessage: string
+  baked: BakedLesson
+  session: TutorSession
+  profile: LearnerProfile
+  messages: ProviderMessage[]
+  onToken: OnToken
+  onProfileLearned: (profile: LearnerProfile) => void
+}
+
+export type TutorRunner = {
+  stream: (request: ProviderRequest, onToken: OnToken) => Promise<string>
+}
+
+export type HarnessDeps = {
+  affectObserver: typeof affectObserver
+  masteryTracer: typeof masteryTracer
+  misconceptionDiagnoser: typeof misconceptionDiagnoser
+  controller: typeof controller
+  answerLeakGuard: typeof answerLeakGuard
+  groundingGuard: typeof groundingGuard
+  memoryCurator: typeof memoryCurator
+  tutor: TutorRunner
+}
+
+export function createProviderTutor(provider: TutorProvider): TutorRunner {
+  return {
+    stream: async (request, onToken) => {
+      let text = ''
+      for await (const event of provider.streamMessage(request)) {
+        if (event.type === 'text_delta') {
+          text += event.text
+          onToken(event.text)
+        }
+      }
+      return text
+    },
+  }
+}
+
+export function defaultHarnessDeps(provider: TutorProvider): HarnessDeps {
+  return {
+    affectObserver,
+    masteryTracer,
+    misconceptionDiagnoser,
+    controller,
+    answerLeakGuard,
+    groundingGuard,
+    memoryCurator,
+    tutor: createProviderTutor(provider),
+  }
+}
+
+const NO_STREAM: OnToken = () => {}
+
+function countStudentTurns(messages: ProviderMessage[]): number {
+  return messages.filter((message) => message.role === 'user').length
+}
+
+async function regenerate(
+  request: ProviderRequest,
+  directive: string,
+  deps: HarnessDeps,
+): Promise<string> {
+  const stricter: ProviderRequest = {
+    system: `${request.system}\n\n${directive}`,
+    messages: request.messages,
+  }
+  return deps.tutor.stream(stricter, NO_STREAM)
+}
+
+async function generateGuarded(
+  request: ProviderRequest,
+  input: TurnInput,
+  deps: HarnessDeps,
+): Promise<string> {
+  let draft = await deps.tutor.stream(request, NO_STREAM)
+  const leak = deps.answerLeakGuard(draft, input.session, input.baked)
+  if (leak.tripped && leak.directive !== undefined) {
+    draft = await regenerate(request, leak.directive, deps)
+    if (deps.answerLeakGuard(draft, input.session, input.baked).tripped) {
+      input.onToken(WITHHOLD_FALLBACK)
+      return WITHHOLD_FALLBACK
+    }
+  }
+  const grounding = deps.groundingGuard(draft, input.baked)
+  if (grounding.tripped && grounding.directive !== undefined) {
+    draft = await regenerate(request, grounding.directive, deps)
+  }
+  input.onToken(draft)
+  return draft
+}
+
+export async function handleTurn(input: TurnInput, deps: HarnessDeps): Promise<string> {
+  const affect = deps.affectObserver(input.userMessage, input.messages)
+  const mastery = deps.masteryTracer(input.session, input.baked)
+  const misconception = deps.misconceptionDiagnoser(input.userMessage, input.baked)
+  const move = deps.controller({
+    lesson: input.baked,
+    session: input.session,
+    affect,
+    mastery,
+    misconception,
+    turnIndex: countStudentTurns(input.messages),
+  })
+  const request = buildContext({
+    baked: input.baked,
+    session: input.session,
+    profile: input.profile,
+    messages: input.messages,
+    move,
+    misconception,
+  })
+  const draft = isGuardedMode(input.session.mode)
+    ? await generateGuarded(request, input, deps)
+    : await deps.tutor.stream(request, input.onToken)
+  queueMicrotask(() => {
+    const updated = deps.memoryCurator(input.userMessage, input.profile)
+    if (updated !== input.profile) {
+      input.onProfileLearned(updated)
+    }
+  })
+  return draft
+}
