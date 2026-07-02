@@ -202,5 +202,10 @@
     "headline": "Your numbers are presentable now.",
     "recap": "You carved values with round(x, n), framed them with f\"{x:.2f}\", saw why 4.5 can display as 4.50 while staying 4.5 underneath, and learned that float tails like 59.96999999999999 are approximations you clean at print time.",
     "unlocked": "Next: checking the facts — asking Python what type a value is, and converting between str, int, and float."
-  }
+  },
+  "summaryBullets": [
+    "You can now use round(x, n) to control numeric precision.",
+    "You can now format prices with f\"{x:.2f}\" as a quick money-format (value vs representation).",
+    "You understand controlling precision with round(x, n) and money-formatting with f\"{x:.2f}\"."
+  ]
 }

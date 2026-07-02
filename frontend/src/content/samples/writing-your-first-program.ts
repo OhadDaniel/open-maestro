@@ -109,4 +109,9 @@ export const WRITING_YOUR_FIRST_PROGRAM: BakedLesson = {
     recap: 'You used print() to display text and saw it appear in the Output panel.',
     unlocked: 'Next: store and reuse values with variables.',
   },
+  summaryBullets: [
+    'You can now navigate the Maestro Code Editor to write and run Python code.',
+    'You can now write and execute a simple Python script using the print() function.',
+    'You understand how to use print() to display output in Python.',
+  ],
 }

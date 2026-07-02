@@ -18,6 +18,9 @@ export const lessonProgressSchema = z
   .object({
     lessonId: z.string().min(1),
     checksPassed: z.array(z.string()),
+    masteredOutcomes: z.array(z.string()),
+    wrapOffered: z.boolean(),
+    wrapDeclined: z.boolean(),
     completed: z.boolean(),
   })
   .strict()

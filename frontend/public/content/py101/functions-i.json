@@ -207,5 +207,10 @@
     "headline": "You just built your first reusable machine.",
     "recap": "You saw why functions kill repetition, learned the def-name-parentheses-colon-body shape, and defined functions with one and two parameters — then called them with literals and variables and watched one body serve many values.",
     "unlocked": "Next: Functions II — we go inside the function while it runs and trace exactly how values travel from the call into the parameters."
-  }
+  },
+  "summaryBullets": [
+    "You can now understand how functions reduce repetition and improve reuse.",
+    "You can now understand the structure of Python functions.",
+    "You can now define a function with one or two parameters and call it with literals and variables."
+  ]
 }

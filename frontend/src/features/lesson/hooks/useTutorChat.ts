@@ -29,6 +29,7 @@ function toProviderMessages(messages: ChatMessage[]): ProviderMessage[] {
 type UseTutorChat = {
   messages: ChatMessage[]
   isStreaming: boolean
+  session: TutorSession
   seedTutorMessage: (text: string) => void
   beginLesson: () => Promise<void>
   sendMessage: (text: string) => Promise<void>
@@ -37,13 +38,14 @@ type UseTutorChat = {
 export function useTutorChat(
   provider: TutorProvider,
   baked: BakedLesson,
-  session: TutorSession,
+  initialSession: TutorSession,
   profile: LearnerProfile,
   onProfileLearned: (profile: LearnerProfile) => void,
   onReplyComplete: (replyId: string) => void,
 ): UseTutorChat {
   const [messages, setMessages] = useState<ChatMessage[]>([])
   const [isStreaming, setIsStreaming] = useState(false)
+  const [session, setSession] = useState<TutorSession>(initialSession)
   const deps = useMemo(() => defaultHarnessDeps(provider), [provider])
 
   const seedTutorMessage = useCallback((text: string) => {
@@ -109,6 +111,7 @@ export function useTutorChat(
               ),
             ),
           onProfileLearned,
+          onSessionUpdated: setSession,
         },
         deps,
       )
@@ -118,5 +121,5 @@ export function useTutorChat(
     [deps, baked, session, profile, messages, isStreaming, onProfileLearned, onReplyComplete],
   )
 
-  return { messages, isStreaming, seedTutorMessage, beginLesson, sendMessage }
+  return { messages, isStreaming, session, seedTutorMessage, beginLesson, sendMessage }
 }

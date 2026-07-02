@@ -38,6 +38,7 @@ describe('handleTurn (slice 0)', () => {
           streamed += token
         },
         onProfileLearned: () => {},
+        onSessionUpdated: () => {},
       },
       deps,
     )

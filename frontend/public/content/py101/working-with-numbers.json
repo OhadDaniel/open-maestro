@@ -204,5 +204,11 @@
     "headline": "Numbers are officially yours.",
     "recap": "You met int and float, stored them in variables, ran real arithmetic with +, -, * and /, learned that / always answers in floats, and proved why 5 computes while \"5\" glues.",
     "unlocked": "Next: modeling real-world calculations — turning word problems into arithmetic your programs can run."
-  }
+  },
+  "summaryBullets": [
+    "You can now distinguish between an integer (int, a whole number) and a float (float, a number with a decimal).",
+    "You can now create variables to store integer and float values.",
+    "You can now perform basic arithmetic operations (+, -, *, /) on numeric variables.",
+    "You can now explain why 5 is different from \"5\"."
+  ]
 }

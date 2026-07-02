@@ -202,5 +202,11 @@
     "headline": "Text is officially yours.",
     "recap": "You defined what a data type is, created string variables with single and double quotes, glued strings with + (spaces included, on purpose), and predicted printed output exactly.",
     "unlocked": "Next: working with numbers — ints, floats, and why 5 is different from \"5\"."
-  }
+  },
+  "summaryBullets": [
+    "You can now define a \"data type\" as a category of data that determines what you can do with it.",
+    "You can now create a string variable by enclosing text in single (') or double (\") quotes.",
+    "You can now combine two strings using the + operator (concatenation).",
+    "You can now predict the output when printing string variables."
+  ]
 }

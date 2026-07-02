@@ -205,5 +205,10 @@
     "headline": "You now divide in two languages.",
     "recap": "You contrasted / (exact, always a float) with // (whole groups, floored), met % as the leftover, teamed // with % to crack packing and scheduling problems, and learned the rebuild identity that checks every answer.",
     "unlocked": "Next: modulo in practice — % turns out to detect even and odd, and to drive repeating cycles like weekdays and rotating shifts."
-  }
+  },
+  "summaryBullets": [
+    "You can now compute and contrast true division (/) and floor division (//) on integers; explain the difference.",
+    "You can now use // and % together to derive quotient and remainder for practical cases (e.g., packing/scheduling).",
+    "You understand two ways to divide."
+  ]
 }

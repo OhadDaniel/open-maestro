@@ -5,7 +5,14 @@ export function createSession(lessonId: string): TutorSession {
     lessonId,
     mode: 'explain',
     prefs: { name: null },
-    progress: { lessonId, checksPassed: [], completed: false },
+    progress: {
+      lessonId,
+      checksPassed: [],
+      masteredOutcomes: [],
+      wrapOffered: false,
+      wrapDeclined: false,
+      completed: false,
+    },
   }
 }
 
@@ -28,6 +35,28 @@ export function passCheck(session: TutorSession, checkId: string): TutorSession 
       checksPassed: [...session.progress.checksPassed, checkId],
     },
   }
+}
+
+export function masterOutcome(session: TutorSession, index: number): TutorSession {
+  const id = String(index)
+  if (session.progress.masteredOutcomes.includes(id)) {
+    return session
+  }
+  return {
+    ...session,
+    progress: {
+      ...session.progress,
+      masteredOutcomes: [...session.progress.masteredOutcomes, id],
+    },
+  }
+}
+
+export function offerWrap(session: TutorSession): TutorSession {
+  return { ...session, progress: { ...session.progress, wrapOffered: true } }
+}
+
+export function declineWrap(session: TutorSession): TutorSession {
+  return { ...session, progress: { ...session.progress, wrapDeclined: true } }
 }
 
 export function completeLesson(session: TutorSession): TutorSession {

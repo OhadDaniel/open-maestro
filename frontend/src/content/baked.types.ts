@@ -90,6 +90,7 @@ export const bakedLessonSchema = z
     failurePlaybooks: z.array(failurePlaybookSchema).min(1),
     chunks: z.array(bakedChunkSchema).min(1),
     celebration: celebrationSchema,
+    summaryBullets: z.array(z.string().min(1)).min(3).max(5),
   })
   .strict()
 export type BakedLesson = z.infer<typeof bakedLessonSchema>

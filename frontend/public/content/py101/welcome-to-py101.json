@@ -185,5 +185,10 @@
     "headline": "You're in — set up, oriented, and ready to code.",
     "recap": "You know the four units of PY101, how the grade is built (three 10% practice reviews, one 60% timed final, 10% discussions, 10 bonus points), and what you personally want out of Python.",
     "unlocked": "Next: write and run your very first line of Python."
-  }
+  },
+  "summaryBullets": [
+    "You can now describe how PY101 is structured across its four units.",
+    "You can now explain how the final grade is built from reviews, discussions, and bonus points.",
+    "You understand what to expect from the course and how to succeed from day one."
+  ]
 }

@@ -29,11 +29,45 @@ describe('affectObserver', () => {
 })
 
 describe('masteryTracer', () => {
-  it('reports mastered when the lesson is completed, else unseen', () => {
-    const done = masteryTracer(sessionWith({ progress: { lessonId, checksPassed: [], completed: true } }), lesson)
+  it('reports all mastered when the lesson is completed', () => {
+    const done = masteryTracer(
+      sessionWith({
+        progress: {
+          lessonId,
+          checksPassed: [],
+          masteredOutcomes: [],
+          wrapOffered: false,
+          wrapDeclined: false,
+          completed: true,
+        },
+      }),
+      lesson,
+    )
     expect(done.skills.every((skill) => skill.status === 'mastered')).toBe(true)
+  })
+
+  it('marks outcome 0 as practicing and the rest as unseen for a fresh session', () => {
     const fresh = masteryTracer(sessionWith({}), lesson)
-    expect(fresh.skills.every((skill) => skill.status === 'unseen')).toBe(true)
+    expect(fresh.skills[0].status).toBe('practicing')
+    expect(fresh.skills.slice(1).every((s) => s.status === 'unseen')).toBe(true)
+  })
+
+  it('advances to next outcome when previous is mastered', () => {
+    const partial = masteryTracer(
+      sessionWith({
+        progress: {
+          lessonId,
+          checksPassed: [],
+          masteredOutcomes: ['0'],
+          wrapOffered: false,
+          wrapDeclined: false,
+          completed: false,
+        },
+      }),
+      lesson,
+    )
+    expect(partial.skills[0].status).toBe('mastered')
+    expect(partial.skills[1].status).toBe('practicing')
   })
 })
 
@@ -49,6 +83,18 @@ describe('groundingGuard', () => {
   it('does not trip on short or on-lesson drafts', () => {
     expect(groundingGuard('ok', lesson).tripped).toBe(false)
     expect(groundingGuard("Let's use print to display output in Python together now.", lesson).tripped).toBe(false)
+  })
+
+  it('trips when draft keyword overlap ratio is below 0.15', () => {
+    const offTopic =
+      'Quantum entanglement occurs when particles become correlated regardless of distance. Measurement collapses the wavefunction and determines the state of the entangled partner.'
+    expect(groundingGuard(offTopic, lesson).tripped).toBe(true)
+  })
+
+  it('does not trip when draft keyword overlap ratio meets threshold', () => {
+    const onTopic =
+      'The print function in Python outputs text to the screen. You write print followed by parentheses and put your string value inside them.'
+    expect(groundingGuard(onTopic, lesson).tripped).toBe(false)
   })
 })
 

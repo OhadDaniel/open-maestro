@@ -4,6 +4,12 @@ import type { ProviderMessage, ProviderRequest } from '../ai/provider.types'
 import type { BakedLesson } from '../content/baked.types'
 import type { TutorSession } from '../content/session.types'
 import type { LearnerProfile } from '../memory/learner-profile.types'
+import {
+  completeLesson,
+  declineWrap,
+  masterOutcome,
+  offerWrap,
+} from '../tutor/session'
 import { buildContext } from './buildContext'
 import { controller } from './decide/controller'
 import { memoryCurator } from './remember/memoryCurator'
@@ -24,6 +30,7 @@ export type TurnInput = {
   messages: ProviderMessage[]
   onToken: OnToken
   onProfileLearned: (profile: LearnerProfile) => void
+  onSessionUpdated: (session: TutorSession) => void
 }
 
 export type TutorRunner = {
@@ -109,6 +116,38 @@ async function generateGuarded(
   return draft
 }
 
+function applySessionEffects(
+  session: TutorSession,
+  move: TeachingMove,
+  mastery: ReturnType<typeof masteryTracer>,
+): TutorSession {
+  let next = session
+
+  if (move.action === 'advance' && move.reason === 'confident-claim') {
+    const practicingIndex = mastery.skills.findIndex((s) => s.status === 'practicing')
+    if (practicingIndex >= 0) {
+      next = masterOutcome(next, practicingIndex)
+    }
+  }
+
+  if (move.action === 'offer-wrap') {
+    next = offerWrap(next)
+  } else if (
+    next.progress.wrapOffered &&
+    !next.progress.wrapDeclined &&
+    move.action !== 'wrap-lesson' &&
+    move.reason === 'wrap-declined'
+  ) {
+    next = declineWrap(next)
+  }
+
+  if (move.action === 'wrap-lesson' && !next.progress.completed) {
+    next = completeLesson(next)
+  }
+
+  return next
+}
+
 export async function handleTurn(input: TurnInput, deps: HarnessDeps): Promise<string> {
   const affect = deps.affectObserver(input.userMessage, input.messages)
   const mastery = deps.masteryTracer(input.session, input.baked)
@@ -120,6 +159,7 @@ export async function handleTurn(input: TurnInput, deps: HarnessDeps): Promise<s
     mastery,
     misconception,
     turnIndex: countStudentTurns(input.messages),
+    userMessage: input.userMessage,
   })
   const request = buildContext({
     baked: input.baked,
@@ -133,6 +173,14 @@ export async function handleTurn(input: TurnInput, deps: HarnessDeps): Promise<s
     ? await generateGuarded(request, input, deps)
     : await deps.tutor.stream(request, input.onToken)
   queueMicrotask(() => {
+    const updatedSession = applySessionEffects(
+      input.session,
+      move,
+      mastery,
+    )
+    if (updatedSession !== input.session) {
+      input.onSessionUpdated(updatedSession)
+    }
     const updated = deps.memoryCurator(input.userMessage, input.profile)
     if (updated !== input.profile) {
       input.onProfileLearned(updated)

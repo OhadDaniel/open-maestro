@@ -206,5 +206,10 @@
     "headline": "You can see inside the machine now.",
     "recap": "You named all four parts of a function, watched arguments bind to parameters by position, used trace prints to prove what really arrived, and followed a return value back to the call site where a variable caught it.",
     "unlocked": "Next: Functions III — the real difference between printing a value and returning it, plus ending a function early with an early return."
-  }
+  },
+  "summaryBullets": [
+    "You can now understand the structure of a function, including its name, parameters, indentation, and return value.",
+    "You can now call functions with arguments correctly and trace how values are passed from the call site to parameters, verifying the flow using print statements.",
+    "You understand the four parts of a function, and tracing how argument values travel from the call site into the parameters."
+  ]
 }
