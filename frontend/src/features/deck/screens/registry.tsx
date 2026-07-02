@@ -6,6 +6,7 @@ import { DegreeScreen } from './degree/DegreeScreen'
 import { DownloadScreen } from './download/DownloadScreen'
 import { CelebrateScreen } from './celebrate/CelebrateScreen'
 import { GetKnowScreen } from './getknow/GetKnowScreen'
+import { HomeScreen } from './home/HomeScreen'
 
 const SCREENS: Partial<Record<ScreenId, () => React.ReactNode>> = {
   welcome: () => <WelcomeScreen />,
@@ -14,6 +15,7 @@ const SCREENS: Partial<Record<ScreenId, () => React.ReactNode>> = {
   download: () => <DownloadScreen />,
   celebrate: () => <CelebrateScreen />,
   getknow: () => <GetKnowScreen />,
+  home: () => <HomeScreen />,
 }
 
 export function renderScreen(id: ScreenId): React.ReactNode {
