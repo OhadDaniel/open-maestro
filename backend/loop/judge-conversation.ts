@@ -38,7 +38,10 @@ export async function judgeConversation(turns: ChatTurn[]): Promise<CriterionRes
     'Return JSON only: {"results":[{"id":"<criterion id>","pass":true or false,"reason":"<one short sentence>"}]}',
   ].join('\n\n')
   const parsed = (await completeJson(MODELS.judge, JUDGE_SYSTEM, user)) as {
-    results: CriterionResult[]
+    results?: CriterionResult[]
+  }
+  if (!Array.isArray(parsed.results)) {
+    throw new Error('judge did not return a results array')
   }
   return parsed.results
 }

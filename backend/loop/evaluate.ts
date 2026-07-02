@@ -51,7 +51,7 @@ export async function evaluateBench(policy: TutorPolicy = DEFAULT_POLICY): Promi
   let total = 0
   const failures: Failure[] = []
   for (const run of judged) {
-    if (run === null) {
+    if (run === null || !Array.isArray(run.results)) {
       continue
     }
     for (const result of run.results) {
