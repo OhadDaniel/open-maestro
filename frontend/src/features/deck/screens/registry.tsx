@@ -11,6 +11,7 @@ import { WeekScreen } from './week/WeekScreen'
 import { LessonScreen } from './lesson/LessonScreen'
 import { CodeScreen } from './code/CodeScreen'
 import { LessonDoneScreen } from './lessondone/LessonDoneScreen'
+import { WeekDoneScreen } from './weekdone/WeekDoneScreen'
 
 const SCREENS: Partial<Record<ScreenId, () => React.ReactNode>> = {
   welcome: () => <WelcomeScreen />,
@@ -24,6 +25,7 @@ const SCREENS: Partial<Record<ScreenId, () => React.ReactNode>> = {
   lesson: () => <LessonScreen />,
   code: () => <CodeScreen />,
   lessondone: () => <LessonDoneScreen />,
+  weekdone: () => <WeekDoneScreen />,
 }
 
 export function renderScreen(id: ScreenId): React.ReactNode {
