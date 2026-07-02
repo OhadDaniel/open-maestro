@@ -1,11 +1,11 @@
 import { useCallback, useState } from 'react'
 import type { TutorProvider } from '../../ai/provider'
 import { loadProfile, saveProfile } from '../../memory/profile-store'
+import { userFromProfile } from './session-hydrate'
 import {
   INITIAL_IDENTITY,
   INITIAL_PROGRESS,
   INITIAL_STREAK,
-  INITIAL_USER,
 } from './session.constants'
 import type {
   SessionIdentity,
@@ -15,7 +15,7 @@ import type {
 } from './session.types'
 
 export function useSessionState() {
-  const [user, setUser] = useState<SessionUser>(INITIAL_USER)
+  const [user, setUser] = useState<SessionUser>(() => userFromProfile(loadProfile()))
   const [progress, setProgress] = useState<SessionProgress>(INITIAL_PROGRESS)
   const [streak] = useState<SessionStreak>(INITIAL_STREAK)
   const [identity] = useState<SessionIdentity>(INITIAL_IDENTITY)

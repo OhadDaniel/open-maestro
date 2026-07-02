@@ -1,6 +1,7 @@
 import { ASSET } from '../../shared/assets'
 import { useDeckNav } from '../deck/DeckContext'
 import { useSession } from '../session/SessionContext'
+import { NAME_FALLBACK } from '../session/session.constants'
 import { APPNAV_WIDTH, LOCKED_NAV, PRIMARY_NAV, type NavKey } from './appnav.constants'
 import { NavRow } from './NavRow'
 
@@ -11,8 +12,8 @@ type AppNavProps = {
 export function AppNav({ active }: AppNavProps) {
   const { goTo } = useDeckNav()
   const { user } = useSession()
-  const firstName = user.name.trim().split(' ')[0] || 'Ray'
-  const initial = firstName[0].toUpperCase()
+  const displayName = user.name.trim().length > 0 ? user.name.trim() : NAME_FALLBACK
+  const initial = displayName[0].toUpperCase()
 
   return (
     <div
@@ -76,7 +77,7 @@ export function AppNav({ active }: AppNavProps) {
         </div>
         <div style={{ minWidth: 0 }}>
           <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--fg)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-            {user.name.trim().length > 0 ? user.name.trim() : firstName}
+            {displayName}
           </div>
           <div style={{ fontSize: 12, color: 'var(--fg-3)' }}>AAS · AI Engineering</div>
         </div>

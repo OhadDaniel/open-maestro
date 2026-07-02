@@ -13,13 +13,15 @@ export const TRACK_LABEL: Record<TrackId, string> = {
 }
 
 export const INITIAL_USER: SessionUser = {
-  name: 'Ray',
+  name: '',
   email: '',
   track: 'applied-ml',
   weeklyHours: '',
   codingExperience: '',
   why: '',
 }
+
+export const NAME_FALLBACK = 'Explorer'
 
 export const INITIAL_PROGRESS: SessionProgress = {
   level: 3,

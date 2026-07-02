@@ -17,12 +17,12 @@ export function AccountScreen() {
   const walkRef = useWaypointPulse<HTMLDivElement>()
   const { user, updateUser } = useSession()
   const { goTo } = useDeckNav()
-  const [name, setName] = useState(user.name === 'Ray' ? '' : user.name)
+  const [name, setName] = useState(user.name)
   const [email, setEmail] = useState(user.email)
   const firstName = name.trim().split(' ')[0]
 
   const submit = () => {
-    updateUser({ name: name.trim().length > 0 ? name.trim() : 'Ray', email })
+    updateUser({ name: name.trim(), email })
     goTo('degree')
   }
 

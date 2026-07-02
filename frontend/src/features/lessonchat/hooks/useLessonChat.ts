@@ -1,11 +1,17 @@
 import { useCallback, useEffect, useState } from 'react'
 import type { BakedLesson } from '../../../content/baked.types'
 import { loadBakedLesson } from '../../../content/load-lesson'
+import { loadProfile } from '../../../memory/profile-store'
 import { useViewedLesson } from '../../lessonview/useViewedLesson'
 import { usePyodide } from '../../code/usePyodide'
 import { COURSE_ID, STARTER_CODE } from '../lessonchat.constants'
 
-const DEMO_STDIN: readonly string[] = ['Ray']
+const STDIN_FALLBACK = 'friend'
+
+function demoStdin(): readonly string[] {
+  const name = loadProfile().name
+  return [name !== null && name.trim().length > 0 ? name.trim() : STDIN_FALLBACK]
+}
 
 export function useLessonChat() {
   const { slug: currentLessonSlug } = useViewedLesson()
@@ -37,7 +43,7 @@ export function useLessonChat() {
   }, [currentLessonSlug])
 
   const run = useCallback(async () => {
-    await runPy(code, DEMO_STDIN)
+    await runPy(code, demoStdin())
     setRunCount((count) => count + 1)
   }, [code, runPy])
 
