@@ -1,6 +1,6 @@
 import type { ProgressState } from './progress.types'
 
-export const PROGRESS_STORAGE_KEY = 'open-maestro.progress.v1'
+export const PROGRESS_STORAGE_KEY = 'open-maestro.progress.v2'
 
 export const INITIAL_PROGRESS_STATE: ProgressState = {
   firstRunDone: false,
