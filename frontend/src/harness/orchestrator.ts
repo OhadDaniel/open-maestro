@@ -1,3 +1,4 @@
+import { OPENING_BOOTSTRAP } from '../ai/offline-provider'
 import type { TutorProvider } from '../ai/provider'
 import type { ProviderMessage, ProviderRequest } from '../ai/provider.types'
 import type { BakedLesson } from '../content/baked.types'
@@ -9,6 +10,7 @@ import { memoryCurator } from './remember/memoryCurator'
 import { affectObserver } from './sense/affectObserver'
 import { masteryTracer } from './sense/masteryTracer'
 import { misconceptionDiagnoser } from './sense/misconceptionDiagnoser'
+import type { TeachingMove } from './types'
 import { WITHHOLD_FALLBACK, answerLeakGuard, isGuardedMode } from './verify/answerLeakGuard'
 import { groundingGuard } from './verify/groundingGuard'
 
@@ -137,4 +139,35 @@ export async function handleTurn(input: TurnInput, deps: HarnessDeps): Promise<s
     }
   })
   return draft
+}
+
+export type OpeningInput = {
+  baked: BakedLesson
+  session: TutorSession
+  profile: LearnerProfile
+  onToken: OnToken
+}
+
+const OPENING_MOVE: TeachingMove = {
+  action: 'explain',
+  rules: [
+    'This is your first message — open the lesson yourself.',
+    'Greet the student by name if their saved memory includes one.',
+    'In 2 to 4 short sentences, introduce what this lesson covers using the lesson material, then ask one simple question to get them started.',
+    'Do not reveal answers or dump the whole lesson; invite them in.',
+  ],
+  reason: 'lesson-opening',
+}
+
+export async function openLesson(input: OpeningInput, deps: HarnessDeps): Promise<string> {
+  const messages: ProviderMessage[] = [{ role: 'user', content: OPENING_BOOTSTRAP }]
+  const request = buildContext({
+    baked: input.baked,
+    session: input.session,
+    profile: input.profile,
+    messages,
+    move: OPENING_MOVE,
+    misconception: { matched: false },
+  })
+  return deps.tutor.stream(request, input.onToken)
 }

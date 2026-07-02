@@ -1,13 +1,14 @@
 import { describe, expect, it } from 'vitest'
+import { OPENING_BOOTSTRAP } from '../ai/offline-provider'
 import type { TutorProvider } from '../ai/provider'
-import type { ProviderMessage, ProviderStreamEvent } from '../ai/provider.types'
+import type { ProviderMessage, ProviderRequest, ProviderStreamEvent } from '../ai/provider.types'
 import { WRITING_YOUR_FIRST_PROGRAM } from '../content/samples/writing-your-first-program'
-import { emptyProfile } from '../memory/learner-profile'
+import { emptyProfile, withName } from '../memory/learner-profile'
 import { buildTutorRequest } from '../tutor/tutor-engine'
 import { createSession } from '../tutor/session'
 import { buildContext } from './buildContext'
 import { NO_MISCONCEPTION, PASS_THROUGH_MOVE } from './constants'
-import { defaultHarnessDeps, handleTurn } from './orchestrator'
+import { defaultHarnessDeps, handleTurn, openLesson } from './orchestrator'
 
 function fakeProvider(chunks: string[]): TutorProvider {
   return {
@@ -42,6 +43,40 @@ describe('handleTurn (slice 0)', () => {
     )
     expect(draft).toBe('Hello, world')
     expect(streamed).toBe('Hello, world')
+  })
+})
+
+describe('openLesson (slice 2)', () => {
+  it('streams a tutor-led opening grounded in the lesson and greeting by name', async () => {
+    let captured: ProviderRequest | undefined
+    const provider: TutorProvider = {
+      async *streamMessage(request): AsyncIterable<ProviderStreamEvent> {
+        captured = request
+        yield { type: 'text_delta', text: 'Hi Dana' }
+        yield { type: 'message_stop', stopReason: 'stop' }
+      },
+    }
+    const deps = defaultHarnessDeps(provider)
+    const session = createSession(WRITING_YOUR_FIRST_PROGRAM.lesson.id)
+    const profile = withName(emptyProfile(), 'Dana')
+    let streamed = ''
+    const draft = await openLesson(
+      {
+        baked: WRITING_YOUR_FIRST_PROGRAM,
+        session,
+        profile,
+        onToken: (token) => {
+          streamed += token
+        },
+      },
+      deps,
+    )
+    expect(draft).toBe('Hi Dana')
+    expect(streamed).toBe('Hi Dana')
+    expect(captured?.system).toContain(WRITING_YOUR_FIRST_PROGRAM.lesson.title)
+    expect(captured?.system).toContain('Dana')
+    expect(captured?.system).toContain('open the lesson yourself')
+    expect(captured?.messages.at(-1)?.content).toBe(OPENING_BOOTSTRAP)
   })
 })
 

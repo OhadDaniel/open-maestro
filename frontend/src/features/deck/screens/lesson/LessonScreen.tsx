@@ -1,21 +1,15 @@
+import { Icon } from '../../../../shared/components/Icon'
 import { useReveal } from '../../../../shared/motion/useReveal'
 import { useCoursePosition } from '../../../course/useCoursePosition'
 import { AppNav } from '../../../appnav/AppNav'
 import { useLessonChatContext } from '../../../lessonchat/LessonChatContext'
-import {
-  FIRST_BUBBLE_FALLBACK,
-  TUTOR_INTRO,
-  TUTOR_TRY_PROMPT,
-  memoryCallback,
-} from '../../../lessonchat/lessonchat.constants'
+import { LESSON_CHAT_COPY } from '../../../lessonchat/lessonchat.constants'
 import { useSession } from '../../../session/SessionContext'
 import { useDeckNav } from '../../DeckContext'
 import { ScreenShell } from '../../components/ScreenShell'
-import { CodeCard } from './CodeCard'
 import { Composer } from './Composer'
 import { LessonHeader } from './LessonHeader'
-import { LiveMessage, TutorBubble, TypingBubble, UserBubble } from './ChatBubbles'
-import { SuggestionChips } from './SuggestionChips'
+import { LiveMessage, TypingBubble } from './ChatBubbles'
 import { useLessonThread } from './useLessonThread'
 
 export function LessonScreen() {
@@ -50,28 +44,27 @@ type LessonThreadProps = {
 
 function LessonThread({ baked, provider, onOpenCode }: LessonThreadProps) {
   const revealRef = useReveal<HTMLDivElement>()
-  const { messages, isStreaming, typingDone, profileName, send } = useLessonThread(baked, provider)
-  const firstBubble = profileName !== null ? memoryCallback(profileName) : FIRST_BUBBLE_FALLBACK
+  const { messages, isStreaming, send } = useLessonThread(baked, provider)
 
   return (
     <>
       <div style={{ flex: 1, overflowY: 'auto', padding: '28px 30px 12px' }}>
         <div ref={revealRef} style={{ maxWidth: 660, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 14 }}>
-          <TutorBubble>{firstBubble}</TutorBubble>
-          <UserBubble>I&apos;m ready</UserBubble>
-          <TutorBubble>{TUTOR_INTRO}</TutorBubble>
-          <CodeCard />
-          {typingDone ? (
-            <>
-              <TutorBubble>{TUTOR_TRY_PROMPT}</TutorBubble>
-              <SuggestionChips onOpenCode={onOpenCode} onSuggest={send} />
-            </>
-          ) : (
+          {messages.length === 0 ? (
             <TypingBubble />
+          ) : (
+            messages.map((message) => <LiveMessage key={message.id} message={message} />)
           )}
-          {messages.map((message) => (
-            <LiveMessage key={message.id} message={message} />
-          ))}
+          <div style={{ display: 'flex' }}>
+            <button
+              type="button"
+              onClick={onOpenCode}
+              style={{ display: 'inline-flex', alignItems: 'center', gap: 8, height: 40, padding: '0 18px', borderRadius: 'var(--r-pill)', border: '1px solid var(--border-strong)', background: 'transparent', color: 'var(--fg)', fontSize: 14, fontWeight: 600, cursor: 'pointer' }}
+            >
+              <Icon name="file-code-01" size={16} />
+              {LESSON_CHAT_COPY.openCodePanel}
+            </button>
+          </div>
         </div>
       </div>
       <Composer disabled={isStreaming} onSend={send} />

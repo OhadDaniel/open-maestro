@@ -3,7 +3,7 @@ import type { TutorProvider } from '../../../ai/provider'
 import type { ProviderMessage } from '../../../ai/provider.types'
 import type { BakedLesson } from '../../../content/baked.types'
 import type { TutorSession } from '../../../content/session.types'
-import { defaultHarnessDeps, handleTurn } from '../../../harness/orchestrator'
+import { defaultHarnessDeps, handleTurn, openLesson } from '../../../harness/orchestrator'
 import type { LearnerProfile } from '../../../memory/learner-profile.types'
 import type { ChatMessage } from '../lesson.types'
 
@@ -30,6 +30,7 @@ type UseTutorChat = {
   messages: ChatMessage[]
   isStreaming: boolean
   seedTutorMessage: (text: string) => void
+  beginLesson: () => Promise<void>
   sendMessage: (text: string) => Promise<void>
 }
 
@@ -48,6 +49,30 @@ export function useTutorChat(
   const seedTutorMessage = useCallback((text: string) => {
     setMessages((prev) => [...prev, { id: nextId(), role: 'tutor', text }])
   }, [])
+
+  const beginLesson = useCallback(async () => {
+    if (isStreaming) {
+      return
+    }
+    const replyId = nextId()
+    setMessages((prev) => [...prev, { id: replyId, role: 'tutor', text: '' }])
+    setIsStreaming(true)
+    await openLesson(
+      {
+        baked,
+        session,
+        profile,
+        onToken: (token) =>
+          setMessages((prev) =>
+            prev.map((message) =>
+              message.id === replyId ? { ...message, text: message.text + token } : message,
+            ),
+          ),
+      },
+      deps,
+    )
+    setIsStreaming(false)
+  }, [deps, baked, session, profile, isStreaming])
 
   const sendMessage = useCallback(
     async (text: string) => {
@@ -93,5 +118,5 @@ export function useTutorChat(
     [deps, baked, session, profile, messages, isStreaming, onProfileLearned, onReplyComplete],
   )
 
-  return { messages, isStreaming, seedTutorMessage, sendMessage }
+  return { messages, isStreaming, seedTutorMessage, beginLesson, sendMessage }
 }
