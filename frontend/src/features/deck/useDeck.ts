@@ -24,8 +24,11 @@ function resolveTransition(move: DeckMove): Transition {
   return { mode: 'fade', origin: FADE_ORIGIN }
 }
 
-export function useDeck() {
-  const [index, setIndex] = useState(0)
+export function useDeck(initialScreen: ScreenId) {
+  const [index, setIndex] = useState(() => {
+    const start = SCREEN_FLOW.indexOf(initialScreen)
+    return start < 0 ? 0 : start
+  })
   const [previous, setPrevious] = useState<ScreenId | null>(null)
 
   const current = SCREEN_FLOW[index]
@@ -35,22 +38,19 @@ export function useDeck() {
     [previous, current],
   )
 
-  const goTo = useCallback(
-    (id: ScreenId) => {
-      const nextIndex = SCREEN_FLOW.indexOf(id)
-      if (nextIndex < 0) {
-        return
+  const goTo = useCallback((id: ScreenId) => {
+    const nextIndex = SCREEN_FLOW.indexOf(id)
+    if (nextIndex < 0) {
+      return
+    }
+    setIndex((currentIndex) => {
+      if (currentIndex === nextIndex) {
+        return currentIndex
       }
-      setIndex((currentIndex) => {
-        if (currentIndex === nextIndex) {
-          return currentIndex
-        }
-        setPrevious(SCREEN_FLOW[currentIndex])
-        return nextIndex
-      })
-    },
-    [],
-  )
+      setPrevious(SCREEN_FLOW[currentIndex])
+      return nextIndex
+    })
+  }, [])
 
   const step = useCallback((delta: number) => {
     setIndex((currentIndex) => {

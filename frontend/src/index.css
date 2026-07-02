@@ -47,6 +47,18 @@
   --easing: var(--e-emphasized);
   --bg-deep: #000;
   --surface-glass: rgba(255, 255, 255, 0.05);
+  --n300: #3c3c3a;
+  --n500: #6f6f6d;
+  --n600: #8a8a86;
+  --evergreen-text: #cef585;
+  --surface-muted: #201f1e;
+  --accent-ink: #0a0a0a;
+  --fg-disabled: #4a4a48;
+  --font-display: 'Wix Madefor Display', system-ui, sans-serif;
+  --font-text: 'Wix Madefor Text', system-ui, sans-serif;
+  --font-mono: Menlo, ui-monospace, monospace;
+  --e-out: cubic-bezier(0.2, 0, 0.38, 0.9);
+  --e-emph: cubic-bezier(0.2, 0, 0, 1);
   color-scheme: dark;
 }
 
