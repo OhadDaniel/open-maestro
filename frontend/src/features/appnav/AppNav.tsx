@@ -76,7 +76,7 @@ export function AppNav({ active }: AppNavProps) {
         </div>
         <div style={{ minWidth: 0 }}>
           <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--fg)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-            {firstName} Chen
+            {user.name.trim().length > 0 ? user.name.trim() : firstName}
           </div>
           <div style={{ fontSize: 12, color: 'var(--fg-3)' }}>AAS · AI Engineering</div>
         </div>

@@ -13,6 +13,7 @@ import {
   TRAIL_GHOST_PATH,
   homeGreeting,
   levelState,
+  skyCaption,
 } from './home.constants'
 import { useHomeCurrent } from './useHomeCurrent'
 import { useHomeMotion } from './useHomeMotion'
@@ -47,7 +48,7 @@ export function HomeScreen() {
             <div data-sky style={{ position: 'absolute', inset: 0, zIndex: 3, pointerEvents: 'none' }} />
             <div style={{ position: 'absolute', top: 66, right: 22, zIndex: 8, display: 'flex', alignItems: 'center', gap: 7, color: 'var(--fg-3)', fontSize: 12, textShadow: '0 1px 4px #000' }}>
               <Icon name="magic-wand-01" size={13} />
-              {HOME_COPY.skyCaption}
+              {skyCaption(completedConstellations)}
             </div>
             <div style={{ position: 'absolute', inset: 0, zIndex: 4 }}>
               <svg viewBox="0 0 1000 760" preserveAspectRatio="none" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', overflow: 'visible' }}>

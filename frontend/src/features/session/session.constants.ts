@@ -42,7 +42,7 @@ export const INITIAL_PROGRESS: SessionProgress = {
 }
 
 export const INITIAL_STREAK: SessionStreak = {
-  days: 12,
+  days: 0,
   lastActive: '2026-07-02',
 }
 
