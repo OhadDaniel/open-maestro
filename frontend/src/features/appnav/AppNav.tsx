@@ -1,7 +1,6 @@
 import { ASSET } from '../../shared/assets'
 import { useDeckNav } from '../deck/DeckContext'
 import { useSession } from '../session/SessionContext'
-import { NAME_FALLBACK } from '../session/session.constants'
 import { APPNAV_WIDTH, LOCKED_NAV, PRIMARY_NAV, type NavKey } from './appnav.constants'
 import { NavRow } from './NavRow'
 
@@ -12,8 +11,8 @@ type AppNavProps = {
 export function AppNav({ active }: AppNavProps) {
   const { goTo } = useDeckNav()
   const { user } = useSession()
-  const displayName = user.name.trim().length > 0 ? user.name.trim() : NAME_FALLBACK
-  const initial = displayName[0].toUpperCase()
+  const displayName = user.name.trim()
+  const initial = displayName.length > 0 ? displayName[0].toUpperCase() : '?'
 
   return (
     <div

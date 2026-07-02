@@ -49,8 +49,8 @@ export const SKY_CONSTELLATIONS: readonly (readonly number[])[] = [
 ]
 
 export function homeGreeting(name: string): string {
-  const first = name.trim().split(' ')[0] || 'Explorer'
-  return `Back at it, ${first}`
+  const first = name.trim().split(' ')[0]
+  return first ? `Back at it, ${first}` : 'Back at it'
 }
 
 export function skyCaption(levelsMastered: number): string {
