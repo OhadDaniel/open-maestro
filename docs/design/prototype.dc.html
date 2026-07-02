@@ -1,0 +1,1732 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Wix+Madefor+Display:wght@400;500;600;700;800&family=Wix+Madefor+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+<style>
+  :root{
+    --font-display:"Wix Madefor Display",ui-sans-serif,system-ui,sans-serif;
+    --font-text:"Wix Madefor Text",ui-sans-serif,system-ui,sans-serif;
+    --font-mono:"Menlo",ui-monospace,SFMono-Regular,Monaco,Consolas,monospace;
+    --black:#0A0A0A;
+    --n25:#141311;--n50:#1A1A19;--n75:#252524;--n100:#232322;--n150:#2A2A29;--n200:#2E2E2C;--n250:#333332;--n300:#3C3C3A;--n350:#454543;--n400:#525250;--n450:#5F5E5C;--n500:#6F6F6D;--n600:#858581;--n700:#A8A8A4;--n800:#C4C4C0;--n900:#DCDBD5;--n950:#ECEBE4;
+    --evergreen:#CEF585;--evergreen-lo:#B7E86A;--lavender:#A6B2F7;--sunset:#FF8B62;--gold:#EAAD5E;--success:#0DD387;
+    --bg:#000;--surface:#1A1A19;--surface-1:#232322;--surface-2:#2A2A29;
+    --fg:#ECEBE4;--fg-2:#A8A8A4;--fg-3:#6F6F6D;--fg-disabled:#6F6F6D;--border:#3C3C3A;--border-strong:#525250;--surface-muted:#232322;--evergreen-text:#CEF585;
+    --accent:#CEF585;--accent-ink:#0A0A0A;
+    --r-lg:12px;--r-xl:16px;--r-2xl:24px;--r-3xl:32px;--r-full:9999px;
+    --e-out:cubic-bezier(0.2,0,0.38,0.9);--e-emph:cubic-bezier(0.2,0,0,1);--e-in:cubic-bezier(0,0,0.38,0.9);
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0;background:#000;color:#ECEBE4;font-family:var(--font-text);color-scheme:dark;-webkit-font-smoothing:antialiased}
+  h1,h2,h3,h4,h5,h6{font-family:var(--font-display);margin:0;font-weight:700}
+  p{margin:0}
+  ::selection{background:rgba(206,245,133,.28)}
+  .om-scroll::-webkit-scrollbar{width:10px;height:10px}
+  .om-scroll::-webkit-scrollbar-thumb{background:var(--n300);border-radius:9999px;border:3px solid #000}
+  .om-scroll::-webkit-scrollbar-track{background:transparent}
+  @keyframes om-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+  @keyframes om-spin{to{transform:rotate(360deg)}}
+  @keyframes om-pulsering{0%{transform:scale(.72);opacity:.6}100%{transform:scale(1.7);opacity:0}}
+  @keyframes om-caret{0%,100%{opacity:1}50%{opacity:0}}
+  @keyframes om-shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+  @keyframes om-breathe{0%,100%{opacity:.4;transform:scale(1)}50%{opacity:.85;transform:scale(1.05)}}
+  @keyframes om-dot{0%,80%,100%{opacity:.25;transform:translateY(0)}40%{opacity:1;transform:translateY(-3px)}}
+  @keyframes om-drift{0%{transform:scale(1.05) translate(0,0)}100%{transform:scale(1.12) translate(-2.2%,-3.2%)}}
+  @keyframes om-ping{0%{transform:scale(.85);opacity:.7}70%{opacity:0}100%{transform:scale(2.4);opacity:0}}
+  @media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important}}
+  #om-app input,#om-app textarea{font-family:var(--font-text);color:var(--fg)}
+  #om-app input::placeholder,#om-app textarea::placeholder{color:var(--fg-3);opacity:1}
+  #om-app input:focus,#om-app textarea:focus{outline:none}
+  #om-app button{font-family:var(--font-text)}
+  #om-app *:focus-visible{outline:2px solid var(--lavender);outline-offset:2px}
+</style>
+</helmet>
+<div id="om-app" style="position:fixed;inset:0;background:radial-gradient(120% 90% at 50% 12%,#131210 0%,#000 62%);color:var(--fg);font-family:var(--font-text);overflow:hidden;display:flex;flex-direction:column">
+
+  <!-- ============ TOP BAR ============ -->
+  <div style="flex:none;height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 22px;border-bottom:1px solid rgba(255,255,255,.06);z-index:40;position:relative">
+    <div style="display:flex;align-items:center;gap:14px;min-width:0">
+      <img src="assets/maestro-logo-on-dark.svg" alt="Maestro" style="height:22px;width:auto;display:block">
+      <span style="width:1px;height:18px;background:var(--border)"></span>
+      <span style="font-size:12px;letter-spacing:.04em;color:var(--fg-3);text-transform:uppercase;white-space:nowrap">Open Maestro · product flow</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:8px">
+      <div id="om-title" style="font-size:13px;color:var(--fg-2);margin-right:6px;white-space:nowrap;font-variant-numeric:tabular-nums"></div>
+      <button data-nav="restart" title="Replay flow" style="width:34px;height:34px;border-radius:9999px;border:1px solid var(--border);background:transparent;color:var(--fg-2);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;transition:all .15s var(--e-out)" style-hover="background:var(--surface-1);color:var(--fg);border-color:var(--border-strong)">
+        <i data-icon="refresh-ccw" style="width:16px;height:16px"></i>
+      </button>
+      <button data-nav="overview" id="om-ovbtn" style="height:34px;padding:0 15px;border-radius:9999px;border:1px solid var(--border);background:transparent;color:var(--fg);display:inline-flex;align-items:center;gap:8px;cursor:pointer;font-family:var(--font-text);font-size:13px;font-weight:500;transition:all .15s var(--e-out)" style-hover="background:var(--surface-1);border-color:var(--border-strong)">
+        <span data-icon="columns-02" style="width:15px;height:15px"></span>
+        <span id="om-ovlabel">All screens</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ============ VIEWPORT ============ -->
+  <div id="om-viewport" class="om-scroll" style="flex:1;position:relative;overflow:hidden">
+    <div id="om-deck" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:1240px;height:800px;transform-origin:center center">
+
+      <!-- ===================== 1 · WELCOME A ===================== -->
+      <div class="om-tile" data-screen="welcome" data-variant="a" data-flow="welcome" data-index="01" data-name="Welcome" data-url="maestro.university" style="position:absolute;inset:0;opacity:1;visibility:visible">
+        <div class="om-tile-label" style="display:none">01 · Welcome <b style="color:var(--fg-3)">1a</b></div>
+        <div class="om-cell" style="width:1240px;height:800px">
+          <div class="om-frame" style="width:1240px;height:800px;border-radius:16px;overflow:hidden;border:1px solid var(--border);background:#000;box-shadow:0 50px 130px -30px rgba(0,0,0,.85);display:flex;flex-direction:column">
+            <div class="om-chrome" style="height:40px;flex:none;display:flex;align-items:center;gap:14px;padding:0 16px;background:#0c0c0b;border-bottom:1px solid var(--border)">
+              <div style="display:flex;gap:7px"><span style="width:11px;height:11px;border-radius:50%;background:#38423a"></span><span style="width:11px;height:11px;border-radius:50%;background:#38383a"></span><span style="width:11px;height:11px;border-radius:50%;background:#3a3838"></span></div>
+              <div style="flex:1;display:flex;justify-content:center"><div style="display:flex;align-items:center;gap:7px;height:24px;padding:0 16px;background:#000;border:1px solid var(--border);border-radius:9999px;color:var(--fg-3);font-size:12px"><i data-icon="lock-03" style="width:11px;height:11px"></i>maestro.university</div></div>
+              <div style="width:52px"></div>
+            </div>
+            <div class="om-screen" style="position:relative;flex:1;overflow:hidden;background:#000;color:var(--fg)">
+              <img data-plx-img src="assets/climb-1-basecamp.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:64% 42%;transform:scale(1.06);will-change:transform">
+              <div style="position:absolute;inset:0;background:linear-gradient(101deg,#000 22%,rgba(0,0,0,.62) 45%,rgba(0,0,0,0) 74%)"></div>
+              <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.6),transparent 34%)"></div>
+              <div style="position:absolute;top:20px;right:20px;z-index:20;display:flex;gap:4px;padding:4px;background:rgba(18,18,17,.72);backdrop-filter:blur(10px);border:1px solid var(--border);border-radius:9999px">
+                <button data-variant-set="welcome" data-variant-val="a" style="height:30px;padding:0 14px;border-radius:9999px;border:1px solid var(--fg);background:var(--fg);color:#0A0A0A;font-size:13px;font-weight:600;cursor:pointer">A</button>
+                <button data-variant-set="welcome" data-variant-val="b" style="height:30px;padding:0 14px;border-radius:9999px;border:1px solid transparent;background:transparent;color:var(--fg-2);font-size:13px;font-weight:600;cursor:pointer">B</button>
+              </div>
+              <div style="position:absolute;left:92px;top:0;bottom:0;width:600px;display:flex;flex-direction:column;justify-content:center;gap:26px">
+                <div data-reveal style="display:flex;align-items:center;gap:16px">
+                  <div data-plx-orb style="position:relative;width:66px;height:66px;flex:none">
+                    <div style="position:absolute;inset:-14px;background:radial-gradient(circle,rgba(166,178,247,.5),transparent 68%);filter:blur(6px);animation:om-breathe 4.5s var(--e-out) infinite"></div>
+                    <img src="assets/maestro-logo-mark-on-dark.svg" style="position:relative;width:66px;height:66px;display:block">
+                  </div>
+                  <span style="font-size:12px;letter-spacing:.22em;color:var(--fg-2);text-transform:uppercase;font-weight:600">Accredited · Free · On-device</span>
+                </div>
+                <h1 data-reveal style="font-size:62px;line-height:1.04;font-weight:700;letter-spacing:-.015em;max-width:560px">Your AI engineering degree starts here.</h1>
+                <p data-reveal style="font-size:19px;line-height:1.55;color:var(--fg-2);max-width:452px">An accredited degree you learn at your own pace — with a tutor that lives on your device and is yours to keep.</p>
+                <div data-reveal style="display:flex;align-items:center;gap:14px;margin-top:6px">
+                  <button data-goto="name" style="height:56px;padding:0 30px;border-radius:9999px;border:none;background:var(--accent);color:var(--accent-ink);font-family:var(--font-text);font-size:17px;font-weight:600;display:inline-flex;align-items:center;gap:10px;cursor:pointer;box-shadow:0 12px 40px -8px rgba(206,245,133,.5);transition:transform .12s var(--e-out),box-shadow .2s var(--e-out)" style-hover="transform:translateY(-2px);box-shadow:0 18px 52px -8px rgba(206,245,133,.62)" style-active="transform:translateY(0) scale(.98)">Begin<i data-icon="arrow-right" style="width:19px;height:19px"></i></button>
+                  <button data-goto="name" style="height:56px;padding:0 24px;border-radius:9999px;border:1px solid var(--border-strong);background:transparent;color:var(--fg);font-family:var(--font-text);font-size:16px;font-weight:500;cursor:pointer;transition:all .15s var(--e-out)" style-hover="background:rgba(255,255,255,.05);border-color:var(--fg-3)">Sign in</button>
+                </div>
+                <p data-reveal style="font-size:13px;color:var(--fg-3);margin-top:2px">Free to start · No credit card · Learns offline</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="om-tile-hit" style="display:none"></button>
+      </div>
+
+      <!-- ===================== 1 · WELCOME B ===================== -->
+      <div class="om-tile" data-screen="welcome" data-variant="b" data-flow="welcome" data-index="01" data-name="Welcome" data-url="maestro.university" style="position:absolute;inset:0;opacity:0;visibility:hidden">
+        <div class="om-tile-label" style="display:none">01 · Welcome <b style="color:var(--fg-3)">1b</b></div>
+        <div class="om-cell" style="width:1240px;height:800px">
+          <div class="om-frame" style="width:1240px;height:800px;border-radius:16px;overflow:hidden;border:1px solid var(--border);background:#000;box-shadow:0 50px 130px -30px rgba(0,0,0,.85);display:flex;flex-direction:column">
+            <div class="om-chrome" style="height:40px;flex:none;display:flex;align-items:center;gap:14px;padding:0 16px;background:#0c0c0b;border-bottom:1px solid var(--border)">
+              <div style="display:flex;gap:7px"><span style="width:11px;height:11px;border-radius:50%;background:#38423a"></span><span style="width:11px;height:11px;border-radius:50%;background:#38383a"></span><span style="width:11px;height:11px;border-radius:50%;background:#3a3838"></span></div>
+              <div style="flex:1;display:flex;justify-content:center"><div style="display:flex;align-items:center;gap:7px;height:24px;padding:0 16px;background:#000;border:1px solid var(--border);border-radius:9999px;color:var(--fg-3);font-size:12px"><i data-icon="lock-03" style="width:11px;height:11px"></i>maestro.university</div></div>
+              <div style="width:52px"></div>
+            </div>
+            <div class="om-screen" style="position:relative;flex:1;overflow:hidden;background:#000;color:var(--fg)">
+              <img data-plx-img src="assets/climb-5-summit.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 40%;transform:scale(1.06);will-change:transform">
+              <div style="position:absolute;inset:0;background:radial-gradient(120% 78% at 72% 30%,rgba(0,0,0,0) 30%,rgba(0,0,0,.55) 62%,#000 100%)"></div>
+              <div style="position:absolute;inset:0;background:linear-gradient(to top,#000 4%,rgba(0,0,0,.15) 40%,rgba(0,0,0,.35) 100%)"></div>
+              <div style="position:absolute;top:20px;right:20px;z-index:20;display:flex;gap:4px;padding:4px;background:rgba(18,18,17,.72);backdrop-filter:blur(10px);border:1px solid var(--border);border-radius:9999px">
+                <button data-variant-set="welcome" data-variant-val="a" style="height:30px;padding:0 14px;border-radius:9999px;border:1px solid transparent;background:transparent;color:var(--fg-2);font-size:13px;font-weight:600;cursor:pointer">A</button>
+                <button data-variant-set="welcome" data-variant-val="b" style="height:30px;padding:0 14px;border-radius:9999px;border:1px solid var(--fg);background:var(--fg);color:#0A0A0A;font-size:13px;font-weight:600;cursor:pointer">B</button>
+              </div>
+              <div style="position:absolute;left:0;right:0;top:0;bottom:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 40px;gap:26px">
+                <div data-reveal data-plx-orb style="position:relative;width:96px;height:96px;margin-bottom:2px">
+                  <div style="position:absolute;inset:-20px;background:radial-gradient(circle,rgba(206,245,133,.38),rgba(166,178,247,.22) 55%,transparent 72%);filter:blur(9px);animation:om-breathe 4.5s var(--e-out) infinite"></div>
+                  <div style="position:absolute;inset:-17px;border-radius:50%;border:1px solid rgba(236,235,228,.13)"></div>
+                  <div style="position:absolute;inset:-17px;border-radius:50%;background:conic-gradient(from 0deg,transparent 0 72%,rgba(166,178,247,.65) 86%,transparent 96%);-webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 2px),#000 calc(100% - 1px));mask:radial-gradient(farthest-side,transparent calc(100% - 2px),#000 calc(100% - 1px));animation:om-spin 22s linear infinite"></div>
+                  <img src="assets/maestro-logo-mark-on-dark.svg" style="position:relative;width:96px;height:96px;display:block">
+                </div>
+                <div data-reveal style="display:flex;align-items:center;gap:16px">
+                  <span style="width:34px;height:1px;background:var(--border-strong)"></span>
+                  <span style="font-size:12px;letter-spacing:.26em;color:var(--fg-2);text-transform:uppercase;font-weight:600">The first AI-native university</span>
+                  <span style="width:34px;height:1px;background:var(--border-strong)"></span>
+                </div>
+                <h1 style="font-size:76px;line-height:1.04;font-weight:700;letter-spacing:-.022em;max-width:920px;display:flex;flex-direction:column;align-items:center;margin:0">
+                  <span style="display:block;overflow:hidden;padding:0 8px 6px"><span data-wline style="display:block">Learn AI engineering,</span></span>
+                  <span style="display:block;overflow:hidden;padding:0 8px 10px;margin-top:-4px"><span data-wline style="display:block;background:linear-gradient(100deg,#ECEBE4 32%,#A6B2F7 46%,#CEF585 56%,#ECEBE4 70%);background-size:230% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:om-shimmer 3s ease 1.1s 1 both">all the way up.</span></span>
+                </h1>
+                <p data-reveal style="font-size:19px;line-height:1.55;color:var(--fg-2);max-width:520px">A full accredited degree, self-paced, guided by a tutor that runs on your own device — and stays there.</p>
+                <div data-reveal style="display:flex;align-items:center;gap:14px;margin-top:8px">
+                  <button data-goto="name" data-magnetic style="height:58px;padding:0 34px;border-radius:9999px;border:none;background:var(--accent);color:var(--accent-ink);font-family:var(--font-text);font-size:17px;font-weight:600;display:inline-flex;align-items:center;gap:10px;cursor:pointer;box-shadow:0 14px 44px -10px rgba(206,245,133,.55)" style-hover="box-shadow:0 20px 60px -10px rgba(206,245,133,.7)">Begin the climb<i data-icon="arrow-right" style="width:19px;height:19px"></i></button>
+                </div>
+              </div>
+              <div data-motes style="position:absolute;inset:0;z-index:2;pointer-events:none"></div>
+              <div style="position:absolute;top:26px;left:40px;z-index:10"><img src="assets/maestro-logo-on-dark.svg" style="height:20px;display:block;opacity:.92"></div>
+              <div style="position:absolute;bottom:24px;left:40px;z-index:10;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--fg-3)">Est. 2026 · Maestro University</div>
+              <div style="position:absolute;bottom:24px;right:40px;z-index:10;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--fg-3)">Free · No credit card · Works offline</div>
+            </div>
+          </div>
+        </div>
+        <button class="om-tile-hit" style="display:none"></button>
+      </div>
+
+      <!-- ===================== 2 · NAME + EMAIL ===================== -->
+      <div class="om-tile" data-screen="name" data-variant="" data-flow="name" data-index="02" data-name="Your account" data-url="maestro.university/join" style="position:absolute;inset:0;opacity:0;visibility:hidden">
+        <div class="om-tile-label" style="display:none">02 · Your account</div>
+        <div class="om-cell" style="width:1240px;height:800px">
+          <div class="om-frame" style="width:1240px;height:800px;border-radius:16px;overflow:hidden;border:1px solid var(--border);background:#000;box-shadow:0 50px 130px -30px rgba(0,0,0,.85);display:flex;flex-direction:column">
+            <div class="om-chrome" style="height:40px;flex:none;display:flex;align-items:center;gap:14px;padding:0 16px;background:#0c0c0b;border-bottom:1px solid var(--border)">
+              <div style="display:flex;gap:7px"><span style="width:11px;height:11px;border-radius:50%;background:#38423a"></span><span style="width:11px;height:11px;border-radius:50%;background:#38383a"></span><span style="width:11px;height:11px;border-radius:50%;background:#3a3838"></span></div>
+              <div style="flex:1;display:flex;justify-content:center"><div style="display:flex;align-items:center;gap:7px;height:24px;padding:0 16px;background:#000;border:1px solid var(--border);border-radius:9999px;color:var(--fg-3);font-size:12px"><i data-icon="lock-03" style="width:11px;height:11px"></i>maestro.university/join</div></div>
+              <div style="width:52px"></div>
+            </div>
+            <div class="om-screen" style="position:relative;flex:1;overflow:hidden;background:#000;color:var(--fg)">
+              <div style="position:absolute;right:0;top:0;bottom:0;width:62%;overflow:hidden"><img src="assets/climb-account.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:58% 44%;animation:om-drift 17s ease-in-out infinite alternate"></div>
+              <div style="position:absolute;inset:0;background:linear-gradient(90deg,#000 33%,rgba(0,0,0,.5) 52%,rgba(0,0,0,0) 74%)"></div>
+              <div data-walk style="position:absolute;inset:0;pointer-events:none">
+                <span style="position:absolute;left:53%;top:73%;width:9px;height:9px;border-radius:9999px;background:var(--accent);box-shadow:0 0 12px var(--accent);opacity:.15"></span>
+                <span style="position:absolute;left:58%;top:63%;width:9px;height:9px;border-radius:9999px;background:var(--accent);box-shadow:0 0 12px var(--accent);opacity:.15"></span>
+                <span style="position:absolute;left:62%;top:53%;width:9px;height:9px;border-radius:9999px;background:var(--accent);box-shadow:0 0 12px var(--accent);opacity:.15"></span>
+                <span style="position:absolute;left:66%;top:43%;width:9px;height:9px;border-radius:9999px;background:var(--accent);box-shadow:0 0 12px var(--accent);opacity:.15"></span>
+                <span style="position:absolute;left:70.5%;top:34%;width:9px;height:9px;border-radius:9999px;background:var(--accent);box-shadow:0 0 12px var(--accent);opacity:.15"></span>
+              </div>
+              <div style="position:absolute;left:96px;top:0;bottom:0;width:556px;display:flex;flex-direction:column;justify-content:center;gap:0">
+                <div data-reveal style="display:flex;align-items:center;gap:10px;margin-bottom:30px">
+                  <div style="display:flex;gap:6px"><span style="width:24px;height:4px;border-radius:9999px;background:var(--accent)"></span><span style="width:24px;height:4px;border-radius:9999px;background:var(--n300)"></span><span style="width:24px;height:4px;border-radius:9999px;background:var(--n300)"></span></div>
+                  <span style="font-size:12px;letter-spacing:.16em;color:var(--fg-3);text-transform:uppercase;font-weight:600;margin-left:6px">Step 1 of 3</span>
+                </div>
+                <div data-reveal style="display:flex;align-items:center;gap:14px;margin-bottom:22px">
+                  <div style="position:relative;width:48px;height:48px;flex:none">
+                    <div style="position:absolute;inset:-9px;background:radial-gradient(circle,rgba(166,178,247,.5),transparent 68%);filter:blur(5px);animation:om-breathe 4s var(--e-out) infinite"></div>
+                    <img src="assets/maestro-logo-mark-on-dark.svg" style="position:relative;width:48px;height:48px;display:block">
+                  </div>
+                  <p style="font-size:17px;color:var(--fg-2);line-height:1.5">Hi — I'm <span style="color:var(--fg);font-weight:600">Maestro</span>, your tutor.<br>Let's get you set up.</p>
+                </div>
+                <div data-reveal style="margin-bottom:34px">
+                  <label style="display:block;font-size:16px;color:var(--fg-2);margin-bottom:12px;font-weight:500">What should I call you?</label>
+                  <input data-field-name type="text" placeholder="Your name" style="background:transparent;border:none;border-bottom:2px solid var(--border-strong);color:var(--fg);font-family:var(--font-display);font-size:36px;font-weight:600;padding:6px 2px;width:100%;caret-color:var(--accent);transition:border-color .18s var(--e-out)" style-focus="border-bottom-color:var(--accent)">
+                </div>
+                <div data-reveal style="margin-bottom:38px">
+                  <label style="display:block;font-size:16px;color:var(--fg-2);margin-bottom:12px;font-weight:500">Where should I save your progress?</label>
+                  <input data-field-email type="email" placeholder="you@email.com" style="background:transparent;border:none;border-bottom:2px solid var(--border-strong);color:var(--fg);font-family:var(--font-display);font-size:28px;font-weight:500;padding:6px 2px;width:100%;caret-color:var(--accent);transition:border-color .18s var(--e-out)" style-focus="border-bottom-color:var(--accent)">
+                </div>
+                <div data-reveal style="display:flex;align-items:center;gap:18px">
+                  <button data-goto="degree" style="height:54px;padding:0 28px;border-radius:9999px;border:none;background:var(--accent);color:var(--accent-ink);font-size:16px;font-weight:600;display:inline-flex;align-items:center;gap:9px;cursor:pointer;box-shadow:0 12px 40px -8px rgba(206,245,133,.45);transition:transform .12s var(--e-out),box-shadow .2s var(--e-out)" style-hover="transform:translateY(-2px);box-shadow:0 18px 52px -8px rgba(206,245,133,.6)" style-active="transform:translateY(0) scale(.98)">Continue<i data-icon="arrow-right" style="width:18px;height:18px"></i></button>
+                  <span data-name-echo style="font-size:15px;color:var(--fg-3);opacity:0;transition:opacity .3s var(--e-out)"></span>
+                </div>
+                <div data-reveal style="display:flex;align-items:center;gap:8px;margin-top:34px;color:var(--fg-3)">
+                  <i data-icon="lock-03" style="width:14px;height:14px"></i>
+                  <span style="font-size:13px">Everything stays on your device. We'll never share it.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="om-tile-hit" style="display:none"></button>
+      </div>
+
+      <!-- ===================== 3 · CHOOSE DEGREE ===================== -->
+      <div class="om-tile" data-screen="degree" data-variant="" data-flow="degree" data-index="03" data-name="Your degree" data-url="maestro.university/enroll" style="position:absolute;inset:0;opacity:0;visibility:hidden">
+        <div class="om-tile-label" style="display:none">03 · Your degree</div>
+        <div class="om-cell" style="width:1240px;height:800px">
+          <div class="om-frame" style="width:1240px;height:800px;border-radius:16px;overflow:hidden;border:1px solid var(--border);background:#000;box-shadow:0 50px 130px -30px rgba(0,0,0,.85);display:flex;flex-direction:column">
+            <div class="om-chrome" style="height:40px;flex:none;display:flex;align-items:center;gap:14px;padding:0 16px;background:#0c0c0b;border-bottom:1px solid var(--border)">
+              <div style="display:flex;gap:7px"><span style="width:11px;height:11px;border-radius:50%;background:#38423a"></span><span style="width:11px;height:11px;border-radius:50%;background:#38383a"></span><span style="width:11px;height:11px;border-radius:50%;background:#3a3838"></span></div>
+              <div style="flex:1;display:flex;justify-content:center"><div style="display:flex;align-items:center;gap:7px;height:24px;padding:0 16px;background:#000;border:1px solid var(--border);border-radius:9999px;color:var(--fg-3);font-size:12px"><i data-icon="lock-03" style="width:11px;height:11px"></i>maestro.university/enroll</div></div>
+              <div style="width:52px"></div>
+            </div>
+            <div class="om-screen" style="position:relative;flex:1;overflow:hidden;background:#000;color:var(--fg);display:flex">
+              <img src="assets/climb-peakface.png" alt="" style="position:absolute;right:0;top:0;width:54%;height:100%;object-fit:cover;object-position:55% 28%;opacity:.3">
+              <div style="position:absolute;inset:0;background:linear-gradient(90deg,#000 42%,rgba(0,0,0,.5) 70%,rgba(0,0,0,.7) 100%)"></div>
+              <!-- LEFT: degree -->
+              <div style="position:relative;width:540px;flex:none;padding:64px 0 64px 76px;display:flex;flex-direction:column;justify-content:center">
+                <div data-reveal style="display:flex;align-items:center;gap:10px;margin-bottom:26px">
+                  <div style="display:flex;gap:6px"><span style="width:24px;height:4px;border-radius:9999px;background:var(--accent)"></span><span style="width:24px;height:4px;border-radius:9999px;background:var(--accent)"></span><span style="width:24px;height:4px;border-radius:9999px;background:var(--n300)"></span></div>
+                  <span style="font-size:12px;letter-spacing:.16em;color:var(--fg-3);text-transform:uppercase;font-weight:600;margin-left:6px">Step 2 of 3</span>
+                </div>
+                <span data-reveal style="font-size:13px;letter-spacing:.14em;color:var(--fg-2);text-transform:uppercase;font-weight:600;margin-bottom:10px">Associate of Applied Science</span>
+                <h1 data-reveal style="font-size:58px;line-height:1;font-weight:700;letter-spacing:-.02em;margin-bottom:22px">AI Engineering</h1>
+                <div data-reveal style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:26px">
+                  <span style="display:inline-flex;align-items:center;gap:7px;height:32px;padding:0 13px;border-radius:9999px;background:rgba(166,178,247,.14);color:var(--lavender);font-size:13px;font-weight:600"><i data-icon="shield-tick" style="width:15px;height:15px"></i>Accredited</span>
+                  <span style="display:inline-flex;align-items:center;gap:7px;height:32px;padding:0 13px;border-radius:9999px;background:var(--surface-1);border:1px solid var(--border);color:var(--fg-2);font-size:13px;font-weight:500"><i data-icon="graduation-hat-02" style="width:15px;height:15px"></i>60 credits</span>
+                  <span style="display:inline-flex;align-items:center;gap:7px;height:32px;padding:0 13px;border-radius:9999px;background:var(--surface-1);border:1px solid var(--border);color:var(--fg-2);font-size:13px;font-weight:500"><i data-icon="clock" style="width:15px;height:15px"></i>Self-paced</span>
+                </div>
+                <p data-reveal style="font-size:17px;line-height:1.6;color:var(--fg-2);max-width:430px">A career-ready degree in building real AI systems — from Python foundations to shipping models people rely on. Learn by doing, with your tutor beside you the whole way.</p>
+              </div>
+              <!-- RIGHT: tracks -->
+              <div style="position:relative;flex:1;padding:56px 76px 56px 40px;display:flex;flex-direction:column;justify-content:center" data-track-group>
+                <div data-reveal style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:16px">
+                  <span style="font-size:15px;font-weight:600;color:var(--fg)">Pick your focus</span>
+                  <span style="font-size:13px;color:var(--fg-3)">Change it anytime</span>
+                </div>
+                <button data-track data-track-sel="1" data-reveal style="text-align:left;display:flex;align-items:center;gap:16px;padding:18px 20px;margin-bottom:12px;border-radius:16px;border:1.5px solid var(--accent);background:rgba(206,245,133,.07);cursor:pointer;transition:all .18s var(--e-out);box-shadow:0 0 34px -12px rgba(206,245,133,.5)">
+                  <span style="width:46px;height:46px;flex:none;border-radius:12px;background:rgba(206,245,133,.14);display:flex;align-items:center;justify-content:center;color:var(--accent)"><i data-icon="cpu-chip-01" style="width:24px;height:24px"></i></span>
+                  <span style="flex:1;min-width:0"><span style="display:block;font-size:17px;font-weight:600;color:var(--fg)">Applied Machine Learning</span><span style="display:block;font-size:13px;color:var(--fg-2);margin-top:3px">Train and ship models that learn from data</span></span>
+                  <span data-track-check style="width:24px;height:24px;flex:none;border-radius:9999px;background:var(--accent);color:var(--accent-ink);display:flex;align-items:center;justify-content:center;transition:all .18s var(--e-out)"><i data-icon="check" style="width:15px;height:15px"></i></span>
+                </button>
+                <button data-track data-track-sel="0" data-reveal style="text-align:left;display:flex;align-items:center;gap:16px;padding:18px 20px;margin-bottom:12px;border-radius:16px;border:1px solid var(--border);background:var(--surface);cursor:pointer;transition:all .18s var(--e-out)" style-hover="border-color:var(--border-strong)">
+                  <span style="width:46px;height:46px;flex:none;border-radius:12px;background:var(--surface-2);display:flex;align-items:center;justify-content:center;color:var(--fg-2)"><i data-icon="magic-wand-01" style="width:24px;height:24px"></i></span>
+                  <span style="flex:1;min-width:0"><span style="display:block;font-size:17px;font-weight:600;color:var(--fg)">LLMs &amp; Generative AI</span><span style="display:block;font-size:13px;color:var(--fg-2);margin-top:3px">Build with language models, agents and RAG</span></span>
+                  <span data-track-check style="width:24px;height:24px;flex:none;border-radius:9999px;border:2px solid var(--border-strong);background:transparent;color:transparent;display:flex;align-items:center;justify-content:center;transition:all .18s var(--e-out)"><i data-icon="check" style="width:15px;height:15px"></i></span>
+                </button>
+                <button data-track data-track-sel="0" data-reveal style="text-align:left;display:flex;align-items:center;gap:16px;padding:18px 20px;margin-bottom:26px;border-radius:16px;border:1px solid var(--border);background:var(--surface);cursor:pointer;transition:all .18s var(--e-out)" style-hover="border-color:var(--border-strong)">
+                  <span style="width:46px;height:46px;flex:none;border-radius:12px;background:var(--surface-2);display:flex;align-items:center;justify-content:center;color:var(--fg-2)"><i data-icon="lightning-01" style="width:24px;height:24px"></i></span>
+                  <span style="flex:1;min-width:0"><span style="display:block;font-size:17px;font-weight:600;color:var(--fg)">ML Systems &amp; Infrastructure</span><span style="display:block;font-size:13px;color:var(--fg-2);margin-top:3px">Serve models at scale, in production</span></span>
+                  <span data-track-check style="width:24px;height:24px;flex:none;border-radius:9999px;border:2px solid var(--border-strong);background:transparent;color:transparent;display:flex;align-items:center;justify-content:center;transition:all .18s var(--e-out)"><i data-icon="check" style="width:15px;height:15px"></i></span>
+                </button>
+                <div data-reveal style="display:flex;align-items:center;gap:18px">
+                  <button data-goto="download" style="height:56px;padding:0 30px;border-radius:9999px;border:none;background:var(--accent);color:var(--accent-ink);font-size:17px;font-weight:600;display:inline-flex;align-items:center;gap:10px;cursor:pointer;box-shadow:0 12px 40px -8px rgba(206,245,133,.45);transition:transform .12s var(--e-out),box-shadow .2s var(--e-out)" style-hover="transform:translateY(-2px);box-shadow:0 18px 52px -8px rgba(206,245,133,.6)" style-active="transform:translateY(0) scale(.98)">Commit to this degree<i data-icon="arrow-right" style="width:19px;height:19px"></i></button>
+                </div>
+                <p data-reveal style="font-size:13px;color:var(--fg-3);margin-top:16px">This becomes your path. Your tutor is tailored to your focus.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="om-tile-hit" style="display:none"></button>
+      </div>
+
+      <!-- ===================== 4 · TUTOR DOWNLOAD ===================== -->
+      <div class="om-tile" data-screen="download" data-variant="" data-flow="download" data-index="04" data-name="Download tutor" data-url="maestro.university/setup" style="position:absolute;inset:0;opacity:0;visibility:hidden">
+        <div class="om-tile-label" style="display:none">04 · Download tutor</div>
+        <div class="om-cell" style="width:1240px;height:800px">
+          <div class="om-frame" style="width:1240px;height:800px;border-radius:16px;overflow:hidden;border:1px solid var(--border);background:#000;box-shadow:0 50px 130px -30px rgba(0,0,0,.85);display:flex;flex-direction:column">
+            <div class="om-chrome" style="height:40px;flex:none;display:flex;align-items:center;gap:14px;padding:0 16px;background:#0c0c0b;border-bottom:1px solid var(--border)">
+              <div style="display:flex;gap:7px"><span style="width:11px;height:11px;border-radius:50%;background:#38423a"></span><span style="width:11px;height:11px;border-radius:50%;background:#38383a"></span><span style="width:11px;height:11px;border-radius:50%;background:#3a3838"></span></div>
+              <div style="flex:1;display:flex;justify-content:center"><div style="display:flex;align-items:center;gap:7px;height:24px;padding:0 16px;background:#000;border:1px solid var(--border);border-radius:9999px;color:var(--fg-3);font-size:12px"><i data-icon="lock-03" style="width:11px;height:11px"></i>maestro.university/setup</div></div>
+              <div style="width:52px"></div>
+            </div>
+            <div class="om-screen" style="position:relative;flex:1;overflow:hidden;background:radial-gradient(90% 70% at 50% 42%,#111 0%,#000 70%);color:var(--fg);display:flex;flex-direction:column;align-items:center;justify-content:center">
+              <div style="position:absolute;top:40px;left:0;right:0;display:flex;flex-direction:column;align-items:center;gap:12px">
+                <div style="display:flex;gap:6px"><span style="width:24px;height:4px;border-radius:9999px;background:var(--accent)"></span><span style="width:24px;height:4px;border-radius:9999px;background:var(--accent)"></span><span style="width:24px;height:4px;border-radius:9999px;background:var(--accent)"></span></div>
+                <span style="font-size:12px;letter-spacing:.18em;color:var(--fg-3);text-transform:uppercase;font-weight:600">Bringing your tutor to your device</span>
+              </div>
+              <div data-orb data-plx-orb style="position:relative;width:264px;height:264px">
+                <div data-orb-glow style="position:absolute;inset:-46px;border-radius:50%;background:radial-gradient(circle,rgba(166,178,247,.5),rgba(206,245,133,.18) 46%,transparent 70%);filter:blur(12px);opacity:.4;transform:scale(.9)"></div>
+                <div data-pulse-host style="position:absolute;inset:0"></div>
+                <svg width="264" height="264" viewBox="0 0 264 264" style="position:absolute;inset:0;transform:rotate(-90deg)">
+                  <circle cx="132" cy="132" r="112" fill="none" style="stroke:var(--n300);stroke-width:6"></circle>
+                  <circle data-ring cx="132" cy="132" r="112" fill="none" stroke-dasharray="703.7" stroke-dashoffset="703.7" style="stroke:var(--accent);stroke-width:6;stroke-linecap:round;filter:drop-shadow(0 0 9px rgba(206,245,133,.6))"></circle>
+                </svg>
+                <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center">
+                  <img src="assets/maestro-logo-mark-on-dark.svg" style="width:100px;height:100px;display:block;filter:drop-shadow(0 6px 22px rgba(0,0,0,.7))">
+                </div>
+              </div>
+              <div style="display:flex;align-items:flex-end;gap:5px;margin-top:38px">
+                <span data-pct style="font-size:62px;font-weight:700;font-family:var(--font-display);letter-spacing:-.02em;line-height:1;font-variant-numeric:tabular-nums">0</span>
+                <span style="font-size:26px;font-weight:600;color:var(--fg-2);margin-bottom:9px">%</span>
+              </div>
+              <div data-status style="font-size:18px;color:var(--fg-2);margin-top:8px;height:26px">Waking your tutor…</div>
+              <div style="display:flex;gap:26px;margin-top:26px">
+                <div data-dl-step data-th="34" style="display:flex;align-items:center;gap:9px;opacity:.5;transition:opacity .3s var(--e-out),color .3s var(--e-out)"><span data-step-ring style="width:20px;height:20px;border-radius:9999px;border:2px solid var(--border-strong);display:flex;align-items:center;justify-content:center;color:transparent;transition:all .25s var(--e-out)"><i data-icon="check" style="width:12px;height:12px"></i></span><span style="font-size:14px">Model weights</span></div>
+                <div data-dl-step data-th="66" style="display:flex;align-items:center;gap:9px;opacity:.5;transition:opacity .3s var(--e-out),color .3s var(--e-out)"><span data-step-ring style="width:20px;height:20px;border-radius:9999px;border:2px solid var(--border-strong);display:flex;align-items:center;justify-content:center;color:transparent;transition:all .25s var(--e-out)"><i data-icon="check" style="width:12px;height:12px"></i></span><span style="font-size:14px">Tokenizer &amp; tools</span></div>
+                <div data-dl-step data-th="93" style="display:flex;align-items:center;gap:9px;opacity:.5;transition:opacity .3s var(--e-out),color .3s var(--e-out)"><span data-step-ring style="width:20px;height:20px;border-radius:9999px;border:2px solid var(--border-strong);display:flex;align-items:center;justify-content:center;color:transparent;transition:all .25s var(--e-out)"><i data-icon="check" style="width:12px;height:12px"></i></span><span style="font-size:14px">Tuned to your focus</span></div>
+              </div>
+              <div style="display:flex;align-items:center;gap:8px;margin-top:30px;color:var(--fg-3)"><i data-icon="cpu-chip-01" style="width:15px;height:15px"></i><span style="font-size:13px">Runs entirely on your device · Works offline</span></div>
+              <button data-dl-continue data-goto="celebrate" style="margin-top:32px;height:54px;padding:0 30px;border-radius:9999px;border:none;background:var(--accent);color:var(--accent-ink);font-size:16px;font-weight:600;display:inline-flex;align-items:center;gap:9px;cursor:pointer;opacity:0;pointer-events:none;transform:translateY(10px);box-shadow:0 12px 44px -8px rgba(206,245,133,.55);transition:opacity .4s var(--e-out),transform .4s var(--e-out)">Meet your tutor<i data-icon="arrow-right" style="width:18px;height:18px"></i></button>
+            </div>
+          </div>
+        </div>
+        <button class="om-tile-hit" style="display:none"></button>
+      </div>
+
+      <!-- ===================== 5 · CELEBRATION A ===================== -->
+      <div class="om-tile" data-screen="celebrate" data-variant="a" data-flow="celebrate" data-index="05" data-name="Journey started" data-url="maestro.university/welcome" style="position:absolute;inset:0;opacity:0;visibility:hidden">
+        <div class="om-tile-label" style="display:none">05 · Journey started <b style="color:var(--fg-3)">5a</b></div>
+        <div class="om-cell" style="width:1240px;height:800px">
+          <div class="om-frame" style="width:1240px;height:800px;border-radius:16px;overflow:hidden;border:1px solid var(--border);background:#000;box-shadow:0 50px 130px -30px rgba(0,0,0,.85);display:flex;flex-direction:column">
+            <div class="om-chrome" style="height:40px;flex:none;display:flex;align-items:center;gap:14px;padding:0 16px;background:#0c0c0b;border-bottom:1px solid var(--border)">
+              <div style="display:flex;gap:7px"><span style="width:11px;height:11px;border-radius:50%;background:#38423a"></span><span style="width:11px;height:11px;border-radius:50%;background:#38383a"></span><span style="width:11px;height:11px;border-radius:50%;background:#3a3838"></span></div>
+              <div style="flex:1;display:flex;justify-content:center"><div style="display:flex;align-items:center;gap:7px;height:24px;padding:0 16px;background:#000;border:1px solid var(--border);border-radius:9999px;color:var(--fg-3);font-size:12px"><i data-icon="lock-03" style="width:11px;height:11px"></i>maestro.university/welcome</div></div>
+              <div style="width:52px"></div>
+            </div>
+            <div class="om-screen" style="position:relative;flex:1;overflow:hidden;background:#000;color:var(--fg)">
+              <img src="assets/climb-4-vista.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:26% 46%">
+              <div style="position:absolute;inset:0;background:linear-gradient(to left,#000 24%,rgba(0,0,0,.5) 50%,rgba(0,0,0,0) 76%)"></div>
+              <div data-confetti style="position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:15"></div>
+              <div style="position:absolute;top:20px;right:20px;z-index:20;display:flex;gap:4px;padding:4px;background:rgba(18,18,17,.72);backdrop-filter:blur(10px);border:1px solid var(--border);border-radius:9999px">
+                <button data-variant-set="celebrate" data-variant-val="a" style="height:30px;padding:0 14px;border-radius:9999px;border:1px solid var(--fg);background:var(--fg);color:#0A0A0A;font-size:13px;font-weight:600;cursor:pointer">A</button>
+                <button data-variant-set="celebrate" data-variant-val="b" style="height:30px;padding:0 14px;border-radius:9999px;border:1px solid transparent;background:transparent;color:var(--fg-2);font-size:13px;font-weight:600;cursor:pointer">B</button>
+              </div>
+              <div style="position:absolute;right:88px;top:0;bottom:0;width:520px;display:flex;flex-direction:column;justify-content:center;gap:22px;z-index:16">
+                <div data-reveal style="display:inline-flex;align-items:center;gap:9px;color:var(--accent)"><i data-icon="confetti-outline" style="width:20px;height:20px"></i><span style="font-size:13px;letter-spacing:.16em;text-transform:uppercase;font-weight:600">Journey started</span></div>
+                <h1 data-reveal style="font-size:60px;line-height:1.03;font-weight:700;letter-spacing:-.02em">You've started<br>your climb.</h1>
+                <p data-reveal style="font-size:19px;line-height:1.55;color:var(--fg-2);max-width:430px">Your AI engineering degree is officially underway. Basecamp is behind you — your tutor's ready when you are.</p>
+                <div data-reveal style="display:flex;align-items:center;gap:10px">
+                  <span style="display:inline-flex;align-items:center;gap:7px;height:32px;padding:0 13px;border-radius:9999px;background:var(--surface-1);border:1px solid var(--border);color:var(--fg-2);font-size:13px;font-weight:500"><i data-icon="graduation-hat-02" style="width:14px;height:14px"></i>AAS · AI Engineering</span>
+                  <span style="display:inline-flex;align-items:center;gap:7px;height:32px;padding:0 13px;border-radius:9999px;background:rgba(206,245,133,.12);color:var(--accent);font-size:13px;font-weight:600"><i data-icon="cpu-chip-01" style="width:14px;height:14px"></i>Applied ML</span>
+                </div>
+                <div data-reveal style="margin-top:8px">
+                  <button data-goto="getknow" style="height:56px;padding:0 30px;border-radius:9999px;border:none;background:var(--accent);color:var(--accent-ink);font-size:17px;font-weight:600;display:inline-flex;align-items:center;gap:10px;cursor:pointer;box-shadow:0 12px 44px -8px rgba(206,245,133,.5);transition:transform .12s var(--e-out),box-shadow .2s var(--e-out)" style-hover="transform:translateY(-2px);box-shadow:0 18px 54px -8px rgba(206,245,133,.62)" style-active="transform:translateY(0) scale(.98)">Start my first lesson<i data-icon="arrow-right" style="width:19px;height:19px"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="om-tile-hit" style="display:none"></button>
+      </div>
+
+      <!-- ===================== 5 · CELEBRATION B ===================== -->
+      <div class="om-tile" data-screen="celebrate" data-variant="b" data-flow="celebrate" data-index="05" data-name="Journey started" data-url="maestro.university/welcome" style="position:absolute;inset:0;opacity:0;visibility:hidden">
+        <div class="om-tile-label" style="display:none">05 · Journey started <b style="color:var(--fg-3)">5b</b></div>
+        <div class="om-cell" style="width:1240px;height:800px">
+          <div class="om-frame" style="width:1240px;height:800px;border-radius:16px;overflow:hidden;border:1px solid var(--border);background:#000;box-shadow:0 50px 130px -30px rgba(0,0,0,.85);display:flex;flex-direction:column">
+            <div class="om-chrome" style="height:40px;flex:none;display:flex;align-items:center;gap:14px;padding:0 16px;background:#0c0c0b;border-bottom:1px solid var(--border)">
+              <div style="display:flex;gap:7px"><span style="width:11px;height:11px;border-radius:50%;background:#38423a"></span><span style="width:11px;height:11px;border-radius:50%;background:#38383a"></span><span style="width:11px;height:11px;border-radius:50%;background:#3a3838"></span></div>
+              <div style="flex:1;display:flex;justify-content:center"><div style="display:flex;align-items:center;gap:7px;height:24px;padding:0 16px;background:#000;border:1px solid var(--border);border-radius:9999px;color:var(--fg-3);font-size:12px"><i data-icon="lock-03" style="width:11px;height:11px"></i>maestro.university/welcome</div></div>
+              <div style="width:52px"></div>
+            </div>
+            <div class="om-screen" style="position:relative;flex:1;overflow:hidden;background:#000;color:var(--fg);display:flex;align-items:center;justify-content:center">
+              <img src="assets/climb-clouds.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 30%;opacity:.55">
+              <div style="position:absolute;inset:0;background:radial-gradient(85% 75% at 50% 46%,rgba(0,0,0,.15),rgba(0,0,0,.72) 66%,#000 100%)"></div>
+              <div data-confetti style="position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:15"></div>
+              <div style="position:absolute;top:20px;right:20px;z-index:20;display:flex;gap:4px;padding:4px;background:rgba(18,18,17,.72);backdrop-filter:blur(10px);border:1px solid var(--border);border-radius:9999px">
+                <button data-variant-set="celebrate" data-variant-val="a" style="height:30px;padding:0 14px;border-radius:9999px;border:1px solid transparent;background:transparent;color:var(--fg-2);font-size:13px;font-weight:600;cursor:pointer">A</button>
+                <button data-variant-set="celebrate" data-variant-val="b" style="height:30px;padding:0 14px;border-radius:9999px;border:1px solid var(--fg);background:var(--fg);color:#0A0A0A;font-size:13px;font-weight:600;cursor:pointer">B</button>
+              </div>
+              <div style="position:relative;z-index:16;display:flex;flex-direction:column;align-items:center;text-align:center;gap:20px;max-width:580px;padding:0 40px">
+                <div data-reveal data-medallion style="position:relative;width:132px;height:132px;margin-bottom:4px">
+                  <div style="position:absolute;inset:-18px;border-radius:50%;background:radial-gradient(circle,rgba(234,173,94,.42),rgba(206,245,133,.16) 50%,transparent 72%);filter:blur(8px);animation:om-breathe 4.2s var(--e-out) infinite"></div>
+                  <div style="position:absolute;inset:0;border-radius:50%;border:2px solid var(--gold);opacity:.55"></div>
+                  <div style="position:absolute;inset:13px;border-radius:50%;border:1.5px solid rgba(206,245,133,.5)"></div>
+                  <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center"><img src="assets/maestro-logo-mark-on-dark.svg" style="width:62px;height:62px"></div>
+                </div>
+                <span data-reveal style="font-size:13px;letter-spacing:.22em;text-transform:uppercase;font-weight:600;color:var(--gold)">Day 1 · Your climb begins</span>
+                <h1 data-reveal style="font-size:60px;line-height:1.02;font-weight:700;letter-spacing:-.02em">Welcome to Maestro.</h1>
+                <p data-reveal style="font-size:19px;line-height:1.55;color:var(--fg-2);max-width:460px">You're enrolled in AI Engineering, focused on Applied ML. Your tutor lives on your device and the whole path is ahead of you.</p>
+                <div data-reveal style="margin-top:8px">
+                  <button data-goto="getknow" style="height:56px;padding:0 32px;border-radius:9999px;border:none;background:var(--accent);color:var(--accent-ink);font-size:17px;font-weight:600;display:inline-flex;align-items:center;gap:10px;cursor:pointer;box-shadow:0 12px 44px -8px rgba(206,245,133,.5);transition:transform .12s var(--e-out),box-shadow .2s var(--e-out)" style-hover="transform:translateY(-2px);box-shadow:0 18px 54px -8px rgba(206,245,133,.62)" style-active="transform:translateY(0) scale(.98)">Start my first lesson<i data-icon="arrow-right" style="width:19px;height:19px"></i></button>
+                </div>
+                <p data-reveal style="font-size:12px;color:var(--fg-3);letter-spacing:.1em;text-transform:uppercase;margin-top:4px">Climber No. 4,213 · Ascent began July 2, 2026</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="om-tile-hit" style="display:none"></button>
+      </div>
+
+      <!-- ===================== 6 · LESSON 0 · GET TO KNOW YOU ===================== -->
+      <div class="om-tile" data-screen="getknow" data-variant="" data-flow="getknow" data-index="06" data-name="First lesson" data-url="maestro.university/lesson-0" style="position:absolute;inset:0;opacity:0;visibility:hidden">
+        <div class="om-tile-label" style="display:none">06 · Lesson 0 · Get to know you</div>
+        <div class="om-cell" style="width:1240px;height:800px">
+          <div class="om-frame" style="width:1240px;height:800px;border-radius:16px;overflow:hidden;border:1px solid var(--border);background:#000;box-shadow:0 50px 130px -30px rgba(0,0,0,.85);display:flex;flex-direction:column">
+            <div class="om-chrome" style="height:40px;flex:none;display:flex;align-items:center;gap:14px;padding:0 16px;background:#0c0c0b;border-bottom:1px solid var(--border)">
+              <div style="display:flex;gap:7px"><span style="width:11px;height:11px;border-radius:50%;background:#38423a"></span><span style="width:11px;height:11px;border-radius:50%;background:#38383a"></span><span style="width:11px;height:11px;border-radius:50%;background:#3a3838"></span></div>
+              <div style="flex:1;display:flex;justify-content:center"><div style="display:flex;align-items:center;gap:7px;height:24px;padding:0 16px;background:#000;border:1px solid var(--border);border-radius:9999px;color:var(--fg-3);font-size:12px"><i data-icon="lock-03" style="width:11px;height:11px"></i>maestro.university/lesson-0</div></div>
+              <div style="width:52px"></div>
+            </div>
+            <div class="om-screen" style="position:relative;flex:1;overflow:hidden;background:#000;color:var(--fg)">
+              <img data-plx-img src="assets/climb-1-basecamp.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:64% 78%;opacity:.14;transform:scale(1.06);will-change:transform">
+              <div style="position:absolute;inset:0;background:radial-gradient(70% 55% at 50% 28%,rgba(166,178,247,.09),transparent 70%)"></div>
+              <div style="position:absolute;inset:0;background:linear-gradient(to top,#000 6%,rgba(0,0,0,.4) 40%,rgba(0,0,0,.7) 100%)"></div>
+              <!-- header -->
+              <div style="position:absolute;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:24px 40px;z-index:10">
+                <div data-reveal style="display:flex;align-items:center;gap:13px">
+                  <img src="assets/maestro-logo-mark-on-dark.svg" style="width:36px;height:36px;display:block">
+                  <div><div style="font-size:15px;font-weight:600">Lesson 0 · Getting to know you</div><div style="font-size:12px;color:var(--fg-3)">Your first lesson, before the climb</div></div>
+                </div>
+                <div data-reveal style="display:flex;align-items:center;gap:12px">
+                  <div style="display:flex;gap:5px">
+                    <div data-gk-seg style="width:44px;height:6px;border-radius:9999px;background:var(--surface-2)"></div>
+                    <div data-gk-seg style="width:44px;height:6px;border-radius:9999px;background:var(--surface-2)"></div>
+                    <div data-gk-seg style="width:44px;height:6px;border-radius:9999px;background:var(--surface-2)"></div>
+                  </div>
+                  <span data-gk-count style="font-size:13px;color:var(--fg-2);font-weight:600;white-space:nowrap">Question 1 of 3</span>
+                </div>
+              </div>
+              <!-- stage -->
+              <div data-gk-stage style="position:absolute;left:0;right:0;top:88px;bottom:0;z-index:5">
+                <!-- Q1 -->
+                <div data-gk-panel="0" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:30px;padding:0 90px 30px;opacity:1;visibility:visible">
+                  <div style="position:relative;width:58px;height:58px">
+                    <div style="position:absolute;inset:-12px;background:radial-gradient(circle,rgba(166,178,247,.5),transparent 68%);filter:blur(6px);animation:om-breathe 4.2s var(--e-out) infinite"></div>
+                    <img src="assets/maestro-logo-mark-on-dark.svg" style="position:relative;width:58px;height:58px;display:block">
+                  </div>
+                  <h1 style="font-size:42px;line-height:1.12;font-weight:700;letter-spacing:-.015em;text-align:center;max-width:780px">Before we climb, Ray — what brings you to the mountain?</h1>
+                  <div style="display:grid;grid-template-columns:repeat(2,310px);gap:14px">
+                    <button data-quiz-opt data-gk-item data-echo="Career switch" style="text-align:left;display:flex;flex-direction:column;gap:4px;padding:18px 20px;border-radius:16px;border:1px solid var(--border);background:var(--surface);cursor:pointer;transition:border-color .18s var(--e-out),background .18s var(--e-out),transform .18s var(--e-out)" style-hover="border-color:var(--border-strong);transform:translateY(-2px)"><span style="font-size:17px;font-weight:600;color:var(--fg)">Switching careers</span><span style="font-size:13px;color:var(--fg-2)">Time for something new</span></button>
+                    <button data-quiz-opt data-gk-item data-echo="Building own ideas" style="text-align:left;display:flex;flex-direction:column;gap:4px;padding:18px 20px;border-radius:16px;border:1px solid var(--border);background:var(--surface);cursor:pointer;transition:border-color .18s var(--e-out),background .18s var(--e-out),transform .18s var(--e-out)" style-hover="border-color:var(--border-strong);transform:translateY(-2px)"><span style="font-size:17px;font-weight:600;color:var(--fg)">Building my own ideas</span><span style="font-size:13px;color:var(--fg-2)">I want to ship things</span></button>
+                    <button data-quiz-opt data-gk-item data-echo="Leveling up at work" style="text-align:left;display:flex;flex-direction:column;gap:4px;padding:18px 20px;border-radius:16px;border:1px solid var(--border);background:var(--surface);cursor:pointer;transition:border-color .18s var(--e-out),background .18s var(--e-out),transform .18s var(--e-out)" style-hover="border-color:var(--border-strong);transform:translateY(-2px)"><span style="font-size:17px;font-weight:600;color:var(--fg)">Leveling up at work</span><span style="font-size:13px;color:var(--fg-2)">AI is coming to my job</span></button>
+                    <button data-quiz-opt data-gk-item data-echo="Pure curiosity" style="text-align:left;display:flex;flex-direction:column;gap:4px;padding:18px 20px;border-radius:16px;border:1px solid var(--border);background:var(--surface);cursor:pointer;transition:border-color .18s var(--e-out),background .18s var(--e-out),transform .18s var(--e-out)" style-hover="border-color:var(--border-strong);transform:translateY(-2px)"><span style="font-size:17px;font-weight:600;color:var(--fg)">Pure curiosity</span><span style="font-size:13px;color:var(--fg-2)">I want to understand it</span></button>
+                  </div>
+                </div>
+                <!-- Q2 -->
+                <div data-gk-panel="1" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:30px;padding:0 90px 30px;opacity:0;visibility:hidden">
+                  <div style="position:relative;width:58px;height:58px">
+                    <div style="position:absolute;inset:-12px;background:radial-gradient(circle,rgba(166,178,247,.5),transparent 68%);filter:blur(6px);animation:om-breathe 4.2s var(--e-out) infinite"></div>
+                    <img src="assets/maestro-logo-mark-on-dark.svg" style="position:relative;width:58px;height:58px;display:block">
+                  </div>
+                  <h1 style="font-size:42px;line-height:1.12;font-weight:700;letter-spacing:-.015em;text-align:center;max-width:720px">How much time can you give each week?</h1>
+                  <div style="display:flex;gap:14px">
+                    <button data-quiz-opt data-gk-item data-echo="2–3 hrs a week" style="text-align:left;display:flex;flex-direction:column;gap:4px;padding:18px 20px;border-radius:16px;border:1px solid var(--border);background:var(--surface);cursor:pointer;width:250px;transition:border-color .18s var(--e-out),background .18s var(--e-out),transform .18s var(--e-out)" style-hover="border-color:var(--border-strong);transform:translateY(-2px)"><span style="font-size:17px;font-weight:600;color:var(--fg)">2–3 hours</span><span style="font-size:13px;color:var(--fg-2)">A steady pace</span></button>
+                    <button data-quiz-opt data-gk-item data-echo="5–7 hrs a week" style="text-align:left;display:flex;flex-direction:column;gap:4px;padding:18px 20px;border-radius:16px;border:1px solid var(--border);background:var(--surface);cursor:pointer;width:250px;transition:border-color .18s var(--e-out),background .18s var(--e-out),transform .18s var(--e-out)" style-hover="border-color:var(--border-strong);transform:translateY(-2px)"><span style="font-size:17px;font-weight:600;color:var(--fg)">5–7 hours</span><span style="font-size:13px;color:var(--fg-2)">The classic climb</span></button>
+                    <button data-quiz-opt data-gk-item data-echo="10+ hrs a week" style="text-align:left;display:flex;flex-direction:column;gap:4px;padding:18px 20px;border-radius:16px;border:1px solid var(--border);background:var(--surface);cursor:pointer;width:250px;transition:border-color .18s var(--e-out),background .18s var(--e-out),transform .18s var(--e-out)" style-hover="border-color:var(--border-strong);transform:translateY(-2px)"><span style="font-size:17px;font-weight:600;color:var(--fg)">10+ hours</span><span style="font-size:13px;color:var(--fg-2)">A fast ascent</span></button>
+                  </div>
+                </div>
+                <!-- Q3 -->
+                <div data-gk-panel="2" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:30px;padding:0 90px 30px;opacity:0;visibility:hidden">
+                  <div style="position:relative;width:58px;height:58px">
+                    <div style="position:absolute;inset:-12px;background:radial-gradient(circle,rgba(166,178,247,.5),transparent 68%);filter:blur(6px);animation:om-breathe 4.2s var(--e-out) infinite"></div>
+                    <img src="assets/maestro-logo-mark-on-dark.svg" style="position:relative;width:58px;height:58px;display:block">
+                  </div>
+                  <h1 style="font-size:42px;line-height:1.12;font-weight:700;letter-spacing:-.015em;text-align:center;max-width:720px">Have you written code before?</h1>
+                  <div style="display:flex;gap:14px">
+                    <button data-quiz-opt data-gk-item data-echo="starting from zero" style="text-align:left;display:flex;flex-direction:column;gap:4px;padding:18px 20px;border-radius:16px;border:1px solid var(--border);background:var(--surface);cursor:pointer;width:250px;transition:border-color .18s var(--e-out),background .18s var(--e-out),transform .18s var(--e-out)" style-hover="border-color:var(--border-strong);transform:translateY(-2px)"><span style="font-size:17px;font-weight:600;color:var(--fg)">Never</span><span style="font-size:13px;color:var(--fg-2)">We'll start from zero</span></button>
+                    <button data-quiz-opt data-gk-item data-echo="a little code before" style="text-align:left;display:flex;flex-direction:column;gap:4px;padding:18px 20px;border-radius:16px;border:1px solid var(--border);background:var(--surface);cursor:pointer;width:250px;transition:border-color .18s var(--e-out),background .18s var(--e-out),transform .18s var(--e-out)" style-hover="border-color:var(--border-strong);transform:translateY(-2px)"><span style="font-size:17px;font-weight:600;color:var(--fg)">A little</span><span style="font-size:13px;color:var(--fg-2)">Tutorials and copy-paste</span></button>
+                    <button data-quiz-opt data-gk-item data-echo="comfortable coding" style="text-align:left;display:flex;flex-direction:column;gap:4px;padding:18px 20px;border-radius:16px;border:1px solid var(--border);background:var(--surface);cursor:pointer;width:250px;transition:border-color .18s var(--e-out),background .18s var(--e-out),transform .18s var(--e-out)" style-hover="border-color:var(--border-strong);transform:translateY(-2px)"><span style="font-size:17px;font-weight:600;color:var(--fg)">Comfortable</span><span style="font-size:13px;color:var(--fg-2)">I'm here for the AI part</span></button>
+                  </div>
+                </div>
+                <!-- WRAP -->
+                <div data-gk-panel="3" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;padding:0 90px 20px;opacity:0;visibility:hidden">
+                  <div style="position:relative;width:56px;height:56px">
+                    <div style="position:absolute;inset:-12px;background:radial-gradient(circle,rgba(206,245,133,.45),transparent 68%);filter:blur(6px);animation:om-breathe 4.2s var(--e-out) infinite"></div>
+                    <img src="assets/maestro-logo-mark-on-dark.svg" style="position:relative;width:56px;height:56px;display:block">
+                  </div>
+                  <h1 style="font-size:38px;line-height:1.1;font-weight:700;letter-spacing:-.015em;text-align:center">Thanks, Ray — here's how this works.</h1>
+                  <div style="display:flex;flex-direction:column;gap:12px;width:640px;margin-top:4px">
+                    <div data-gk-item style="display:flex;align-items:center;gap:16px;padding:15px 18px;border:1px solid var(--border);border-radius:16px;background:rgba(26,26,25,.72)">
+                      <span style="width:46px;height:46px;flex:none;border-radius:12px;background:rgba(166,178,247,.14);display:flex;align-items:center;justify-content:center;color:var(--lavender)"><i data-icon="message-chat-circle" style="width:22px;height:22px"></i></span>
+                      <span style="display:flex;flex-direction:column;gap:2px"><span style="font-size:16px;font-weight:600;color:var(--fg)">Lessons are conversations</span><span style="font-size:13.5px;color:var(--fg-2)">You talk it through with your tutor — no lecture videos.</span></span>
+                    </div>
+                    <div data-gk-item style="display:flex;align-items:center;gap:16px;padding:15px 18px;border:1px solid var(--border);border-radius:16px;background:rgba(26,26,25,.72)">
+                      <span style="width:46px;height:46px;flex:none;border-radius:12px;background:rgba(206,245,133,.13);display:flex;align-items:center;justify-content:center;color:var(--accent)"><i data-icon="cpu-chip-01" style="width:22px;height:22px"></i></span>
+                      <span style="display:flex;flex-direction:column;gap:2px"><span style="font-size:16px;font-weight:600;color:var(--fg)">Yours, on your device</span><span style="font-size:13.5px;color:var(--fg-2)">Your tutor runs locally — offline, private, always there.</span></span>
+                    </div>
+                    <div data-gk-item style="display:flex;align-items:center;gap:16px;padding:15px 18px;border:1px solid var(--border);border-radius:16px;background:rgba(26,26,25,.72)">
+                      <span style="width:46px;height:46px;flex:none;border-radius:12px;background:rgba(255,139,98,.14);display:flex;align-items:center;justify-content:center;color:var(--sunset)"><i data-icon="route" style="width:22px;height:22px"></i></span>
+                      <span style="display:flex;flex-direction:column;gap:2px"><span style="font-size:16px;font-weight:600;color:var(--fg)">A path that adapts</span><span style="font-size:13.5px;color:var(--fg-2)">Your answers shape every week of the climb.</span></span>
+                    </div>
+                  </div>
+                  <div data-gk-item style="margin-top:8px">
+                    <button data-goto="home" style="height:56px;padding:0 30px;border-radius:9999px;border:none;background:var(--accent);color:var(--accent-ink);font-size:17px;font-weight:600;display:inline-flex;align-items:center;gap:10px;cursor:pointer;box-shadow:0 12px 44px -8px rgba(206,245,133,.5);transition:transform .12s var(--e-out),box-shadow .2s var(--e-out)" style-hover="transform:translateY(-2px);box-shadow:0 18px 54px -8px rgba(206,245,133,.62)" style-active="transform:translateY(0) scale(.98)">Take me to my summit<i data-icon="arrow-right" style="width:19px;height:19px"></i></button>
+                  </div>
+                  <p data-gk-item style="font-size:13px;color:var(--fg-3)">Lesson 0 complete · Your path is set</p>
+                </div>
+              </div>
+              <img src="assets/walk-peak.gif" alt="" style="position:absolute;right:30px;bottom:14px;width:300px;height:300px;object-fit:cover;opacity:.5;z-index:1;pointer-events:none;-webkit-mask:radial-gradient(closest-side,#000 55%,transparent 82%) center/100% 100% no-repeat;mask:radial-gradient(closest-side,#000 55%,transparent 82%) center/100% 100% no-repeat">
+              <span data-gk-echo style="position:absolute;left:40px;bottom:26px;z-index:10;display:none;align-items:center;height:30px;padding:0 13px;border-radius:9999px;border:1px solid var(--border);background:rgba(18,18,17,.7);color:var(--fg-2);font-size:13px"></span>
+            </div>
+          </div>
+        </div>
+        <button class="om-tile-hit" style="display:none"></button>
+      </div>
+
+      <!-- ===================== 6 · HOME SUMMIT MAP A ===================== -->
+      <div class="om-tile" data-screen="home" data-variant="a" data-flow="home" data-index="07" data-name="Your summit" data-url="maestro.university/home" style="position:absolute;inset:0;opacity:0;visibility:hidden">
+        <div class="om-tile-label" style="display:none">07 · Your summit <b style="color:var(--fg-3)">7a</b></div>
+        <div class="om-cell" style="width:1240px;height:800px">
+          <div class="om-frame" style="width:1240px;height:800px;border-radius:16px;overflow:hidden;border:1px solid var(--border);background:#000;box-shadow:0 50px 130px -30px rgba(0,0,0,.85);display:flex;flex-direction:column">
+            <div class="om-chrome" style="height:40px;flex:none;display:flex;align-items:center;gap:14px;padding:0 16px;background:#0c0c0b;border-bottom:1px solid var(--border)">
+              <div style="display:flex;gap:7px"><span style="width:11px;height:11px;border-radius:50%;background:#38423a"></span><span style="width:11px;height:11px;border-radius:50%;background:#38383a"></span><span style="width:11px;height:11px;border-radius:50%;background:#3a3838"></span></div>
+              <div style="flex:1;display:flex;justify-content:center"><div style="display:flex;align-items:center;gap:7px;height:24px;padding:0 16px;background:#000;border:1px solid var(--border);border-radius:9999px;color:var(--fg-3);font-size:12px"><i data-icon="lock-03" style="width:11px;height:11px"></i>maestro.university/home</div></div>
+              <div style="width:52px"></div>
+            </div>
+            <div class="om-screen" style="position:relative;flex:1;overflow:hidden;background:#000;color:var(--fg);display:flex">
+              <div data-appnav="home" style="width:240px;flex:none;background:#1c1c1b;border-right:1px solid var(--border);z-index:9"></div>
+              <div style="flex:1;position:relative;overflow:hidden;background:#000">
+                <img src="assets/climb-3-ridge.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:52% 46%">
+                <div style="position:absolute;inset:0;background:linear-gradient(108deg,rgba(0,0,0,.9) 0%,rgba(0,0,0,.45) 34%,rgba(0,0,0,.12) 72%)"></div>
+                <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.75),transparent 40%)"></div>
+                <!-- variant toggle -->
+                <div style="position:absolute;top:18px;right:18px;z-index:20;display:flex;gap:4px;padding:4px;background:rgba(18,18,17,.72);backdrop-filter:blur(10px);border:1px solid var(--border);border-radius:9999px">
+                  <button data-variant-set="home" data-variant-val="a" style="height:30px;padding:0 14px;border-radius:9999px;border:1px solid var(--fg);background:var(--fg);color:#0A0A0A;font-size:13px;font-weight:600;cursor:pointer">A</button>
+                  <button data-variant-set="home" data-variant-val="b" style="height:30px;padding:0 14px;border-radius:9999px;border:1px solid transparent;background:transparent;color:var(--fg-2);font-size:13px;font-weight:600;cursor:pointer">B</button>
+                </div>
+                <!-- greeting -->
+                <div style="position:absolute;left:44px;top:34px;z-index:8">
+                  <div style="display:flex;align-items:center;gap:14px">
+                    <h2 style="font-size:38px;font-weight:700;letter-spacing:-.01em">Back at it, Ray</h2>
+                    <span style="display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 12px;border-radius:9999px;background:rgba(255,139,98,.16);color:var(--sunset);font-size:14px;font-weight:600"><i data-icon="flame-02" style="width:16px;height:16px"></i>12</span>
+                  </div>
+                  <p style="font-size:16px;color:var(--fg-2);margin-top:6px;text-shadow:0 1px 6px rgba(0,0,0,.6)">Level 3 of 5 · you're 35% of the way to the next camp</p>
+                </div>
+                <!-- constellation sky -->
+                <div data-sky style="position:absolute;inset:0;z-index:3;pointer-events:none"></div>
+                <div data-reveal style="position:absolute;top:66px;right:22px;z-index:8;display:flex;align-items:center;gap:7px;color:var(--fg-3);font-size:12px;text-shadow:0 1px 4px #000"><i data-icon="sparkle" style="width:13px;height:13px"></i>Your sky · 10 concepts mastered</div>
+                <!-- trail -->
+                <div data-trail style="position:absolute;inset:0;z-index:4">
+                  <svg viewBox="0 0 1000 760" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;overflow:visible">
+                    <path d="M545 388 C 630 325 650 315 725 255 C 800 200 815 185 880 120" fill="none" stroke="rgba(236,235,228,.32)" stroke-width="2.5" stroke-dasharray="2 9" stroke-linecap="round"></path>
+                    <path data-trail-done d="M150 655 C 250 620 280 560 350 520 C 440 480 470 445 545 388" fill="none" style="stroke:var(--accent);stroke-width:3.5;stroke-linecap:round;filter:drop-shadow(0 0 7px rgba(206,245,133,.6))"></path>
+                  </svg>
+                  <!-- nodes -->
+                  <div style="position:absolute;left:15%;top:86.2%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:8px;z-index:5">
+                    <div data-node style="width:36px;height:36px;border-radius:50%;background:rgba(206,245,133,.18);border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;color:var(--accent)"><i data-icon="check" style="width:16px;height:16px"></i></div>
+                    <div style="text-align:center;text-shadow:0 1px 5px #000"><div style="font-size:12px;font-weight:600">Level 1</div><div style="font-size:11px;color:var(--fg-2)">Foundations</div></div>
+                  </div>
+                  <div style="position:absolute;left:35%;top:68.4%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:8px;z-index:5">
+                    <div data-node style="width:36px;height:36px;border-radius:50%;background:rgba(206,245,133,.18);border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;color:var(--accent)"><i data-icon="check" style="width:16px;height:16px"></i></div>
+                    <div style="text-align:center;text-shadow:0 1px 5px #000"><div style="font-size:12px;font-weight:600">Level 2</div><div style="font-size:11px;color:var(--fg-2)">Python basics</div></div>
+                  </div>
+                  <div style="position:absolute;left:54.5%;top:51%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:10px;z-index:6">
+                    <div data-you style="position:relative;display:flex;flex-direction:column;align-items:center;gap:10px">
+                      <div style="display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 11px;border-radius:9999px;background:var(--accent);color:var(--accent-ink);font-size:12px;font-weight:700;box-shadow:0 6px 18px -4px rgba(206,245,133,.6)">You're here</div>
+                      <div data-node style="position:relative;width:48px;height:48px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;box-shadow:0 0 28px -2px rgba(206,245,133,.8)">
+                        <span style="position:absolute;inset:0;border-radius:50%;border:2px solid var(--accent);animation:om-ping 2.6s var(--e-out) infinite"></span>
+                        <span style="position:absolute;inset:0;border-radius:50%;border:2px solid var(--accent);animation:om-ping 2.6s var(--e-out) 1.3s infinite"></span>
+                        <img src="assets/maestro-logo-mark.svg" style="width:26px;height:26px"></div>
+                    </div>
+                    <div style="text-align:center;text-shadow:0 1px 6px #000"><div style="font-size:13px;font-weight:700">Level 3</div><div style="font-size:11px;color:var(--fg-2)">Functions &amp; input</div></div>
+                  </div>
+                  <div style="position:absolute;left:72.5%;top:33.6%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:8px;z-index:5">
+                    <div data-node style="width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.05);border:1.5px solid var(--border-strong);display:flex;align-items:center;justify-content:center;color:var(--fg-3)"><i data-icon="lock-03" style="width:15px;height:15px"></i></div>
+                    <div style="text-align:center;text-shadow:0 1px 5px #000"><div style="font-size:12px;font-weight:600;color:var(--fg-2)">Level 4</div><div style="font-size:11px;color:var(--fg-3)">Data &amp; loops</div></div>
+                  </div>
+                  <div style="position:absolute;left:88%;top:15.8%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:8px;z-index:5">
+                    <div data-node style="width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.05);border:1.5px solid var(--border-strong);display:flex;align-items:center;justify-content:center;color:var(--fg-3)"><i data-icon="diamond-01" style="width:15px;height:15px"></i></div>
+                    <div style="text-align:center;text-shadow:0 1px 5px #000"><div style="font-size:12px;font-weight:600;color:var(--fg-2)">Summit</div><div style="font-size:11px;color:var(--fg-3)">First model</div></div>
+                  </div>
+                </div>
+                <!-- continue card -->
+                <div style="position:absolute;right:40px;bottom:34px;z-index:8;display:flex;align-items:center;gap:16px;padding:16px 18px;background:rgba(16,16,15,.86);backdrop-filter:blur(14px);border:1px solid var(--border);border-radius:18px;box-shadow:0 18px 50px -14px rgba(0,0,0,.7)">
+                  <div style="position:relative;width:48px;height:48px;flex:none"><svg width="48" height="48" viewBox="0 0 48 48" style="transform:rotate(-90deg)"><circle cx="24" cy="24" r="20" fill="none" style="stroke:var(--n300);stroke-width:4"></circle><circle cx="24" cy="24" r="20" fill="none" stroke-dasharray="125.6" stroke-dashoffset="81.6" style="stroke:var(--accent);stroke-width:4;stroke-linecap:round"></circle></svg><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700">35%</div></div>
+                  <div style="min-width:0"><div style="font-size:12px;color:var(--fg-3);text-transform:uppercase;letter-spacing:.08em;font-weight:600">Pick up where you left off</div><div style="font-size:18px;font-weight:600;margin-top:3px">Functions &amp; input</div><div style="font-size:13px;color:var(--fg-2);margin-top:1px">PY101 · Lesson 4</div></div>
+                  <button data-goto="week" style="margin-left:8px;height:52px;padding:0 24px;border-radius:9999px;border:none;background:var(--accent);color:var(--accent-ink);font-size:16px;font-weight:600;display:inline-flex;align-items:center;gap:9px;cursor:pointer;transition:transform .12s var(--e-out)" style-hover="transform:translateY(-2px)" style-active="transform:scale(.97)">Continue<i data-icon="arrow-right" style="width:18px;height:18px"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="om-tile-hit" style="display:none"></button>
+      </div>
+
+      <!-- ===================== 6 · HOME SUMMIT MAP B ===================== -->
+      <div class="om-tile" data-screen="home" data-variant="b" data-flow="home" data-index="07" data-name="Your summit" data-url="maestro.university/home" style="position:absolute;inset:0;opacity:0;visibility:hidden">
+        <div class="om-tile-label" style="display:none">07 · Your summit <b style="color:var(--fg-3)">7b</b></div>
+        <div class="om-cell" style="width:1240px;height:800px">
+          <div class="om-frame" style="width:1240px;height:800px;border-radius:16px;overflow:hidden;border:1px solid var(--border);background:#000;box-shadow:0 50px 130px -30px rgba(0,0,0,.85);display:flex;flex-direction:column">
+            <div class="om-chrome" style="height:40px;flex:none;display:flex;align-items:center;gap:14px;padding:0 16px;background:#0c0c0b;border-bottom:1px solid var(--border)">
+              <div style="display:flex;gap:7px"><span style="width:11px;height:11px;border-radius:50%;background:#38423a"></span><span style="width:11px;height:11px;border-radius:50%;background:#38383a"></span><span style="width:11px;height:11px;border-radius:50%;background:#3a3838"></span></div>
+              <div style="flex:1;display:flex;justify-content:center"><div style="display:flex;align-items:center;gap:7px;height:24px;padding:0 16px;background:#000;border:1px solid var(--border);border-radius:9999px;color:var(--fg-3);font-size:12px"><i data-icon="lock-03" style="width:11px;height:11px"></i>maestro.university/home</div></div>
+              <div style="width:52px"></div>
+            </div>
+            <div class="om-screen" style="position:relative;flex:1;overflow:hidden;background:#000;color:var(--fg);display:flex">
+              <div data-appnav="home" style="width:240px;flex:none;background:#1c1c1b;border-right:1px solid var(--border);z-index:9"></div>
+              <!-- left: expedition list -->
+              <div style="width:452px;flex:none;background:#161615;border-right:1px solid var(--border);padding:38px 34px;display:flex;flex-direction:column;overflow:hidden">
+                <div style="display:flex;align-items:center;gap:12px">
+                  <h2 style="font-size:30px;font-weight:700;letter-spacing:-.01em">Back at it, Ray</h2>
+                  <span style="display:inline-flex;align-items:center;gap:5px;height:28px;padding:0 11px;border-radius:9999px;background:rgba(255,139,98,.16);color:var(--sunset);font-size:13px;font-weight:600"><i data-icon="flame-02" style="width:14px;height:14px"></i>12</span>
+                </div>
+                <p style="font-size:15px;color:var(--fg-2);margin-top:5px">Level 3 of 5 · AI Engineering</p>
+                <div style="font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--fg-3);margin:30px 0 16px">Your expedition</div>
+                <div data-timeline style="display:flex;flex-direction:column">
+                  <!-- L1 -->
+                  <div style="display:flex;gap:15px">
+                    <div style="display:flex;flex-direction:column;align-items:center;flex:none"><div data-node style="width:36px;height:36px;border-radius:50%;background:rgba(206,245,133,.16);border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;color:var(--accent)"><i data-icon="check" style="width:15px;height:15px"></i></div><div data-conn style="width:2px;height:28px;background:var(--accent)"></div></div>
+                    <div style="padding-bottom:16px"><div style="font-size:16px;font-weight:600">Foundations</div><div style="font-size:13px;color:var(--fg-3);margin-top:1px">Level 1 · Completed</div></div>
+                  </div>
+                  <!-- L2 -->
+                  <div style="display:flex;gap:15px">
+                    <div style="display:flex;flex-direction:column;align-items:center;flex:none"><div data-node style="width:36px;height:36px;border-radius:50%;background:rgba(206,245,133,.16);border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;color:var(--accent)"><i data-icon="check" style="width:15px;height:15px"></i></div><div data-conn style="width:2px;height:34px;background:var(--accent)"></div></div>
+                    <div style="padding-bottom:16px"><div style="font-size:16px;font-weight:600">Python basics</div><div style="font-size:13px;color:var(--fg-3);margin-top:1px">Level 2 · Completed</div></div>
+                  </div>
+                  <!-- L3 current -->
+                  <div style="display:flex;gap:15px">
+                    <div style="display:flex;flex-direction:column;align-items:center;flex:none"><div data-node style="width:38px;height:38px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;box-shadow:0 0 22px -2px rgba(206,245,133,.75)"><img src="assets/maestro-logo-mark.svg" style="width:22px;height:22px"></div><div data-conn style="width:2px;height:44px;background:var(--border-strong)"></div></div>
+                    <div style="flex:1;padding-bottom:16px">
+                      <div style="border:1px solid var(--accent);background:rgba(206,245,133,.06);border-radius:16px;padding:14px 16px">
+                        <div style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--accent)">You're here · Level 3</div>
+                        <div style="font-size:17px;font-weight:600;margin-top:5px">Functions &amp; input</div>
+                        <div style="font-size:13px;color:var(--fg-2);margin-top:1px">PY101 · Lesson 4 · 35% done</div>
+                        <button data-goto="week" style="margin-top:13px;height:42px;padding:0 20px;border-radius:9999px;border:none;background:var(--accent);color:var(--accent-ink);font-size:15px;font-weight:600;display:inline-flex;align-items:center;gap:8px;cursor:pointer;transition:transform .12s var(--e-out)" style-hover="transform:translateY(-1px)" style-active="transform:scale(.97)">Continue<i data-icon="arrow-right" style="width:17px;height:17px"></i></button>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- L4 -->
+                  <div style="display:flex;gap:15px">
+                    <div style="display:flex;flex-direction:column;align-items:center;flex:none"><div data-node style="width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.04);border:1.5px solid var(--border-strong);display:flex;align-items:center;justify-content:center;color:var(--fg-3);margin-left:1px"><i data-icon="lock-03" style="width:14px;height:14px"></i></div><div data-conn style="width:2px;height:28px;background:var(--border-strong)"></div></div>
+                    <div style="padding-bottom:16px"><div style="font-size:16px;font-weight:600;color:var(--fg-2)">Data &amp; loops</div><div style="font-size:13px;color:var(--fg-3);margin-top:1px">Level 4 · Locked</div></div>
+                  </div>
+                  <!-- L5 -->
+                  <div style="display:flex;gap:15px">
+                    <div style="display:flex;flex-direction:column;align-items:center;flex:none"><div data-node style="width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.04);border:1.5px solid var(--border-strong);display:flex;align-items:center;justify-content:center;color:var(--fg-3);margin-left:1px"><i data-icon="diamond-01" style="width:14px;height:14px"></i></div></div>
+                    <div><div style="font-size:16px;font-weight:600;color:var(--fg-2)">First model</div><div style="font-size:13px;color:var(--fg-3);margin-top:1px">Summit · Locked</div></div>
+                  </div>
+                </div>
+              </div>
+              <!-- right: cinematic -->
+              <div style="flex:1;position:relative;overflow:hidden;background:#000">
+                <img src="assets/climb-4-vista.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:40% 44%">
+                <div style="position:absolute;inset:0;background:linear-gradient(90deg,#161615 0%,rgba(0,0,0,.2) 26%,rgba(0,0,0,0) 60%)"></div>
+                <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.7),transparent 46%)"></div>
+                <div style="position:absolute;top:18px;right:18px;z-index:20;display:flex;gap:4px;padding:4px;background:rgba(18,18,17,.72);backdrop-filter:blur(10px);border:1px solid var(--border);border-radius:9999px">
+                  <button data-variant-set="home" data-variant-val="a" style="height:30px;padding:0 14px;border-radius:9999px;border:1px solid transparent;background:transparent;color:var(--fg-2);font-size:13px;font-weight:600;cursor:pointer">A</button>
+                  <button data-variant-set="home" data-variant-val="b" style="height:30px;padding:0 14px;border-radius:9999px;border:1px solid var(--fg);background:var(--fg);color:#0A0A0A;font-size:13px;font-weight:600;cursor:pointer">B</button>
+                </div>
+                <div style="position:absolute;left:40px;bottom:40px;right:40px;display:flex;align-items:flex-end;justify-content:space-between;gap:20px">
+                  <div>
+                    <div style="font-size:13px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--fg-2);text-shadow:0 1px 6px #000">The ridge · Level 3</div>
+                    <div style="font-size:34px;font-weight:700;letter-spacing:-.01em;margin-top:6px;text-shadow:0 2px 10px #000">Keep climbing.</div>
+                    <div style="font-size:15px;color:var(--fg-2);margin-top:4px;max-width:360px;text-shadow:0 1px 6px #000">You're 35% of the way to the next camp — three lessons to go.</div>
+                  </div>
+                  <div style="position:relative;width:76px;height:76px;flex:none"><svg width="76" height="76" viewBox="0 0 76 76" style="transform:rotate(-90deg)"><circle cx="38" cy="38" r="32" fill="none" style="stroke:rgba(255,255,255,.22);stroke-width:5"></circle><circle cx="38" cy="38" r="32" fill="none" stroke-dasharray="201" stroke-dashoffset="131" style="stroke:var(--accent);stroke-width:5;stroke-linecap:round;filter:drop-shadow(0 0 6px rgba(206,245,133,.6))"></circle></svg><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700">35%</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="om-tile-hit" style="display:none"></button>
+      </div>
+
+      <!-- ===================== 6b · WEEK VIEW ===================== -->
+      <div class="om-tile" data-screen="week" data-variant="" data-flow="week" data-index="08" data-name="Week view" data-url="maestro.university/py101" style="position:absolute;inset:0;opacity:0;visibility:hidden">
+        <div class="om-tile-label" style="display:none">08 · Week view</div>
+        <div class="om-cell" style="width:1240px;height:800px">
+          <div class="om-frame" style="width:1240px;height:800px;border-radius:16px;overflow:hidden;border:1px solid var(--border);background:#000;box-shadow:0 50px 130px -30px rgba(0,0,0,.85);display:flex;flex-direction:column">
+            <div class="om-chrome" style="height:40px;flex:none;display:flex;align-items:center;gap:14px;padding:0 16px;background:#0c0c0b;border-bottom:1px solid var(--border)">
+              <div style="display:flex;gap:7px"><span style="width:11px;height:11px;border-radius:50%;background:#38423a"></span><span style="width:11px;height:11px;border-radius:50%;background:#38383a"></span><span style="width:11px;height:11px;border-radius:50%;background:#3a3838"></span></div>
+              <div style="flex:1;display:flex;justify-content:center"><div style="display:flex;align-items:center;gap:7px;height:24px;padding:0 16px;background:#000;border:1px solid var(--border);border-radius:9999px;color:var(--fg-3);font-size:12px"><i data-icon="lock-03" style="width:11px;height:11px"></i>maestro.university/py101</div></div>
+              <div style="width:52px"></div>
+            </div>
+            <div class="om-screen" style="position:relative;flex:1;overflow:hidden;background:var(--bg);color:var(--fg);display:flex">
+              <div data-appnav="learn" style="width:240px;flex:none;background:#1c1c1b;border-right:1px solid var(--border);z-index:9"></div>
+              <!-- content -->
+              <div class="om-scroll" style="flex:1;overflow-y:auto;padding:34px 44px 48px">
+                <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--fg-3);margin-bottom:22px">
+                  <span data-goto="home" style="cursor:pointer">AI Engineering</span><i data-icon="chevron-right" style="width:13px;height:13px"></i><span style="color:var(--fg-2)">Level 3 · Functions &amp; input</span>
+                </div>
+                <h1 style="font-size:34px;font-weight:700;letter-spacing:-.01em">Functions &amp; input</h1>
+                <p style="font-size:15px;color:var(--fg-2);margin-top:6px">PY101 · Python fundamentals · Level 3 of 5</p>
+                <div style="display:flex;align-items:center;gap:12px;margin:18px 0 30px;max-width:520px">
+                  <div style="flex:1;height:8px;border-radius:9999px;background:var(--surface-2);overflow:hidden"><div style="width:35%;height:100%;background:var(--accent);border-radius:9999px"></div></div>
+                  <span style="font-size:13px;color:var(--fg-2);font-weight:600">35%</span>
+                </div>
+                <!-- accordion -->
+                <div data-weeks style="max-width:640px">
+                  <!-- W1 done -->
+                  <div style="border:1px solid var(--border);border-radius:16px;overflow:hidden;background:var(--surface);margin-bottom:12px">
+                    <div data-acc style="display:flex;align-items:center;gap:14px;padding:15px 18px;cursor:pointer">
+                      <div style="width:30px;height:30px;border-radius:50%;background:rgba(206,245,133,.16);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;color:var(--accent);flex:none"><i data-icon="check" style="width:14px;height:14px"></i></div>
+                      <div style="flex:1"><div style="font-size:16px;font-weight:600">Week 1 · Printing &amp; comments</div><div style="font-size:13px;color:var(--fg-3)">4 lessons · completed</div></div>
+                      <i data-acc-chevron data-icon="chevron-down" style="width:18px;height:18px;color:var(--fg-3);transition:transform .3s var(--e-emph)"></i>
+                    </div>
+                    <div data-acc-body style="display:grid;grid-template-rows:0fr;transition:grid-template-rows .32s var(--e-emph)"><div style="overflow:hidden"><div style="padding:0 18px 12px 18px">
+                      <div style="display:flex;align-items:center;gap:12px;padding:10px 12px 10px 48px;color:var(--fg-2)"><i data-icon="check-circle" style="width:17px;height:17px;color:var(--accent)"></i><span style="font-size:14px">The print function</span></div>
+                      <div style="display:flex;align-items:center;gap:12px;padding:10px 12px 10px 48px;color:var(--fg-2)"><i data-icon="check-circle" style="width:17px;height:17px;color:var(--accent)"></i><span style="font-size:14px">Writing comments</span></div>
+                    </div></div></div>
+                  </div>
+                  <!-- W2 done -->
+                  <div style="border:1px solid var(--border);border-radius:16px;overflow:hidden;background:var(--surface);margin-bottom:12px">
+                    <div data-acc style="display:flex;align-items:center;gap:14px;padding:15px 18px;cursor:pointer">
+                      <div style="width:30px;height:30px;border-radius:50%;background:rgba(206,245,133,.16);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;color:var(--accent);flex:none"><i data-icon="check" style="width:14px;height:14px"></i></div>
+                      <div style="flex:1"><div style="font-size:16px;font-weight:600">Week 2 · Variables &amp; types</div><div style="font-size:13px;color:var(--fg-3)">4 lessons · completed</div></div>
+                      <i data-acc-chevron data-icon="chevron-down" style="width:18px;height:18px;color:var(--fg-3);transition:transform .3s var(--e-emph)"></i>
+                    </div>
+                    <div data-acc-body style="display:grid;grid-template-rows:0fr;transition:grid-template-rows .32s var(--e-emph)"><div style="overflow:hidden"><div style="padding:0 18px 12px 18px">
+                      <div style="display:flex;align-items:center;gap:12px;padding:10px 12px 10px 48px;color:var(--fg-2)"><i data-icon="check-circle" style="width:17px;height:17px;color:var(--accent)"></i><span style="font-size:14px">Numbers &amp; strings</span></div>
+                      <div style="display:flex;align-items:center;gap:12px;padding:10px 12px 10px 48px;color:var(--fg-2)"><i data-icon="check-circle" style="width:17px;height:17px;color:var(--accent)"></i><span style="font-size:14px">Naming variables</span></div>
+                    </div></div></div>
+                  </div>
+                  <!-- W3 current, open -->
+                  <div style="border:1.5px solid var(--accent);border-radius:16px;overflow:hidden;background:rgba(206,245,133,.04);margin-bottom:12px;box-shadow:0 0 34px -14px rgba(206,245,133,.5)">
+                    <div data-acc style="display:flex;align-items:center;gap:14px;padding:15px 18px;cursor:pointer">
+                      <div style="width:30px;height:30px;border-radius:50%;background:var(--accent);color:var(--accent-ink);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex:none">3</div>
+                      <div style="flex:1"><div style="font-size:16px;font-weight:600">Week 3 · Functions &amp; input</div><div style="font-size:13px;color:var(--accent);font-weight:500">In progress · 3 of 4 done</div></div>
+                      <i data-acc-chevron data-icon="chevron-down" style="width:18px;height:18px;color:var(--fg-2);transform:rotate(180deg);transition:transform .3s var(--e-emph)"></i>
+                    </div>
+                    <div data-acc-body style="display:grid;grid-template-rows:1fr;transition:grid-template-rows .32s var(--e-emph)"><div style="overflow:hidden"><div style="padding:2px 18px 14px 18px">
+                      <div data-lesson style="display:flex;align-items:center;gap:12px;padding:11px 12px 11px 48px;color:var(--fg-2)"><i data-icon="check-circle" style="width:17px;height:17px;color:var(--accent)"></i><span style="font-size:14px">Defining functions</span></div>
+                      <div data-lesson style="display:flex;align-items:center;gap:12px;padding:11px 12px 11px 48px;color:var(--fg-2)"><i data-icon="check-circle" style="width:17px;height:17px;color:var(--accent)"></i><span style="font-size:14px">Parameters &amp; arguments</span></div>
+                      <div data-lesson style="display:flex;align-items:center;gap:12px;padding:11px 12px 11px 48px;color:var(--fg-2)"><i data-icon="check-circle" style="width:17px;height:17px;color:var(--accent)"></i><span style="font-size:14px">Return values</span></div>
+                      <div data-lesson data-goto="lesson" style="display:flex;align-items:center;gap:12px;padding:12px 14px 12px 46px;margin-top:4px;border-radius:12px;background:var(--surface);border:1px solid var(--accent);cursor:pointer">
+                        <span style="width:20px;height:20px;border-radius:50%;border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;flex:none"><span style="width:8px;height:8px;border-radius:50%;background:var(--accent)"></span></span>
+                        <div style="flex:1"><div style="font-size:15px;font-weight:600;color:var(--fg)">Input &amp; output</div><div style="font-size:12px;color:var(--fg-3)">Lesson 4 · up next</div></div>
+                        <span style="display:inline-flex;align-items:center;gap:7px;height:36px;padding:0 16px;border-radius:9999px;background:var(--accent);color:var(--accent-ink);font-size:14px;font-weight:600">Continue<i data-icon="arrow-right" style="width:16px;height:16px"></i></span>
+                      </div>
+                    </div></div></div>
+                  </div>
+                  <!-- W4 locked -->
+                  <div style="border:1px solid var(--border);border-radius:16px;overflow:hidden;background:var(--surface);margin-bottom:12px;opacity:.7">
+                    <div data-acc style="display:flex;align-items:center;gap:14px;padding:15px 18px;cursor:pointer">
+                      <div style="width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.04);border:1.5px solid var(--border-strong);display:flex;align-items:center;justify-content:center;color:var(--fg-3);flex:none"><i data-icon="lock-03" style="width:13px;height:13px"></i></div>
+                      <div style="flex:1"><div style="font-size:16px;font-weight:600;color:var(--fg-2)">Week 4 · Conditionals</div><div style="font-size:13px;color:var(--fg-3)">Unlocks after Week 3</div></div>
+                      <i data-acc-chevron data-icon="chevron-down" style="width:18px;height:18px;color:var(--fg-3);transition:transform .3s var(--e-emph)"></i>
+                    </div>
+                    <div data-acc-body style="display:grid;grid-template-rows:0fr;transition:grid-template-rows .32s var(--e-emph)"><div style="overflow:hidden"><div style="padding:0 18px 14px 48px;font-size:13px;color:var(--fg-3)">Finish Week 3 to unlock these lessons.</div></div></div>
+                  </div>
+                  <!-- W5 locked -->
+                  <div style="border:1px solid var(--border);border-radius:16px;overflow:hidden;background:var(--surface);opacity:.7">
+                    <div data-acc style="display:flex;align-items:center;gap:14px;padding:15px 18px;cursor:pointer">
+                      <div style="width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.04);border:1.5px solid var(--border-strong);display:flex;align-items:center;justify-content:center;color:var(--fg-3);flex:none"><i data-icon="lock-03" style="width:13px;height:13px"></i></div>
+                      <div style="flex:1"><div style="font-size:16px;font-weight:600;color:var(--fg-2)">Week 5 · Loops</div><div style="font-size:13px;color:var(--fg-3)">Unlocks after Week 4</div></div>
+                      <i data-acc-chevron data-icon="chevron-down" style="width:18px;height:18px;color:var(--fg-3);transition:transform .3s var(--e-emph)"></i>
+                    </div>
+                    <div data-acc-body style="display:grid;grid-template-rows:0fr;transition:grid-template-rows .32s var(--e-emph)"><div style="overflow:hidden"><div style="padding:0 18px 14px 48px;font-size:13px;color:var(--fg-3)">Finish Week 4 to unlock these lessons.</div></div></div>
+                  </div>
+                </div>
+              </div>
+              <!-- right rail -->
+              <div style="width:308px;flex:none;border-left:1px solid var(--border);padding:34px 28px;display:flex;flex-direction:column;gap:18px">
+                <div style="border:1px solid var(--border);border-radius:18px;overflow:hidden;background:var(--surface)">
+                  <div style="position:relative;height:150px"><img src="assets/walk-ridge.gif" alt="" style="width:100%;height:100%;object-fit:cover;object-position:50% 62%"><div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(20,20,19,.95),transparent 60%)"></div><div style="position:absolute;left:16px;bottom:12px"><div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-2);font-weight:600">The ridge</div><div style="font-size:20px;font-weight:700">Level 3</div></div></div>
+                  <div style="padding:16px 18px;display:flex;align-items:center;gap:14px">
+                    <div style="position:relative;width:52px;height:52px;flex:none"><svg width="52" height="52" viewBox="0 0 52 52" style="transform:rotate(-90deg)"><circle cx="26" cy="26" r="22" fill="none" style="stroke:var(--n300);stroke-width:4"></circle><circle cx="26" cy="26" r="22" fill="none" stroke-dasharray="138" stroke-dashoffset="90" style="stroke:var(--accent);stroke-width:4;stroke-linecap:round"></circle></svg><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700">35%</div></div>
+                    <div><div style="font-size:15px;font-weight:600">3 lessons to go</div><div style="font-size:13px;color:var(--fg-2)">to reach the next camp</div></div>
+                  </div>
+                </div>
+                <div style="display:flex;align-items:center;gap:12px;padding:14px 16px;border:1px solid var(--border);border-radius:16px;background:var(--surface)">
+                  <span style="display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:12px;background:rgba(255,139,98,.16);color:var(--sunset);flex:none"><i data-icon="flame-02" style="width:20px;height:20px"></i></span>
+                  <div><div style="font-size:18px;font-weight:700">12 days</div><div style="font-size:13px;color:var(--fg-2)">on your streak</div></div>
+                </div>
+                <div style="display:flex;align-items:center;gap:12px;padding:14px 16px;border:1px solid var(--border);border-radius:16px;background:var(--surface)">
+                  <span style="display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:12px;background:rgba(166,178,247,.16);color:var(--lavender);flex:none"><i data-icon="cpu-chip-01" style="width:20px;height:20px"></i></span>
+                  <div><div style="font-size:15px;font-weight:600">Tutor ready</div><div style="font-size:13px;color:var(--fg-2)">on your device</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="om-tile-hit" style="display:none"></button>
+      </div>
+
+      <!-- ===================== 7 · LESSON CHAT ===================== -->
+      <div class="om-tile" data-screen="lesson" data-variant="" data-flow="lesson" data-index="09" data-name="Lesson" data-url="maestro.university/py101/lesson-4" style="position:absolute;inset:0;opacity:0;visibility:hidden">
+        <div class="om-tile-label" style="display:none">09 · Lesson</div>
+        <div class="om-cell" style="width:1240px;height:800px">
+          <div class="om-frame" style="width:1240px;height:800px;border-radius:16px;overflow:hidden;border:1px solid var(--border);background:#000;box-shadow:0 50px 130px -30px rgba(0,0,0,.85);display:flex;flex-direction:column">
+            <div class="om-chrome" style="height:40px;flex:none;display:flex;align-items:center;gap:14px;padding:0 16px;background:#0c0c0b;border-bottom:1px solid var(--border)">
+              <div style="display:flex;gap:7px"><span style="width:11px;height:11px;border-radius:50%;background:#38423a"></span><span style="width:11px;height:11px;border-radius:50%;background:#38383a"></span><span style="width:11px;height:11px;border-radius:50%;background:#3a3838"></span></div>
+              <div style="flex:1;display:flex;justify-content:center"><div style="display:flex;align-items:center;gap:7px;height:24px;padding:0 16px;background:#000;border:1px solid var(--border);border-radius:9999px;color:var(--fg-3);font-size:12px"><i data-icon="lock-03" style="width:11px;height:11px"></i>maestro.university/py101/lesson-4</div></div>
+              <div style="width:52px"></div>
+            </div>
+            <div class="om-screen" style="position:relative;flex:1;overflow:hidden;background:var(--bg);color:var(--fg);display:flex">
+              <div data-appnav="learn" style="width:240px;flex:none;background:#1c1c1b;border-right:1px solid var(--border);z-index:9"></div>
+              <div style="flex:1;display:flex;flex-direction:column;min-width:0">
+                <!-- header + segmented progress -->
+                <div style="height:70px;flex:none;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:0 30px;border-bottom:1px solid var(--border)">
+                  <div style="display:flex;align-items:center;gap:12px">
+                    <button data-goto="week" style="width:36px;height:36px;border-radius:9999px;border:1px solid var(--border);background:transparent;color:var(--fg-2);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;flex:none" style-hover="background:var(--surface-1);color:var(--fg)"><i data-icon="chevron-left" style="width:17px;height:17px"></i></button>
+                    <div><div style="font-size:17px;font-weight:600">Input &amp; output</div><div style="font-size:12px;color:var(--fg-3)">PY101 · Lesson 4</div></div>
+                  </div>
+                  <div style="display:flex;align-items:center;gap:14px">
+                    <div style="display:flex;gap:5px;width:280px">
+                      <div style="flex:1;height:6px;border-radius:9999px;background:var(--accent)"></div>
+                      <div style="flex:1;height:6px;border-radius:9999px;background:var(--surface-2);overflow:hidden"><div data-seg-fill style="width:0%;height:100%;background:var(--accent);border-radius:9999px"></div></div>
+                      <div style="flex:1;height:6px;border-radius:9999px;background:var(--surface-2)"></div>
+                      <div style="flex:1;height:6px;border-radius:9999px;background:var(--surface-2)"></div>
+                      <div style="flex:1;height:6px;border-radius:9999px;background:var(--surface-2)"></div>
+                    </div>
+                    <span style="font-size:13px;color:var(--fg-2);font-weight:600;white-space:nowrap">Step 2 of 5</span>
+                  </div>
+                </div>
+                <!-- thread -->
+                <div class="om-scroll" style="flex:1;overflow-y:auto;padding:28px 30px 12px">
+                  <div style="max-width:660px;margin:0 auto;display:flex;flex-direction:column;gap:14px">
+                    <div data-reveal style="display:flex;align-items:flex-start;gap:10px">
+                      <div style="width:32px;height:32px;border-radius:9999px;background:var(--surface-2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex:none"><img src="assets/maestro-logo-mark-on-dark.svg" style="width:19px;height:19px"></div>
+                      <div style="padding:11px 15px;border-radius:4px 20px 20px 20px;background:var(--surface-1);font-size:15px;line-height:1.5;max-width:460px">Welcome back, Ray. Last time we covered <code style="font-family:var(--font-mono);font-size:13px;padding:1px 5px;border-radius:4px;background:rgba(255,255,255,.08)">print()</code> and comments. Ready for input and output?</div>
+                    </div>
+                    <div data-reveal style="display:flex;justify-content:flex-end"><div style="padding:11px 15px;border-radius:20px 4px 20px 20px;background:#1A3426;font-size:15px;line-height:1.5;max-width:420px">I'm ready</div></div>
+                    <div data-reveal style="display:flex;align-items:flex-start;gap:10px">
+                      <div style="width:32px;height:32px;border-radius:9999px;background:var(--surface-2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex:none"><img src="assets/maestro-logo-mark-on-dark.svg" style="width:19px;height:19px"></div>
+                      <div style="padding:11px 15px;border-radius:4px 20px 20px 20px;background:var(--surface-1);font-size:15px;line-height:1.5;max-width:460px">Great. The <code style="font-family:var(--font-mono);font-size:13px;padding:1px 5px;border-radius:4px;background:rgba(255,255,255,.08)">input()</code> function pauses your program and waits for the user to type. Whatever they type comes back as a string.</div>
+                    </div>
+                    <div data-reveal style="display:flex;align-items:flex-start;gap:10px">
+                      <div style="width:32px;flex:none"></div>
+                      <div style="max-width:460px;width:100%;border:1px solid var(--border);border-radius:12px;overflow:hidden;background:var(--surface)">
+                        <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 12px;border-bottom:1px solid var(--border);background:#141413"><span style="font-family:var(--font-text);font-size:11px;font-weight:600;letter-spacing:.05em;color:var(--fg-2)">PYTHON</span><span style="display:inline-flex;align-items:center;gap:5px;font-size:12px;color:var(--fg-2);cursor:pointer"><i data-icon="copy-06" style="width:13px;height:13px"></i>Copy</span></div>
+                        <div style="display:flex;padding:12px 0;font-family:var(--font-mono);font-size:13px;line-height:21px">
+                          <div style="padding:0 10px 0 14px;text-align:right;color:var(--fg-disabled);user-select:none;color:var(--n500)">1<br>2</div>
+                          <div style="padding-right:14px;white-space:pre">name <span style="color:var(--fg-2)">=</span> <span style="color:var(--evergreen-text)">input</span>(<span style="color:var(--sunset)">"What's your name? "</span>)
+<span style="color:var(--evergreen-text)">print</span>(<span style="color:var(--sunset)">"Hello, "</span> <span style="color:var(--fg-2)">+</span> name <span style="color:var(--fg-2)">+</span> <span style="color:var(--sunset)">"!"</span>)</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div data-typing style="display:none;align-items:flex-start;gap:10px">
+                      <div style="width:32px;height:32px;border-radius:9999px;background:var(--surface-2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex:none"><img src="assets/maestro-logo-mark-on-dark.svg" style="width:19px;height:19px"></div>
+                      <div style="padding:15px 16px;border-radius:4px 20px 20px 20px;background:var(--surface-1);display:flex;gap:5px;align-items:center"><span style="width:7px;height:7px;border-radius:50%;background:var(--fg-3);animation:om-dot 1.2s infinite"></span><span style="width:7px;height:7px;border-radius:50%;background:var(--fg-3);animation:om-dot 1.2s .15s infinite"></span><span style="width:7px;height:7px;border-radius:50%;background:var(--fg-3);animation:om-dot 1.2s .3s infinite"></span></div>
+                    </div>
+                    <div data-type-target style="display:flex;align-items:flex-start;gap:10px">
+                      <div style="width:32px;height:32px;border-radius:9999px;background:var(--surface-2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex:none"><img src="assets/maestro-logo-mark-on-dark.svg" style="width:19px;height:19px"></div>
+                      <div style="padding:11px 15px;border-radius:4px 20px 20px 20px;background:var(--surface-1);font-size:15px;line-height:1.5;max-width:460px">Want to try it yourself? I'll open the code panel and you can run it — then we'll make it your own.</div>
+                    </div>
+                    <div data-type-follow style="display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap">
+                      <button data-goto="code" style="display:inline-flex;align-items:center;gap:7px;height:34px;padding:0 15px;font-size:14px;font-weight:600;background:var(--accent);color:var(--accent-ink);border:none;border-radius:9999px 9999px 0 9999px;cursor:pointer"><i data-icon="code-02" style="width:16px;height:16px"></i>Open the code panel</button>
+                      <button style="display:inline-flex;align-items:center;height:34px;padding:0 15px;font-size:14px;font-weight:500;background:transparent;color:var(--fg);border:1px solid var(--border-strong);border-radius:9999px 9999px 0 9999px;cursor:pointer" style-hover="background:var(--surface-1)">Explain input()</button>
+                      <button style="display:inline-flex;align-items:center;height:34px;padding:0 15px;font-size:14px;font-weight:500;background:transparent;color:var(--fg);border:1px solid var(--border-strong);border-radius:9999px 9999px 0 9999px;cursor:pointer" style-hover="background:var(--surface-1)">Show an example</button>
+                    </div>
+                  </div>
+                </div>
+                <!-- composer -->
+                <div style="flex:none;padding:14px 30px 20px">
+                  <div style="max-width:660px;margin:0 auto;background:var(--surface-muted);border:1px solid var(--border-strong);border-radius:16px;padding:6px 8px 8px">
+                    <div style="padding:10px 12px 4px;font-size:15px;color:var(--fg-3)">Message Maestro</div>
+                    <div style="display:flex;align-items:center;gap:6px;padding:4px 6px 2px">
+                      <button style="width:32px;height:32px;border-radius:9999px;border:1px solid var(--border-strong);background:transparent;color:var(--fg-2);display:inline-flex;align-items:center;justify-content:center;cursor:pointer"><i data-icon="file-code-01" style="width:16px;height:16px"></i></button>
+                      <div style="flex:1"></div>
+                      <button style="width:32px;height:32px;border-radius:9999px;border:1px solid var(--border-strong);background:transparent;color:var(--fg-2);display:inline-flex;align-items:center;justify-content:center;cursor:pointer"><i data-icon="microphone-01" style="width:16px;height:16px"></i></button>
+                      <button style="width:34px;height:34px;border-radius:9999px;border:none;background:var(--fg);color:#0A0A0A;display:inline-flex;align-items:center;justify-content:center;cursor:pointer"><i data-icon="send-03" style="width:16px;height:16px"></i></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="om-tile-hit" style="display:none"></button>
+      </div>
+
+      <!-- ===================== 8 · CODE PANEL (SPLIT) ===================== -->
+      <div class="om-tile" data-screen="code" data-variant="" data-flow="code" data-index="10" data-name="Code panel" data-url="maestro.university/py101/lesson-4" style="position:absolute;inset:0;opacity:0;visibility:hidden">
+        <div class="om-tile-label" style="display:none">10 · Code panel</div>
+        <div class="om-cell" style="width:1240px;height:800px">
+          <div class="om-frame" style="width:1240px;height:800px;border-radius:16px;overflow:hidden;border:1px solid var(--border);background:#000;box-shadow:0 50px 130px -30px rgba(0,0,0,.85);display:flex;flex-direction:column">
+            <div class="om-chrome" style="height:40px;flex:none;display:flex;align-items:center;gap:14px;padding:0 16px;background:#0c0c0b;border-bottom:1px solid var(--border)">
+              <div style="display:flex;gap:7px"><span style="width:11px;height:11px;border-radius:50%;background:#38423a"></span><span style="width:11px;height:11px;border-radius:50%;background:#38383a"></span><span style="width:11px;height:11px;border-radius:50%;background:#3a3838"></span></div>
+              <div style="flex:1;display:flex;justify-content:center"><div style="display:flex;align-items:center;gap:7px;height:24px;padding:0 16px;background:#000;border:1px solid var(--border);border-radius:9999px;color:var(--fg-3);font-size:12px"><i data-icon="lock-03" style="width:11px;height:11px"></i>maestro.university/py101/lesson-4</div></div>
+              <div style="width:52px"></div>
+            </div>
+            <div class="om-screen" style="position:relative;flex:1;overflow:hidden;background:var(--bg);color:var(--fg);display:flex">
+              <!-- LEFT: chat pane -->
+              <div style="flex:0 0 500px;display:flex;flex-direction:column;min-width:0;border-right:1px solid var(--border)">
+                <div style="height:62px;flex:none;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0 20px;border-bottom:1px solid var(--border)">
+                  <div style="display:flex;align-items:center;gap:10px">
+                    <button data-goto="lesson" style="width:32px;height:32px;border-radius:9999px;border:1px solid var(--border);background:transparent;color:var(--fg-2);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;flex:none" style-hover="background:var(--surface-1);color:var(--fg)"><i data-icon="chevron-left" style="width:16px;height:16px"></i></button>
+                    <div style="font-size:15px;font-weight:600">Input &amp; output</div>
+                  </div>
+                  <div style="display:flex;align-items:center;gap:10px">
+                    <div style="display:flex;gap:4px;width:120px"><div style="flex:1;height:5px;border-radius:9999px;background:var(--accent)"></div><div style="flex:1;height:5px;border-radius:9999px;background:var(--accent)"></div><div style="flex:1;height:5px;border-radius:9999px;background:var(--surface-2)"></div><div style="flex:1;height:5px;border-radius:9999px;background:var(--surface-2)"></div><div style="flex:1;height:5px;border-radius:9999px;background:var(--surface-2)"></div></div>
+                    <span style="font-size:12px;color:var(--fg-2);font-weight:600">3 / 5</span>
+                  </div>
+                </div>
+                <div class="om-scroll" style="flex:1;overflow-y:auto;padding:22px 20px 10px;display:flex;flex-direction:column;gap:12px">
+                  <div style="display:flex;align-items:flex-start;gap:9px"><div style="width:30px;height:30px;border-radius:9999px;background:var(--surface-2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex:none"><img src="assets/maestro-logo-mark-on-dark.svg" style="width:18px;height:18px"></div><div style="padding:10px 14px;border-radius:4px 18px 18px 18px;background:var(--surface-1);font-size:14px;line-height:1.5">Here's your code. Press <b style="color:var(--accent)">Run</b>, then type your name when the program asks.</div></div>
+                  <div style="display:flex;align-items:flex-start;gap:9px"><div style="width:30px;height:30px;border-radius:9999px;background:var(--surface-2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex:none"><img src="assets/maestro-logo-mark-on-dark.svg" style="width:18px;height:18px"></div><div style="padding:10px 14px;border-radius:4px 18px 18px 18px;background:var(--surface-1);font-size:14px;line-height:1.5">Notice how <code style="font-family:var(--font-mono);font-size:12px;padding:1px 5px;border-radius:4px;background:rgba(255,255,255,.08)">input()</code> waits for you before the next line runs.</div></div>
+                  <div data-run-reply style="display:flex;align-items:flex-start;gap:9px;opacity:0"><div style="width:30px;height:30px;border-radius:9999px;background:var(--surface-2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex:none"><img src="assets/maestro-logo-mark-on-dark.svg" style="width:18px;height:18px"></div><div style="padding:10px 14px;border-radius:4px 18px 18px 18px;background:var(--surface-1);font-size:14px;line-height:1.5">Nice — it greeted you by name. That's your first interactive program. Ready to make it your own?</div></div>
+                  <div data-run-cta style="display:flex;justify-content:flex-end;opacity:0"><button data-goto="lessondone" style="display:inline-flex;align-items:center;gap:7px;height:36px;padding:0 16px;font-size:14px;font-weight:600;background:var(--accent);color:var(--accent-ink);border:none;border-radius:9999px 9999px 0 9999px;cursor:pointer;transition:transform .12s var(--e-out)" style-hover="transform:translateY(-1px)">Finish lesson<i data-icon="check" style="width:15px;height:15px"></i></button></div>
+                </div>
+                <div style="flex:none;padding:12px 20px 16px">
+                  <div style="background:var(--surface-muted);border:1px solid var(--border-strong);border-radius:14px;padding:5px 6px 6px">
+                    <div style="padding:9px 10px 4px;font-size:14px;color:var(--fg-3)">Message Maestro</div>
+                    <div style="display:flex;align-items:center;gap:6px;padding:2px 4px"><div style="flex:1"></div><button style="width:30px;height:30px;border-radius:9999px;border:none;background:var(--fg);color:#0A0A0A;display:inline-flex;align-items:center;justify-content:center;cursor:pointer"><i data-icon="send-03" style="width:15px;height:15px"></i></button></div>
+                  </div>
+                </div>
+              </div>
+              <!-- RIGHT: code editor (springs in) -->
+              <div data-codepane style="flex:1;display:flex;flex-direction:column;min-width:0;background:#0e0e0d">
+                <div style="height:62px;flex:none;display:flex;align-items:center;justify-content:space-between;gap:14px;padding:0 18px;border-bottom:1px solid var(--border)">
+                  <div style="display:flex;align-items:center;gap:10px"><span style="width:9px;height:9px;border-radius:9999px;background:var(--accent)"></span><span style="font-family:var(--font-mono);font-size:14px;color:var(--fg-2)">main.py</span></div>
+                  <div style="display:flex;align-items:center;gap:10px">
+                    <button data-run style="display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 18px;border-radius:9999px;border:none;background:var(--accent);color:var(--accent-ink);font-size:14px;font-weight:600;cursor:pointer;transition:transform .12s var(--e-out)" style-hover="transform:translateY(-1px)" style-active="transform:scale(.97)"><i data-icon="play" style="width:15px;height:15px"></i>Run</button>
+                    <button data-goto="lesson" style="width:36px;height:36px;border-radius:9999px;border:1px solid var(--border);background:transparent;color:var(--fg-2);display:inline-flex;align-items:center;justify-content:center;cursor:pointer" style-hover="background:var(--surface-1);color:var(--fg)"><i data-icon="chevron-right" style="width:16px;height:16px"></i></button>
+                  </div>
+                </div>
+                <div style="flex:1;display:flex;font-family:var(--font-mono);font-size:14px;line-height:26px;padding:18px 0;overflow:auto">
+                  <div style="padding:0 14px 0 20px;text-align:right;color:var(--n500);user-select:none">1<br>2<br>3</div>
+                  <div style="padding-right:18px;white-space:pre;color:var(--fg)">name <span style="color:var(--n600)">=</span> <span style="color:var(--evergreen-text)">input</span>(<span style="color:var(--sunset)">"What's your name? "</span>)
+<span style="color:var(--evergreen-text)">print</span>(<span style="color:var(--sunset)">"Hello, "</span> <span style="color:var(--n600)">+</span> name <span style="color:var(--n600)">+</span> <span style="color:var(--sunset)">"!"</span>)
+<span style="display:inline-block;width:9px;height:18px;background:var(--accent);vertical-align:-3px;animation:om-caret 1.1s steps(1) infinite"></span></div>
+                </div>
+                <!-- console -->
+                <div data-console style="flex:none;max-height:0;opacity:0;overflow:hidden;border-top:1px solid var(--border);background:#000">
+                  <div style="display:flex;align-items:center;gap:8px;padding:9px 18px;border-bottom:1px solid var(--border)"><i data-icon="play-square" style="width:14px;height:14px;color:var(--fg-3)"></i><span style="font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--fg-3)">Console</span></div>
+                  <div style="padding:14px 18px;font-family:var(--font-mono);font-size:13px;line-height:22px;color:var(--fg-2)"><div style="color:var(--n600)">$ python main.py</div><div>What's your name? <span style="color:var(--fg)">Ray</span></div><div style="color:var(--accent)">Hello, Ray!</div><div style="color:var(--n600)">[Finished in 0.1s]</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="om-tile-hit" style="display:none"></button>
+      </div>
+
+      <!-- ===================== 11 · LESSON COMPLETE (modest) ===================== -->
+      <div class="om-tile" data-screen="lessondone" data-variant="" data-flow="lessondone" data-index="11" data-name="Lesson complete" data-url="maestro.university/py101/lesson-4" style="position:absolute;inset:0;opacity:0;visibility:hidden">
+        <div class="om-tile-label" style="display:none">11 · Lesson complete</div>
+        <div class="om-cell" style="width:1240px;height:800px">
+          <div class="om-frame" style="width:1240px;height:800px;border-radius:16px;overflow:hidden;border:1px solid var(--border);background:#000;box-shadow:0 50px 130px -30px rgba(0,0,0,.85);display:flex;flex-direction:column">
+            <div class="om-chrome" style="height:40px;flex:none;display:flex;align-items:center;gap:14px;padding:0 16px;background:#0c0c0b;border-bottom:1px solid var(--border)">
+              <div style="display:flex;gap:7px"><span style="width:11px;height:11px;border-radius:50%;background:#38423a"></span><span style="width:11px;height:11px;border-radius:50%;background:#38383a"></span><span style="width:11px;height:11px;border-radius:50%;background:#3a3838"></span></div>
+              <div style="flex:1;display:flex;justify-content:center"><div style="display:flex;align-items:center;gap:7px;height:24px;padding:0 16px;background:#000;border:1px solid var(--border);border-radius:9999px;color:var(--fg-3);font-size:12px"><i data-icon="lock-03" style="width:11px;height:11px"></i>maestro.university/py101/lesson-4</div></div>
+              <div style="width:52px"></div>
+            </div>
+            <div class="om-screen" style="position:relative;flex:1;overflow:hidden;background:var(--bg);color:var(--fg);display:flex">
+              <div data-appnav="learn" style="width:240px;flex:none;background:#1c1c1b;border-right:1px solid var(--border);z-index:9"></div>
+              <div style="flex:1;display:flex;flex-direction:column;min-width:0">
+                <div style="height:70px;flex:none;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:0 30px;border-bottom:1px solid var(--border)">
+                  <div style="display:flex;align-items:center;gap:12px">
+                    <button data-goto="code" style="width:36px;height:36px;border-radius:9999px;border:1px solid var(--border);background:transparent;color:var(--fg-2);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;flex:none" style-hover="background:var(--surface-1);color:var(--fg)"><i data-icon="chevron-left" style="width:17px;height:17px"></i></button>
+                    <div><div style="font-size:17px;font-weight:600">Input &amp; output</div><div style="font-size:12px;color:var(--fg-3)">PY101 · Lesson 4</div></div>
+                  </div>
+                  <div style="display:flex;align-items:center;gap:14px">
+                    <div style="display:flex;gap:5px;width:280px">
+                      <div style="flex:1;height:6px;border-radius:9999px;background:var(--accent)"></div>
+                      <div style="flex:1;height:6px;border-radius:9999px;background:var(--accent)"></div>
+                      <div style="flex:1;height:6px;border-radius:9999px;background:var(--accent)"></div>
+                      <div style="flex:1;height:6px;border-radius:9999px;background:var(--accent)"></div>
+                      <div style="flex:1;height:6px;border-radius:9999px;background:var(--surface-2);overflow:hidden"><div data-ld-fill style="width:100%;height:100%;background:var(--accent);border-radius:9999px"></div></div>
+                    </div>
+                    <span style="font-size:13px;color:var(--fg-2);font-weight:600;white-space:nowrap">Step 5 of 5</span>
+                  </div>
+                </div>
+                <div style="position:relative;flex:1;overflow:hidden">
+                  <div style="position:absolute;inset:0;opacity:.16;pointer-events:none;padding:28px 30px">
+                    <div style="max-width:660px;margin:0 auto;display:flex;flex-direction:column;gap:14px">
+                      <div style="display:flex;align-items:flex-start;gap:10px"><div style="width:32px;height:32px;border-radius:9999px;background:var(--surface-2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex:none"><img src="assets/maestro-logo-mark-on-dark.svg" style="width:19px;height:19px"></div><div style="padding:11px 15px;border-radius:4px 20px 20px 20px;background:var(--surface-1);font-size:15px;line-height:1.5;max-width:460px">Hello, Ray! — printed exactly right. That's input, output, and a variable working together.</div></div>
+                      <div style="display:flex;justify-content:flex-end"><div style="padding:11px 15px;border-radius:20px 4px 20px 20px;background:#1A3426;font-size:15px;line-height:1.5;max-width:420px">That was easier than I expected</div></div>
+                    </div>
+                  </div>
+                  <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;z-index:5">
+                    <div data-ld-card style="width:440px;background:var(--surface-1);border:1px solid var(--border);border-radius:24px;padding:36px 36px 28px;display:flex;flex-direction:column;align-items:center;text-align:center;box-shadow:0 30px 80px -20px rgba(0,0,0,.7)">
+                      <div data-ld-burst style="position:relative;width:72px;height:72px;margin-bottom:18px">
+                        <div data-ld-check style="position:absolute;inset:0;border-radius:50%;background:rgba(206,245,133,.13);border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;color:var(--accent)"><i data-icon="check" style="width:32px;height:32px"></i></div>
+                      </div>
+                      <h2 style="font-size:26px;font-weight:700;letter-spacing:-.01em">Lesson complete</h2>
+                      <p style="font-size:14px;color:var(--fg-2);margin-top:6px">Input &amp; output · Lesson 4 of 4</p>
+                      <div style="display:flex;gap:18px;margin-top:20px">
+                        <span style="display:inline-flex;align-items:center;gap:7px;color:var(--fg-2);font-size:13px"><i data-icon="clock" style="width:15px;height:15px"></i>12 min</span>
+                        <span style="display:inline-flex;align-items:center;gap:7px;color:var(--fg-2);font-size:13px"><i data-icon="play" style="width:15px;height:15px"></i>2 runs</span>
+                        <span style="display:inline-flex;align-items:center;gap:7px;color:var(--sunset);font-size:13px;font-weight:600"><i data-icon="flame-02" style="width:15px;height:15px"></i>Day 13</span>
+                      </div>
+                      <div style="width:100%;height:1px;background:var(--border);margin:22px 0 20px"></div>
+                      <div style="display:flex;align-items:center;gap:10px">
+                        <button data-goto="weekdone" style="height:48px;padding:0 24px;border-radius:9999px;border:none;background:var(--accent);color:var(--accent-ink);font-size:15px;font-weight:600;display:inline-flex;align-items:center;gap:9px;cursor:pointer;transition:transform .12s var(--e-out)" style-hover="transform:translateY(-2px)" style-active="transform:scale(.97)">Finish Week 3<i data-icon="arrow-right" style="width:17px;height:17px"></i></button>
+                        <button data-goto="week" style="height:48px;padding:0 20px;border-radius:9999px;border:1px solid var(--border-strong);background:transparent;color:var(--fg);font-size:15px;font-weight:500;cursor:pointer;transition:all .15s var(--e-out)" style-hover="background:var(--surface-2)">Back to week</button>
+                      </div>
+                    </div>
+                    <div data-reveal style="display:flex;align-items:center;gap:9px">
+                      <img src="assets/maestro-logo-mark-on-dark.svg" style="width:22px;height:22px">
+                      <span data-typewrite="Clean run, Ray — one step from camp." style="font-size:14px;color:var(--fg-2);min-height:20px;display:inline-block">Clean run, Ray — one step from camp.</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="om-tile-hit" style="display:none"></button>
+      </div>
+
+      <!-- ===================== 12 · WEEK CLEARED (celebration) ===================== -->
+      <div class="om-tile" data-screen="weekdone" data-variant="" data-flow="weekdone" data-index="12" data-name="Week cleared" data-url="maestro.university/py101/week-3" style="position:absolute;inset:0;opacity:0;visibility:hidden">
+        <div class="om-tile-label" style="display:none">12 · Week cleared</div>
+        <div class="om-cell" style="width:1240px;height:800px">
+          <div class="om-frame" style="width:1240px;height:800px;border-radius:16px;overflow:hidden;border:1px solid var(--border);background:#000;box-shadow:0 50px 130px -30px rgba(0,0,0,.85);display:flex;flex-direction:column">
+            <div class="om-chrome" style="height:40px;flex:none;display:flex;align-items:center;gap:14px;padding:0 16px;background:#0c0c0b;border-bottom:1px solid var(--border)">
+              <div style="display:flex;gap:7px"><span style="width:11px;height:11px;border-radius:50%;background:#38423a"></span><span style="width:11px;height:11px;border-radius:50%;background:#38383a"></span><span style="width:11px;height:11px;border-radius:50%;background:#3a3838"></span></div>
+              <div style="flex:1;display:flex;justify-content:center"><div style="display:flex;align-items:center;gap:7px;height:24px;padding:0 16px;background:#000;border:1px solid var(--border);border-radius:9999px;color:var(--fg-3);font-size:12px"><i data-icon="lock-03" style="width:11px;height:11px"></i>maestro.university/py101/week-3</div></div>
+              <div style="width:52px"></div>
+            </div>
+            <div class="om-screen" style="position:relative;flex:1;overflow:hidden;background:#000;color:var(--fg)">
+              <img src="assets/climb-2-darkpitch.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:35% 45%">
+              <div style="position:absolute;inset:0;background:linear-gradient(100deg,#000 14%,rgba(0,0,0,.66) 42%,rgba(0,0,0,.12) 74%)"></div>
+              <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.78) 6%,transparent 44%)"></div>
+              <div data-confetti style="position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:15"></div>
+              <div data-ws-sky style="position:absolute;inset:0;z-index:5;pointer-events:none"></div>
+              <!-- the week's route, drawn in -->
+              <svg viewBox="0 0 1240 760" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;z-index:4;overflow:visible">
+                <path data-wd-path d="M 640 690 C 700 610 690 560 740 490 C 790 420 800 380 850 310 C 890 250 900 210 930 150" fill="none" style="stroke:var(--accent);stroke-width:3.5;stroke-linecap:round"></path>
+              </svg>
+              <span data-wd-dot style="position:absolute;left:668px;top:625px;transform:translate(-50%,-50%);z-index:5"><span data-wd-core style="display:block;width:13px;height:13px;border-radius:9999px;background:var(--accent);box-shadow:0 0 12px rgba(206,245,133,.8)"></span></span>
+              <span data-wd-dot style="position:absolute;left:742px;top:487px;transform:translate(-50%,-50%);z-index:5"><span data-wd-core style="display:block;width:13px;height:13px;border-radius:9999px;background:var(--accent);box-shadow:0 0 12px rgba(206,245,133,.8)"></span></span>
+              <span data-wd-dot style="position:absolute;left:818px;top:375px;transform:translate(-50%,-50%);z-index:5"><span data-wd-core style="display:block;width:13px;height:13px;border-radius:9999px;background:var(--accent);box-shadow:0 0 12px rgba(206,245,133,.8)"></span></span>
+              <span data-wd-dot style="position:absolute;left:895px;top:235px;transform:translate(-50%,-50%);z-index:5"><span data-wd-core style="display:block;width:13px;height:13px;border-radius:9999px;background:var(--accent);box-shadow:0 0 12px rgba(206,245,133,.8)"></span></span>
+              <div style="position:absolute;left:930px;top:150px;transform:translate(-50%,-50%);z-index:6">
+                <div data-wd-campwrap style="display:flex;flex-direction:column;align-items:center;gap:8px">
+                  <div style="position:relative;width:46px;height:46px">
+                    <span style="position:absolute;inset:0;border-radius:50%;border:2px solid var(--gold);animation:om-ping 2.6s var(--e-out) infinite"></span>
+                    <span style="position:absolute;inset:0;border-radius:50%;border:2px solid var(--gold);animation:om-ping 2.6s var(--e-out) 1.3s infinite"></span>
+                    <div style="position:absolute;inset:0;border-radius:50%;background:rgba(234,173,94,.16);border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;color:var(--gold)"><i data-icon="diamond-01" style="width:19px;height:19px"></i></div>
+                  </div>
+                  <div style="text-align:center;text-shadow:0 1px 6px #000"><div style="font-size:13px;font-weight:700">Week 4</div><div style="font-size:11px;color:var(--fg-2)">unlocked</div></div>
+                </div>
+              </div>
+              <!-- content -->
+              <div style="position:absolute;left:64px;bottom:54px;width:600px;display:flex;flex-direction:column;gap:18px;z-index:16">
+                <div data-reveal style="display:inline-flex;align-items:center;gap:9px;color:var(--gold)"><i data-icon="check-circle" style="width:19px;height:19px"></i><span style="font-size:13px;letter-spacing:.2em;text-transform:uppercase;font-weight:700">Week 3 cleared</span></div>
+                <h1 data-reveal style="font-size:58px;line-height:1.03;font-weight:700;letter-spacing:-.02em">That's Week 3,<br>done.</h1>
+                <p data-reveal style="font-size:18px;line-height:1.55;color:var(--fg-2);max-width:470px">Functions &amp; input is behind you — and the route to Week 4 just opened.</p>
+                <div data-reveal style="display:flex;gap:10px;flex-wrap:wrap">
+                  <span style="display:inline-flex;align-items:center;gap:7px;height:34px;padding:0 14px;border-radius:9999px;background:rgba(18,18,17,.72);backdrop-filter:blur(10px);border:1px solid var(--border);color:var(--fg-2);font-size:13px;font-weight:500"><i data-icon="book-opened-02" style="width:15px;height:15px"></i>4 lessons</span>
+                  <span style="display:inline-flex;align-items:center;gap:7px;height:34px;padding:0 14px;border-radius:9999px;background:rgba(18,18,17,.72);backdrop-filter:blur(10px);border:1px solid var(--border);color:var(--fg-2);font-size:13px;font-weight:500"><i data-icon="clock" style="width:15px;height:15px"></i>58 min with your tutor</span>
+                  <span style="display:inline-flex;align-items:center;gap:7px;height:34px;padding:0 14px;border-radius:9999px;background:rgba(255,139,98,.14);backdrop-filter:blur(10px);color:var(--sunset);font-size:13px;font-weight:600"><i data-icon="flame-02" style="width:15px;height:15px"></i>13-day streak</span>
+                </div>
+                <div data-reveal style="display:flex;align-items:center;gap:10px;margin-top:2px">
+                  <img src="assets/maestro-logo-mark-on-dark.svg" style="width:22px;height:22px;flex:none">
+                  <span style="font-size:14.5px;color:var(--fg-2);line-height:1.5">You told me you're switching careers — Week 4 is where it starts to show.</span>
+                </div>
+                <div data-reveal style="display:flex;align-items:center;gap:14px;margin-top:6px">
+                  <button data-goto="week" style="height:56px;padding:0 30px;border-radius:9999px;border:none;background:var(--accent);color:var(--accent-ink);font-size:17px;font-weight:600;display:inline-flex;align-items:center;gap:10px;cursor:pointer;box-shadow:0 12px 44px -8px rgba(206,245,133,.5);transition:transform .12s var(--e-out),box-shadow .2s var(--e-out)" style-hover="transform:translateY(-2px);box-shadow:0 18px 54px -8px rgba(206,245,133,.62)" style-active="transform:translateY(0) scale(.98)">Onward to Week 4<i data-icon="arrow-right" style="width:19px;height:19px"></i></button>
+                  <button data-goto="home" style="height:56px;padding:0 24px;border-radius:9999px;border:1px solid var(--border-strong);background:transparent;color:var(--fg);font-size:16px;font-weight:500;cursor:pointer;transition:all .15s var(--e-out)" style-hover="background:rgba(255,255,255,.05);border-color:var(--fg-3)">Back to my summit</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="om-tile-hit" style="display:none"></button>
+      </div>
+
+      <!--APPEND-SCREENS-->
+    </div>
+  </div>
+
+  <!-- ============ BOTTOM NAV PILL ============ -->
+  <div id="om-navpill" style="position:absolute;left:50%;bottom:22px;transform:translateX(-50%);z-index:40;display:flex;align-items:center;gap:6px;height:52px;padding:0 8px;background:rgba(18,18,17,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--border);border-radius:9999px;box-shadow:0 16px 50px -12px rgba(0,0,0,.7)">
+    <button data-nav="prev" style="width:38px;height:38px;border-radius:9999px;border:none;background:transparent;color:var(--fg-2);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;transition:all .15s var(--e-out)" style-hover="background:var(--surface-2);color:var(--fg)"><i data-icon="arrow-left" style="width:18px;height:18px"></i></button>
+    <div id="om-dots" style="display:flex;align-items:center;gap:7px;padding:0 8px"></div>
+    <button data-nav="next" style="width:38px;height:38px;border-radius:9999px;border:none;background:var(--accent);color:var(--accent-ink);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;transition:all .15s var(--e-out)" style-hover="filter:brightness(1.05)"><i data-icon="arrow-right" style="width:18px;height:18px"></i></button>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;100%&quot;,&quot;height&quot;:&quot;100%&quot;},&quot;accent&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;evergreen&quot;,&quot;lavender&quot;,&quot;gold&quot;],&quot;default&quot;:&quot;evergreen&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Prototype&quot;},&quot;reduceMotion&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Prototype&quot;}}">
+class Component extends DCLogic {
+  renderVals(){ return {}; }
+
+  componentDidMount(){
+    this.app = document.getElementById('om-app');
+    if(!this.app) return;
+    this.reduce = matchMedia('(prefers-reduced-motion:reduce)').matches || !!this.props.reduceMotion;
+    this.flow = ['welcome','name','degree','download','celebrate','getknow','home','week','lesson','code','lessondone','weekdone'];
+    this.variant = { welcome:'a', celebrate:'a', home:'a' };
+    this.slot = 0;
+    this.mode = 'stage';
+    this._done = {};
+    this.userName='Ray';
+    this.applyAccent();
+    this.buildNavs();
+    this.enhanceIcons();
+    this.initTiles();
+    this.wire();
+    this.initParallax();
+    this.initMagnetic();
+    this.fit();
+    this._rs = ()=>this.fit();
+    window.addEventListener('resize', this._rs);
+    this.go(0, true);
+    // re-run first reveal once anime is present
+    let tries=0; const t=setInterval(()=>{ if(window.anime||tries++>30){ clearInterval(t); if(this.mode==='stage') this.animateEnter(this.flow[this.slot], this.tileFor(this.flow[this.slot])); } }, 60);
+  }
+  componentWillUnmount(){ window.removeEventListener('resize', this._rs); }
+  componentDidUpdate(prev){ if(prev.accent!==this.props.accent || prev.reduceMotion!==this.props.reduceMotion){ this.reduce = matchMedia('(prefers-reduced-motion:reduce)').matches || !!this.props.reduceMotion; this.applyAccent(); } }
+
+  css(el, o){ for(const k in o) el.style[k]=o[k]; }
+  tiles(){ return Array.from(this.app.querySelectorAll('.om-tile')); }
+  tileFor(id){ const v=this.variant[id]; return (v && this.app.querySelector('.om-tile[data-screen="'+id+'"][data-variant="'+v+'"]')) || this.app.querySelector('.om-tile[data-screen="'+id+'"]'); }
+  slotExists(id){ return !!this.tileFor(id); }
+
+  applyAccent(){
+    const map={ evergreen:'#CEF585', lavender:'#A6B2F7', gold:'#EAAD5E' };
+    const a = map[this.props.accent] || '#CEF585';
+    this.app.style.setProperty('--accent', a);
+    this.app.style.setProperty('--accent-ink', this.props.accent==='lavender' ? '#15163A' : '#0A0A0A');
+  }
+
+  buildNavs(){ this.app.querySelectorAll('[data-appnav]').forEach(el=>{ el.innerHTML=this.buildNav(el.getAttribute('data-appnav')); }); }
+  buildNav(active){
+    const item=(icon,label,goto,on,locked)=>{
+      const color=locked?'var(--fg-3)':(on?'var(--fg)':'var(--fg-2)'); const bg=on?'var(--surface-2)':'transparent';
+      const lock=locked?'<i data-icon="lock-03" style="width:14px;height:14px;margin-left:auto;opacity:.7"></i>':'';
+      const ga=(goto&&!locked)?(' data-goto="'+goto+'"'):'';
+      return '<div'+ga+' style="display:flex;align-items:center;gap:11px;height:38px;padding:0 12px;border-radius:10px;cursor:'+(locked?'default':'pointer')+';color:'+color+';background:'+bg+';font-size:14px;font-weight:'+(on?600:500)+'"><i data-icon="'+icon+'" style="width:18px;height:18px"></i>'+label+lock+'</div>';
+    };
+    const initial=(this.userName||'R')[0];
+    return '<div style="height:100%;display:flex;flex-direction:column;padding:16px 12px;box-sizing:border-box">'
+      +'<div style="display:flex;align-items:center;padding:8px 10px 22px"><img src="assets/maestro-logo-on-dark.svg" style="height:21px"></div>'
+      +'<div style="display:flex;flex-direction:column;gap:2px">'
+      +item('home-03','Home','home',active==='home')+item('book-opened-02','Learn','week',active==='learn')
+      +item('atom-01-line','Practice',null,false)+item('graduation-hat-02','Profile',null,false)
+      +item('message-chat-circle','Discussions',null,false)+item('help-and-support','Services',null,false)
+      +'</div><div style="height:1px;background:var(--border);margin:14px 10px"></div><div style="display:flex;flex-direction:column;gap:2px">'
+      +item('route','Projects',null,false,true)+item('diamond-01','Leaderboards',null,false,true)
+      +item('message-chat-circle','Community',null,false,true)+item('graduation-hat-02','Shop',null,false,true)
+      +'</div>'
+      +'<div style="margin-top:auto;display:flex;align-items:center;gap:11px;padding:14px 8px 4px;border-top:1px solid var(--border)">'
+      +'<div style="width:36px;height:36px;border-radius:50%;background:var(--sunset);color:#441F06;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex:none">'+initial+'</div>'
+      +'<div style="min-width:0"><div style="font-size:14px;font-weight:600;color:var(--fg);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+this.userName+' Chen</div><div style="font-size:12px;color:var(--fg-3)">AAS · AI Engineering</div></div>'
+      +'</div></div>';
+  }
+  async enhanceIcons(){
+    const els = Array.from(this.app.querySelectorAll('[data-icon]'));
+    const names = [...new Set(els.map(e=>e.getAttribute('data-icon')))];
+    if(!this._iconCache) this._iconCache = {};
+    await Promise.all(names.map(async n=>{
+      if(this._iconCache[n]!==undefined) return;
+      try{ let t = await (await fetch('assets/icons/'+n+'.svg')).text(); this._iconCache[n]=t.split('#000').join('currentColor'); }
+      catch(e){ this._iconCache[n]=''; }
+    }));
+    els.forEach(el=>{
+      const n=el.getAttribute('data-icon'); const svgText=this._iconCache[n];
+      if(!svgText || el._iconDone) return;
+      el.innerHTML=svgText; el._iconDone=true;
+      const svg=el.firstElementChild;
+      if(svg){ svg.removeAttribute('width'); svg.removeAttribute('height'); svg.style.width='100%'; svg.style.height='100%'; svg.style.display='block'; }
+      el.style.display = (el.style.display && el.style.display!=='inline-block') ? el.style.display : 'inline-flex';
+      el.style.alignItems='center'; el.style.justifyContent='center'; el.style.flex='none';
+      el.style.background=''; el.style.mask=''; el.style.webkitMask='';
+      if(!el.style.width) el.style.width='20px';
+      if(!el.style.height) el.style.height='20px';
+    });
+  }
+
+  initTiles(){
+    this.tiles().forEach(t=>{ t.style.transition='none'; t.style.willChange='opacity, transform'; });
+    // build dots
+    const dots = this.app.querySelector('#om-dots'); dots.innerHTML='';
+    this.flowSlots().forEach((id,i)=>{
+      const d=document.createElement('button');
+      d.setAttribute('data-dot', i);
+      this.css(d,{width:'8px',height:'8px',borderRadius:'9999px',border:'none',padding:'0',background:'var(--border-strong)',cursor:'pointer',transition:'all .2s var(--e-out)'});
+      dots.appendChild(d);
+    });
+    ['welcome','celebrate','home'].forEach(s=>{ if(this.variant[s]!==undefined && this.app.querySelector('[data-variant-set="'+s+'"]')) this.refreshVariantUI(s); });
+  }
+  flowSlots(){ return this.flow.filter(id=>this.slotExists(id)); }
+
+  wire(){
+    this.app.addEventListener('click', (e)=>{
+      const nav = e.target.closest('[data-nav]');
+      if(nav){ const a=nav.getAttribute('data-nav'); if(a==='next')this.next(); else if(a==='prev')this.prev(); else if(a==='overview')this.toggleOverview(); else if(a==='restart')this.restart(); return; }
+      const dot = e.target.closest('[data-dot]');
+      if(dot){ const slots=this.flowSlots(); this.go(this.flow.indexOf(slots[+dot.getAttribute('data-dot')])); return; }
+      const goto = e.target.closest('[data-goto]');
+      if(goto){ const id=goto.getAttribute('data-goto'); this.go(this.flow.indexOf(id)); return; }
+      const vset = e.target.closest('[data-variant-set]');
+      if(vset){ const s=vset.getAttribute('data-variant-set'), v=vset.getAttribute('data-variant-val'); this.variant[s]=v; this.refreshVariantUI(s); if(this.mode==='stage') this.go(this.flow.indexOf(s)); return; }
+      const qopt = e.target.closest('[data-quiz-opt]');
+      if(qopt){ this.quizPick(qopt); return; }
+      const track = e.target.closest('[data-track]');
+      if(track){ this.selectTrack(track); return; }
+      const acc = e.target.closest('[data-acc]');
+      if(acc){ const card=acc.parentElement; const body=card.querySelector('[data-acc-body]'); const chev=acc.querySelector('[data-acc-chevron]');
+        const inner=body.firstElementChild; const opening=!body._open; body._open=opening;
+        if(chev) chev.style.transform=opening?'rotate(180deg)':'rotate(0deg)';
+        const target=inner?inner.scrollHeight:body.scrollHeight;
+        if(!window.anime || this.reduce){ body.style.height=opening?'auto':'0px'; return; }
+        anime.remove(body);
+        if(opening){ body.style.height='0px'; anime({targets:body,height:[0,target],duration:360,easing:'easeOutCubic',complete:()=>{ if(body._open) body.style.height='auto'; }}); }
+        else { body.style.height=target+'px'; anime({targets:body,height:[target,0],duration:300,easing:'easeInQuad'}); }
+        return; }
+      const run = e.target.closest('[data-run]');
+      if(run){ const tile=run.closest('.om-tile'); const c=tile.querySelector('[data-console]'); const reply=tile.querySelector('[data-run-reply]');
+        if(c && !c._open){ c._open=true;
+          if(window.anime && !this.reduce){ anime.remove(c); c.style.opacity='1'; anime({targets:c, maxHeight:[0,260], opacity:[0,1], duration:440, easing:'easeOutCubic'}); }
+          else { c.style.maxHeight='260px'; c.style.opacity='1'; } }
+        if(reply){ setTimeout(()=>{ if(window.anime && !this.reduce){ anime({targets:reply,opacity:[0,1],translateY:[8,0],duration:420,easing:'easeOutCubic'}); } else reply.style.opacity='1'; }, 750); }
+        const rcta=tile.querySelector('[data-run-cta]');
+        if(rcta){ setTimeout(()=>{ if(window.anime && !this.reduce){ anime({targets:rcta,opacity:[0,1],translateY:[8,0],duration:420,easing:'easeOutCubic'}); } else rcta.style.opacity='1'; }, 1400); }
+        return; }
+      const hit = e.target.closest('.om-tile-hit');
+      if(hit && this.mode==='overview'){ const tile=hit.closest('.om-tile'); this.enterStageAt(tile); return; }
+    });
+    document.addEventListener('keydown',(e)=>{
+      if(this.mode==='overview'){ if(e.key==='Escape') this.toggleOverview(); return; }
+      if(e.key==='ArrowRight'||e.key==='PageDown') this.next();
+      else if(e.key==='ArrowLeft'||e.key==='PageUp') this.prev();
+      else if(e.key==='Escape') this.toggleOverview();
+    });
+  }
+
+  refreshVariantUI(screen){
+    this.app.querySelectorAll('[data-variant-set="'+screen+'"]').forEach(b=>{
+      const on = b.getAttribute('data-variant-val')===this.variant[screen];
+      b.style.background = on ? 'var(--fg)' : 'transparent';
+      b.style.color = on ? '#0A0A0A' : 'var(--fg-2)';
+      b.style.borderColor = on ? 'var(--fg)' : 'var(--border)';
+    });
+  }
+
+  fit(){
+    if(this.mode!=='stage') return;
+    const vp = this.app.querySelector('#om-viewport');
+    const w = vp.clientWidth, h = vp.clientHeight;
+    const s = Math.min((w-56)/1240, (h-150)/800);
+    const deck = this.app.querySelector('#om-deck');
+    deck.style.transform = 'translate(-50%, calc(-50% - 30px)) scale('+Math.max(.2,s)+')';
+  }
+
+  go(slot, instant){
+    const n = this.flow.length;
+    slot = Math.max(0, Math.min(n-1, slot));
+    let dir = slot>=this.slot?1:-1;
+    while(!this.slotExists(this.flow[slot])){ slot+=dir; if(slot<0||slot>=n){ return; } }
+    this.slot = slot;
+    if(this.mode==='overview'){ this.toggleOverview(); }
+    const id = this.flow[slot];
+    const target = this.tileFor(id);
+    const prev=this._activeTile; this._activeTile=target;
+    const prevId = prev ? prev.getAttribute('data-flow') : null;
+    const zoomPairs={ 'home>week':[63,54], 'week>lesson':[46,64] };
+    let zmode=null, zorg=null;
+    if(!instant && !this.reduce && window.anime && prev && prev!==target && prevId){
+      if(zoomPairs[prevId+'>'+id]){ zmode='in'; zorg=zoomPairs[prevId+'>'+id]; }
+      else if(zoomPairs[id+'>'+prevId]){ zmode='out'; zorg=zoomPairs[id+'>'+prevId]; }
+    }
+    this.tiles().forEach(t=>{
+      if(window.anime) anime.remove(t);
+      if(t===target){
+        clearTimeout(t._hideT);
+        t.style.visibility='visible'; t.style.pointerEvents='auto'; t.style.zIndex='2'; t.style.display='block';
+        if(instant || this.reduce || !window.anime){ t.style.opacity='1'; t.style.transform='none'; t.style.transformOrigin='50% 50%'; }
+        else if(zmode==='in'){ t.style.transformOrigin='50% 50%'; t.style.opacity='0';
+          anime({targets:t,opacity:[0,1],scale:[.94,1],delay:110,duration:480,easing:'easeOutCubic',complete:()=>{ t.style.transform='none'; }});
+        }
+        else if(zmode==='out'){ t.style.transformOrigin=zorg[0]+'% '+zorg[1]+'%'; t.style.opacity='0';
+          anime({targets:t,opacity:[0,1],scale:[1.45,1],duration:560,easing:'easeOutCubic',complete:()=>{ t.style.transform='none'; t.style.transformOrigin='50% 50%'; }});
+        }
+        else { t.style.opacity='0'; anime({targets:t,opacity:[0,1],translateY:[14,0],duration:520,easing:'easeOutCubic'}); }
+      } else {
+        t.style.pointerEvents='none'; t.style.zIndex='1';
+        if(!instant && !this.reduce && window.anime && t===prev){
+          if(zmode==='in'){ t.style.transformOrigin=zorg[0]+'% '+zorg[1]+'%';
+            anime({targets:t,opacity:[parseFloat(t.style.opacity||'1'),0],scale:[1,1.55],duration:520,easing:'easeInQuad',complete:()=>{ if(this._activeTile!==t){ t.style.visibility='hidden'; } t.style.transform='none'; t.style.transformOrigin='50% 50%'; }});
+          } else if(zmode==='out'){ t.style.transformOrigin='50% 50%';
+            anime({targets:t,opacity:[parseFloat(t.style.opacity||'1'),0],scale:[1,.94],duration:340,easing:'easeInQuad',complete:()=>{ if(this._activeTile!==t){ t.style.visibility='hidden'; } t.style.transform='none'; }});
+          } else {
+            anime({targets:t,opacity:[parseFloat(t.style.opacity||'1'),0],duration:300,easing:'easeInQuad',complete:()=>{ if(this._activeTile!==t) t.style.visibility='hidden'; }});
+          }
+        } else { t.style.opacity='0'; t.style.transform='none'; t.style.visibility='hidden'; }
+      }
+    });
+    this.updateHud();
+    if(!instant) this.animateEnter(id, target);
+  }
+  next(){ this.go(this.slot+1); }
+  prev(){ this.go(this.slot-1); }
+  restart(){ this.variant={welcome:'a',celebrate:'a',home:'a'}; ['welcome','celebrate','home'].forEach(s=>this.refreshVariantUI(s)); this._done={}; this.go(0); }
+
+  updateHud(){
+    const slots=this.flowSlots(); const pos=slots.indexOf(this.flow[this.slot]);
+    const tile=this.tileFor(this.flow[this.slot]);
+    const idx=tile?tile.getAttribute('data-index'):''; const name=tile?tile.getAttribute('data-name'):'';
+    const tEl=this.app.querySelector('#om-title'); if(tEl) tEl.textContent = idx+' · '+name;
+    this.app.querySelectorAll('#om-dots [data-dot]').forEach((d,i)=>{
+      const on=i===pos; d.style.width=on?'26px':'8px'; d.style.background=on?'var(--accent)':'var(--border-strong)';
+    });
+  }
+
+  // ---------- overview ----------
+  toggleOverview(){
+    const deck=this.app.querySelector('#om-deck'); const vp=this.app.querySelector('#om-viewport');
+    const pill=this.app.querySelector('#om-navpill'); const ovlabel=this.app.querySelector('#om-ovlabel');
+    if(this.mode==='stage'){
+      this.mode='overview';
+      pill.style.display='none'; ovlabel.textContent='Back to flow';
+      vp.style.overflow='auto';
+      this.css(deck,{position:'static',transform:'none',width:'auto',height:'auto',display:'grid',gridTemplateColumns:'repeat(auto-fill, 384px)',gap:'42px 36px',justifyContent:'center',alignContent:'start',padding:'52px 44px 90px'});
+      this.tiles().forEach(t=>{
+        clearTimeout(t._hideT);
+        this.css(t,{position:'relative',inset:'auto',opacity:'1',visibility:'visible',transform:'none',pointerEvents:'auto',display:'flex',flexDirection:'column',gap:'12px',transition:'none'});
+        const lbl=t.querySelector('.om-tile-label'); if(lbl) lbl.style.display='flex';
+        const cell=t.querySelector('.om-cell'); this.css(cell,{width:'384px',height:'248px',overflow:'hidden',borderRadius:'14px',position:'relative',border:'1px solid var(--border)',boxShadow:'0 18px 48px -18px rgba(0,0,0,.7)'});
+        const frame=t.querySelector('.om-frame'); this.css(frame,{transform:'scale(.3097)',transformOrigin:'top left',boxShadow:'none',borderRadius:'0',border:'none'});
+        let hit=t.querySelector('.om-tile-hit'); this.css(hit,{display:'block',position:'absolute',inset:'0',border:'none',background:'transparent',cursor:'pointer',zIndex:'5'});
+        this.css(t.querySelector('.om-tile-label'),{font:'600 13px var(--font-text)',color:'var(--fg)',display:'flex',gap:'8px',alignItems:'center',letterSpacing:'.01em'});
+      });
+      // group labels via order already in DOM
+      requestAnimationFrame(()=>{ if(window.anime && !this.reduce){ anime({targets:this.app.querySelectorAll('.om-tile'),opacity:[0,1],translateY:[14,0],delay:anime.stagger(38),duration:420,easing:'easeOutCubic'}); } });
+    } else {
+      this.mode='stage';
+      pill.style.display='flex'; ovlabel.textContent='All screens';
+      vp.style.overflow='hidden';
+      this.css(deck,{position:'absolute',left:'50%',top:'50%',display:'block',width:'1240px',height:'800px',gridTemplateColumns:'',gap:'',padding:'',justifyContent:'',alignContent:''});
+      this.tiles().forEach(t=>{
+        this.css(t,{position:'absolute',inset:'0',display:'block',transition:'none'});
+        const lbl=t.querySelector('.om-tile-label'); if(lbl) lbl.style.display='none';
+        const cell=t.querySelector('.om-cell'); this.css(cell,{width:'1240px',height:'800px',overflow:'visible',borderRadius:'0',border:'none',boxShadow:'none'});
+        const frame=t.querySelector('.om-frame'); this.css(frame,{transform:'none',boxShadow:'0 50px 130px -30px rgba(0,0,0,.85)',borderRadius:'16px',border:'1px solid var(--border)'});
+        const hit=t.querySelector('.om-tile-hit'); if(hit) hit.style.display='none';
+      });
+      this.fit();
+      this.go(this.slot, true);
+    }
+  }
+  enterStageAt(tile){
+    const id=tile.getAttribute('data-flow'); const v=tile.getAttribute('data-variant');
+    if(v && this.variant[id]!==undefined){ this.variant[id]=v; this.refreshVariantUI(id); }
+    this.toggleOverview();
+    this.go(this.flow.indexOf(id));
+  }
+
+  // ---------- per-screen entrance ----------
+  animateEnter(id, tile){
+    if(!tile) return;
+    if(window.anime && !this.reduce){
+      const items = tile.querySelectorAll('[data-reveal]');
+      if(items.length){ anime.remove(items); anime({targets:items, opacity:[0,1], translateY:[18,0], delay:anime.stagger(70,{start:60}), duration:560, easing:'easeOutCubic'}); }
+    }
+    const hook = this['enter_'+id];
+    if(typeof hook==='function') hook.call(this, tile);
+  }
+
+  selectTrack(btn){
+    const group=btn.closest('[data-track-group]'); if(!group) return;
+    group.querySelectorAll('[data-track]').forEach(b=>{
+      const on=b===btn; const chk=b.querySelector('[data-track-check]'); const ic=b.querySelector('span');
+      if(on){ b.style.border='1.5px solid var(--accent)'; b.style.background='rgba(206,245,133,.07)'; b.style.boxShadow='0 0 34px -12px rgba(206,245,133,.5)';
+        if(ic){ ic.style.background='rgba(206,245,133,.14)'; ic.style.color='var(--accent)'; }
+        if(chk){ chk.style.background='var(--accent)'; chk.style.border='none'; chk.style.color='var(--accent-ink)'; } }
+      else { b.style.border='1px solid var(--border)'; b.style.background='var(--surface)'; b.style.boxShadow='none';
+        if(ic){ ic.style.background='var(--surface-2)'; ic.style.color='var(--fg-2)'; }
+        if(chk){ chk.style.background='transparent'; chk.style.border='2px solid var(--border-strong)'; chk.style.color='transparent'; } }
+    });
+    if(window.anime&&!this.reduce){ anime.remove(btn); anime({targets:btn,scale:[0.985,1],duration:280,easing:'easeOutBack'}); }
+  }
+
+  enter_download(tile){
+    const ring=tile.querySelector('[data-ring]'), pctEl=tile.querySelector('[data-pct]'), statusEl=tile.querySelector('[data-status]');
+    const glow=tile.querySelector('[data-orb-glow]'), steps=tile.querySelectorAll('[data-dl-step]'), cont=tile.querySelector('[data-dl-continue]');
+    const CIRC=703.7;
+    const setPct=(p)=>{
+      p=Math.max(0,Math.min(100,p));
+      ring.setAttribute('stroke-dashoffset', CIRC*(1-p/100));
+      pctEl.textContent=Math.round(p);
+      glow.style.opacity=0.34+0.62*(p/100); glow.style.transform='scale('+(0.9+0.28*(p/100))+')';
+      let s; if(p<15)s='Waking your tutor…';else if(p<40)s='Downloading the model to your device…';else if(p<70)s='Unpacking 3.8B parameters…';else if(p<93)s='Tuning to your focus — Applied ML…';else if(p<100)s='Almost yours…';else s='Your tutor is ready.';
+      if(statusEl.textContent!==s) statusEl.textContent=s;
+      steps.forEach(st=>{ const th=+st.getAttribute('data-th'); if(p>=th && !st._on){ st._on=true; this.checkStep(st,true);} else if(p<th && st._on){ st._on=false; this.checkStep(st,false); } });
+    };
+    steps.forEach(st=>{ st._on=false; this.checkStep(st,false); });
+    cont.style.opacity='0'; cont.style.pointerEvents='none'; cont.style.transform='translateY(10px)';
+    if(this._dlAnim) this._dlAnim.pause();
+    if(this.reduce || !window.anime){ setPct(100); this.dlComplete(tile); return; }
+    const obj={v:0}; setPct(0);
+    this._dlAnim=anime({targets:obj,v:100,duration:5200,easing:'easeInOutQuart',update:()=>setPct(obj.v),complete:()=>this.dlComplete(tile)});
+  }
+  checkStep(st,on){ const c=st.querySelector('[data-step-ring]'); if(!c) return;
+    if(on){ c.style.background='var(--accent)'; c.style.borderColor='var(--accent)'; c.style.color='var(--accent-ink)'; st.style.color='var(--fg)'; st.style.opacity='1'; }
+    else { c.style.background='transparent'; c.style.borderColor='var(--border-strong)'; c.style.color='transparent'; st.style.opacity='.5'; } }
+  dlComplete(tile){
+    const cont=tile.querySelector('[data-dl-continue]'), orb=tile.querySelector('[data-orb]'), glow=tile.querySelector('[data-orb-glow]');
+    const mark=tile.querySelector('[data-orb] img'), screen=tile.querySelector('.om-screen'), ring=tile.querySelector('[data-ring]');
+    if(window.anime && !this.reduce){
+      const flash=document.createElement('div');
+      flash.style.cssText='position:absolute;inset:0;pointer-events:none;z-index:3;background:radial-gradient(circle at 50% 40%,rgba(206,245,133,.5),rgba(166,178,247,.18) 40%,transparent 68%);opacity:0';
+      screen.appendChild(flash); anime({targets:flash,opacity:[0,.95,0],duration:1000,easing:'easeOutQuad',complete:()=>flash.remove()});
+      this.pulseRing(tile,3); this.sparks(tile,20);
+      anime({targets:mark,scale:[1,1.2,1],duration:900,easing:'easeOutElastic(1,.5)'});
+      glow.style.background='radial-gradient(circle,rgba(206,245,133,.62),rgba(166,178,247,.22) 46%,transparent 72%)';
+      anime({targets:glow,scale:[1.08,1.34,1.14],opacity:[.9,1,.86],duration:960,easing:'easeOutQuad'});
+      if(ring) anime({targets:ring,strokeWidth:[6,11,7],duration:820,easing:'easeOutQuad'});
+    } else { glow.style.opacity='.9'; }
+    cont.style.opacity='1'; cont.style.pointerEvents='auto'; cont.style.transform='translateY(0)';
+  }
+  pulseRing(tile,n){ const host=tile.querySelector('[data-pulse-host]'); if(!host) return; n=n||2;
+    for(let i=0;i<n;i++){ const r=document.createElement('div'); r.style.cssText='position:absolute;inset:0;border-radius:50%;border:2px solid var(--accent);opacity:.6;pointer-events:none'; r.style.animation='om-pulsering 1350ms var(--e-out) '+(i*230)+'ms forwards'; host.appendChild(r); setTimeout(()=>r.remove(),1800); } }
+  sparks(tile,n){ const host=tile.querySelector('[data-pulse-host]'); if(!host||!window.anime) return; n=n||18;
+    for(let i=0;i<n;i++){ const s=document.createElement('div'); const h=i%3; const col=h===0?'var(--accent)':h===1?'var(--lavender)':'var(--sunset)';
+      s.style.cssText='position:absolute;left:132px;top:132px;width:6px;height:6px;border-radius:9999px;pointer-events:none;background:'+col+';box-shadow:0 0 9px '+col;
+      host.appendChild(s); const ang=(Math.PI*2*i)/n+(Math.random()*0.5-0.25), dist=88+Math.random()*78;
+      anime({targets:s,translateX:Math.cos(ang)*dist,translateY:Math.sin(ang)*dist,scale:[1,0],opacity:[1,0],duration:820+Math.random()*340,easing:'easeOutQuad',complete:()=>s.remove()}); } }
+
+  enter_name(tile){
+    const nameIn=tile.querySelector('[data-field-name]'), echo=tile.querySelector('[data-name-echo]');
+    if(nameIn && !nameIn._wired){ nameIn._wired=true; nameIn.addEventListener('input',()=>{ const v=nameIn.value.trim(); if(v){ echo.textContent='Nice to meet you, '+v.split(' ')[0]+'.'; echo.style.opacity='1'; } else echo.style.opacity='0'; }); }
+    setTimeout(()=>{ try{ nameIn && nameIn.focus({preventScroll:true}); }catch(e){} }, 460);
+    this.startWalk(tile);
+  }
+  startWalk(tile){
+    const dots=tile.querySelectorAll('[data-walk] > *'); if(!dots.length) return;
+    if(this.reduce || !window.anime){ dots.forEach(d=>d.style.opacity='.75'); return; }
+    anime.remove(dots);
+    anime({targets:dots, opacity:[{value:.12,duration:0},{value:1,duration:300},{value:.18,duration:760}], scale:[{value:.65,duration:0},{value:1.3,duration:300},{value:.9,duration:760}], delay:anime.stagger(240), loop:true, easing:'easeInOutSine'});
+  }
+
+  enter_celebrate(tile){
+    this.alpenglow(tile); this.spindrift(tile,16);
+    const med=tile.querySelector('[data-medallion]');
+    if(med && window.anime && !this.reduce){ anime.remove(med); anime({targets:med,scale:[.68,1],opacity:[0,1],duration:760,easing:'easeOutElastic(1,.6)'}); }
+  }
+  confetti(tile){
+    const host=tile.querySelector('[data-confetti]'); if(!host) return; host.innerHTML='';
+    if(this.reduce || !window.anime) return;
+    const cols=['#CEF585','#A6B2F7','#FF8B62','#EAAD5E','#ECEBE4']; const W=1240,H=760,n=64;
+    for(let i=0;i<n;i++){ const p=document.createElement('div'); const c=cols[i%cols.length]; const w=6+Math.random()*7,h=9+Math.random()*11;
+      const sx=W*0.5+(Math.random()*2-1)*W*0.34;
+      p.style.cssText='position:absolute;top:-26px;left:'+sx+'px;width:'+w+'px;height:'+h+'px;background:'+c+';border-radius:2px;opacity:0';
+      host.appendChild(p);
+      anime({targets:p,translateY:[-30,H+50],translateX:(Math.random()*2-1)*180,rotate:Math.random()*760-380,opacity:[{value:1,duration:140},{value:1,duration:1500},{value:0,duration:340}],duration:1900+Math.random()*1300,delay:Math.random()*460,easing:'easeInQuad',complete:()=>p.remove()});
+    }
+  }
+
+  enter_home(tile){
+    const path=tile.querySelector('[data-trail-done]');
+    if(!path){
+      const tl=tile.querySelector('[data-timeline]'); if(!tl) return;
+      const tnodes=tile.querySelectorAll('[data-node]'), conns=tile.querySelectorAll('[data-conn]');
+      if(this.reduce || !window.anime) return;
+      anime.remove(tnodes); anime.remove(conns);
+      conns.forEach(c=>{ c.style.transformOrigin='top'; c.style.transform='scaleY(0)'; });
+      tnodes.forEach(n=>n.style.opacity='0');
+      anime({targets:tnodes, opacity:[0,1], scale:[.45,1], duration:440, delay:anime.stagger(130,{start:120}), easing:'easeOutBack'});
+      anime({targets:conns, scaleY:[0,1], duration:340, delay:anime.stagger(130,{start:240}), easing:'easeOutQuad'});
+      return;
+    }
+    const nodes=tile.querySelectorAll('[data-node]'); const you=tile.querySelector('[data-you]');
+    const L=path.getTotalLength(); path.style.strokeDasharray=L;
+    if(this.reduce || !window.anime){ path.style.strokeDashoffset='0'; nodes.forEach(n=>n.style.opacity='1'); if(you) you.style.opacity='1'; this.buildSky(tile); return; }
+    anime.remove(path); anime.remove(nodes); if(you) anime.remove(you);
+    path.style.strokeDashoffset=L; nodes.forEach(n=>n.style.opacity='0'); if(you) you.style.opacity='0';
+    anime({targets:path, strokeDashoffset:[L,0], duration:1500, easing:'easeInOutSine'});
+    anime({targets:nodes, opacity:[0,1], scale:[.4,1], duration:520, delay:anime.stagger(190,{start:260}), easing:'easeOutBack'});
+    if(you) anime({targets:you, opacity:[0,1], scale:[.45,1], translateY:[10,0], duration:720, delay:1050, easing:'easeOutElastic(1,.55)'});
+    this.buildSky(tile);
+  }
+  enter_week(tile){
+    tile.querySelectorAll('[data-acc-body]').forEach(b=>{ const open=b.style.gridTemplateRows==='1fr'||b._open; b.style.display='block'; b.style.overflow='hidden'; b.style.gridTemplateRows=''; b.style.transition='none'; b._open=open; b.style.height=open?'auto':'0px'; });
+    const cards=tile.querySelectorAll('[data-weeks] > *'); if(!cards.length || this.reduce || !window.anime) return;
+    anime.remove(cards); anime({targets:cards, opacity:[0,1], translateY:[16,0], duration:460, delay:anime.stagger(80,{start:120}), easing:'easeOutCubic'});
+  }
+  enter_lesson(tile){
+    const seg=tile.querySelector('[data-seg-fill]');
+    if(seg){
+      if(this.reduce || !window.anime){ seg.style.width='55%'; }
+      else { seg.style.width='0%'; anime.remove(seg); anime({targets:seg, width:['0%','55%'], duration:900, delay:420, easing:'easeInOutQuart'}); }
+    }
+    const typing=tile.querySelector('[data-typing]'), tgt=tile.querySelector('[data-type-target]'), fol=tile.querySelector('[data-type-follow]');
+    clearTimeout(this._typT);
+    if(typing && tgt && !this.reduce && window.anime){
+      tgt.style.display='none'; tgt.style.opacity='0';
+      if(fol) fol.style.opacity='0';
+      typing.style.display='flex'; typing.style.opacity='0';
+      anime({targets:typing,opacity:[0,1],duration:300,delay:500,easing:'easeOutQuad'});
+      this._typT=setTimeout(()=>{
+        typing.style.display='none';
+        tgt.style.display='flex';
+        anime({targets:tgt,opacity:[0,1],translateY:[8,0],duration:400,easing:'easeOutCubic'});
+        if(fol) anime({targets:fol,opacity:[0,1],translateY:[8,0],delay:220,duration:400,easing:'easeOutCubic'});
+      },1750);
+    } else {
+      if(typing) typing.style.display='none';
+      if(tgt){ tgt.style.display='flex'; tgt.style.opacity='1'; }
+      if(fol) fol.style.opacity='1';
+    }
+  }
+  enter_code(tile){
+    const pane=tile.querySelector('[data-codepane]'); const c=tile.querySelector('[data-console]'); const reply=tile.querySelector('[data-run-reply]');
+    if(c){ c._open=false; c.style.maxHeight='0'; c.style.opacity='0'; }
+    if(reply) reply.style.opacity='0';
+    const rcta=tile.querySelector('[data-run-cta]'); if(rcta) rcta.style.opacity='0';
+    if(!pane) return;
+    if(this.reduce || !window.anime){ pane.style.transform='none'; return; }
+    anime.remove(pane); anime({targets:pane, translateX:['101%','0%'], duration:560, easing:'easeOutCubic'});
+  }
+
+  enter_getknow(tile){
+    this._gkEcho=[]; this._gkPrev=null;
+    tile.querySelectorAll('[data-quiz-opt]').forEach(b=>{ b.style.borderColor='var(--border)'; b.style.background='var(--surface)'; });
+    this.gkShow(tile, 0);
+  }
+  gkShow(tile, n){
+    const panels=Array.from(tile.querySelectorAll('[data-gk-panel]'));
+    const segs=Array.from(tile.querySelectorAll('[data-gk-seg]'));
+    const count=tile.querySelector('[data-gk-count]');
+    segs.forEach((s,i)=>{ s.style.background = i<Math.min(n,3) ? 'var(--accent)' : 'var(--surface-2)'; });
+    if(count) count.textContent = n<3 ? ('Question '+(n+1)+' of 3') : 'Lesson 0 complete';
+    const echoEl=tile.querySelector('[data-gk-echo]');
+    if(echoEl){ const parts=(this._gkEcho||[]).filter(Boolean); echoEl.textContent=parts.join(' · '); echoEl.style.display=parts.length?'inline-flex':'none'; }
+    panels.forEach(p=>{
+      const i=+p.getAttribute('data-gk-panel');
+      if(window.anime) anime.remove(p);
+      if(i===n){
+        p.style.visibility='visible'; p.style.pointerEvents='auto';
+        if(this.reduce||!window.anime){ p.style.opacity='1'; p.style.transform='none'; }
+        else{
+          p.style.opacity='0';
+          anime({targets:p,opacity:[0,1],translateY:[26,0],duration:520,easing:'easeOutCubic'});
+          const kids=p.querySelectorAll('[data-gk-item]');
+          if(kids.length){ anime.remove(kids); anime({targets:kids,opacity:[0,1],translateY:[14,0],delay:anime.stagger(65,{start:140}),duration:440,easing:'easeOutCubic'}); }
+        }
+      } else {
+        p.style.pointerEvents='none';
+        if(i===this._gkPrev && !this.reduce && window.anime){
+          anime({targets:p,opacity:[1,0],translateY:[0,-18],duration:250,easing:'easeInQuad',complete:()=>{ if(this._gk!==i) p.style.visibility='hidden'; }});
+        } else { p.style.opacity='0'; p.style.visibility='hidden'; }
+      }
+    });
+    this._gkPrev=n; this._gk=n;
+  }
+  quizPick(btn){
+    const tile=btn.closest('.om-tile'); const panel=btn.closest('[data-gk-panel]'); if(!tile||!panel) return;
+    panel.querySelectorAll('[data-quiz-opt]').forEach(b=>{
+      const on=b===btn; b.style.borderColor=on?'var(--accent)':'var(--border)'; b.style.background=on?'rgba(206,245,133,.08)':'var(--surface)';
+    });
+    if(!this._gkEcho) this._gkEcho=[];
+    const step=+panel.getAttribute('data-gk-panel');
+    this._gkEcho[step]=btn.getAttribute('data-echo')||'';
+    if(window.anime && !this.reduce){ anime.remove(btn); anime({targets:btn,scale:[.97,1],duration:240,easing:'easeOutQuad'}); }
+    clearTimeout(this._gkT); this._gkT=setTimeout(()=>this.gkShow(tile, step+1), 430);
+  }
+
+  enter_lessondone(tile){
+    const fill=tile.querySelector('[data-ld-fill]'), check=tile.querySelector('[data-ld-check]'), card=tile.querySelector('[data-ld-card]'), burst=tile.querySelector('[data-ld-burst]');
+    this.typeText(tile.querySelector('[data-typewrite]'), 1100);
+    if(this.reduce || !window.anime){ if(fill) fill.style.width='100%'; return; }
+    if(fill){ fill.style.width='0%'; anime.remove(fill); anime({targets:fill,width:['0%','100%'],duration:700,delay:350,easing:'easeInOutQuart'}); }
+    if(card){ anime.remove(card); anime({targets:card,opacity:[0,1],translateY:[22,0],duration:520,easing:'easeOutCubic'}); }
+    if(check){ anime.remove(check); check.style.opacity='0';
+      anime({targets:check,opacity:[0,1],scale:[.3,1],duration:720,delay:300,easing:'easeOutElastic(1,.55)'}); }
+    if(burst){ setTimeout(()=>{ for(let i=0;i<8;i++){ const s=document.createElement('span');
+      s.style.cssText='position:absolute;left:50%;top:50%;width:5px;height:5px;border-radius:9999px;background:var(--accent);box-shadow:0 0 8px rgba(206,245,133,.8);pointer-events:none';
+      burst.appendChild(s); const a=Math.PI*2*i/8+0.35, d=46+Math.random()*20;
+      anime({targets:s,translateX:Math.cos(a)*d,translateY:Math.sin(a)*d,opacity:[1,0],scale:[1,.3],duration:640,easing:'easeOutQuad',complete:()=>s.remove()}); } }, 640); }
+  }
+
+  enter_weekdone(tile){
+    this.alpenglow(tile); this.spindrift(tile,16);
+    clearTimeout(this._sbT); this._sbT=setTimeout(()=>{ if(this._activeTile===tile) this.starBorn(tile); }, 1650);
+    const path=tile.querySelector('[data-wd-path]');
+    const cores=tile.querySelectorAll('[data-wd-core]');
+    const camp=tile.querySelector('[data-wd-campwrap]');
+    if(this.reduce || !window.anime){
+      if(path){ path.style.strokeDasharray='none'; path.style.strokeDashoffset='0'; path.style.filter='drop-shadow(0 0 8px rgba(206,245,133,.55))'; }
+      cores.forEach(c=>c.style.opacity='1'); if(camp) camp.style.opacity='1'; return;
+    }
+    if(path){ const L=path.getTotalLength(); path.style.strokeDasharray=L; path.style.strokeDashoffset=L; path.style.filter='none';
+      anime.remove(path); anime({targets:path,strokeDashoffset:[L,0],duration:1000,delay:150,easing:'easeInOutQuad',complete:()=>{ path.style.filter='drop-shadow(0 0 8px rgba(206,245,133,.55))'; }}); }
+    anime.remove(cores); cores.forEach(c=>c.style.opacity='0');
+    anime({targets:cores,opacity:[0,1],scale:[.3,1],duration:380,delay:anime.stagger(170,{start:350}),easing:'easeOutBack'});
+    if(camp){ anime.remove(camp); camp.style.opacity='0';
+      anime({targets:camp,opacity:[0,1],scale:[.4,1],duration:600,delay:1050,easing:'easeOutElastic(1,.55)'}); }
+  }
+
+  enter_welcome(tile){
+    const lines=tile.querySelectorAll('[data-wline]');
+    if(lines.length){
+      if(this.reduce || !window.anime){ lines.forEach(l=>{ l.style.transform='none'; }); }
+      else { anime.remove(lines); lines.forEach(l=>{ l.style.transform='translateY(115%)'; });
+        anime({targets:lines,translateY:['115%','0%'],delay:anime.stagger(130,{start:220}),duration:780,easing:'easeOutQuint'}); }
+    }
+    const mh=tile.querySelector('[data-motes]');
+    if(mh){ mh.innerHTML='';
+      if(!this.reduce && window.anime){
+        for(let i=0;i<9;i++){ const m=document.createElement('span');
+          const x=Math.random()*100, y=30+Math.random()*68, sz=2+Math.random()*2;
+          m.style.cssText='position:absolute;border-radius:9999px;background:rgba(236,235,228,'+(0.12+Math.random()*.2).toFixed(2)+');width:'+sz+'px;height:'+sz+'px;left:'+x+'%;top:'+y+'%;opacity:0';
+          mh.appendChild(m);
+          anime({targets:m,translateY:[0,-(90+Math.random()*140)],translateX:[0,(Math.random()*2-1)*50],opacity:[{value:.85,duration:2200},{value:0,duration:2600}],duration:7000+Math.random()*5000,delay:Math.random()*3800,loop:true,easing:'linear'});
+        }
+      }
+    }
+  }
+
+  initMagnetic(){
+    if(this.reduce) return;
+    this.app.querySelectorAll('[data-magnetic]').forEach(b=>{
+      b.style.transition='transform .18s var(--e-out), box-shadow .2s var(--e-out)';
+      b.addEventListener('mousemove',(e)=>{ const r=b.getBoundingClientRect();
+        const dx=((e.clientX-r.left)/r.width-.5)*12, dy=((e.clientY-r.top)/r.height-.5)*8;
+        b.style.transform='translate('+dx.toFixed(1)+'px,'+(dy-2).toFixed(1)+'px)'; });
+      b.addEventListener('mouseleave',()=>{ b.style.transform='translate(0,0)'; });
+    });
+  }
+
+  initParallax(){
+    if(this.reduce) return;
+    this.app.querySelectorAll('.om-tile').forEach(t=>{
+      const s=t.getAttribute('data-screen');
+      if(s!=='welcome' && s!=='getknow' && s!=='download') return;
+      const screen=t.querySelector('.om-screen'); if(!screen) return;
+      const img=screen.querySelector('[data-plx-img]');
+      const orbs=screen.querySelectorAll('[data-plx-orb]');
+      if(!img && !orbs.length) return;
+      let tx=0,ty=0,cx=0,cy=0,raf=null;
+      const tick=()=>{
+        cx+=(tx-cx)*.09; cy+=(ty-cy)*.09;
+        if(img) img.style.transform='translate('+(cx*-13)+'px,'+(cy*-9)+'px) scale(1.06)';
+        orbs.forEach(o=>{ o.style.transform='translate('+(cx*8)+'px,'+(cy*6)+'px)'; });
+        if(Math.abs(tx-cx)>.002||Math.abs(ty-cy)>.002){ raf=requestAnimationFrame(tick); } else { raf=null; }
+      };
+      const kick=()=>{ if(!raf) raf=requestAnimationFrame(tick); };
+      screen.addEventListener('mousemove',(e)=>{
+        const r=screen.getBoundingClientRect();
+        tx=((e.clientX-r.left)/r.width-.5)*2; ty=((e.clientY-r.top)/r.height-.5)*2; kick();
+      });
+      screen.addEventListener('mouseleave',()=>{ tx=0; ty=0; kick(); });
+    });
+  }
+
+  buildSky(tile){
+    const sky=tile.querySelector('[data-sky]'); if(!sky) return;
+    sky.innerHTML='';
+    const stars=[[540,170,'print()','Week 1'],[585,120,'comments','Week 1'],[635,168,'running code','Week 1'],[700,95,'variables','Week 2'],[755,140,'strings','Week 2'],[815,88,'numbers','Week 2'],[870,132,'naming','Week 2'],[925,175,'functions','Week 3'],[957,110,'parameters','Week 3'],[988,160,'return values','Week 3']];
+    const NS='http://www.w3.org/2000/svg';
+    const svg=document.createElementNS(NS,'svg');
+    svg.setAttribute('viewBox','0 0 1000 760'); svg.setAttribute('preserveAspectRatio','none');
+    svg.style.cssText='position:absolute;left:0;top:0;width:100%;height:100%';
+    const lines=[[0,1,2],[3,4,5,6]].map(idxs=>{
+      const p=document.createElementNS(NS,'polyline');
+      p.setAttribute('points', idxs.map(i=>stars[i][0]+','+stars[i][1]).join(' '));
+      p.setAttribute('fill','none'); p.setAttribute('stroke','rgba(166,178,247,.3)'); p.setAttribute('stroke-width','1');
+      svg.appendChild(p); return p;
+    });
+    sky.appendChild(svg);
+    const els=stars.map(s=>{
+      const el=document.createElement('span');
+      el.style.cssText='position:absolute;width:5px;height:5px;border-radius:9999px;background:#E9EBFF;box-shadow:0 0 9px rgba(166,178,247,.95);pointer-events:auto;transform:translate(-50%,-50%)';
+      el.style.left=s[0]+'px'; el.style.top=s[1]+'px';
+      const lab=document.createElement('span');
+      lab.style.cssText='position:absolute;left:12px;top:-11px;display:none;white-space:nowrap;padding:4px 10px;border-radius:9999px;background:rgba(14,14,13,.92);border:1px solid var(--border);color:var(--fg);font-size:11.5px;font-weight:600';
+      lab.innerHTML=s[2]+' <span style="color:var(--fg-3);font-weight:500">· '+s[3]+'</span>';
+      el.appendChild(lab);
+      el.addEventListener('mouseenter',()=>{ lab.style.display='block'; el.style.transform='translate(-50%,-50%) scale(2)'; });
+      el.addEventListener('mouseleave',()=>{ lab.style.display='none'; el.style.transform='translate(-50%,-50%)'; });
+      sky.appendChild(el); return el;
+    });
+    if(this.reduce || !window.anime){ return; }
+    els.forEach(e=>{ e.style.opacity='0'; });
+    lines.forEach(l=>{ const len=l.getTotalLength(); l.style.strokeDasharray=len; l.style.strokeDashoffset=len; });
+    anime({targets:els,opacity:[0,1],delay:anime.stagger(90,{start:1250}),duration:420,easing:'easeOutQuad',complete:()=>{
+      els.forEach(e=>{ anime({targets:e,opacity:[1,.5],duration:1500+Math.random()*1800,direction:'alternate',loop:true,easing:'easeInOutSine',delay:Math.random()*1400}); });
+    }});
+    anime({targets:lines,strokeDashoffset:0,delay:anime.stagger(220,{start:2050}),duration:800,easing:'easeInOutSine'});
+  }
+
+  alpenglow(tile){
+    const screen=tile.querySelector('.om-screen'); if(!screen || this.reduce || !window.anime) return;
+    const sweep=document.createElement('div');
+    sweep.style.cssText='position:absolute;inset:0;pointer-events:none;z-index:14;opacity:0;background:linear-gradient(105deg,transparent 26%,rgba(234,173,94,.13) 42%,rgba(236,235,228,.2) 50%,rgba(234,173,94,.12) 58%,transparent 74%);transform:translateX(-60%)';
+    screen.appendChild(sweep);
+    anime({targets:sweep,translateX:['-60%','60%'],opacity:[{value:1,duration:250},{value:1,duration:700},{value:0,duration:450}],duration:1500,easing:'easeInOutSine',complete:()=>sweep.remove()});
+    const bloom=document.createElement('div');
+    bloom.style.cssText='position:absolute;inset:0;pointer-events:none;z-index:13;opacity:0;background:radial-gradient(90% 70% at 50% 30%,rgba(236,235,228,.15),transparent 62%)';
+    screen.appendChild(bloom);
+    anime({targets:bloom,opacity:[0,1,0],duration:2000,easing:'easeInOutQuad',complete:()=>bloom.remove()});
+  }
+  spindrift(tile,n){
+    const screen=tile.querySelector('.om-screen'); if(!screen || this.reduce || !window.anime) return;
+    n=n||22;
+    for(let i=0;i<n;i++){
+      const s=document.createElement('span');
+      const y=40+Math.random()*620, len=18+Math.random()*26, op=.3+Math.random()*.5;
+      s.style.cssText='position:absolute;pointer-events:none;z-index:14;left:104%;top:'+y+'px;width:'+len+'px;height:2px;border-radius:9999px;background:rgba(236,235,228,'+op+')';
+      screen.appendChild(s);
+      anime({targets:s,translateX:[0,-(1500+Math.random()*500)],translateY:[0,60+Math.random()*90],rotate:-6,opacity:[{value:op,duration:100},{value:0,duration:600,delay:500}],duration:1100+Math.random()*800,delay:Math.random()*1500,easing:'easeInQuad',complete:()=>s.remove()});
+    }
+  }
+  starBorn(tile){
+    const host=tile.querySelector('[data-ws-sky]'); if(!host || this.reduce || !window.anime) return;
+    host.innerHTML='';
+    const decor=[[1020,95],[1150,85],[1085,150]], land=[1062,112];
+    const stars=decor.map(p=>{
+      const el=document.createElement('span');
+      el.style.cssText='position:absolute;width:4px;height:4px;border-radius:9999px;background:#E9EBFF;box-shadow:0 0 8px rgba(166,178,247,.8);opacity:.35;transform:translate(-50%,-50%)';
+      el.style.left=p[0]+'px'; el.style.top=p[1]+'px'; host.appendChild(el); return el;
+    });
+    const born=document.createElement('span');
+    born.style.cssText='position:absolute;width:7px;height:7px;border-radius:9999px;background:#FFFDF2;box-shadow:0 0 14px rgba(236,235,228,.95);opacity:0;margin-left:-3.5px;margin-top:-3.5px';
+    born.style.left='930px'; born.style.top='150px'; host.appendChild(born);
+    anime({targets:born,opacity:[0,1],translateX:[0,land[0]-930],translateY:[0,land[1]-150],duration:800,easing:'easeOutCubic'});
+    const ring=document.createElement('span');
+    ring.style.cssText='position:absolute;width:44px;height:44px;border-radius:50%;border:1.5px solid rgba(236,235,228,.85);opacity:0;margin-left:-22px;margin-top:-22px';
+    ring.style.left=land[0]+'px'; ring.style.top=land[1]+'px'; host.appendChild(ring);
+    anime({targets:ring,opacity:[.9,0],scale:[.3,1.7],delay:800,duration:600,easing:'easeOutQuad',complete:()=>ring.remove()});
+    anime({targets:stars,opacity:[.35,1],delay:anime.stagger(110,{start:850}),duration:360,easing:'easeOutQuad'});
+    const NS='http://www.w3.org/2000/svg';
+    const svg=document.createElementNS(NS,'svg');
+    svg.setAttribute('viewBox','0 0 1240 760'); svg.setAttribute('preserveAspectRatio','none');
+    svg.style.cssText='position:absolute;inset:0;width:100%;height:100%';
+    const paths=[[[1020,95],land,[1150,85]],[land,[1085,150]]].map(pts=>{
+      const p=document.createElementNS(NS,'polyline');
+      p.setAttribute('points',pts.map(q=>q[0]+','+q[1]).join(' '));
+      p.setAttribute('fill','none'); p.setAttribute('stroke','rgba(166,178,247,.42)'); p.setAttribute('stroke-width','1');
+      svg.appendChild(p); return p;
+    });
+    host.appendChild(svg);
+    paths.forEach(p=>{ const len=p.getTotalLength(); p.style.strokeDasharray=len; p.style.strokeDashoffset=len; });
+    anime({targets:paths,strokeDashoffset:0,delay:anime.stagger(160,{start:1000}),duration:520,easing:'easeInOutSine'});
+  }
+  typeText(el, delay){
+    if(!el) return; const full=el.getAttribute('data-typewrite'); if(!full) return;
+    clearInterval(el._twT);
+    if(this.reduce || !window.anime){ el.textContent=full; return; }
+    el.textContent='';
+    setTimeout(()=>{ let i=0; el._twT=setInterval(()=>{ i++; el.textContent=full.slice(0,i); if(i>=full.length) clearInterval(el._twT); },17); }, delay||0);
+  }
+}
+</script>
+</body>
+</html>
