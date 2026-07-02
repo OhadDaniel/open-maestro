@@ -1,4 +1,5 @@
 import { useReveal } from '../../../../shared/motion/useReveal'
+import { useCoursePosition } from '../../../course/useCoursePosition'
 import { AppNav } from '../../../appnav/AppNav'
 import { useLessonChatContext } from '../../../lessonchat/LessonChatContext'
 import {
@@ -21,13 +22,15 @@ export function LessonScreen() {
   const { goTo } = useDeckNav()
   const { provider } = useSession()
   const { baked, ready } = useLessonChatContext()
+  const { currentWeekIndex, currentLessonIndex, currentLessonTitle } = useCoursePosition()
+  const lessonMeta = `PY101 · Week ${currentWeekIndex + 1} · Lesson ${currentLessonIndex + 1}`
 
   return (
     <ScreenShell background="var(--surface)">
       <div style={{ position: 'absolute', inset: 0, display: 'flex' }}>
         <AppNav active="learn" />
         <div style={{ flex: 1, display: 'flex', flexDirection: 'column', minWidth: 0 }}>
-          <LessonHeader step={2} onBack={() => goTo('week')} />
+          <LessonHeader step={2} title={currentLessonTitle} meta={lessonMeta} onBack={() => goTo('week')} />
           {ready && baked !== null ? (
             <LessonThread baked={baked} provider={provider} onOpenCode={() => goTo('code')} />
           ) : (

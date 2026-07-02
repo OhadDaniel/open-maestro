@@ -1,5 +1,5 @@
 import { Icon } from '../../../../shared/components/Icon'
-import { COURSE_LEVEL_COUNT, WEEK_LESSON_COUNT } from '../../../course/course.constants'
+import { COURSE_LEVEL_COUNT } from '../../../course/course.constants'
 import { useCoursePosition } from '../../../course/useCoursePosition'
 import { AppNav } from '../../../appnav/AppNav'
 import { useSession } from '../../../session/SessionContext'
@@ -16,7 +16,7 @@ export function WeekScreen() {
   const { currentWeekIndex, levelPct, weeks } = useCoursePosition()
   const { openIndex, toggle } = useWeekAccordion(currentWeekIndex)
   const currentWeek = weeks[currentWeekIndex]
-  const lessonsToGo = WEEK_LESSON_COUNT - (currentWeek?.lessonsDone ?? 0)
+  const lessonsToGo = (currentWeek?.lessonTitles.length ?? 0) - (currentWeek?.lessonsDone ?? 0)
 
   return (
     <ScreenShell background="var(--surface)">

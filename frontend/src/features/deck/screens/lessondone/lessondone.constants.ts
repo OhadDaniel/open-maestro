@@ -1,13 +1,16 @@
 export const LESSON_DONE_COPY = {
   title: 'Lesson complete',
-  subtitle: 'Input & output · Lesson 4 of 4',
-  minutes: '12 min',
-  runs: '2 runs',
-  streak: 'Day 13',
-  finishWeek: 'Finish Week 3',
+  continue: 'Next lesson',
   backToWeek: 'Back to week',
-  campLog: 'Clean run, Ray — one step from camp.',
 } as const
+
+export function lessonDoneSubtitle(title: string, lessonNumber: number, lessonsInWeek: number): string {
+  return `${title} · Lesson ${lessonNumber} of ${lessonsInWeek}`
+}
+
+export function finishWeekLabel(weekNumber: number): string {
+  return `Finish Week ${weekNumber}`
+}
 
 export const CHECK_POP_DURATION = 640
 export const SPARK_COUNT = 8

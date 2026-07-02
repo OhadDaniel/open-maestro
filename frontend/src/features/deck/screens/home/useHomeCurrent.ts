@@ -1,4 +1,3 @@
-import { RESUME_LESSON_TITLE } from '../../../course/course.constants'
 import { useCoursePosition } from '../../../course/useCoursePosition'
 
 type HomeCurrent = {
@@ -9,14 +8,16 @@ type HomeCurrent = {
   completedConstellations: number
 }
 
+const RESUME_FALLBACK_TITLE = 'Your next lesson'
+
 export function useHomeCurrent(): HomeCurrent {
-  const { currentWeekIndex, currentLessonIndex, levelPct } = useCoursePosition()
+  const { currentWeekIndex, currentLessonIndex, currentLessonTitle, levelPct } = useCoursePosition()
 
   return {
     currentWeekIndex,
     levelPct,
-    resumeTitle: RESUME_LESSON_TITLE,
-    resumeMeta: `PY101 · Lesson ${currentLessonIndex + 1}`,
+    resumeTitle: currentLessonTitle === '' ? RESUME_FALLBACK_TITLE : currentLessonTitle,
+    resumeMeta: `PY101 · Week ${currentWeekIndex + 1} · Lesson ${currentLessonIndex + 1}`,
     completedConstellations: currentWeekIndex,
   }
 }

@@ -11,6 +11,12 @@ export type WeekView = {
 export type CoursePosition = {
   currentWeekIndex: number
   currentLessonIndex: number
+  currentWeekId: string
+  currentLessonSlug: string
+  currentLessonTitle: string
+  lessonsInWeek: number
+  isLastLessonOfWeek: boolean
+  allWeeksCleared: boolean
   levelPct: number
   weeks: readonly WeekView[]
 }

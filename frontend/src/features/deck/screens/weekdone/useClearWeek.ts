@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { ACTIVE_COURSE } from '../../../course/course.constants'
+import { BAKED_WEEKS } from '../../../course/course-map'
 import { useProgressContext } from '../../../progress/ProgressContext'
 
 export function useClearWeek(weekIndex: number) {
@@ -11,7 +11,7 @@ export function useClearWeek(weekIndex: number) {
       return
     }
     doneRef.current = true
-    const week = ACTIVE_COURSE.weeks[weekIndex]
+    const week = BAKED_WEEKS[weekIndex]
     if (week !== undefined) {
       clearWeek(week.id)
     }

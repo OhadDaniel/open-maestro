@@ -1,27 +1,40 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import type { BakedLesson } from '../../../content/baked.types'
 import { loadBakedLesson } from '../../../content/load-lesson'
+import { useCoursePosition } from '../../course/useCoursePosition'
 import { usePyodide } from '../../code/usePyodide'
-import { COURSE_ID, LESSON_SLUG, STARTER_CODE } from '../lessonchat.constants'
+import { COURSE_ID, STARTER_CODE } from '../lessonchat.constants'
 
 const DEMO_STDIN: readonly string[] = ['Ray']
 
 export function useLessonChat() {
+  const { currentLessonSlug } = useCoursePosition()
   const [baked, setBaked] = useState<BakedLesson | null>(null)
   const [code, setCode] = useState(STARTER_CODE)
   const [runCount, setRunCount] = useState(0)
   const { status, lastResult, run: runPy } = usePyodide()
-  const loadedRef = useRef(false)
 
   useEffect(() => {
-    if (loadedRef.current) {
+    if (currentLessonSlug === '') {
       return
     }
-    loadedRef.current = true
-    void loadBakedLesson(COURSE_ID, LESSON_SLUG)
-      .then(setBaked)
-      .catch(() => setBaked(null))
-  }, [])
+    let active = true
+    setBaked(null)
+    void loadBakedLesson(COURSE_ID, currentLessonSlug)
+      .then((lesson) => {
+        if (active) {
+          setBaked(lesson)
+        }
+      })
+      .catch(() => {
+        if (active) {
+          setBaked(null)
+        }
+      })
+    return () => {
+      active = false
+    }
+  }, [currentLessonSlug])
 
   const run = useCallback(async () => {
     await runPy(code, DEMO_STDIN)

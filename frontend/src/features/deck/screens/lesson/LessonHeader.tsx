@@ -1,5 +1,4 @@
 import { Icon } from '../../../../shared/components/Icon'
-import { LESSON_CHAT_COPY } from '../../../lessonchat/lessonchat.constants'
 import { useSegFill } from './useSegFill'
 
 const SEG_COUNT = 5
@@ -7,9 +6,11 @@ const SEG_COUNT = 5
 type LessonHeaderProps = {
   onBack: () => void
   step: number
+  title: string
+  meta: string
 }
 
-export function LessonHeader({ onBack, step }: LessonHeaderProps) {
+export function LessonHeader({ onBack, step, title, meta }: LessonHeaderProps) {
   const fillRef = useSegFill<HTMLDivElement>()
   return (
     <div style={{ height: 70, flex: 'none', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 24, padding: '0 30px', borderBottom: '1px solid var(--border)' }}>
@@ -18,8 +19,8 @@ export function LessonHeader({ onBack, step }: LessonHeaderProps) {
           <Icon name="chevron-left" size={17} />
         </button>
         <div>
-          <div style={{ fontSize: 17, fontWeight: 600 }}>{LESSON_CHAT_COPY.lessonTitle}</div>
-          <div style={{ fontSize: 12, color: 'var(--fg-3)' }}>{LESSON_CHAT_COPY.lessonMeta}</div>
+          <div style={{ fontSize: 17, fontWeight: 600 }}>{title}</div>
+          <div style={{ fontSize: 12, color: 'var(--fg-3)' }}>{meta}</div>
         </div>
       </div>
       <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>

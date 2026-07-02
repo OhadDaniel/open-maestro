@@ -1,5 +1,4 @@
 import { Icon } from '../../../../shared/components/Icon'
-import { WEEK_LESSON_COUNT } from '../../../course/course.constants'
 import type { WeekView } from '../../../course/course.types'
 import { WEEK_COPY, lockedSub, progressSub } from './week.constants'
 
@@ -29,11 +28,12 @@ export function WeekAccordionItem({ week, open, onToggle, onContinue }: WeekAcco
   const isCurrent = week.status === 'current'
   const isLocked = week.status === 'locked'
   const badge = headerBadge(week)
+  const lessonCount = week.lessonTitles.length
   const subColor = isCurrent ? 'var(--accent)' : 'var(--fg-3)'
   const sub = week.status === 'done'
-    ? `${WEEK_LESSON_COUNT} lessons · completed`
+    ? `${lessonCount} lessons · completed`
     : isCurrent
-      ? progressSub(week.lessonsDone, WEEK_LESSON_COUNT)
+      ? progressSub(week.lessonsDone, lessonCount)
       : lockedSub(week.index)
 
   return (
@@ -62,7 +62,7 @@ export function WeekAccordionItem({ week, open, onToggle, onContinue }: WeekAcco
                         <span style={{ width: 8, height: 8, borderRadius: '50%', background: 'var(--accent)' }} />
                       </span>
                       <div style={{ flex: 1 }}>
-                        <div style={{ fontSize: 15, fontWeight: 600, color: 'var(--fg)' }}>{WEEK_COPY.upNextLessonTitle}</div>
+                        <div style={{ fontSize: 15, fontWeight: 600, color: 'var(--fg)' }}>{title}</div>
                         <div style={{ fontSize: 12, color: 'var(--fg-3)' }}>Lesson {lessonIndex + 1} · up next</div>
                       </div>
                       <span style={{ display: 'inline-flex', alignItems: 'center', gap: 7, height: 36, padding: '0 16px', borderRadius: 'var(--r-pill)', background: 'var(--accent)', color: 'var(--ink)', fontSize: 14, fontWeight: 600 }}>
