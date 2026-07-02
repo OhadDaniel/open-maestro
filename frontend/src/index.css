@@ -63,8 +63,151 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--display);
+  margin: 0;
+  font-weight: 700;
+}
+
+p {
+  margin: 0;
+}
+
+::selection {
+  background: rgba(206, 245, 133, 0.28);
+}
+
 #root {
   min-height: 100svh;
+}
+
+@keyframes om-breathe {
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scale(1.05);
+  }
+}
+@keyframes om-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes om-ping {
+  0% {
+    transform: scale(0.85);
+    opacity: 0.7;
+  }
+  70% {
+    opacity: 0;
+  }
+  100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+@keyframes om-pulsering {
+  0% {
+    transform: scale(0.72);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(1.7);
+    opacity: 0;
+  }
+}
+@keyframes om-caret {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+@keyframes om-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+@keyframes om-dot {
+  0%,
+  80%,
+  100% {
+    opacity: 0.25;
+    transform: translateY(0);
+  }
+  40% {
+    opacity: 1;
+    transform: translateY(-3px);
+  }
+}
+@keyframes om-drift {
+  0% {
+    transform: scale(1.05) translate(0, 0);
+  }
+  100% {
+    transform: scale(1.12) translate(-2.2%, -3.2%);
+  }
+}
+
+.om-pill {
+  transition:
+    transform 0.12s var(--e-productive),
+    box-shadow 0.2s var(--e-productive),
+    background 0.15s var(--e-productive),
+    border-color 0.15s var(--e-productive);
+}
+.om-pill-primary:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 54px -8px rgba(206, 245, 133, 0.62);
+}
+.om-pill-primary:active:not(:disabled) {
+  transform: translateY(0) scale(0.98);
+}
+.om-pill-ghost:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--fg-3);
+}
+
+.om-deck-viewport {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  background: radial-gradient(120% 90% at 50% 12%, #131210 0%, #000 62%);
+}
+.om-stage {
+  position: absolute;
+  inset: 0;
+}
+.om-scroll::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+.om-scroll::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 9999px;
+  border: 3px solid #000;
+}
+.om-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
 }
 
 .lesson {
