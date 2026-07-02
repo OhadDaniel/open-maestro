@@ -38,15 +38,17 @@ function replyText(baked: BakedLesson): string {
 
 const OUTPUT_MARKER = 'Output:'
 
-function firstLine(text: string): string {
-  return text.split('\n')[0]?.trim() ?? text.trim()
+function errorLine(text: string): string {
+  const lines = text.split('\n').map((line) => line.trim()).filter((line) => line.length > 0)
+  const named = [...lines].reverse().find((line) => /^[A-Za-z_][\w.]*Error\b/.test(line))
+  return named ?? lines[lines.length - 1] ?? text.trim()
 }
 
 function runReactionText(message: string): string {
   const markerAt = message.indexOf(OUTPUT_MARKER)
   const output = markerAt < 0 ? '' : message.slice(markerAt + OUTPUT_MARKER.length).trim()
   if (/traceback|error/i.test(output)) {
-    return `Let's read that error together — Python is telling you: "${firstLine(output)}". That's a clue, not a failure. Want to look at the line it points to and try again?`
+    return `Let's read that error together — Python is telling you: "${errorLine(output)}". That's a clue, not a failure. Want to look at the line it points to and try again?`
   }
   if (output.length === 0 || output === '(no output)') {
     return `Your code ran, but nothing printed yet. Add a print(...) so you can see what it's doing, then run it again.`
