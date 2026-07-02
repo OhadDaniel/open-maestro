@@ -7,17 +7,17 @@ export type PyodideStatus = 'idle' | 'loading' | 'ready' | 'error'
 type UsePyodide = {
   status: PyodideStatus
   lastResult: RunResult | null
-  run: (code: string) => Promise<RunResult>
+  run: (code: string, stdinLines?: readonly string[]) => Promise<RunResult>
 }
 
 export function usePyodide(): UsePyodide {
   const [status, setStatus] = useState<PyodideStatus>('idle')
   const [lastResult, setLastResult] = useState<RunResult | null>(null)
 
-  const run = useCallback(async (code: string) => {
+  const run = useCallback(async (code: string, stdinLines: readonly string[] = []) => {
     setStatus((prev) => (prev === 'ready' ? prev : 'loading'))
     try {
-      const result = await runPython(code)
+      const result = await runPython(code, stdinLines)
       setStatus('ready')
       setLastResult(result)
       return result

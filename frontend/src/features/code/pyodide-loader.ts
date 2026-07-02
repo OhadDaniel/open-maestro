@@ -5,10 +5,13 @@ export type RunResult = { output: string; ok: boolean }
 
 type PyodideStdHandler = { batched: (text: string) => void }
 
+type PyodideStdinHandler = { stdin: () => string }
+
 type PyodideInterface = {
   runPythonAsync: (code: string) => Promise<unknown>
   setStdout: (handler: PyodideStdHandler) => void
   setStderr: (handler: PyodideStdHandler) => void
+  setStdin: (handler: PyodideStdinHandler) => void
 }
 
 type LoadPyodide = (config: { indexURL: string }) => Promise<PyodideInterface>
@@ -48,7 +51,19 @@ export async function getPyodide(): Promise<PyodideInterface> {
   return runtime
 }
 
-export async function runPython(code: string): Promise<RunResult> {
+function makeStdin(lines: readonly string[]): () => string {
+  let index = 0
+  return () => {
+    const line = lines[index] ?? ''
+    index += 1
+    return line
+  }
+}
+
+export async function runPython(
+  code: string,
+  stdinLines: readonly string[] = [],
+): Promise<RunResult> {
   const pyodide = await getPyodide()
   let output = ''
   const append = (text: string) => {
@@ -56,6 +71,7 @@ export async function runPython(code: string): Promise<RunResult> {
   }
   pyodide.setStdout({ batched: append })
   pyodide.setStderr({ batched: append })
+  pyodide.setStdin({ stdin: makeStdin(stdinLines) })
   try {
     await pyodide.runPythonAsync(code)
     return { output, ok: true }
