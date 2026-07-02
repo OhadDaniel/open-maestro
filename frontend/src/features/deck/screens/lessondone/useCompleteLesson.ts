@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
-import { useCoursePosition } from '../../../course/useCoursePosition'
 import { useProgressContext } from '../../../progress/ProgressContext'
+import { useViewedLesson } from '../../../lessonview/useViewedLesson'
 
 export type FinishedLesson = {
   slug: string
@@ -8,19 +8,21 @@ export type FinishedLesson = {
   lessonNumber: number
   lessonsInWeek: number
   weekNumber: number
+  isFrontier: boolean
   isLastOfWeek: boolean
 }
 
 export function useCompleteLesson(): FinishedLesson {
   const { completeLesson, advanceLessonPosition } = useProgressContext()
-  const position = useCoursePosition()
+  const viewed = useViewedLesson()
   const snapshotRef = useRef<FinishedLesson>({
-    slug: position.currentLessonSlug,
-    title: position.currentLessonTitle,
-    lessonNumber: position.currentLessonIndex + 1,
-    lessonsInWeek: position.lessonsInWeek,
-    weekNumber: position.currentWeekIndex + 1,
-    isLastOfWeek: position.isLastLessonOfWeek,
+    slug: viewed.slug,
+    title: viewed.title,
+    lessonNumber: viewed.lessonIndex + 1,
+    lessonsInWeek: viewed.lessonsInWeek,
+    weekNumber: viewed.weekIndex + 1,
+    isFrontier: viewed.isFrontier,
+    isLastOfWeek: viewed.isLastOfWeek,
   })
   const snapshot = snapshotRef.current
   const doneRef = useRef(false)
@@ -31,7 +33,7 @@ export function useCompleteLesson(): FinishedLesson {
     }
     doneRef.current = true
     completeLesson(snapshot.slug)
-    if (!snapshot.isLastOfWeek) {
+    if (snapshot.isFrontier && !snapshot.isLastOfWeek) {
       advanceLessonPosition()
     }
   }, [completeLesson, advanceLessonPosition, snapshot])

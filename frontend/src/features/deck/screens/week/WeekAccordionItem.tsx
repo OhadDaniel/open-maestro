@@ -6,7 +6,7 @@ type WeekAccordionItemProps = {
   week: WeekView
   open: boolean
   onToggle: () => void
-  onContinue: () => void
+  onOpenLesson: (weekIndex: number, lessonIndex: number) => void
 }
 
 const HEADER_ICON = {
@@ -24,7 +24,7 @@ function headerBadge(week: WeekView) {
   return { bg: 'rgba(255,255,255,.04)', border: '1.5px solid var(--border-strong)', color: 'var(--fg-3)', node: HEADER_ICON.locked }
 }
 
-export function WeekAccordionItem({ week, open, onToggle, onContinue }: WeekAccordionItemProps) {
+export function WeekAccordionItem({ week, open, onToggle, onOpenLesson }: WeekAccordionItemProps) {
   const isCurrent = week.status === 'current'
   const isLocked = week.status === 'locked'
   const badge = headerBadge(week)
@@ -57,7 +57,7 @@ export function WeekAccordionItem({ week, open, onToggle, onContinue }: WeekAcco
                 const isNext = isCurrent && lessonIndex === week.lessonsDone
                 if (isNext) {
                   return (
-                    <div key={title} onClick={onContinue} style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '12px 14px 12px 46px', marginTop: 4, borderRadius: 12, background: 'var(--surface)', border: '1px solid var(--accent)', cursor: 'pointer' }}>
+                    <div key={title} onClick={() => onOpenLesson(week.index, lessonIndex)} style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '12px 14px 12px 46px', marginTop: 4, borderRadius: 12, background: 'var(--surface)', border: '1px solid var(--accent)', cursor: 'pointer' }}>
                       <span style={{ width: 20, height: 20, borderRadius: '50%', border: '2px solid var(--accent)', display: 'flex', alignItems: 'center', justifyContent: 'center', flex: 'none' }}>
                         <span style={{ width: 8, height: 8, borderRadius: '50%', background: 'var(--accent)' }} />
                       </span>
@@ -73,9 +73,14 @@ export function WeekAccordionItem({ week, open, onToggle, onContinue }: WeekAcco
                   )
                 }
                 return (
-                  <div key={title} style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '11px 12px 11px 48px', color: done ? 'var(--fg-2)' : 'var(--fg-3)' }}>
+                  <div
+                    key={title}
+                    onClick={done ? () => onOpenLesson(week.index, lessonIndex) : undefined}
+                    style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '11px 12px 11px 48px', color: done ? 'var(--fg-2)' : 'var(--fg-3)', cursor: done ? 'pointer' : 'default', borderRadius: 10 }}
+                  >
                     <Icon name={done ? 'check-circle' : 'lock-03'} size={17} style={{ color: done ? 'var(--accent)' : 'var(--fg-3)' }} />
                     <span style={{ fontSize: 14 }}>{title}</span>
+                    {done && <Icon name="chevron-right" size={15} style={{ color: 'var(--fg-3)', marginLeft: 'auto' }} />}
                   </div>
                 )
               })}

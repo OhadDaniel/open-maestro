@@ -1,14 +1,14 @@
 import { useCallback, useEffect, useState } from 'react'
 import type { BakedLesson } from '../../../content/baked.types'
 import { loadBakedLesson } from '../../../content/load-lesson'
-import { useCoursePosition } from '../../course/useCoursePosition'
+import { useViewedLesson } from '../../lessonview/useViewedLesson'
 import { usePyodide } from '../../code/usePyodide'
 import { COURSE_ID, STARTER_CODE } from '../lessonchat.constants'
 
 const DEMO_STDIN: readonly string[] = ['Ray']
 
 export function useLessonChat() {
-  const { currentLessonSlug } = useCoursePosition()
+  const { slug: currentLessonSlug } = useViewedLesson()
   const [baked, setBaked] = useState<BakedLesson | null>(null)
   const [code, setCode] = useState(STARTER_CODE)
   const [runCount, setRunCount] = useState(0)

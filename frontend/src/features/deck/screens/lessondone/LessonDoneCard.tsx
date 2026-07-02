@@ -5,10 +5,12 @@ import { useReveal } from '../../../../shared/motion/useReveal'
 import { LESSON_DONE_COPY, finishWeekLabel } from './lessondone.constants'
 import { useCheckPop } from './useCheckPop'
 
+export type LessonDoneMode = 'advance' | 'finish-week' | 'review'
+
 type LessonDoneCardProps = {
   title: string
   subtitle: string
-  isLastOfWeek: boolean
+  mode: LessonDoneMode
   weekNumber: number
   onContinue: () => void
   onFinishWeek: () => void
@@ -18,7 +20,7 @@ type LessonDoneCardProps = {
 export function LessonDoneCard({
   title,
   subtitle,
-  isLastOfWeek,
+  mode,
   weekNumber,
   onContinue,
   onFinishWeek,
@@ -29,8 +31,14 @@ export function LessonDoneCard({
   const revealRef = useReveal<HTMLDivElement>()
   useCheckPop(burstRef, checkRef)
 
-  const primaryLabel = isLastOfWeek ? finishWeekLabel(weekNumber) : LESSON_DONE_COPY.continue
-  const onPrimary = isLastOfWeek ? onFinishWeek : onContinue
+  const primaryLabel =
+    mode === 'finish-week'
+      ? finishWeekLabel(weekNumber)
+      : mode === 'review'
+        ? LESSON_DONE_COPY.backToWeek
+        : LESSON_DONE_COPY.continue
+  const onPrimary = mode === 'finish-week' ? onFinishWeek : mode === 'review' ? onBackToWeek : onContinue
+  const showSecondary = mode !== 'review'
 
   return (
     <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 18, zIndex: 5 }}>
@@ -48,9 +56,11 @@ export function LessonDoneCard({
             {primaryLabel}
             <Icon name="arrow-right" size={17} />
           </button>
-          <button type="button" onClick={onBackToWeek} style={{ height: 48, padding: '0 20px', borderRadius: 'var(--r-pill)', border: '1px solid var(--border-strong)', background: 'transparent', color: 'var(--fg)', fontSize: 15, fontWeight: 500, cursor: 'pointer' }}>
-            {LESSON_DONE_COPY.backToWeek}
-          </button>
+          {showSecondary && (
+            <button type="button" onClick={onBackToWeek} style={{ height: 48, padding: '0 20px', borderRadius: 'var(--r-pill)', border: '1px solid var(--border-strong)', background: 'transparent', color: 'var(--fg)', fontSize: 15, fontWeight: 500, cursor: 'pointer' }}>
+              {LESSON_DONE_COPY.backToWeek}
+            </button>
+          )}
         </div>
       </div>
       <div ref={revealRef} style={{ display: 'flex', alignItems: 'center', gap: 9 }}>

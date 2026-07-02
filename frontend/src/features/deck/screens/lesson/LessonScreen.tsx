@@ -1,6 +1,6 @@
 import { Icon } from '../../../../shared/components/Icon'
 import { useReveal } from '../../../../shared/motion/useReveal'
-import { useCoursePosition } from '../../../course/useCoursePosition'
+import { useViewedLesson } from '../../../lessonview/useViewedLesson'
 import { AppNav } from '../../../appnav/AppNav'
 import { useLessonChatContext } from '../../../lessonchat/LessonChatContext'
 import { LESSON_CHAT_COPY } from '../../../lessonchat/lessonchat.constants'
@@ -16,15 +16,15 @@ export function LessonScreen() {
   const { goTo } = useDeckNav()
   const { provider } = useSession()
   const { baked, ready } = useLessonChatContext()
-  const { currentWeekIndex, currentLessonIndex, currentLessonTitle } = useCoursePosition()
-  const lessonMeta = `PY101 · Week ${currentWeekIndex + 1} · Lesson ${currentLessonIndex + 1}`
+  const { weekIndex, lessonIndex, title } = useViewedLesson()
+  const lessonMeta = `PY101 · Week ${weekIndex + 1} · Lesson ${lessonIndex + 1}`
 
   return (
     <ScreenShell background="var(--surface)">
       <div style={{ position: 'absolute', inset: 0, display: 'flex' }}>
         <AppNav active="learn" />
         <div style={{ flex: 1, display: 'flex', flexDirection: 'column', minWidth: 0 }}>
-          <LessonHeader step={2} title={currentLessonTitle} meta={lessonMeta} onBack={() => goTo('week')} />
+          <LessonHeader step={2} title={title} meta={lessonMeta} onBack={() => goTo('week')} />
           {ready && baked !== null ? (
             <LessonThread baked={baked} provider={provider} onOpenCode={() => goTo('code')} />
           ) : (

@@ -1,17 +1,24 @@
 import { Icon } from '../../../../shared/components/Icon'
+import { useLessonViewContext } from '../../../lessonview/LessonViewContext'
 import { useSegFill } from '../lesson/useSegFill'
 import { AppNav } from '../../../appnav/AppNav'
 import { useDeckNav } from '../../DeckContext'
 import { ScreenShell } from '../../components/ScreenShell'
-import { LessonDoneCard } from './LessonDoneCard'
+import { LessonDoneCard, type LessonDoneMode } from './LessonDoneCard'
 import { lessonDoneSubtitle } from './lessondone.constants'
 import { useCompleteLesson } from './useCompleteLesson'
 
 export function LessonDoneScreen() {
   const { goTo } = useDeckNav()
+  const { clearView } = useLessonViewContext()
   const finished = useCompleteLesson()
   const meta = `PY101 · Lesson ${finished.lessonNumber}`
   const subtitle = lessonDoneSubtitle(finished.title, finished.lessonNumber, finished.lessonsInWeek)
+  const mode: LessonDoneMode = !finished.isFrontier
+    ? 'review'
+    : finished.isLastOfWeek
+      ? 'finish-week'
+      : 'advance'
 
   return (
     <ScreenShell background="var(--surface)">
@@ -23,9 +30,12 @@ export function LessonDoneScreen() {
             <LessonDoneCard
               title={finished.title}
               subtitle={subtitle}
-              isLastOfWeek={finished.isLastOfWeek}
+              mode={mode}
               weekNumber={finished.weekNumber}
-              onContinue={() => goTo('lesson')}
+              onContinue={() => {
+                clearView()
+                goTo('lesson')
+              }}
               onFinishWeek={() => goTo('weekdone')}
               onBackToWeek={() => goTo('week')}
             />

@@ -1,6 +1,7 @@
 import { Icon } from '../../../../shared/components/Icon'
 import { COURSE_LEVEL_COUNT } from '../../../course/course.constants'
 import { useCoursePosition } from '../../../course/useCoursePosition'
+import { useLessonViewContext } from '../../../lessonview/LessonViewContext'
 import { AppNav } from '../../../appnav/AppNav'
 import { useSession } from '../../../session/SessionContext'
 import { useDeckNav } from '../../DeckContext'
@@ -13,7 +14,12 @@ import { useWeekAccordion } from './useWeekAccordion'
 export function WeekScreen() {
   const { streak } = useSession()
   const { goTo } = useDeckNav()
+  const { openLessonAt } = useLessonViewContext()
   const { currentWeekIndex, levelPct, weeks } = useCoursePosition()
+  const openLesson = (weekIndex: number, lessonIndex: number) => {
+    openLessonAt(weekIndex, lessonIndex)
+    goTo('lesson')
+  }
   const { openIndex, toggle } = useWeekAccordion(currentWeekIndex)
   const currentWeek = weeks[currentWeekIndex]
   const lessonsToGo = (currentWeek?.lessonTitles.length ?? 0) - (currentWeek?.lessonsDone ?? 0)
@@ -43,7 +49,7 @@ export function WeekScreen() {
                 week={week}
                 open={openIndex === week.index}
                 onToggle={() => toggle(week.index)}
-                onContinue={() => goTo('lesson')}
+                onOpenLesson={openLesson}
               />
             ))}
           </div>
