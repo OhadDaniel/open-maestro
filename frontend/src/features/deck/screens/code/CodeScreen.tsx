@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { MockTutorProvider } from '../../../../ai/mock-provider'
-import { OfflineTutorProvider } from '../../../../ai/offline-provider'
 import type { TutorProvider } from '../../../../ai/provider'
+import { resolveTutorProvider } from '../../../../ai/resolve-provider'
 import type { BakedLesson } from '../../../../content/baked.types'
 import { loadProfile, saveProfile } from '../../../../memory/profile-store'
 import type { LearnerProfile } from '../../../../memory/learner-profile.types'
@@ -37,10 +36,7 @@ function CodeSession({ baked }: { baked: BakedLesson }) {
   const [profile, setProfile] = useState<LearnerProfile>(() => loadProfile())
   const session = useMemo(() => createSession(baked.lesson.id), [baked.lesson.id])
   const tutorProvider = useMemo<TutorProvider>(
-    () =>
-      provider !== null && !(provider instanceof MockTutorProvider)
-        ? provider
-        : new OfflineTutorProvider(baked, profile.name),
+    () => resolveTutorProvider(provider, baked, profile.name),
     [provider, baked, profile.name],
   )
   const onProfileLearned = (learned: LearnerProfile) => {

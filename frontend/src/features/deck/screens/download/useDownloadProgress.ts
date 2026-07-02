@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { animate } from 'animejs'
 import type { TutorProvider } from '../../../../ai/provider'
-import { MockTutorProvider } from '../../../../ai/mock-provider'
 import { WebLlmProvider, isWebGpuAvailable, pickBestModel } from '../../../../ai/webllm-provider'
 import { EASE } from '../../../../shared/motion/easing'
 import { useReducedMotion } from '../../../../shared/motion/useReducedMotion'
@@ -28,17 +27,19 @@ export function useDownloadProgress(
     startedRef.current = true
     let active = true
 
-    const finish = (provider: TutorProvider) => {
+    const finish = (provider: TutorProvider | null) => {
       if (!active) {
         return
       }
       setPercent(100)
       setDone(true)
-      setProvider(provider)
+      if (provider !== null) {
+        setProvider(provider)
+      }
     }
 
     if (reduced) {
-      finish(new MockTutorProvider())
+      finish(null)
       return () => {
         active = false
       }
@@ -55,7 +56,7 @@ export function useDownloadProgress(
             setPercent(tracker.value)
           }
         },
-        onComplete: () => finish(new MockTutorProvider()),
+        onComplete: () => finish(null),
       })
       return () => {
         active = false
@@ -69,7 +70,7 @@ export function useDownloadProgress(
       }
     })
       .then(finish)
-      .catch(() => finish(new MockTutorProvider()))
+      .catch(() => finish(null))
 
     return () => {
       active = false

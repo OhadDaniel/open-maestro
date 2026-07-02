@@ -3,9 +3,6 @@ import type { ScreenId } from './deck.types'
 
 type DeckNav = {
   goTo: (id: ScreenId) => void
-  next: () => void
-  prev: () => void
-  restart: () => void
 }
 
 const DeckContext = createContext<DeckNav | null>(null)

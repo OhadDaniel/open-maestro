@@ -1,21 +1,16 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { MockTutorProvider } from '../../../../ai/mock-provider'
-import { OfflineTutorProvider } from '../../../../ai/offline-provider'
 import type { TutorProvider } from '../../../../ai/provider'
+import { resolveTutorProvider } from '../../../../ai/resolve-provider'
 import type { BakedLesson } from '../../../../content/baked.types'
 import { loadProfile, saveProfile } from '../../../../memory/profile-store'
 import type { LearnerProfile } from '../../../../memory/learner-profile.types'
 import { createSession } from '../../../../tutor/session'
 import { useTutorChat } from '../../../lesson/hooks/useTutorChat'
 
-function isRealProvider(provider: TutorProvider | null): provider is TutorProvider {
-  return provider !== null && !(provider instanceof MockTutorProvider)
-}
-
 export function useLessonThread(baked: BakedLesson, sessionProvider: TutorProvider | null) {
   const [profile, setProfile] = useState<LearnerProfile>(() => loadProfile())
   const provider = useMemo<TutorProvider>(
-    () => (isRealProvider(sessionProvider) ? sessionProvider : new OfflineTutorProvider(baked, profile.name)),
+    () => resolveTutorProvider(sessionProvider, baked, profile.name),
     [sessionProvider, baked, profile.name],
   )
   const session = useMemo(() => createSession(baked.lesson.id), [baked.lesson.id])

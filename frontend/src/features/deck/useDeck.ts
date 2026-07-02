@@ -52,26 +52,7 @@ export function useDeck(initialScreen: ScreenId) {
     })
   }, [])
 
-  const step = useCallback((delta: number) => {
-    setIndex((currentIndex) => {
-      const nextIndex = Math.max(0, Math.min(SCREEN_FLOW.length - 1, currentIndex + delta))
-      if (nextIndex === currentIndex) {
-        return currentIndex
-      }
-      setPrevious(SCREEN_FLOW[currentIndex])
-      return nextIndex
-    })
-  }, [])
-
-  const restart = useCallback(() => {
-    setPrevious(null)
-    setIndex(0)
-  }, [])
-
-  const next = useCallback(() => step(1), [step])
-  const prev = useCallback(() => step(-1), [step])
-
-  return { current, index, transition, goTo, next, prev, restart }
+  return { current, transition, goTo }
 }
 
 export type DeckMode = ZoomMode
