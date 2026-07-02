@@ -35,6 +35,32 @@ export function useProgress() {
     })
   }, [])
 
+  const advanceLessonPosition = useCallback(() => {
+    setState((current) => {
+      const next: ProgressState = {
+        ...current,
+        currentLessonIndex: current.currentLessonIndex + 1,
+      }
+      saveProgress(next)
+      return next
+    })
+  }, [])
+
+  const clearWeek = useCallback((weekId: string) => {
+    setState((current) => {
+      const next: ProgressState = {
+        ...current,
+        completedWeekIds: current.completedWeekIds.includes(weekId)
+          ? current.completedWeekIds
+          : [...current.completedWeekIds, weekId],
+        currentWeekIndex: current.currentWeekIndex + 1,
+        currentLessonIndex: 0,
+      }
+      saveProgress(next)
+      return next
+    })
+  }, [])
+
   const completeWeek = useCallback((weekId: string) => {
     setState((current) => {
       if (current.completedWeekIds.includes(weekId)) {
@@ -49,5 +75,13 @@ export function useProgress() {
     })
   }, [])
 
-  return { state, persist, markFirstRunDone, completeLesson, completeWeek }
+  return {
+    state,
+    persist,
+    markFirstRunDone,
+    completeLesson,
+    completeWeek,
+    advanceLessonPosition,
+    clearWeek,
+  }
 }
