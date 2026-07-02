@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react'
 import { animate, stagger } from 'animejs'
 import { EASE } from '../../../../shared/motion/easing'
 import { useReducedMotion } from '../../../../shared/motion/useReducedMotion'
-import { SKY_CONSTELLATIONS, SKY_STARS } from './home.constants'
+import { HOME_LEVELS, SKY_CONSTELLATIONS, SKY_STARS } from './home.constants'
 
 const SVG_NS = 'http://www.w3.org/2000/svg'
 
@@ -92,8 +92,12 @@ export function useHomeMotion<T extends HTMLElement>(completedConstellations: nu
 
     if (path !== null) {
       const length = path.getTotalLength()
+      const segments = Math.max(HOME_LEVELS.length - 1, 1)
+      const climbed = Math.min(Math.max(completedConstellations, 0) / segments, 1)
+      const climbedOffset = length * (1 - climbed)
+      path.style.strokeDasharray = String(length)
       if (reduced) {
-        path.style.strokeDashoffset = '0'
+        path.style.strokeDashoffset = String(climbedOffset)
         for (const node of nodes) {
           node.style.opacity = '1'
         }
@@ -101,7 +105,6 @@ export function useHomeMotion<T extends HTMLElement>(completedConstellations: nu
           you.style.opacity = '1'
         }
       } else {
-        path.style.strokeDasharray = String(length)
         path.style.strokeDashoffset = String(length)
         for (const node of nodes) {
           node.style.opacity = '0'
@@ -109,7 +112,7 @@ export function useHomeMotion<T extends HTMLElement>(completedConstellations: nu
         if (you !== null) {
           you.style.opacity = '0'
         }
-        animate(path, { strokeDashoffset: [length, 0], duration: 1500, ease: EASE.inOutSine })
+        animate(path, { strokeDashoffset: [length, climbedOffset], duration: 1500, ease: EASE.inOutSine })
         animate(nodes, { opacity: [0, 1], scale: [0.4, 1], duration: 520, delay: stagger(190, { start: 260 }), ease: EASE.outBack })
         if (you !== null) {
           animate(you, { opacity: [0, 1], scale: [0.45, 1], translateY: [10, 0], duration: 720, delay: 1050, ease: EASE.outElasticSoft })

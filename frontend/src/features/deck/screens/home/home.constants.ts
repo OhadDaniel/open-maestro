@@ -17,8 +17,10 @@ export const HOME_LEVELS: readonly LevelNode[] = [
   { level: 'Summit', title: 'First model', sub: 'First model', left: '88%', top: '15.8%', lockIcon: 'diamond-01' },
 ]
 
-export const TRAIL_GHOST_PATH = 'M545 388 C 630 325 650 315 725 255 C 800 200 815 185 880 120'
-export const TRAIL_DONE_PATH = 'M150 655 C 250 620 280 560 350 520 C 440 480 470 445 545 388'
+export const TRAIL_FULL_PATH =
+  'M150 655 C 250 620 280 560 350 520 C 440 480 470 445 545 388 C 630 325 650 315 725 255 C 800 200 815 185 880 120'
+export const TRAIL_GHOST_PATH = TRAIL_FULL_PATH
+export const TRAIL_DONE_PATH = TRAIL_FULL_PATH
 
 export type SkyStar = {
   x: number
