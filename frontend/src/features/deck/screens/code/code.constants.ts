@@ -11,6 +11,8 @@ export const CODE_SCREEN_COPY = {
   finishLesson: 'Finish lesson',
   consoleLabel: 'Console',
   composerPlaceholder: 'Message Maestro',
+  runIntro: "Here's your code. Press Run to try it — I'll read what it prints and help from there.",
+  reading: 'Reading your output…',
 } as const
 
 export const RUN_REPLY_DELAY = 750

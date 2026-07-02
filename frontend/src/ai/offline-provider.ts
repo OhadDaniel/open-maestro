@@ -36,6 +36,24 @@ function replyText(baked: BakedLesson): string {
   return hint === undefined ? body : `${body}\n\nHere's a nudge: ${hint.text}`
 }
 
+const OUTPUT_MARKER = 'Output:'
+
+function firstLine(text: string): string {
+  return text.split('\n')[0]?.trim() ?? text.trim()
+}
+
+function runReactionText(message: string): string {
+  const markerAt = message.indexOf(OUTPUT_MARKER)
+  const output = markerAt < 0 ? '' : message.slice(markerAt + OUTPUT_MARKER.length).trim()
+  if (/traceback|error/i.test(output)) {
+    return `Let's read that error together — Python is telling you: "${firstLine(output)}". That's a clue, not a failure. Want to look at the line it points to and try again?`
+  }
+  if (output.length === 0 || output === '(no output)') {
+    return `Your code ran, but nothing printed yet. Add a print(...) so you can see what it's doing, then run it again.`
+  }
+  return `Nice — your program printed:\n${output}\n\nThat's your code doing real work. Want to tweak it and run it again?`
+}
+
 export class OfflineTutorProvider implements TutorProvider {
   private readonly baked: BakedLesson
   private readonly name: string | null
@@ -47,8 +65,13 @@ export class OfflineTutorProvider implements TutorProvider {
 
   async *streamMessage(request: ProviderRequest): AsyncIterable<ProviderStreamEvent> {
     const last = request.messages[request.messages.length - 1]
-    const isOpening = last !== undefined && last.content === OPENING_BOOTSTRAP
-    const text = isOpening ? openingText(this.baked, this.name) : replyText(this.baked)
+    const lastContent = last?.content ?? ''
+    const text =
+      lastContent === OPENING_BOOTSTRAP
+        ? openingText(this.baked, this.name)
+        : lastContent.includes(OUTPUT_MARKER)
+          ? runReactionText(lastContent)
+          : replyText(this.baked)
     const tokens = text.match(/\S+\s*|\n+/g) ?? [text]
     for (const token of tokens) {
       await delay(DELTA_DELAY_MS)
