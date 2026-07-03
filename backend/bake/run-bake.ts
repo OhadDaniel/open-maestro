@@ -3,7 +3,7 @@ import { fileURLToPath } from 'node:url'
 import type { RawLesson } from '../../frontend/src/content/lesson.types'
 import { bakedLessonSchema } from '../../frontend/src/content/baked.types'
 import { completeJson } from '../eval/openai-client'
-import { BAKE_SYSTEM_PROMPT, buildBakeUserPrompt } from './bake-prompt'
+import { BAKE_SYSTEM_PROMPT, buildBakeUserPrompt, type BakeBriefContext } from './bake-prompt'
 import { ALL_RAW } from './raw-lessons'
 
 const BAKER_MODEL = 'anthropic/claude-fable-5'
@@ -13,13 +13,17 @@ const CONTENT_DIR = fileURLToPath(
 )
 const EXAMPLE = readFileSync(`${CONTENT_DIR}writing-your-first-program.json`, 'utf8')
 
-async function bakeOne(slug: string, lesson: RawLesson): Promise<boolean> {
+async function bakeOne(
+  slug: string,
+  lesson: RawLesson,
+  context: BakeBriefContext,
+): Promise<boolean> {
   const target = `${CONTENT_DIR}${slug}.json`
   if (!FORCE && existsSync(target)) {
     console.log(`skip ${slug} (already baked)`)
     return true
   }
-  const user = buildBakeUserPrompt(lesson, EXAMPLE)
+  const user = buildBakeUserPrompt(lesson, EXAMPLE, context)
   let candidate = await completeJson(BAKER_MODEL, BAKE_SYSTEM_PROMPT, user)
   let parsed = bakedLessonSchema.safeParse(candidate)
 
@@ -46,7 +50,14 @@ async function bakeOne(slug: string, lesson: RawLesson): Promise<boolean> {
 }
 
 async function main(): Promise<void> {
-  const outcomes = await Promise.all(ALL_RAW.map((entry) => bakeOne(entry.slug, entry.lesson)))
+  const outcomes: boolean[] = []
+  for (const [index, entry] of ALL_RAW.entries()) {
+    const previousLesson = index === 0 ? null : ALL_RAW[index - 1].lesson
+    const isWeekOne = entry.lesson.weekId.endsWith('-w1')
+    outcomes.push(
+      await bakeOne(entry.slug, entry.lesson, { previousLesson, isWeekOne }),
+    )
+  }
   const ok = outcomes.filter(Boolean).length
   console.log(`\n${ok}/${outcomes.length} lessons ready`)
   if (ok < outcomes.length) {
