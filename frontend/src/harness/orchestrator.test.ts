@@ -148,6 +148,12 @@ describe('renderOpeningLine', () => {
     const baked = { ...base, openingLine: 'Hi {name}.', bridgeFromPreviousLesson: null }
     expect(renderOpeningLine(baked, withName(emptyProfile(), 'Sam'))).toBe('Hi Sam.')
   })
+
+  it('strips any remaining unknown template vars so no raw braces reach the screen', () => {
+    const baked = { ...base, openingLine: 'Hi {name}, studying {course} — goal: {goal}.' }
+    const profile = withGoal(withName(emptyProfile(), 'Sam'), 'learn Python')
+    expect(renderOpeningLine(baked, profile)).toBe('Hi Sam, studying  — goal: learn Python.')
+  })
 })
 
 describe('buildContext (slice 0)', () => {

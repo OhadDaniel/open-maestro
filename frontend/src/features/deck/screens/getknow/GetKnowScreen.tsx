@@ -6,7 +6,7 @@ import { useProgressContext } from '../../../progress/ProgressContext'
 import { useSession } from '../../../session/SessionContext'
 import { useDeckNav } from '../../DeckContext'
 import { ScreenShell } from '../../components/ScreenShell'
-import { TutorBubble, UserBubble } from '../lesson/ChatBubbles'
+import { AnimatedBubble, TutorBubble, TypingBubble, UserBubble } from '../lesson/ChatBubbles'
 import { Composer } from '../lesson/Composer'
 import { LESSON0_CTA, LESSON0_HEADER, LESSON0_SUB } from './lesson0.constants'
 import { useLesson0Interview } from './useLesson0Interview'
@@ -64,15 +64,20 @@ export function GetKnowScreen() {
           style={{ position: 'absolute', top: 88, bottom: 88, left: 0, right: 0, overflowY: 'auto', padding: '24px 40px', zIndex: 5 }}
         >
           <div style={{ maxWidth: 660, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 14, paddingBottom: 8 }}>
-            {messages.map((message) =>
-              message.role === 'tutor' ? (
-                <TutorBubble key={message.id}>
-                  {message.text.length > 0 ? message.text : '…'}
-                </TutorBubble>
-              ) : (
-                <UserBubble key={message.id}>{message.text}</UserBubble>
-              ),
-            )}
+            {messages.map((message) => {
+              const showTyping = generating && message.role === 'tutor' && message.text.length === 0
+              return (
+                <AnimatedBubble key={message.id}>
+                  {showTyping ? (
+                    <TypingBubble />
+                  ) : message.role === 'tutor' ? (
+                    <TutorBubble>{message.text}</TutorBubble>
+                  ) : (
+                    <UserBubble>{message.text}</UserBubble>
+                  )}
+                </AnimatedBubble>
+              )
+            })}
             <div ref={bottomRef} />
           </div>
         </div>

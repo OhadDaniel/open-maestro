@@ -10,6 +10,7 @@ export type LessonDoneMode = 'advance' | 'finish-week' | 'review'
 type LessonDoneCardProps = {
   title: string
   subtitle: string
+  summaryBullets: string[]
   mode: LessonDoneMode
   weekNumber: number
   onContinue: () => void
@@ -20,6 +21,7 @@ type LessonDoneCardProps = {
 export function LessonDoneCard({
   title,
   subtitle,
+  summaryBullets,
   mode,
   weekNumber,
   onContinue,
@@ -29,6 +31,7 @@ export function LessonDoneCard({
   const burstRef = useRef<HTMLDivElement | null>(null)
   const checkRef = useRef<HTMLDivElement | null>(null)
   const revealRef = useReveal<HTMLDivElement>()
+  const bulletsRef = useReveal<HTMLUListElement>()
   useCheckPop(burstRef, checkRef)
 
   const primaryLabel =
@@ -50,6 +53,16 @@ export function LessonDoneCard({
         </div>
         <h2 style={{ fontSize: 26, fontWeight: 700, letterSpacing: '-.01em' }}>{LESSON_DONE_COPY.title}</h2>
         <p style={{ fontSize: 14, color: 'var(--fg-2)', marginTop: 6 }}>{subtitle}</p>
+        {summaryBullets.length > 0 && (
+          <ul ref={bulletsRef} style={{ width: '100%', listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 8, marginTop: 20, textAlign: 'left' }}>
+            {summaryBullets.map((bullet) => (
+              <li key={bullet} data-reveal style={{ display: 'flex', alignItems: 'flex-start', gap: 9, fontSize: 14, color: 'var(--fg-2)', lineHeight: 1.45 }}>
+                <span style={{ color: 'var(--accent)', flexShrink: 0, fontWeight: 700, marginTop: 1 }}>✓</span>
+                {bullet}
+              </li>
+            ))}
+          </ul>
+        )}
         <div style={{ width: '100%', height: 1, background: 'var(--border)', margin: '22px 0 20px' }} />
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
           <button type="button" onClick={onPrimary} style={{ height: 48, padding: '0 24px', borderRadius: 'var(--r-pill)', border: 'none', background: 'var(--accent)', color: 'var(--ink)', fontSize: 15, fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: 9, cursor: 'pointer' }}>

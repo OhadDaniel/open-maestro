@@ -218,6 +218,7 @@ export function renderOpeningLine(baked: BakedLesson, profile: LearnerProfile): 
   let text = baked.openingLine
     .replace('{name}', name)
     .replace('{goal}', profile.goal ?? '')
+    .replace(/\{[^}]+\}/g, '')
     .trim()
   if (baked.bridgeFromPreviousLesson !== null) {
     text += '\n\n' + baked.bridgeFromPreviousLesson

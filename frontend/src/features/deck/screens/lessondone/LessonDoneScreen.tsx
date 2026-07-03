@@ -1,5 +1,6 @@
 import { Icon } from '../../../../shared/components/Icon'
 import { useLessonViewContext } from '../../../lessonview/LessonViewContext'
+import { useLessonChatContext } from '../../../lessonchat/LessonChatContext'
 import { useSegFill } from '../lesson/useSegFill'
 import { AppNav } from '../../../appnav/AppNav'
 import { useDeckNav } from '../../DeckContext'
@@ -11,6 +12,7 @@ import { useCompleteLesson } from './useCompleteLesson'
 export function LessonDoneScreen() {
   const { goTo } = useDeckNav()
   const { clearView } = useLessonViewContext()
+  const { baked } = useLessonChatContext()
   const finished = useCompleteLesson()
   const meta = `PY101 · Lesson ${finished.lessonNumber}`
   const subtitle = lessonDoneSubtitle(finished.title, finished.lessonNumber, finished.lessonsInWeek)
@@ -30,6 +32,7 @@ export function LessonDoneScreen() {
             <LessonDoneCard
               title={finished.title}
               subtitle={subtitle}
+              summaryBullets={baked?.summaryBullets ?? []}
               mode={mode}
               weekNumber={finished.weekNumber}
               onContinue={() => {

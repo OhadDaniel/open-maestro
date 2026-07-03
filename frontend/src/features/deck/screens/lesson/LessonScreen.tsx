@@ -1,5 +1,4 @@
 import { Icon } from '../../../../shared/components/Icon'
-import { useReveal } from '../../../../shared/motion/useReveal'
 import { useViewedLesson } from '../../../lessonview/useViewedLesson'
 import { AppNav } from '../../../appnav/AppNav'
 import { useLessonChatContext } from '../../../lessonchat/LessonChatContext'
@@ -8,7 +7,7 @@ import { useDeckNav } from '../../DeckContext'
 import { ScreenShell } from '../../components/ScreenShell'
 import { Composer } from './Composer'
 import { LessonHeader } from './LessonHeader'
-import { LiveMessage, TypingBubble } from './ChatBubbles'
+import { AnimatedBubble, LiveMessage, TypingBubble } from './ChatBubbles'
 import { useLessonThreadContext } from './LessonThreadContext'
 
 export function LessonScreen() {
@@ -35,17 +34,23 @@ export function LessonScreen() {
 }
 
 function LessonThread({ onOpenCode }: { onOpenCode: () => void }) {
-  const revealRef = useReveal<HTMLDivElement>()
   const { messages, isStreaming, send } = useLessonThreadContext()
 
   return (
     <>
       <div style={{ flex: 1, overflowY: 'auto', padding: '28px 30px 12px' }}>
-        <div ref={revealRef} style={{ maxWidth: 660, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 14 }}>
+        <div style={{ maxWidth: 660, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 14 }}>
           {messages.length === 0 ? (
             <TypingBubble />
           ) : (
-            messages.map((message) => <LiveMessage key={message.id} message={message} onSend={send} />)
+            messages.map((message) => {
+              const showTyping = isStreaming && message.role === 'tutor' && message.text.length === 0
+              return (
+                <AnimatedBubble key={message.id}>
+                  {showTyping ? <TypingBubble /> : <LiveMessage message={message} onSend={send} />}
+                </AnimatedBubble>
+              )
+            })
           )}
           <div style={{ display: 'flex' }}>
             <button

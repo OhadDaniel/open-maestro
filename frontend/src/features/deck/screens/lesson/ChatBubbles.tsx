@@ -1,5 +1,27 @@
+import { useEffect, useRef } from 'react'
+import { animate } from 'animejs'
 import { ASSET } from '../../../../shared/assets'
+import { DURATION, EASE } from '../../../../shared/motion/easing'
+import { useReducedMotion } from '../../../../shared/motion/useReducedMotion'
 import type { ChatMessage } from '../../../lesson/lesson.types'
+
+export function AnimatedBubble({ children }: { children: React.ReactNode }) {
+  const ref = useRef<HTMLDivElement | null>(null)
+  const reduced = useReducedMotion()
+  useEffect(() => {
+    const node = ref.current
+    if (reduced || node === null) {
+      return
+    }
+    animate(node, {
+      opacity: [0, 1],
+      translateY: [14, 0],
+      duration: DURATION.fast,
+      ease: EASE.outCubic,
+    })
+  }, [reduced])
+  return <div ref={ref}>{children}</div>
+}
 
 export function TutorBubble({ children }: { children: React.ReactNode }) {
   return (
