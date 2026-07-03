@@ -10,203 +10,267 @@
     ],
     "tutorInstructions": null
   },
-  "concept": "Reading Python tracebacks: why they exist, their three parts, the bottom-up reading order, and telling NameError, TypeError, ValueError, and ZeroDivisionError apart",
+  "concept": "Reading a Python traceback to find what went wrong and where",
   "prerequisites": [
-    "Working with text and numbers: why \"5\" + 5 fails",
-    "Checking the facts: ValueError from impossible conversions like int(\"hello\")"
+    "Writing and running simple Python scripts with print()",
+    "Collecting user input with input() and converting it with int()"
   ],
-  "bloom": "analyze",
+  "bloom": "understand",
   "explanations": [
     {
       "level": "eli5",
-      "text": "When a program breaks, Python doesn't just shrug — it writes you a little incident report called a traceback. It looks scary: red text, several lines, official-sounding words. But it's actually a map with two treasures on it: WHERE the program broke (the file and line number) and WHAT went wrong (the very last line). The trick nobody tells beginners: read the LAST line first. That's the headline of the whole report."
+      "text": "When your program breaks, Python doesn't just say 'error' — it leaves you a note explaining what went wrong and exactly which line caused it. That note is called a traceback. Learning to read it is like learning to read a treasure map: the last line tells you WHAT happened, and the lines above tell you WHERE."
     },
     {
       "level": "standard",
-      "text": "A traceback has three parts. The header — Traceback (most recent call last): — introduces the report. The location lines — File \"main.py\", line 2, in <module> plus a copy of the offending source line — say where it happened. The final line gives the error type and message, like NameError: name 'message' is not defined. Read it bottom-up: last line first for what went wrong, then jump to the file and line for where. The type is the diagnosis: NameError means Python met a name it doesn't know (a typo, or a variable used before it's created); TypeError means the values' types don't fit the operation (\"5\" + 1); ValueError means the operation was fine but the specific value wasn't (int(\"hello\")); ZeroDivisionError means you divided by zero."
+      "text": "A traceback is Python's error report. Read it bottom-up: the last line names the error type and gives a message, like NameError: name 'nmae' is not defined. Above that, Python shows the file and line number where the error happened, plus the offending line of code. Different problems produce different types: NameError (unknown name), TypeError (wrong kind of value), ValueError (right kind, bad content — like int(\"hello\")), and ZeroDivisionError (dividing by zero). Try print(greeting) in the editor without defining greeting and press Run — you'll see a real NameError traceback."
     },
     {
       "level": "deep",
-      "text": "Why does the header say 'most recent call last'? A traceback lists the chain of calls that led to the crash, oldest at the top — so the bottom location is where the error actually happened. In a single-file script you see one location, in <module>; once you write functions, the chain grows and bottom-up reading really pays off. Two more distinctions sharpen your reading. First, the reported line is where the error surfaced, not always where the mistake lives — if line 4 crashes adding age + 1, the real bug may be line 1 storing age as text. Second, everything before the crashing line already ran: earlier prints are on screen. The odd one out is SyntaxError — Python catches it before running anything, so nothing executes and there is no call chain, just the file, the line, and a caret pointing near the problem. Newer Python versions (3.11+) even underline the exact failing part of a line with ^ markers."
+      "text": "When Python hits a runtime error it raises an exception, and if nothing handles it, execution stops and Python prints the traceback: the chain of calls that led to the failure, most recent call last. Each frame shows a location (line number and code), and the final line is the exception class plus its message. SyntaxError is special — it's caught before your program even runs, and Python points a caret (^) at the spot in the line where parsing failed. Runtime errors like TypeError (e.g. \"hello\" + 5) or ValueError (e.g. int(\"abc\")) only appear when that line actually executes. The error type narrows down the category of problem; the message and line number pinpoint it."
     }
   ],
   "examples": [
-    "print(message)\n\nTraceback (most recent call last):\n  File \"main.py\", line 1, in <module>\n    print(message)\nNameError: name 'message' is not defined",
-    "age = \"21\"\nprint(age + 1)\n\nTraceback (most recent call last):\n  File \"main.py\", line 2, in <module>\n    print(age + 1)\nTypeError: can only concatenate str (not \"int\") to str",
-    "int(\"hello\")\n\nTraceback (most recent call last):\n  File \"main.py\", line 1, in <module>\n    int(\"hello\")\nValueError: invalid literal for int() with base 10: 'hello'",
-    "print(10 / 0)\n\nTraceback (most recent call last):\n  File \"main.py\", line 1, in <module>\n    print(10 / 0)\nZeroDivisionError: division by zero"
+    "print(greeting)  # NameError: name 'greeting' is not defined",
+    "int(\"hello\")  # ValueError: invalid literal for int() with base 10: 'hello'",
+    "print(\"age: \" + 5)  # TypeError: can only concatenate str (not \"int\") to str",
+    "print(10 / 0)  # ZeroDivisionError: division by zero"
   ],
   "hintLadder": [
     {
       "order": 1,
-      "text": "Don't read top-down — jump straight to the very last line and say the error type and its message out loud."
+      "text": "Start at the bottom of the traceback — what is the very last line telling you?"
     },
     {
       "order": 2,
-      "text": "Now find the location: which file and which line number does the traceback point at? Go look at that exact line of code."
+      "text": "The last line has two parts: the error type before the colon, and a message after it. What type do you see?"
     },
     {
       "order": 3,
-      "text": "Match the type to its meaning: NameError — a name Python doesn't know; TypeError — types combined wrongly; ValueError — a value that couldn't be handled; ZeroDivisionError — divided by zero."
-    },
-    {
-      "order": 4,
-      "text": "Name the fix category — fix a spelling or assignment, convert a type, change the data, or guard the division — and change only that one thing before re-running."
+      "text": "Now look one section up for the line number Python points at. Read that exact line of your code — what on it matches the error message?"
     }
   ],
   "misconceptions": [
     {
-      "trigger": "Treats the whole traceback as unreadable noise and starts changing code at random",
-      "correction": "A traceback is structured: header, location (file plus line), and a final line with the type and message. Read the last line first, then go to the reported line. One targeted fix beats ten guesses."
+      "trigger": "Reads the traceback top-down and gets lost in the first lines, ignoring the final line",
+      "correction": "Tracebacks are read bottom-up. The last line names the error type and message — that's the summary. The lines above only tell you where it happened."
     },
     {
-      "trigger": "Reads only the header 'Traceback (most recent call last):' and stops",
-      "correction": "The header carries no diagnosis — it only introduces the report. The answer lives on the LAST line; 'most recent call last' is literally telling you the important end is the bottom."
+      "trigger": "Says 'my program has an error' without reading which error, and starts changing random lines",
+      "correction": "The traceback already narrows it down: the type tells you the category (NameError = unknown name, ValueError = bad content, TypeError = wrong kind of value) and the line number tells you where to look. Read first, then fix one thing."
     },
     {
-      "trigger": "Thinks NameError means Python is broken or the variable mysteriously vanished",
-      "correction": "NameError: name 'x' is not defined means Python has never seen an assignment to that exact spelling — almost always a typo or a name used above the line that creates it. Compare the spellings character by character."
+      "trigger": "Thinks a traceback means Python or the computer is broken, or that they did something shameful",
+      "correction": "A traceback is normal and helpful — every programmer sees them daily. It means Python stopped safely and wrote you a report so you can fix the exact problem."
     },
     {
-      "trigger": "Confuses TypeError with ValueError",
-      "correction": "TypeError: the kinds of things don't fit the operation — \"5\" + 1. ValueError: the operation and types were fine, but the specific value wasn't — int(\"hello\"). They call for different fixes: convert or change the operation, versus fix the data."
+      "trigger": "Confuses ValueError with TypeError, e.g. thinks int(\"abc\") is a TypeError",
+      "correction": "int(\"abc\") is a ValueError: the argument is the right kind (a string) but its content can't become a number. TypeError is for the wrong kind entirely, like \"age: \" + 5 mixing a string and a number."
     },
     {
-      "trigger": "Believes the traceback's line number is always where the fix belongs",
-      "correction": "The line number is where the error surfaced; the cause can live earlier. If line 4 crashes on age + 1, the bug may be line 1 storing age as \"21\". Start at the reported line, then trace the variable upward."
-    },
-    {
-      "trigger": "Confidently claims an error means the program never ran at all",
-      "correction": "Everything before the crashing line already executed — earlier prints are on screen to prove it. Python stops at the error line, not at the start. The exception is SyntaxError, which is caught before anything runs."
+      "trigger": "Expects a SyntaxError to point at a runtime line, or is confused why the program 'didn't even start'",
+      "correction": "SyntaxError is caught before your program runs — Python couldn't even read the code, and it points a caret (^) at the confusing spot. Runtime errors like NameError only happen while the program is running."
     }
   ],
   "checks": [
     {
-      "id": "py101-w2-traceback-read",
-      "prompt": "Here's a traceback. Without seeing the program, answer three things: what type of error, on what line, and what's the likely fix?\n\nTraceback (most recent call last):\n  File \"main.py\", line 4, in <module>\n    print(\"You are \" + age)\nTypeError: can only concatenate str (not \"int\") to str",
+      "id": "py101-w2-read-nameerror",
+      "prompt": "Type print(greeting) in the editor (without defining greeting), press Run, and then tell me: what is the error type, and which line does the traceback point at?",
       "acceptanceCriteria": [
-        "Identifies the error type as TypeError",
-        "Locates it at line 4 of main.py",
-        "Explains the cause: a string was joined to an int with +",
-        "Proposes a valid fix: str(age), a comma in print, or an f-string"
+        "Names the error type as NameError",
+        "States the line number the traceback reports (line 1 for a one-line script)",
+        "Explains the cause: the name greeting was never defined"
       ],
-      "passFeedback": "That's a professional read: type, place, cause, fix — straight from the report, no guessing.",
-      "failFeedback": "Use the reading order: last line names TypeError and says a str met an int around +; the File line says line 4. Now, which side of the + needs converting?"
+      "passFeedback": "Exactly — you read the type from the last line and the location from the line above it. That's the whole skill.",
+      "failFeedback": "Look at the traceback again, starting from the bottom line. What word comes right before the colon, and what line number appears above it?"
     },
     {
-      "id": "py101-w2-traceback-types",
-      "prompt": "Match each broken line to the error type it raises, with a one-line reason: (a) print(total) where total was never created, (b) int(\"12.5\"), (c) print(\"5\" + 5)",
+      "id": "py101-w2-classify-errors",
+      "prompt": "Without running anything: which error type would int(\"ten\") raise, and which would \"score: \" + 100 raise?",
       "acceptanceCriteria": [
-        "Matches (a) to NameError because the name was never defined",
-        "Matches (b) to ValueError because int() got a value it can't parse",
-        "Matches (c) to TypeError because a str and an int don't fit +"
+        "Identifies int(\"ten\") as a ValueError",
+        "Identifies \"score: \" + 100 as a TypeError",
+        "Distinguishes them: ValueError is right kind with bad content, TypeError is wrong kind of value"
       ],
-      "passFeedback": "You can now tell the three most common tracebacks apart at a glance — that's real diagnostic skill.",
-      "failFeedback": "Sort by question: is the NAME unknown (NameError), do the TYPES not fit the operation (TypeError), or was the specific VALUE impossible to handle (ValueError)?"
+      "passFeedback": "Spot on — you can now tell the error types apart before Python even tells you.",
+      "failFeedback": "Think about it this way: is the value the wrong KIND (TypeError), or the right kind with content that doesn't work (ValueError)? Try running each in the editor to check."
     }
   ],
   "practice": [
     {
       "kind": "coding",
-      "prompt": "This program crashes. Read the traceback in your head first — name the error type and line — then fix it so it prints exactly: Price each: 4.5",
-      "starterCode": "total = 9\nitems = 2\nprint(\"Price each: \" + total / items)",
+      "prompt": "This program crashes. Press Run, read the traceback bottom-up, and fix only the line it points at so the program prints: You are 25 in five years",
+      "starterCode": "age = \"20\"\nfuture = age + 5\nprint(\"You are\", future, \"in five years\")",
       "acceptanceCriteria": [
-        "Identifies the crash as a TypeError on the print line (a str joined to a float with +)",
-        "Fixes it with a comma in print, str(), or an f-string",
-        "Output matches exactly: Price each: 4.5",
-        "Runs without errors"
+        "Runs the starter code and identifies the TypeError on line 2",
+        "Fixes it by converting the string to a number, e.g. future = int(age) + 5",
+        "The fixed program runs without errors and prints: You are 25 in five years"
       ]
     },
     {
       "kind": "open",
-      "prompt": "In your own words: why is a traceback a gift rather than a punishment? Name its three parts and say which one you read first.",
+      "prompt": "In your own words: why does Python give you a whole traceback instead of just stopping silently, and what are the two most useful pieces of information in it?",
       "rubric": [
-        "It pinpoints where and what went wrong instead of failing silently, turning a mystery into a targeted fix",
-        "Parts: the header line, the location lines (file, line number, offending source), and the final type-plus-message line",
-        "Read the final line first, then jump to the file and line number"
+        "Says the traceback exists to help you locate and understand the problem instead of guessing",
+        "Names the error type and message (the last line) as one key piece",
+        "Names the location — line number and the code shown — as the other key piece"
       ]
     },
     {
       "kind": "closed",
-      "prompt": "A program stops with this last line: ValueError: invalid literal for int() with base 10: '3.99'. What happened?",
+      "prompt": "Your traceback ends with: ValueError: invalid literal for int() with base 10: 'abc'. What most likely happened?",
       "options": [
-        "Python can't do math with decimal numbers",
-        "int() was given text that isn't a whole number — like a price string",
-        "A variable was used before being defined",
-        "A number was divided by zero"
+        "You used a variable name that was never defined",
+        "You tried to convert text that isn't a number, like int(\"abc\")",
+        "You divided a number by zero",
+        "You forgot a closing parenthesis"
       ],
       "correctIndex": 1,
-      "explanation": "A ValueError from int() means the value couldn't be parsed as a whole number — '3.99' is a decimal string. float(\"3.99\") is the right converter here."
+      "explanation": "ValueError with 'invalid literal for int()' means int() received a string whose content can't become a number. An undefined name is a NameError, dividing by zero is a ZeroDivisionError, and a missing parenthesis is a SyntaxError."
     }
   ],
   "pedagogyRules": [
-    "Ritualize the reading order every single time an error appears: last line first, say the type and message aloud, then jump to the file and line number.",
-    "Never let the student change code before naming the error type and its meaning in one sentence — diagnosis before surgery.",
-    "If the student asks a jump-ahead question (try/except, raising errors, debuggers), answer in one line — catching errors comes later; first learn to read them — then return to the parts of the report.",
-    "If the student says they already know this, show a fresh traceback they haven't seen and ask for type, line, and fix category; a clean read in under a minute earns a jump straight to the check.",
-    "If the student is lost, shrink to a one-line program — print(message) with no message defined — run it, and walk the three parts of its tiny traceback slowly, pointing at each.",
-    "When the student is wrong but confident about a cause, point back at the literal last line and read it together word by word — the traceback outranks both of you.",
-    "If the student wants to skip ahead, allow it after a first-try pass of the traceback-reading check; otherwise decode one more report together first.",
-    "If errors trigger shame or frustration, normalize it in one line — professionals read tracebacks all day; an error message is Python cooperating, not judging — then decode the current one together.",
-    "If asked why this matters, answer in one line — traceback fluency is the difference between a thirty-second fix and a lost hour, on every program they'll ever write — then continue."
+    "Always have the student run the broken code themselves and read the real traceback aloud — never describe an error they haven't seen in their Output panel.",
+    "Teach bottom-up reading explicitly: ask 'what does the LAST line say?' before discussing anything else in the traceback.",
+    "Normalize errors immediately: frame every traceback as a helpful report, never as failure — especially if the student sounds frustrated or apologetic.",
+    "If the student says they already know how to read errors, respect it: give them the classify-errors check (ValueError vs TypeError) to verify lightly, then advance without re-drilling.",
+    "If the student jumps ahead and asks about try/except or handling errors, give a one-line preview ('that's how you catch these — it's coming soon') and steer back to reading tracebacks first, since you can't handle an error you can't identify.",
+    "When the student misreads an error, point them back to the exact words in the last line of their own traceback rather than restating the answer.",
+    "Keep the student in the editor: to settle any 'which error is this?' debate, have them type it and press Run."
   ],
   "failurePlaybooks": [
     {
       "scenarioId": "SWE-02",
-      "failureMode": "Tutor invents a cause that contradicts the traceback's message",
-      "correctMove": "Quote the actual last line back and diagnose from it alone: the stated type and message override any guess. A TypeError is never fixed by renaming a variable, and a NameError is never fixed by converting types."
+      "failureMode": "Tutor factual/syntax error",
+      "correctMove": "Quote the student's actual traceback text. If the last line says ValueError, do not call it a TypeError or invent a different cause — the error type and message in the Output panel are the ground truth."
     },
     {
       "scenarioId": "SWE-01",
-      "failureMode": "Tutor accepts a vague read like 'there's an error on line 4' as a pass",
-      "correctMove": "Full credit requires the type, what the message means, and the location — ask which part of the traceback said each thing, and don't confirm mastery until all three land."
+      "failureMode": "Validated wrong work",
+      "correctMove": "Only confirm a fix if the student re-runs the code and the traceback is gone with correct output. A changed line that still errors, or errors differently, is progress but not success — say so honestly."
     },
     {
       "scenarioId": "SWE-06",
-      "failureMode": "Scaffolding gap — tutor hands over the fixed line instead of guiding the read",
-      "correctMove": "Walk the ladder: last line, then location, then type meaning, then fix category — one step at a time, with the student proposing the actual code change themselves."
+      "failureMode": "Scaffolding gap (too fast)",
+      "correctMove": "If the student is lost, drop to one question at a time: first 'what error type is on the last line?', then 'what line number is shown above it?', then 'what's on that line?'. Never analyze the whole traceback for them in one go."
     },
     {
-      "scenarioId": "SWE-03",
-      "failureMode": "Challenge-answer leak during checks",
-      "correctMove": "Never name the error type or the fix before the student commits to their own reading of the traceback — ask what the last line says and wait."
+      "scenarioId": "SWE-04",
+      "failureMode": "Student frustration or wanting to skip errors entirely",
+      "correctMove": "Acknowledge the feeling, then reframe with one concrete win: 'this traceback just told you the exact line to fix — that saves you re-reading the whole program.' Offer one tiny step (read only the last line) instead of the full exercise."
     }
   ],
   "chunks": [
     {
-      "id": "py101-w2-traceback-chunk-1",
-      "text": "A traceback is Python's incident report when a program crashes: it tells you where it broke and what went wrong, so you can make one targeted fix instead of guessing. Reading order is bottom-up — the last line is the headline. Worked example: print(message) with no message defined produces a report ending in NameError: name 'message' is not defined.",
+      "id": "py101-w2-chunk-1",
+      "text": "A traceback is the error report Python prints when a program fails. It exists so you don't have to guess: it tells you WHAT went wrong (the error type and message) and WHERE (the file, line number, and the line of code). Tracebacks are read bottom-up — the last line is the summary, the lines above are the location.",
       "embedding": null
     },
     {
-      "id": "py101-w2-traceback-chunk-2",
-      "text": "Anatomy of a traceback, top to bottom: the header 'Traceback (most recent call last):' introduces the report; the location lines — File \"main.py\", line 2, in <module> plus a copy of the offending source line — say where; the final line — the error type, a colon, and the message — says what. 'Most recent call last' means the bottom location is where the error actually happened.",
+      "id": "py101-w2-chunk-2",
+      "text": "The last line of a traceback has two parts separated by a colon: the error type, then the message. Example: NameError: name 'greeting' is not defined. The type gives the category of problem; the message gives the specific detail. Directly above, Python shows the location, e.g. File \"<stdin>\", line 1, along with the code on that line.",
       "embedding": null
     },
     {
-      "id": "py101-w2-traceback-chunk-3",
-      "text": "The four common error types: NameError: name 'x' is not defined — a typo or a name used before it's created. TypeError: can only concatenate str (not \"int\") to str — types that don't fit the operation, like \"5\" + 1. ValueError: invalid literal for int() with base 10: 'hello' — the operation was fine, the value wasn't, like int(\"hello\"). ZeroDivisionError: division by zero — like 10 / 0. The type is the diagnosis: it tells you which category of fix to reach for.",
+      "id": "py101-w2-chunk-3",
+      "text": "Common runtime error types: NameError — you used a name that was never defined, often a typo (print(nmae)). TypeError — you combined the wrong kinds of values, like \"age: \" + 5 (string plus number). ValueError — the kind is right but the content is bad, like int(\"hello\"). ZeroDivisionError — you divided by zero, like 10 / 0.",
       "embedding": null
     },
     {
-      "id": "py101-w2-traceback-chunk-4",
-      "text": "The line number is where the error surfaced, not always where the mistake lives. Worked example — line 1: age = \"21\", line 2: print(age + 1). The traceback points at line 2 with a TypeError, but the cause is line 1 storing text. Start at the reported line, then trace the guilty variable upward. Also: everything before the crashing line already ran — earlier prints are on screen.",
+      "id": "py101-w2-chunk-4",
+      "text": "SyntaxError is different from runtime errors: Python catches it BEFORE the program runs, because it couldn't even read the code. Python prints the confusing line with a caret (^) pointing at or near the problem spot, e.g. a missing closing quote or parenthesis. If you see SyntaxError, none of your program executed yet.",
       "embedding": null
     },
     {
-      "id": "py101-w2-traceback-chunk-5",
-      "text": "SyntaxError is the odd one out: Python catches it before the program runs, so nothing executes and there's no call chain — just the file, the line, and a caret pointing near the problem. All the other errors happen mid-run. Newer Python versions (3.11+) also underline the exact failing part of a line with ^ markers inside regular tracebacks — extra precision, same reading order.",
+      "id": "py101-w2-chunk-5",
+      "text": "Worked example. Running: age = \"20\" then future = age + 5 produces: Traceback (most recent call last): File \"<stdin>\", line 2, in <module> ... TypeError: can only concatenate str (not \"int\") to str. Reading bottom-up: the type is TypeError, the message says a string was added to an int, and the location line says it happened on line 2. Fix: future = int(age) + 5, then press Run again to confirm the traceback is gone.",
       "embedding": null
     }
   ],
   "celebration": {
-    "headline": "Error messages just became your allies.",
-    "recap": "You met the traceback's three parts, learned to read it bottom-up — type and message first, then file and line — and can now tell NameError, TypeError, ValueError, and ZeroDivisionError apart and name the fix category for each.",
-    "unlocked": "Next: functions — and with them, tracebacks that show a whole chain of calls, which you now know exactly how to read."
+    "headline": "You can read Python's error reports like a pro.",
+    "recap": "You learned why Python prints a traceback, how to read it bottom-up to find the error type, message, and line number, and how to tell NameError, TypeError, ValueError, ZeroDivisionError, and SyntaxError apart.",
+    "unlocked": "Next: use what tracebacks tell you to debug programs step by step."
   },
   "summaryBullets": [
-    "You can now understand why Python provides a traceback and how it helps identify what went wrong.",
-    "You can now identify parts of a traceback and different types of tracebacks.",
-    "You understand reading Python tracebacks: why they exist, their three parts, the bottom-up reading order, and telling NameError, TypeError, ValueError, and ZeroDivisionError apart."
+    "You can now read a traceback bottom-up to find the error type, its message, and the exact line that failed.",
+    "You can now tell apart NameError, TypeError, ValueError, ZeroDivisionError, and SyntaxError from the last line alone.",
+    "You can now explain why a SyntaxError stops your program before it even starts, while runtime errors happen mid-run.",
+    "You can now fix a crashing program by going straight to the line the traceback points at instead of guessing."
+  ],
+  "openingLine": "Hey {name} — today we're going to break some programs on purpose, and I promise it's going to be fun. Python leaves you a detailed note every time something goes wrong, called a traceback, and once you can read it, errors stop being scary. Ready to crash your first program?",
+  "bridgeFromPreviousLesson": "Last time you converted user input with int() before computing — and if someone had typed 'ten' instead of 10, your program would have crashed, so today you'll learn to read exactly what Python says when that happens.",
+  "dialogueExemplars": [
+    {
+      "title": "Confidently misreading the error type",
+      "turns": [
+        {
+          "role": "student",
+          "text": "I ran int(\"hello\") and got an error. It's a TypeError because a string is the wrong type for int()."
+        },
+        {
+          "role": "tutor",
+          "text": "Good instinct to name the type — but let's check against the real report. Look at the last line of your traceback: what word comes right before the colon?"
+        },
+        {
+          "role": "student",
+          "text": "Oh... it says ValueError, not TypeError."
+        },
+        {
+          "role": "tutor",
+          "text": "Exactly, and here's the difference: int() happily accepts strings, so the KIND is fine — it's the CONTENT 'hello' that can't become a number. That's ValueError. What would int() need to receive to raise it a string it likes?"
+        },
+        {
+          "role": "student",
+          "text": "Something like \"42\", a string that's actually a number."
+        },
+        {
+          "role": "tutor",
+          "text": "Perfect. Type int(\"42\") in the editor and press Run to prove it to yourself."
+        }
+      ]
+    },
+    {
+      "title": "Why do I even need to read errors?",
+      "turns": [
+        {
+          "role": "student",
+          "text": "Honestly, why do I need this? Can't I just fix my code until it works?"
+        },
+        {
+          "role": "tutor",
+          "text": "Fair question! Imagine your input program from last lesson running for a real user who types 'ten' as their age — it crashes on one specific line. Without the traceback you'd re-read every line guessing; with it, Python hands you the line number and the exact reason. Want to see it save you time right now?"
+        },
+        {
+          "role": "student",
+          "text": "Sure, show me."
+        },
+        {
+          "role": "tutor",
+          "text": "Type print(10 / 0) in the editor and press Run. Then tell me just the last line of what appears — that one line is the whole diagnosis."
+        }
+      ]
+    },
+    {
+      "title": "I already know errors — can we skip?",
+      "turns": [
+        {
+          "role": "student",
+          "text": "I've seen plenty of error messages before, can we skip this?"
+        },
+        {
+          "role": "tutor",
+          "text": "If you've got it, we move on — no re-drilling, deal. Quick check first: without running anything, which error does int(\"ten\") raise, and which does \"score: \" + 100 raise?"
+        },
+        {
+          "role": "student",
+          "text": "The first is a ValueError and the second is a TypeError."
+        },
+        {
+          "role": "tutor",
+          "text": "That's exactly right — right kind, bad content versus wrong kind entirely. You've earned the skip; let's jump straight to the fix-the-crash exercise and put it to work."
+        }
+      ]
+    }
   ]
 }

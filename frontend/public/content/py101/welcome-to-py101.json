@@ -12,183 +12,264 @@
     ],
     "tutorInstructions": null
   },
-  "concept": "Orientation: how PY101 works, how the grade is built, and why learning Python is worth it",
+  "concept": "How PY101 is structured and graded, and how to succeed in it",
   "prerequisites": [],
   "bloom": "understand",
   "explanations": [
     {
       "level": "eli5",
-      "text": "Welcome! PY101 teaches you Python from absolute zero — no coding background needed. You'll learn one small idea at a time, try it right away, and build up to writing real programs. Think of it like learning an instrument: short practice sessions, quick wins, and a friendly tutor checking in as you go."
+      "text": "PY101 is like a four-stop journey: first you write your very first program, then you learn the core building blocks, then you teach the computer to make decisions and repeat things, and finally you wrap it all up in a summary unit. At the end of each stop there's a short review to show what you learned — the first three are low-pressure practice, and the last one is the big one."
     },
     {
       "level": "standard",
-      "text": "PY101 has four units, in order: Writing your first program, Core foundations, Decisions and loops, and the Introduction to Python summary. Each unit is a set of short lessons, and each unit ends with a review. The first three reviews are low-stakes practice: untimed, unlimited retakes, worth 10% each — so they are a safe place to make mistakes and learn from them."
+      "text": "PY101 has four units in order: Writing your first program, Core foundations, Decisions and loops, and the Introduction to Python summary. Each unit ends with a review. Reviews 1-3 are worth 10% each, are untimed, and you can retake them as many times as you like. The final unit review is worth 60%, is timed, and allows exactly one retake. Weekly discussions add the last 10%. Pass every review on time and you earn 10 bonus points."
     },
     {
       "level": "deep",
-      "text": "The full grade breakdown: reviews 1-3 are worth 10% each, untimed, with unlimited retakes. The final unit review is worth 60%, is timed, and allows exactly one retake — so it is the one to prepare for seriously. Weekly discussions add the last 10%, and there are 10 bonus points for passing all reviews on time. The design rewards steady weekly practice: if you keep up with lessons and use the free retakes on reviews 1-3, the 60% final becomes a confirmation of what you already know, not a surprise."
+      "text": "The grading is designed around mastery learning. Reviews 1-3 (10% each, untimed, unlimited retakes) exist so you can practice until concepts stick without grade anxiety — retaking them is a feature, not a failure. The final review (60%, timed, one retake) is summative: it checks that the skills are truly yours under light time pressure. Weekly discussions (10%) keep you explaining ideas in your own words, which cements them. The math checks out: 10 + 10 + 10 + 60 + 10 = 100, plus up to 10 bonus points for passing every review on time. The winning strategy is simple: use the unlimited retakes early so the final review feels easy."
     }
   ],
   "examples": [
-    "print(\"Hello, PY101!\")",
-    "Grade math: 10% + 10% + 10% (unit reviews) + 60% (final review) + 10% (discussions) = 100%, plus up to 10 bonus points for passing all reviews on time"
+    "Grade math: 10% + 10% + 10% (unit reviews) + 60% (final review) + 10% (discussions) = 100%, plus 10 bonus points for passing all reviews on time.",
+    "print(\"Hello, PY101!\")"
   ],
   "hintLadder": [
     {
       "order": 1,
-      "text": "Every Python journey starts with one line that shows a message on the screen. Which word have you heard that does that?"
+      "text": "Start with how many unit reviews there are, and remember that one of them is much bigger than the others."
     },
     {
       "order": 2,
-      "text": "Write print, then parentheses right after it — print()."
+      "text": "Reviews 1-3 all share the same small weight and are relaxed: untimed, retake as often as you like. The final one is the opposite in every way."
     },
     {
       "order": 3,
-      "text": "Put your message inside the parentheses, wrapped in quotes, like \"Hello, PY101!\" — then run it."
+      "text": "The pieces must add to 100%: three small reviews, one big timed final, and weekly discussions. What weight makes that work for the final?"
     }
   ],
   "misconceptions": [
     {
-      "trigger": "Believes they need prior coding or strong math to succeed in PY101",
-      "correction": "PY101 assumes zero background. Every lesson introduces one small idea with practice right away, and reviews 1-3 have unlimited retakes — consistency matters far more than any head start."
+      "trigger": "Assumes all reviews have unlimited retakes, including the final one.",
+      "correction": "Only reviews 1-3 have unlimited retakes. The final unit review is different: it's worth 60%, it's timed, and you get exactly one retake — so use the early reviews to practice until you're confident."
     },
     {
-      "trigger": "Assumes the final review works like reviews 1-3 — untimed with unlimited retakes",
-      "correction": "The final review is different: it is worth 60%, it is timed, and it allows only one retake. Reviews 1-3 are the untimed, unlimited-retake ones."
+      "trigger": "Thinks the final review is untimed like the others.",
+      "correction": "The final review is timed. Reviews 1-3 are the untimed ones — that's where you build speed and confidence so the timer on the final never feels tight."
     },
     {
-      "trigger": "Thinks the grade comes only from the reviews",
-      "correction": "Weekly discussions are worth 10% of the grade, and passing all reviews on time earns 10 bonus points — participation counts, not just tests."
+      "trigger": "Believes weekly discussions are optional extra credit.",
+      "correction": "Discussions are part of the core grade — they're worth 10%. The actual bonus is separate: 10 bonus points for passing all reviews on time."
     },
     {
-      "trigger": "Worries that retaking a review will cost points or look bad",
-      "correction": "Reviews 1-3 allow unlimited retakes with no penalty — they exist for practice. Retaking one is using the course as designed, not falling behind."
+      "trigger": "Thinks retaking a review means they're failing the course.",
+      "correction": "Retakes on reviews 1-3 are by design and cost nothing — they're unlimited and untimed. Retaking until you master the material is exactly how the course is meant to be used."
     },
     {
-      "trigger": "Says the course is pointless because they already know some Python",
-      "correction": "Great — prior knowledge means faster progress, not skipping the course. Verify with one quick prediction question, move briskly through familiar lessons, and remember the reviews still build the grade."
-    },
-    {
-      "trigger": "Thinks bonus points can make up for a failed final review",
-      "correction": "The 10 bonus points reward passing all reviews on time — they are a small boost, not a safety net. The final review still carries 60%, so it deserves real preparation."
+      "trigger": "Believes they must already know some coding to start PY101.",
+      "correction": "PY101 assumes zero experience. The very first unit is literally called Writing your first program — everything is built from the ground up, one small step at a time."
     }
   ],
   "checks": [
     {
-      "id": "py101-w1-welcome-ready",
-      "prompt": "Before we start: what do you want to get out of learning Python, and are you ready to write your first line of code?",
+      "id": "py101-w1-welcome-grading",
+      "prompt": "In your own words: how is your PY101 grade built, and what makes the final review different from reviews 1-3?",
       "acceptanceCriteria": [
-        "Student shares a goal or motivation, or confirms they are ready to begin"
+        "States reviews 1-3 are worth 10% each",
+        "States the final review is worth 60%",
+        "States the final review is timed and allows exactly one retake, while reviews 1-3 are untimed with unlimited retakes",
+        "Mentions weekly discussions are worth 10%"
       ],
-      "passFeedback": "Love it — let's turn that into your first running program.",
-      "failFeedback": "No worries — even \"I just want to try it\" is a great reason. Ready when you are."
+      "passFeedback": "Exactly right — you know how the course works and how to play it smart: practice freely early, be ready for the timed final.",
+      "failFeedback": "Close — check the pieces: three 10% untimed reviews with unlimited retakes, one 60% timed final with a single retake, and 10% for discussions."
     },
     {
       "id": "py101-w1-welcome-structure",
-      "prompt": "Quick check so the course never surprises you: how is your PY101 grade built, and which review should you prepare for most carefully?",
+      "prompt": "Name the four units of PY101 in order.",
       "acceptanceCriteria": [
-        "Mentions that reviews 1-3 are worth 10% each and are untimed with unlimited retakes",
-        "Identifies the final review as the big one: 60%, timed, with one retake",
-        "Optionally mentions discussions (10%) or the 10 bonus points for passing all reviews on time"
+        "Names Writing your first program as the first unit",
+        "Names Core foundations second and Decisions and loops third",
+        "Names the Introduction to Python summary as the final unit"
       ],
-      "passFeedback": "Exactly — practice freely on reviews 1-3, and treat the final review as the main event.",
-      "failFeedback": "Close — remember: reviews 1-3 are 10% each with unlimited retakes, but the final review is 60%, timed, and allows only one retake."
+      "passFeedback": "That's the map — and you're standing at the start of unit one right now.",
+      "failFeedback": "Almost — the order is: Writing your first program, Core foundations, Decisions and loops, then the Introduction to Python summary."
     }
   ],
   "practice": [
     {
       "kind": "coding",
-      "prompt": "Warm-up ritual: write one line of Python that prints a hello message to kick off the course — something like Hello, PY101!",
+      "prompt": "Let's make the course officially begin. Type a line in the editor that prints: Hello, PY101! Then press Run and watch the Output panel.",
       "starterCode": "",
       "acceptanceCriteria": [
         "Uses print() with parentheses",
-        "The message is a string in quotes",
-        "Runs without errors and shows the message"
+        "The argument is a string in quotes",
+        "Runs without errors and outputs Hello, PY101!"
       ]
     },
     {
       "kind": "open",
-      "prompt": "In a sentence or two: what do you want to be able to do with Python by the end of PY101?",
+      "prompt": "Reviews 1-3 are untimed with unlimited retakes, but the final review is timed with one retake. Why do you think the course is designed that way, and how will you use that design to your advantage?",
       "rubric": [
-        "Names a concrete goal, interest, or curiosity (a project, a job skill, automation, data, AI, or simply wanting to try coding)",
-        "Shows willingness to start, even if the goal is vague"
+        "Recognizes early reviews are for low-pressure practice and mastery (retakes are encouraged)",
+        "Recognizes the final review checks that skills are truly solid, hence timed and worth 60%",
+        "States a concrete personal strategy, e.g. retaking early reviews until confident before the final"
       ]
     },
     {
       "kind": "closed",
-      "prompt": "Which statement about PY101 grading is true?",
+      "prompt": "Which statement about PY101 grading is correct?",
       "options": [
-        "Every review is timed and allows one retake",
-        "Reviews 1-3 are worth 10% each, untimed, with unlimited retakes",
-        "The final review is worth 10% of the grade",
-        "Weekly discussions do not count toward the grade"
+        "The final review is worth 60%, is timed, and allows one retake.",
+        "All four reviews are untimed with unlimited retakes.",
+        "Weekly discussions are worth 30% of the grade.",
+        "Reviews 1-3 are worth 20% each."
       ],
-      "correctIndex": 1,
-      "explanation": "Reviews 1-3 are the low-stakes practice reviews: 10% each, untimed, unlimited retakes. The final review is the big one at 60%, timed with one retake, and discussions add 10%."
+      "correctIndex": 0,
+      "explanation": "Reviews 1-3 are 10% each, untimed, with unlimited retakes; the final review is the big one — 60%, timed, one retake. Discussions add 10%, and passing everything on time earns 10 bonus points."
     }
   ],
   "pedagogyRules": [
-    "Open with a warm two-line welcome and ask for the student's name and goal before stating any course facts; use their name from then on.",
-    "If the student asks a jump-ahead question (loops, AI, building apps), answer in one sentence, name where it lives in the course (decisions and loops are Unit 3), then return to orientation.",
-    "If the student says they already know Python, do not re-drill: ask them to predict the output of one line such as print(\"ha\" * 3), and if they are right, offer to move quickly through Week 1.",
-    "If the student sounds lost or overwhelmed, drop the grading details entirely and reduce the message to one line: short lessons, one small step at a time, and reviews 1-3 are safe to retry.",
-    "If the student wants to skip orientation, let them — first confirm in one line that they know the final review is 60%, timed, with one retake, then move on without ceremony.",
-    "If the student asks why they should learn Python, tie the answer to their stated goal in one or two sentences with one concrete example (automating a chore, analyzing data, working with AI), then continue.",
-    "If nerves or frustration show up, acknowledge the feeling in one sentence before any content, and remind them that reviews 1-3 have unlimited retakes.",
-    "Never dump the full grading table unprompted: give the one-line version (three small practice reviews, one big final, discussions count) and expand only if asked."
+    "This is an orientation lesson — keep it warm and conversational, never a quiz-drill of grading facts.",
+    "Deliver the course tour one unit at a time; never list all four units plus the full grading scheme in a single turn.",
+    "If the student says they already know Python or want to skip ahead, respect it: give the three-sentence grading summary (10-10-10 untimed unlimited, 60 timed one retake, 10 discussions plus bonus), confirm they've got it, and move them forward.",
+    "If the student is anxious about grades or the timed final, immediately point at the unlimited retakes on reviews 1-3 as the built-in safety net.",
+    "Frame retakes as the designed path to mastery, never as remediation or failure.",
+    "If the student wanders into future topics like loops or variables, give a one-line teaser tied to the unit where it lives, then steer back to the tour.",
+    "End the lesson pointing them at the very next concrete step: writing their first program with print()."
   ],
   "failurePlaybooks": [
     {
-      "scenarioId": "SWE-09",
-      "failureMode": "Emotional attunement miss",
-      "correctMove": "When the student expresses nerves, doubt, or 'I'm not a math person', acknowledge the feeling first and reassure — PY101 assumes zero background — before giving any course information."
+      "scenarioId": "SWE-01",
+      "failureMode": "Validated wrong work",
+      "correctMove": "Only confirm the student's grading summary if the numbers are exactly right: 10% each for reviews 1-3, 60% for the timed final with one retake, 10% for discussions, 10 bonus points for on-time passes. If any number is off, correct that specific number — do not wave it through."
     },
     {
-      "scenarioId": "SWE-10",
-      "failureMode": "Preference/name miss",
-      "correctMove": "If the student gives a name or a preference (pace, tone, examples they like), honor it from that point on and never revert to defaults."
+      "scenarioId": "SWE-06",
+      "failureMode": "Scaffolding gap (too fast)",
+      "correctMove": "Do not dump the whole course map and grading scheme at once. Introduce the four units first, check understanding with one light question, then layer in the grading rules one piece at a time."
     },
     {
-      "scenarioId": "SWE-02",
-      "failureMode": "Tutor factual error about course structure or grading",
-      "correctMove": "State grading facts exactly as written: reviews 1-3 are 10% each untimed with unlimited retakes; the final review is 60%, timed, one retake; discussions 10%; 10 bonus points for passing all reviews on time. Never guess different numbers."
+      "scenarioId": "BIZ-01",
+      "failureMode": "Student demotivated or intimidated before starting",
+      "correctMove": "Name the fear kindly, then point at the design: the first unit is literally writing one line of code, and the first three reviews are untimed with unlimited retakes — the course is built so beginners cannot fall through the cracks. Then give the tiniest next action."
+    },
+    {
+      "scenarioId": "BIZ-02",
+      "failureMode": "Student wants to skip orientation entirely",
+      "correctMove": "Don't force the full tour. Give the compressed version — four units, 10-10-10-60-10 grading, timed final with one retake, bonus for on-time passes — verify with one quick question, and advance to writing their first program."
     }
   ],
   "chunks": [
     {
       "id": "py101-w1-welcome-chunk-1",
-      "text": "PY101 is the first course in the AI Engineering program. It teaches coding from scratch with a focus on Python, designed for learners with no prior technical background. Lessons are short and hands-on: you learn one idea, try it immediately, and build up from there.",
+      "text": "PY101 has four units, taken in order: (1) Writing your first program, (2) Core foundations, (3) Decisions and loops, and (4) the Introduction to Python summary. Each unit builds directly on the one before it, starting from zero — no prior coding experience is assumed.",
       "embedding": null
     },
     {
       "id": "py101-w1-welcome-chunk-2",
-      "text": "PY101 is organized into four units, in order: Writing your first program, Core foundations, Decisions and loops, and the Introduction to Python summary. Each unit is a series of short lessons and ends with a review.",
+      "text": "Every unit in PY101 ends with a review. Reviews 1-3 are worth 10% of the grade each, are untimed, and allow unlimited retakes. Retaking them is encouraged — they exist for low-pressure practice until the material truly sticks.",
       "embedding": null
     },
     {
       "id": "py101-w1-welcome-chunk-3",
-      "text": "Reviews 1-3 are worth 10% each, are untimed, and allow unlimited retakes. They are designed as safe practice: retaking one costs nothing and is the intended way to learn from mistakes.",
+      "text": "The final unit review is worth 60% of the grade, is timed, and allows exactly one retake. Weekly discussions make up the remaining 10%. The full grade is 10 + 10 + 10 + 60 + 10 = 100%. On top of that, passing all reviews on time earns 10 bonus points.",
       "embedding": null
     },
     {
       "id": "py101-w1-welcome-chunk-4",
-      "text": "The final unit review is worth 60% of the grade, is timed, and allows exactly one retake — it is the review to prepare for most seriously. Weekly discussions add 10%, and passing all reviews on time earns 10 bonus points. Worked example: 10 + 10 + 10 (unit reviews) + 60 (final) + 10 (discussions) = 100%, plus up to 10 bonus.",
+      "text": "The smart PY101 strategy: use the unlimited, untimed retakes on reviews 1-3 to build real mastery early, so the timed 60% final feels like familiar ground. Show up for weekly discussions to lock in the easy 10% and explain ideas in your own words.",
       "embedding": null
     },
     {
       "id": "py101-w1-welcome-chunk-5",
-      "text": "Your very first Python taste: print(\"Hello, PY101!\") is a complete, runnable program — one line that shows a message on the screen. Writing and running it is the first thing you will do in the next lesson.",
+      "text": "In the Maestro Code Editor you type Python code, press Run, and see the result in the Output panel. A first line to try: print(\"Hello, PY101!\") — press Run and the text Hello, PY101! appears in the output. That single line is a complete, working Python program.",
       "embedding": null
     }
   ],
   "celebration": {
-    "headline": "You're in — set up, oriented, and ready to code.",
-    "recap": "You know the four units of PY101, how the grade is built (three 10% practice reviews, one 60% timed final, 10% discussions, 10 bonus points), and what you personally want out of Python.",
-    "unlocked": "Next: write and run your very first line of Python."
+    "headline": "You're officially in — and you know exactly how PY101 works.",
+    "recap": "You toured the four units, learned how your grade is built (three 10% untimed reviews with unlimited retakes, a 60% timed final with one retake, 10% discussions, plus bonus points for passing on time), and even ran your first line of Python.",
+    "unlocked": "Next: Writing your first program — you'll make the computer talk with print()."
   },
   "summaryBullets": [
-    "You can now describe how PY101 is structured across its four units.",
-    "You can now explain how the final grade is built from reviews, discussions, and bonus points.",
-    "You understand what to expect from the course and how to succeed from day one."
+    "You can now name the four PY101 units in order: Writing your first program, Core foundations, Decisions and loops, and the Introduction to Python summary.",
+    "You can now explain how your grade is built: 10% each for reviews 1-3, 60% for the final review, and 10% for weekly discussions.",
+    "You can now say exactly what makes the final review different — timed, one retake — and plan to master material early using the unlimited retakes on reviews 1-3.",
+    "You can now describe how to earn the 10 bonus points: pass every review on time.",
+    "You can now type a line of Python in the Maestro editor, press Run, and see your output appear."
+  ],
+  "openingLine": "Hey {name}, welcome to PY101 — I'm genuinely glad you're here! You said you want to {goal}, and Python is one of the best first steps toward exactly that. Want a quick 60-second tour of how this course works before we write some real code?",
+  "bridgeFromPreviousLesson": null,
+  "dialogueExemplars": [
+    {
+      "title": "Wrong but confident about retakes",
+      "turns": [
+        {
+          "role": "student",
+          "text": "I read the syllabus — every review has unlimited retakes, so I can just wing the final and redo it until I pass."
+        },
+        {
+          "role": "tutor",
+          "text": "You're right about reviews 1-3 — those are untimed with unlimited retakes, so retake away. But the final review plays by different rules: it's timed and you get exactly one retake. And it's worth 60%, so it's the one to be ready for. Knowing that, when do you think the real practice should happen?"
+        },
+        {
+          "role": "student",
+          "text": "Oh... during the first three reviews, I guess, since those are free."
+        },
+        {
+          "role": "tutor",
+          "text": "Exactly — that's the whole design. Master everything early when retakes cost nothing, and the timed final becomes a victory lap. Ready to see what unit one covers?"
+        }
+      ]
+    },
+    {
+      "title": "Why do I need a course tour?",
+      "turns": [
+        {
+          "role": "student",
+          "text": "Honestly, why do I need to know the grading structure? Can't we just start coding?"
+        },
+        {
+          "role": "tutor",
+          "text": "Fair question — here's the real payoff. Students who know that reviews 1-3 are untimed with unlimited retakes use them as free practice, walk into the 60% timed final relaxed, and pick up 10 bonus points for passing on time. Two minutes of map-reading, better grade all semester. Quick check to lock it in: which review is the only timed one?"
+        },
+        {
+          "role": "student",
+          "text": "The final one — the 60% review."
+        },
+        {
+          "role": "tutor",
+          "text": "Nailed it, and that's all the admin you need. Now the fun part: shall we write your very first line of Python?"
+        }
+      ]
+    },
+    {
+      "title": "Absolute beginner, first day",
+      "turns": [
+        {
+          "role": "student",
+          "text": "I have to be honest — I don't know anything about coding. Nothing at all."
+        },
+        {
+          "role": "tutor",
+          "text": "Then you're in exactly the right place — PY101 starts from absolute zero. Coding is just writing instructions the computer can follow, one line at a time. Want to try the smallest possible one right now?"
+        },
+        {
+          "role": "student",
+          "text": "Okay... what do I do?"
+        },
+        {
+          "role": "tutor",
+          "text": "Type this into the editor: print(\"Hello, PY101!\") — then press Run. Whatever appears in the Output panel, you made happen. What do you see?"
+        },
+        {
+          "role": "student",
+          "text": "It says Hello, PY101! ... wait, that's it? I just coded?"
+        },
+        {
+          "role": "tutor",
+          "text": "That's it — a complete, working Python program, written by you on day one. And remember, your first three reviews are untimed with unlimited retakes, so there's zero pressure while you learn. Ready to see the four units ahead of you?"
+        }
+      ]
+    }
   ]
 }

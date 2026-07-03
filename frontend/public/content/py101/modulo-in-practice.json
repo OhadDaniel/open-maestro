@@ -10,202 +10,268 @@
     ],
     "tutorInstructions": null
   },
-  "concept": "Using % as a pattern tool: x % 2 for even/odd, and x % n to wrap endless counts onto repeating cycles like weekdays and rotating shifts",
+  "concept": "Using the modulo operator % to detect even/odd numbers and to map counting numbers onto repeating cycles",
   "prerequisites": [
-    "Division modes: // and % giving quotient and remainder, and the rebuild identity a == b * (a // b) + a % b"
+    "Floor division (//) and remainder (%) on integers",
+    "Using print() and simple expressions in the editor"
   ],
   "bloom": "apply",
   "explanations": [
     {
       "level": "eli5",
-      "text": "Here's the trick: % 2 sorts every whole number into two teams. Even numbers split into pairs with nobody left over, so x % 2 gives 0. Odd numbers always have one loner, so x % 2 gives 1. That's a built-in even/odd detector. And % is bigger than 2: it's how you count on anything that repeats. A week repeats every 7 days, so 'what day is it 10 days after day 2?' is (2 + 10) % 7 — the full weeks vanish and you land on 5. Think of a clock face: % takes a huge count, walks it around the circle, and tells you where your finger stops."
+      "text": "Modulo (%) tells you the leftover after sharing. If you share 7 cookies between 2 people, each gets 3 and 1 is left over — so 7 % 2 is 1. That leftover of 1 is exactly what makes 7 odd! And if things repeat in a circle, like days of the week, % tells you where you land: day 10 in a 7-day week is 10 % 7 = 3, so it lands on day 3 of the cycle."
     },
     {
       "level": "standard",
-      "text": "x % 2 is the parity test: it asks 'what's left after removing all the pairs?' Even numbers leave 0, odd numbers leave 1, and those are the only possible answers — print(10 % 2) shows 0, print(7 % 2) shows 1. You can even print the test itself: print(10 % 2 == 0) shows True. The same idea scales to any cycle of length n: x % n converts an ever-growing count into a position from 0 to n - 1 that repeats forever. Three flatmates rotating dinner duty? Dinner number 17 belongs to position 17 % 3, which is 2. Today is weekday 2 and you want 10 days ahead? (2 + 10) % 7 is 5. One detail that trips people: when the count is smaller than the cycle, % just returns it — 3 % 7 is 3, because after zero full weeks you're still on day 3."
+      "text": "x % 2 gives the remainder when x is divided by 2. Even numbers divide by 2 with nothing left over, so x % 2 == 0 means even; odd numbers always leave 1, so x % 2 == 1 means odd. Try print(10 % 2) and print(7 % 2). The same trick works for any cycle length: x % n maps every count x onto a position 0 to n-1 that repeats forever. For example, print(9 % 4) gives 1, so item 9 sits at position 1 of a 4-slot rotation — no long if/elif chains needed."
     },
     {
       "level": "deep",
-      "text": "Why parity works: by the identity from last lesson, every integer is (x // 2) complete pairs plus x % 2 left over. With divisor 2 the remainder can only be 0 or 1, and it is exactly the 'is there a loner?' bit — that bit is parity. (A Python bonus: it survives negatives, because % with a positive divisor never goes negative — -3 % 2 is 1, correctly odd.) The general pattern: any process that repeats with period n is fully described by its position in 0..n - 1, and x % n is the projection onto that circle. Full cycles vanish because they're exact multiples of n — 14 % 7 is 0, meaning two complete weeks land you back at the start — and the result can never reach n itself. This is why % simplifies branching: instead of an endless ladder of cases ('if the count is 3, or 6, or 9...'), one expression — count % 3 == 0 — captures the whole infinite family, and one formula — (start + steps) % n — replaces all wraparound bookkeeping, whether steps is 10 or 10000."
+      "text": "For non-negative integers, x % n returns the unique r with 0 <= r < n such that x == (x // n) * n + r. As x counts up 0, 1, 2, 3, ..., x % n produces the repeating sequence 0, 1, ..., n-1, 0, 1, ... — a perfect cycle of length n. Parity is just the n = 2 case: the cycle 0, 1, 0, 1 alternates with the even/odd pattern. This is why one expression like workers[shift % 3] replaces a whole branching structure: the modulo does the wrapping for you. Note that in Python the result of x % n always has the same sign as n, so with a positive n even negative x gives a valid position: -1 % 7 is 6."
     }
   ],
   "examples": [
-    "print(10 % 2)\nprint(7 % 2)",
-    "print(10 % 2 == 0)\nprint(7 % 2 == 0)",
-    "dinner = 17\nprint(\"Cook:\", dinner % 3)",
-    "today = 2\nprint(\"Weekday in 10 days:\", (today + 10) % 7)",
-    "print(14 % 7)\nprint(3 % 7)"
+    "print(7 % 2)   # 1 -> odd",
+    "print(10 % 2)  # 0 -> even",
+    "print(10 % 7)  # 3 -> day 10 lands on day 3 of a 7-day week",
+    "workers = [\"Ana\", \"Ben\", \"Cleo\"]\nfor shift in range(7):\n    print(\"Shift\", shift, \"->\", workers[shift % 3])"
   ],
   "hintLadder": [
     {
       "order": 1,
-      "text": "Find what repeats in the problem and count how long one full cycle is — that length is your divisor."
+      "text": "Think about what is left over after dividing. Which operator gives you the remainder?"
     },
     {
       "order": 2,
-      "text": "Work out the total count of steps from the start; the cycle length only enters at the very end."
+      "text": "How long is the repeating cycle here? That length is the number you put after the % sign."
     },
     {
       "order": 3,
-      "text": "Full cycles don't change where you stand — % is the operator that throws them away and keeps only your position."
-    },
-    {
-      "order": 4,
-      "text": "Test your formula twice: once with a count smaller than the cycle, once with a bigger one, and walk each on your fingers to compare."
+      "text": "Write the expression as x % cycle_length, print the result for a few values of x, and check that the outputs repeat 0, 1, ..., cycle_length - 1."
     }
   ],
   "misconceptions": [
     {
-      "trigger": "Flips the parity results — claims x % 2 == 1 means even",
-      "correction": "Remember what % 2 measures: the loner left after pairing. Evens pair perfectly (remainder 0); odds leave one behind (remainder 1). Run print(10 % 2) and print(7 % 2) and match each output to its word."
+      "trigger": "Believes x % 2 == 1 means even because 'the 1 means yes it divides'.",
+      "correction": "The result of % is the leftover, not a yes/no flag. Even numbers divide by 2 cleanly, so nothing is left over: x % 2 == 0 means even, and x % 2 == 1 means odd. Run print(4 % 2) and print(5 % 2) to see it."
     },
     {
-      "trigger": "Reads % as percent, expecting something like 50 % 10 to compute a percentage",
-      "correction": "In Python, % is the remainder operator — nothing to do with percentages. 50 % 10 is 0, because 10 fits 5 whole times into 50 with nothing left over."
+      "trigger": "Writes x % 0 or puts the cycle length on the left, e.g. 7 % x when they mean x % 7.",
+      "correction": "The value you are checking goes on the left; the cycle length goes on the right. x % 7 asks 'where does x land in a 7-cycle'. And the right side can never be 0 — dividing by zero is an error."
     },
     {
-      "trigger": "Thinks 3 % 7 must be an error, or 7, because 3 is smaller than 7",
-      "correction": "3 % 7 is just 3: seven fits zero whole times, so all 3 remain. A count smaller than the cycle is already its own position — no error, no wraparound needed yet."
+      "trigger": "Uses long if/elif chains to handle a rotation, e.g. if day == 3: ... elif day == 6: ... for every multiple.",
+      "correction": "That chain never ends because the cycle repeats forever. One condition, day % 3 == 0, catches every third day at once — that is exactly the branching modulo is meant to replace."
     },
     {
-      "trigger": "Expects 14 % 7 to be 7 after two full weeks",
-      "correction": "A remainder can never reach the divisor — % 7 only ever returns 0 through 6. Two exact weeks means you're back at the start: 14 % 7 is 0."
-    },
-    {
-      "trigger": "Handles wraparound by hand, subtracting the cycle length repeatedly (12 - 7 = 5) instead of using %",
-      "correction": "Your subtraction is exactly what % does — done any number of times at once. (2 + 10) % 7 is 5 in one step, and the same formula still works 1000 days ahead, where manual subtracting falls apart."
-    },
-    {
-      "trigger": "Confidently claims you need a separate rule for each case — 'every 3rd item, so check 3, then 6, then 9...'",
-      "correction": "That ladder never ends. count % 3 == 0 captures every multiple of 3 in one expression — test it: print(9 % 3 == 0) shows True and print(10 % 3 == 0) shows False."
+      "trigger": "Confuses % with / or //, e.g. expects 10 % 3 to be 3.",
+      "correction": "10 // 3 is 3 (how many whole groups), but 10 % 3 is 1 (what is left over). They are partners: quotient and remainder. Print both side by side to keep them straight."
     }
   ],
   "checks": [
     {
       "id": "py101-w2-modulo-parity",
-      "prompt": "Predict both outputs, then explain in one sentence why % 2 detects even and odd:\nprint(24 % 2)\nprint(13 % 2)",
+      "prompt": "Write code that prints \"even\" if the variable n is even and \"odd\" if it is odd. Start with n = 42, then change n to 13 and run again.",
       "acceptanceCriteria": [
-        "Predicts 0 for 24 % 2 and 1 for 13 % 2",
-        "Explains that % 2 is the leftover after grouping into pairs",
-        "States that 0 and 1 are the only possible results of % 2, mapping 0 to even and 1 to odd"
+        "Uses the expression n % 2 compared to 0 (or equivalently to 1)",
+        "Prints \"even\" when n % 2 == 0 and \"odd\" otherwise",
+        "Running with n = 42 outputs even, and with n = 13 outputs odd"
       ],
-      "passFeedback": "Exactly — pairs vanish, the loner shows up as 1, and there are only two possible verdicts. That's parity, fully explained.",
-      "failFeedback": "Picture the number as pairs of socks: 24 pairs up perfectly (remainder 0), 13 leaves one sock alone (remainder 1). Run both lines and match the outputs to even and odd."
+      "passFeedback": "Exactly right — the remainder after dividing by 2 is the whole secret of even and odd.",
+      "failFeedback": "Check which remainder means even: dividing an even number by 2 leaves nothing, so the test is n % 2 == 0. Fix the comparison and run it again."
     },
     {
       "id": "py101-w2-modulo-cycle",
-      "prompt": "Three flatmates rotate dinner duty: turn 0 is Ana, turn 1 is Ben, turn 2 is Caro, then it repeats. Starting from dinner = 17, use % to print which turn number (0, 1, or 2) cooks dinner number 17, so the output is exactly: Cook: 2",
+      "prompt": "Three friends — \"Ana\", \"Ben\", \"Cleo\" — take turns washing dishes, in that order, repeating forever. Write code that prints who washes on day 100 (day 0 is Ana's day). Use modulo, not a chain of ifs.",
       "acceptanceCriteria": [
-        "Uses dinner % 3 to compute the position",
-        "Does not hard-code the 2",
-        "Output matches exactly: Cook: 2",
-        "Runs without errors"
+        "Computes 100 % 3 (directly or via a variable)",
+        "Maps the result 0/1/2 to Ana/Ben/Cleo, e.g. by indexing a list",
+        "Running it outputs Ben (since 100 % 3 == 1)"
       ],
-      "passFeedback": "Five full rotations vanish and position 2 remains — Caro cooks. You just replaced a pile of case-checking with one expression.",
-      "failFeedback": "The rotation is 3 turns long, so the divisor is 3. Ask % to discard the complete rotations in 17 and keep your position: walk 17 on your fingers around Ana-Ben-Caro to verify."
+      "passFeedback": "One % expression instead of an infinite if-chain — that's modulo doing the branching for you.",
+      "failFeedback": "The cycle length is 3, so the position on day 100 is 100 % 3. Compute that first with print(100 % 3), then use it to pick the right name."
     }
   ],
   "practice": [
     {
       "kind": "coding",
-      "prompt": "A playlist of 6 songs repeats forever; positions are 0 through 5, and play number 0 is position 0. Starting from songs = 6 and plays = 100, print the position playing at play number 100, so the output is exactly: Position: 4",
-      "starterCode": "songs = 6\nplays = 100\n",
+      "prompt": "A playlist has 5 songs, numbered 0 to 4, and loops forever. Write a program that prints which song number is playing at play-count 0, 4, 5, 12, and 23. Use a single expression with % for each (a loop over a list of counts is even better).",
+      "starterCode": "counts = [0, 4, 5, 12, 23]\n# For each count, print the song number that is playing\n",
       "acceptanceCriteria": [
-        "Uses plays % songs to compute the position",
-        "Does not hard-code the 4",
-        "Output is exactly: Position: 4",
+        "Uses count % 5 to compute the song position",
+        "Handles all five counts (loop or repeated prints both fine)",
+        "Output is 0, 4, 0, 2, 3 in that order",
         "Runs without errors"
       ]
     },
     {
       "kind": "open",
-      "prompt": "Explain why x % 2 works as an even/odd detector, then generalize: what does x % n tell you about any repeating cycle of length n?",
+      "prompt": "In your own words: why does x % 2 == 0 reliably tell you a number is even, and why does x % n always land between 0 and n-1?",
       "rubric": [
-        "% 2 returns the leftover after removing pairs: 0 for even, 1 for odd — the only two possible remainders",
-        "Generalization: x % n gives the position within the current cycle, in the range 0 to n - 1, because complete cycles are exact multiples of n and vanish",
-        "Mentions a concrete cycle example, such as weekdays with % 7 or rotating turns with % 3"
+        "Explains that % gives the remainder after division, and even numbers leave remainder 0 when divided by 2",
+        "Explains that a remainder is what's left after removing whole groups of n, so it must be smaller than n and at least 0",
+        "Connects the repeating remainders 0..n-1 to cycles/positions"
       ]
     },
     {
       "kind": "closed",
-      "prompt": "Today is weekday 5 (with weekday 0 meaning Monday). What does print((5 + 9) % 7) show?",
+      "prompt": "A traffic light repeats a 6-second cycle: green for seconds 0-2, yellow for second 3, red for seconds 4-5. Which expression tells you where second 100 falls in the cycle?",
       "options": [
-        "0",
-        "2",
-        "7",
-        "14"
+        "100 // 6",
+        "100 % 6",
+        "6 % 100",
+        "100 / 6"
       ],
-      "correctIndex": 0,
-      "explanation": "5 + 9 is 14, and 14 % 7 is 0 — fourteen is exactly two full weeks, so you land back on weekday 0, Monday. 7 and 14 are impossible outputs: % 7 only ever returns 0 through 6."
+      "correctIndex": 1,
+      "explanation": "100 % 6 gives the position within the repeating 6-second cycle (it's 4, so red). 100 // 6 counts how many full cycles have passed, 6 % 100 has the operands backwards, and 100 / 6 gives a decimal, not a cycle position."
     }
   ],
   "pedagogyRules": [
-    "Have the student walk each new modulo formula once by hand — on fingers or a drawn circle — predict the result, then run and compare, before they're allowed to trust it.",
-    "If the student asks a jump-ahead question (if statements, loops, lists), answer in one sentence — e.g. 'if turns these 0-or-1 results into decisions, coming soon' — and return to the current cycle problem.",
-    "If the student says they already know modulo, verify lightly: ask for 3 % 7, 14 % 7, and 13 % 2 with reasons; three exact answers means jump straight to the dinner-rotation check, no re-drill.",
-    "If the student is lost, drop cycles entirely and rebuild from pairing: have them compute 6 % 2, 7 % 2, 8 % 2, 9 % 2 in a row and say the 0-1-0-1 pattern aloud before any clock or weekday talk.",
-    "When the student is wrong but confident (e.g. insists 14 % 7 is 7, or that 3 % 7 errors), don't argue — run the single line together, read the output, and restate the 0-to-n-minus-1 range rule it demonstrates.",
-    "If the student wants to skip ahead, allow it after a first-try pass on the dinner-rotation check; otherwise revisit only the specific error they made — flipped parity or an out-of-range remainder.",
-    "If frustration appears, acknowledge it, then shrink to the clock-face image — big number in, position on the circle out — and do one tiny example like 10 % 7 together before returning.",
-    "If asked why this matters, answer in one line — even/odd checks, alternating row colors, weekday math, and round-robin turn-taking all collapse into a single % expression — then continue."
+    "Always anchor % in a concrete story (sharing cookies, weekdays, shift rotations) before showing bare numbers.",
+    "When the student mixes up which remainder means even, have them run print(4 % 2) and print(5 % 2) themselves rather than telling them the answer.",
+    "If the student reaches for an if/elif chain for a cycle, ask 'what happens on day 1000?' to expose that the chain never ends, then reintroduce %.",
+    "If the student says they already know parity checks, respect it: skip straight to the cycle check (dish-washing rotation) to verify at the harder outcome, and advance if they nail it.",
+    "Keep the student in the editor: ask them to print x % n for several x values and describe the repeating pattern they see, instead of confirming results for them.",
+    "One idea per turn: teach parity fully before introducing cycles; never present both in the same explanation turn."
   ],
   "failurePlaybooks": [
     {
-      "scenarioId": "SWE-02",
-      "failureMode": "Tutor misdiagnoses a modulo mistake",
-      "correctMove": "Check the two classic causes in order: an answer equal to the divisor means the 0-to-n-minus-1 range rule was missed; a flipped even/odd verdict means the 0/1 mapping is reversed. Name the one that actually happened — don't guess at anything else."
+      "scenarioId": "SWE-01",
+      "failureMode": "Validated wrong work",
+      "correctMove": "Only confirm a parity or cycle answer if the actual run output matches the expected value (e.g., 100 % 3 must print 1, so day 100 is Ben). If output differs, name the mismatch instead of praising."
     },
     {
-      "scenarioId": "SWE-01",
-      "failureMode": "Tutor waves through an off-by-one cycle answer",
-      "correctMove": "Verify with the rebuild before confirming: for 17 % 3, five full rotations remove 15 and leave 2 — if the student says 1 or 3, walk the circle with them and show where the count actually lands; never accept 'close enough'."
+      "scenarioId": "SWE-02",
+      "failureMode": "Tutor factual/syntax error",
+      "correctMove": "Read the real interpreter output. If the student sees ZeroDivisionError from x % 0, name division by zero exactly; do not invent a different cause or misstate what % returns."
     },
     {
       "scenarioId": "SWE-06",
-      "failureMode": "Scaffolding gap — tutor dumps the finished formula",
-      "correctMove": "Give one hint from the ladder at a time and let the student run code between hints; never hand over (start + steps) % n assembled — the divisor and the total count are theirs to find."
+      "failureMode": "Scaffolding gap (too fast)",
+      "correctMove": "If the student is lost on cycles, drop back one rung: have them print x % 3 for x = 0..8 and say the pattern out loud before touching the shift-rotation problem. One hint from the ladder at a time."
     },
     {
-      "scenarioId": "SWE-03",
-      "failureMode": "Challenge-answer leak",
-      "correctMove": "During the parity and rotation checks, never type the expression or say the resulting number first — ask 'how long is one full cycle?' and let the student pick the divisor and produce the line."
+      "scenarioId": "SWE-04",
+      "failureMode": "Student jumps ahead or goes off-topic (e.g., asks about negative numbers, hashing, or loops)",
+      "correctMove": "Answer in one sentence (e.g., 'Python keeps -1 % 7 positive, it's 6 — handy, and we'll use it later'), then steer back: 'First, let's nail the day-100 rotation — what's 100 % 3?'"
+    },
+    {
+      "scenarioId": "BIZ-01",
+      "failureMode": "Student frustrated or wants to skip ('this is just math trivia')",
+      "correctMove": "Acknowledge the feeling, give one real payoff in a sentence (every 'every Nth item' feature — zebra-striped tables, round-robin scheduling — is one % expression), then offer the smallest concrete step: print(100 % 3)."
     }
   ],
   "chunks": [
     {
-      "id": "py101-w2-modulo-in-practice-chunk-1",
-      "text": "x % 2 is the parity test: it returns the leftover after grouping x into pairs. Even numbers pair perfectly, so 10 % 2 is 0; odd numbers leave one over, so 7 % 2 is 1. Those are the only two possible results, so x % 2 == 0 means even and x % 2 == 1 means odd — print(10 % 2 == 0) shows True.",
+      "id": "py101-w2-chunk-1",
+      "text": "x % 2 is the remainder when x is divided by 2, and it detects parity: even numbers leave remainder 0, odd numbers leave remainder 1. So the standard test is: if n % 2 == 0: print(\"even\") else: print(\"odd\"). Example: 42 % 2 is 0 (even), 13 % 2 is 1 (odd). It works because 'even' literally means 'divisible by 2 with nothing left over'.",
       "embedding": null
     },
     {
-      "id": "py101-w2-modulo-in-practice-chunk-2",
-      "text": "x % n maps any count onto a repeating cycle of length n, returning a position from 0 to n - 1. Full cycles vanish because they're exact multiples of n: 14 % 7 is 0 — two complete weeks land you back at the start — and the result can never equal n itself.",
+      "id": "py101-w2-chunk-2",
+      "text": "For any positive cycle length n, x % n always returns a value from 0 to n-1, and as x counts up the results repeat: 0, 1, ..., n-1, 0, 1, ... For example, x % 3 for x = 0..6 gives 0, 1, 2, 0, 1, 2, 0. This maps any count onto a position in a repeating cycle, like mapping day numbers onto weekdays: day 10 in a 7-day week is 10 % 7 = 3.",
       "embedding": null
     },
     {
-      "id": "py101-w2-modulo-in-practice-chunk-3",
-      "text": "When the count is smaller than the cycle, % returns it unchanged: 3 % 7 is 3, because zero full weeks have passed and you're simply on day 3. No error, no wraparound needed yet — a small count is already its own position.",
+      "id": "py101-w2-chunk-3",
+      "text": "Modulo replaces branching for repeating patterns. Instead of if day == 0 or day == 3 or day == 6 ... (which never ends), one condition day % 3 == 0 catches every third day. Worked example — three workers rotating shifts: workers = [\"Ana\", \"Ben\", \"Cleo\"]; print(workers[100 % 3]) prints Ben, because 100 % 3 is 1 and Ben is at index 1. One expression handles any day, forever.",
       "embedding": null
     },
     {
-      "id": "py101-w2-modulo-in-practice-chunk-4",
-      "text": "The cycle formula is position = (start + steps) % n. Worked example — today is weekday 2 and you want 10 days ahead: (2 + 10) % 7 is 5. The same one-line formula works for 10 or 10000 days, because % discards all the completed weeks at once instead of one subtraction at a time.",
+      "id": "py101-w2-chunk-4",
+      "text": "% and // are partners: x // n is how many whole groups of n fit into x, and x % n is what's left over. For 10 and 3: 10 // 3 is 3 (three full groups) and 10 % 3 is 1 (one left over), and always x == (x // n) * n + (x % n). The right-hand side of % must never be 0 — x % 0 raises ZeroDivisionError.",
       "embedding": null
     },
     {
-      "id": "py101-w2-modulo-in-practice-chunk-5",
-      "text": "Rotating turns: with 3 people taking turns, turn number t belongs to position t % 3. Worked example — dinner number 17: 17 % 3 is 2, because 5 full rotations cover 15 dinners and 2 steps remain. 'Every Nth item' is the same idea in reverse: count % 3 == 0 is True exactly on every 3rd count, replacing an endless list of cases with one expression.",
+      "id": "py101-w2-chunk-5",
+      "text": "In Python, x % n takes the sign of n, so with a positive n the result is always a valid cycle position even for negative x: -1 % 7 is 6, meaning 'one step before day 0 lands on day 6'. This makes modulo safe for wrap-around logic like stepping backwards through a rotation.",
       "embedding": null
     }
   ],
   "celebration": {
-    "headline": "% just became your pattern detector.",
-    "recap": "You used x % 2 to split the world into even and odd — and explained why 0 and 1 are the only possible verdicts — then wrapped endless counts onto circles: weekdays with % 7, rotating turns with % 3, one formula instead of a ladder of cases.",
-    "unlocked": "Next: rounding and money format — round() and f-strings make your float answers look like real prices."
+    "headline": "You turned remainders into a superpower.",
+    "recap": "You used x % 2 to detect even and odd, and x % n to place any count into a repeating cycle — replacing endless if-chains with one clean expression.",
+    "unlocked": "Next: combine these tests with conditionals and loops to build programs that make decisions on their own."
   },
   "summaryBullets": [
-    "You can now use x % 2 to detect parity and explain why it works.",
-    "You can now apply modulo to cyclic positions (e.g., every Nth item, rotating shifts) to simplify branching.",
-    "You understand using % as a pattern tool: x % 2 for even/odd, and x % n to wrap endless counts onto repeating cycles like weekdays and rotating shifts."
+    "You can now test any number for even or odd with n % 2 and explain why remainder 0 means even.",
+    "You can now map any count onto a repeating cycle with x % n, like finding which weekday day 100 is.",
+    "You can now pick 'every Nth item' with one condition like i % 3 == 0 instead of an endless if-chain.",
+    "You can now assign rotating turns (shifts, playlists, dish duty) by indexing a list with count % length."
+  ],
+  "openingLine": "Hey {name} — quick puzzle: three friends rotate dish duty forever, and I can tell you who washes on day one million with a single line of code. Want to see the trick? First, what do you think 7 % 2 equals?",
+  "bridgeFromPreviousLesson": "Last time you split numbers into quotient and remainder with // and %, and today that remainder becomes the star — it detects even and odd and handles anything that repeats in a cycle.",
+  "dialogueExemplars": [
+    {
+      "title": "Wrong-but-confident about parity",
+      "turns": [
+        {
+          "role": "student",
+          "text": "Easy — if n % 2 == 1, the number is even, because 1 means true."
+        },
+        {
+          "role": "tutor",
+          "text": "I love the confidence, and you're one flip away. Remember, % gives the leftover after dividing, not a true/false flag. Type print(4 % 2) and print(5 % 2) in the editor and press Run — what do you get?"
+        },
+        {
+          "role": "student",
+          "text": "Oh... 4 % 2 is 0 and 5 % 2 is 1."
+        },
+        {
+          "role": "tutor",
+          "text": "Exactly — even numbers divide by 2 cleanly, so nothing is left over. That's why the even test is n % 2 == 0. Can you now write the odd test?"
+        }
+      ]
+    },
+    {
+      "title": "Why do I even need modulo?",
+      "turns": [
+        {
+          "role": "student",
+          "text": "Honestly, when would I ever use %? It feels like math class trivia."
+        },
+        {
+          "role": "tutor",
+          "text": "Fair question — here's a real one. Every striped table you've seen shades every other row, and that's literally row % 2 == 0 deciding the color. Same trick schedules rotating shifts and loops playlists. Want to try it on something concrete?"
+        },
+        {
+          "role": "student",
+          "text": "Okay, sure."
+        },
+        {
+          "role": "tutor",
+          "text": "Tiny task: a playlist loops 5 songs numbered 0 to 4. Type print(12 % 5) in the editor and press Run — which song is playing on play number 12?"
+        },
+        {
+          "role": "student",
+          "text": "It printed 2, so song 2."
+        },
+        {
+          "role": "tutor",
+          "text": "That's it — one expression, no if-statements, works for play number 12 or 12 million. Ready to use it on a three-person dish rotation?"
+        }
+      ]
+    },
+    {
+      "title": "I already know this, can we skip?",
+      "turns": [
+        {
+          "role": "student",
+          "text": "I already know even/odd checks. Can we move on?"
+        },
+        {
+          "role": "tutor",
+          "text": "Great — then let's jump straight to the fun part. Ana, Ben, and Cleo wash dishes in rotation, Ana on day 0. In the editor, use one % expression to print who washes on day 100 — no if-statements allowed. What do you get?"
+        },
+        {
+          "role": "student",
+          "text": "workers = [\"Ana\", \"Ben\", \"Cleo\"] then print(workers[100 % 3]) — it printed Ben."
+        },
+        {
+          "role": "tutor",
+          "text": "Perfect, and you skipped an infinite if-chain to do it. You've got both outcomes down, so let's wrap this one up — want a quick recap first?"
+        }
+      ]
+    }
   ]
 }

@@ -11,200 +11,265 @@
     ],
     "tutorInstructions": null
   },
-  "concept": "Printing several values at once: commas, automatic newlines, and combining text with + and *",
+  "concept": "Combining values in print(): commas, the newline behavior, and the + and * operators on strings",
   "prerequisites": [
-    "Writing your first program: calling print() with a single quoted string"
+    "py101-w1-writing-your-first-program"
   ],
   "bloom": "apply",
   "explanations": [
     {
       "level": "eli5",
-      "text": "So far print showed one thing. Now it gets power-ups. Power-up one: give print several things separated by commas, and it shows them all with a space between — even mixing words and numbers. Power-up two: + glues two pieces of text into one, and * repeats text, so \"ha\" * 3 becomes hahaha. And one house rule: every print starts a fresh line, like pressing Enter after each one."
+      "text": "You already know print shows one thing. Now the power-ups: put commas between things and print shows them all, like print(\"Score:\", 100). Every print starts a fresh line, like hitting Enter after each one. And + glues two texts together while * repeats a text — \"ha\" * 3 makes hahaha."
     },
     {
       "level": "standard",
-      "text": "print() accepts multiple arguments separated by commas: print(\"Score:\", 10) shows Score: 10 — Python converts each value to text and puts a single space between them, so mixing strings and numbers just works. Every print() call ends with a newline, which is why two print calls always produce two lines. Separately, + joins two strings into one (\"Py\" + \"thon\" is \"Python\") and * repeats a string a whole number of times (\"ha\" * 3 is \"hahaha\"). The catch: + only works when both sides are strings — \"Score: \" + 10 is an error."
+      "text": "print() accepts several arguments separated by commas and displays them on one line with a space between each, so print(\"Age:\", 25) shows Age: 25. Each print() call ends its line, so two prints give two lines. Separately, + joins two strings into one — \"Hello, \" + \"Ada\" makes \"Hello, Ada\" — and * repeats a string a number of times — \"-\" * 5 makes \"-----\". One rule: + only joins string with string, so to glue a number onto text you write str(25) first, or just use commas instead."
     },
     {
       "level": "deep",
-      "text": "Mechanically: print() converts each argument to text with str(), writes them separated by sep (a single space by default), then writes end (a newline, \"\\n\", by default) — that default end is exactly why printing is always on a new line. The operators are pickier than the comma: + between two strings concatenates, + between two numbers adds, and mixing them — print(\"Score: \" + 10) — raises TypeError: can only concatenate str (not \"int\") to str. You fix that with str(10) or by using a comma instead. * between a string and an integer repeats the string, which is handy for quick dividers like print(\"=\" * 20)."
+      "text": "When print() receives multiple arguments, it converts each one to text and writes them separated by a single space (the default separator), then writes a newline character — that newline is why every print starts a new line. The operators are different: + is string concatenation and produces a brand-new string, but both sides must be strings, so \"Age: \" + 25 raises TypeError: can only concatenate str (not \"int\") to str — fix it with \"Age: \" + str(25). The * operator repeats a string: \"ab\" * 3 evaluates to \"ababab\". Commas convert for you automatically; + and * give you exact control over the resulting string with no automatic spaces."
     }
   ],
   "examples": [
-    "print(\"Score:\", 10)",
-    "print(\"Py\" + \"thon\")",
-    "print(\"ha\" * 3)",
-    "print(\"=\" * 20)",
-    "print(\"first line\")\nprint(\"second line\")"
+    "print(\"Score:\", 100)",
+    "print(\"Hello, \" + \"world!\")",
+    "print(\"=\" * 10)",
+    "print(\"Level \" + str(3))"
   ],
   "hintLadder": [
     {
       "order": 1,
-      "text": "First decide: do you want print to handle the spacing for you, or do you want to build one combined string yourself?"
+      "text": "You want several values in one print — what single character separates arguments inside the parentheses?"
     },
     {
       "order": 2,
-      "text": "Commas inside print separate values, and Python adds a single space between them — numbers are fine there."
+      "text": "Remember: text needs quotes, numbers don't. Check each value inside print() — is each one the right kind?"
     },
     {
       "order": 3,
-      "text": "If you use + instead, both sides must be strings — a bare number next to + will error unless you wrap it in str()."
+      "text": "If you're gluing with +, both sides must be strings. Is there a number that needs str() around it, or could a comma do the job?"
     },
     {
       "order": 4,
-      "text": "Compare your output to the target character by character: is every space and line break exactly where it should be?"
+      "text": "Run it and read the output line by line — commas add a space for you, + does not. Which one gives the spacing you want here?"
     }
   ],
   "misconceptions": [
     {
-      "trigger": "Joins a string and a number with +, e.g. print(\"Score: \" + 10)",
-      "correction": "+ only concatenates strings. Either let a comma do the work — print(\"Score:\", 10) — or convert first: print(\"Score: \" + str(10))."
+      "trigger": "Writes \"Age: \" + 25 and expects it to work",
+      "correction": "+ only joins string with string. Either convert the number first — \"Age: \" + str(25) — or use a comma, print(\"Age:\", 25), which converts it for you."
     },
     {
-      "trigger": "Expects two print calls to continue on the same line",
-      "correction": "Every print call ends with a newline by default, so two calls always make two lines. (There is an end parameter to change that, but it comes later — for now, one print equals one line.)"
+      "trigger": "Expects two print() calls to appear on the same line",
+      "correction": "Every print() ends its line, like pressing Enter. Two prints always give two lines; to keep values on one line, put them in a single print separated by commas."
     },
     {
-      "trigger": "Expects commas to join values with no space, e.g. thinks print(\"Hello\", 5) shows Hello5",
-      "correction": "The comma makes print insert a single space: Hello 5. If you need pieces glued with no space, build one string with + instead."
+      "trigger": "Thinks 3 * \"hi\" multiplies math-style or should error",
+      "correction": "With a string, * means repeat: \"hi\" * 3 (or 3 * \"hi\") makes hihihi. It's repetition, not arithmetic."
     },
     {
-      "trigger": "Multiplies a string by a quoted number, e.g. \"ha\" * \"3\"",
-      "correction": "String repetition needs a real integer on one side: \"ha\" * 3 works, but \"ha\" * \"3\" is a TypeError because both sides are strings."
+      "trigger": "Adds manual spaces with commas, e.g. print(\"Name:\", \" Ada\") and gets a double space",
+      "correction": "Commas already insert one space between values, so don't add your own. Write print(\"Name:\", \"Ada\") and let print handle the spacing."
     },
     {
-      "trigger": "Expects print(2 + 3) to show 23",
-      "correction": "Between two numbers, + does math, so print(2 + 3) shows 5. To get 23 as glued text you would need two strings: print(\"2\" + \"3\")."
-    },
-    {
-      "trigger": "Confidently claims + and comma do the same thing inside print",
-      "correction": "They differ twice: the comma adds a space and happily mixes strings with numbers; + adds nothing and demands strings on both sides. Run print(\"a\", \"b\") next to print(\"a\" + \"b\") to see it."
+      "trigger": "Believes commas and + are interchangeable and produce identical output",
+      "correction": "Close, but not identical: commas add a space between values and accept any type; + adds no space and requires strings on both sides. Try print(\"a\", \"b\") versus print(\"a\" + \"b\") to see the difference."
     }
   ],
   "checks": [
     {
-      "id": "py101-w1-print-powerups-mixed",
-      "prompt": "Write a single print statement that outputs exactly: Score: 10 points",
+      "id": "py101-w1-power-commas",
+      "prompt": "Write one line that prints: Score: 100 — using a comma to combine the text and the number.",
       "acceptanceCriteria": [
-        "Uses one print call",
-        "Combines text and the number 10 using commas, or + with correct str() conversion",
-        "Output matches exactly, including single spaces: Score: 10 points",
-        "Runs without errors"
+        "Uses a single print() call",
+        "Passes two arguments separated by a comma: a string and the number 100 (not in quotes)",
+        "Running it outputs exactly Score: 100"
       ],
-      "passFeedback": "Clean — you mixed text and a number in one line, with the spacing exactly right.",
-      "failFeedback": "Check two things: is every value separated correctly (comma, or + with all strings), and does your spacing match the target character for character?"
+      "passFeedback": "Exactly right — the comma joined text and a number in one line, and print added the space for you.",
+      "failFeedback": "Check three things: one print, a comma between the two values, and 100 without quotes so it's a real number. Then run it."
     },
     {
-      "id": "py101-w1-print-powerups-newline",
-      "prompt": "Predict before running: what exactly appears, and on how many lines?\nprint(\"ha\" * 3)\nprint(\"done\")",
+      "id": "py101-w1-power-plus-star",
+      "prompt": "Write two lines: first print a divider made of ten = signs using *, then print the word Welcome joined from \"Wel\" + \"come\".",
       "acceptanceCriteria": [
-        "Predicts hahaha as the first line",
-        "Predicts done as a second, separate line",
-        "Explains that each print call ends with a newline"
+        "First line uses string repetition, e.g. print(\"=\" * 10), and outputs ==========",
+        "Second line uses + to join two string pieces and outputs Welcome",
+        "The two results appear on two separate lines"
       ],
-      "passFeedback": "Exactly — * repeated the string, and each print took its own line.",
-      "failFeedback": "Run it and look closely: \"ha\" * 3 builds hahaha, and because every print ends with a newline, done lands on its own line."
+      "passFeedback": "Beautiful — * built the divider, + glued the pieces, and each print took its own line.",
+      "failFeedback": "Almost — make sure the = is in quotes times 10, and that + has quoted strings on both sides. Run it and compare the two output lines."
     }
   ],
   "practice": [
     {
       "kind": "coding",
-      "prompt": "Print a menu banner: a line of 10 equals signs, then the word Menu, then another line of 10 equals signs. Use the * operator for the equals lines — don't type 10 of them by hand.",
-      "starterCode": "",
+      "prompt": "Make a tiny score banner: line 1 is a divider of twelve - characters (use *), line 2 prints your name and the number 100 in one print using a comma, line 3 is the same divider again.",
+      "starterCode": "# line 1: divider\n# line 2: name and score\n# line 3: divider\n",
       "acceptanceCriteria": [
-        "Uses \"=\" * 10 (string times integer) for the divider lines",
-        "Produces exactly three lines of output with Menu on the middle line",
-        "Runs without errors"
+        "Uses \"-\" * 12 (or equivalent string repetition) for both dividers",
+        "Middle line is one print() with a string and the number 100 separated by a comma",
+        "Runs without errors and produces exactly three lines of output"
       ]
     },
     {
       "kind": "open",
-      "prompt": "In your own words: when printing a message that includes a number, when would you reach for commas, and when for +?",
+      "prompt": "In your own words: why does print(\"Age: \" + 25) fail, but print(\"Age:\", 25) works?",
       "rubric": [
-        "Commas: mix strings and numbers with no conversion, and print adds the spaces for you",
-        "+: requires everything to be a string (str() for numbers) but gives exact control over spacing"
+        "Says + requires strings on both sides (mixing string and number raises an error)",
+        "Says the comma version works because print converts each argument to text itself",
+        "Bonus: mentions str(25) as the fix if you still want to use +"
       ]
     },
     {
       "kind": "closed",
-      "prompt": "What does print(\"Hello\" + 5) do?",
+      "prompt": "What does print(\"ha\" * 3) output?",
       "options": [
-        "Prints Hello 5",
-        "Prints Hello5",
-        "Raises a TypeError",
-        "Prints 5Hello"
+        "ha ha ha",
+        "hahaha",
+        "ha3",
+        "an error, because you can't multiply text"
       ],
-      "correctIndex": 2,
-      "explanation": "+ cannot join a string and a number — Python raises TypeError: can only concatenate str (not \"int\") to str. Use print(\"Hello\", 5) or print(\"Hello\" + str(5))."
+      "correctIndex": 1,
+      "explanation": "* repeats a string with no spaces added, so \"ha\" * 3 is the single string hahaha. Spaces would only appear if they were inside the quotes."
     }
   ],
   "pedagogyRules": [
-    "Before every run, ask the student to predict the exact output — including spaces and line count — then compare against what actually appears.",
-    "If the student asks a jump-ahead question (f-strings, input(), loops), answer in one sentence, note that it arrives soon (f-strings in Week 2), and return to commas, + and *.",
-    "If the student says they already know print, skip the explanation: ask them to predict print(\"ha\" * 3) and print(\"Hi\" + 5); two correct predictions with reasons means go straight to the check.",
-    "If the student is lost, shrink to one power-up: have them run print(\"Score:\", 10), see the space appear, and only then introduce + and * one at a time.",
-    "When the student is wrong but confident, don't argue — have them run the exact line and read the real output or error aloud, then name the one rule it demonstrates.",
-    "If the student wants to skip ahead, allow it once they pass the Score: 10 points check on the first try; otherwise fix one thing first.",
-    "If a TypeError causes frustration, acknowledge it first, then reframe: the error is Python pointing at exactly one operand that needs converting — fix that one thing.",
-    "If asked why this matters, answer in one line — nearly every program reports results by mixing words and numbers (scores, prices, progress messages) — then continue the lesson."
+    "Teach one power-up at a time — commas, then the newline behavior, then + and * — and have the student run code after each before introducing the next.",
+    "When the student hits the TypeError from string + number, celebrate it as a discovery: read the error aloud, then guide them to str() or a comma — don't just hand over the fixed line.",
+    "If the student says they already know print, respect it: skip re-explaining and go straight to the closed check on \"ha\" * 3 or the string+number trap to verify, then advance.",
+    "Contrast, don't lecture: ask the student to run print(\"a\", \"b\") and print(\"a\" + \"b\") side by side and tell YOU the difference in spacing.",
+    "If the student asks about loops, input(), or f-strings, give a one-line honest answer, promise it's coming, and steer back to finishing the banner exercise.",
+    "Keep every code moment in the app: 'type it in the editor and press Run' — never confirm output the student hasn't actually run."
   ],
   "failurePlaybooks": [
     {
-      "scenarioId": "SWE-02",
-      "failureMode": "Tutor misdiagnoses a string/number combination error",
-      "correctMove": "Read the actual message. TypeError: can only concatenate str (not \"int\") to str means a non-string sits next to + — say exactly that and point at the operand; never invent a different cause."
+      "scenarioId": "SWE-01",
+      "failureMode": "Validated wrong work",
+      "correctMove": "Only confirm success after the student runs the code and the Output panel matches the target exactly — including spacing and line breaks. print(\"a\"+\"b\") showing ab is NOT correct if the task asked for a b."
     },
     {
-      "scenarioId": "SWE-01",
-      "failureMode": "Tutor validates output that doesn't match the target",
-      "correctMove": "Only confirm success when spacing and line breaks match exactly. Hello5 is not Hello 5, and two values on one line is not two lines — if it differs, say so and point at the difference."
+      "scenarioId": "SWE-02",
+      "failureMode": "Tutor factual/syntax error",
+      "correctMove": "If the output shows TypeError: can only concatenate str (not \"int\") to str, name that exact cause — a number on one side of + — and never invent another reason like missing quotes elsewhere."
     },
     {
       "scenarioId": "SWE-06",
-      "failureMode": "Scaffolding gap — tutor dumps the full solution",
-      "correctMove": "Give one hint from the ladder at a time and let the student run code between hints; never write the complete print statement for them up front."
+      "failureMode": "Scaffolding gap (too fast)",
+      "correctMove": "If the student is lost, drop back to one value in one print, get a clean run, then add exactly one power-up (a comma) and run again. One new idea per run, one hint per attempt."
     },
     {
-      "scenarioId": "SWE-03",
-      "failureMode": "Challenge-answer leak",
-      "correctMove": "During checks and practice, never type the final working line — guide with the ladder and let the student produce the statement themselves."
+      "scenarioId": "SWE-04",
+      "failureMode": "Student frustrated or wants to skip",
+      "correctMove": "Acknowledge the feeling in one sentence, shrink the task to a single guaranteed win — print(\"=\" * 5) — let them run it, then rebuild from that success rather than pushing the full exercise."
     }
   ],
   "chunks": [
     {
-      "id": "py101-w1-print-powerups-chunk-1",
-      "text": "print() can take several values separated by commas: print(\"Score:\", 10) shows Score: 10. Python converts each value to text and inserts a single space between them, so strings and numbers can be mixed freely with commas.",
+      "id": "py101-w1-powerups-chunk-1",
+      "text": "print() can display several values at once: separate them with commas inside the parentheses, and print shows them on one line with a single space between each. Commas accept any mix of types — print(\"Score:\", 100) outputs Score: 100 — because print converts each argument to text automatically. Don't add your own spaces around commas or you'll get doubles.",
       "embedding": null
     },
     {
-      "id": "py101-w1-print-powerups-chunk-2",
-      "text": "Printing is always on a new line: every print() call ends with a newline by default. Worked example — print(\"first line\") then print(\"second line\") produces two separate lines, because each call finishes by moving to the next line.",
+      "id": "py101-w1-powerups-chunk-2",
+      "text": "Every print() call ends by moving to a new line, like pressing Enter. So print(\"one\") followed by print(\"two\") produces two lines. If you want several values on the same line, put them in a single print separated by commas — separate print calls can never share a line by default.",
       "embedding": null
     },
     {
-      "id": "py101-w1-print-powerups-chunk-3",
-      "text": "The + operator joins strings: \"Py\" + \"thon\" makes \"Python\", with nothing added in between. Both sides must be strings — \"Score: \" + 10 raises TypeError: can only concatenate str (not \"int\") to str. Fix it with str(10), or use a comma inside print instead.",
+      "id": "py101-w1-powerups-chunk-3",
+      "text": "The + operator joins (concatenates) two strings into one new string with no space added: \"Hello, \" + \"Ada\" makes \"Hello, Ada\". Both sides must be strings — \"Age: \" + 25 raises TypeError: can only concatenate str (not \"int\") to str. Fix it by converting the number with str(), as in \"Age: \" + str(25), or by using a comma instead: print(\"Age:\", 25).",
       "embedding": null
     },
     {
-      "id": "py101-w1-print-powerups-chunk-4",
-      "text": "The * operator repeats a string a whole number of times: \"ha\" * 3 makes \"hahaha\", and print(\"=\" * 20) prints a divider of 20 equals signs. One side must be a string and the other an integer — \"ha\" * \"3\" is a TypeError.",
-      "embedding": null
-    },
-    {
-      "id": "py101-w1-print-powerups-chunk-5",
-      "text": "Choosing the right tool: use commas for quick output that mixes text and numbers (print adds the spaces), use + when you need exact control of spacing and everything is a string, and use * to repeat text. Worked example: print(\"=\" * 10) then print(\"Total:\", 3 + 4) prints a divider line followed by Total: 7.",
+      "id": "py101-w1-powerups-chunk-4",
+      "text": "The * operator repeats a string: \"ha\" * 3 makes \"hahaha\" and \"=\" * 10 makes \"==========\" — great for dividers and banners. It works with a string and a whole number in either order. Worked example: print(\"-\" * 12) then print(\"Ada scored\", 100) then print(\"-\" * 12) outputs a three-line banner with the score framed by dashes.",
       "embedding": null
     }
   ],
   "celebration": {
-    "headline": "print() just got superpowers.",
-    "recap": "You printed several values with commas, saw that every print takes its own line, glued strings with +, repeated them with *, and learned why \"Score: \" + 10 fails but print(\"Score:\", 10) works.",
-    "unlocked": "Next: variables — give a value a name so you can reuse it anywhere."
+    "headline": "print() just leveled up in your hands.",
+    "recap": "You combined text and numbers with commas, saw why every print takes its own line, glued strings with +, and built repeats and dividers with *.",
+    "unlocked": "Next: variables — store a value once and reuse it everywhere."
   },
   "summaryBullets": [
-    "You can now print multiple values using commas.",
-    "You can now understand that printing is always on a new line.",
-    "You can now print multiple text and numeric values using the + and * operators."
+    "You can now print several values in one line using commas, mixing text and numbers freely.",
+    "You can now predict exactly how many lines your output will have, because every print() ends with a new line.",
+    "You can now glue strings together with + and convert numbers with str() when + needs them.",
+    "You can now build dividers and repeated patterns instantly with the * operator, like \"=\" * 10.",
+    "You can now choose the right tool on purpose: commas for easy spacing, + and * for exact control."
+  ],
+  "openingLine": "Nice to see you back, {name} — that first print() you ran was just the beginning. Today we unlock its power-ups: printing several things at once, gluing text together, and repeating it — small tricks that already point toward {goal}. Quick warm-up: what do you think print(\"ha\" * 3) will show?",
+  "bridgeFromPreviousLesson": "Last time you wrote print(\"Hello, world!\") and watched it appear in the Output panel — now we'll make that same print() do three things at once instead of one.",
+  "dialogueExemplars": [
+    {
+      "title": "Confidently wrong: string plus number",
+      "turns": [
+        {
+          "role": "student",
+          "text": "Easy — print(\"Age: \" + 25) will print Age: 25. Plus just adds them."
+        },
+        {
+          "role": "tutor",
+          "text": "I love the confidence — let's test it for real. Type it in the editor and press Run. What does the Output panel say?"
+        },
+        {
+          "role": "student",
+          "text": "It says TypeError: can only concatenate str (not \"int\") to str. So it broke?"
+        },
+        {
+          "role": "tutor",
+          "text": "It broke in the most useful way — Python is telling you + only joins string with string, and 25 is a number. You have two fixes: wrap it as str(25), or swap the + for a comma. Which one do you want to try first?"
+        }
+      ]
+    },
+    {
+      "title": "Why do I even need this?",
+      "turns": [
+        {
+          "role": "student",
+          "text": "Honestly, why do I need commas and + in print? One print worked fine yesterday."
+        },
+        {
+          "role": "tutor",
+          "text": "Fair question. Real programs almost never print fixed text — a game prints \"Score:\" next to a number that changes every second, and commas are how you put those together. Want to build a tiny version right now?"
+        },
+        {
+          "role": "student",
+          "text": "Sure, what do I do?"
+        },
+        {
+          "role": "tutor",
+          "text": "In the editor, type print(\"Score:\", 100) and press Run. What appears between the word and the number?"
+        }
+      ]
+    },
+    {
+      "title": "Absolute beginner: I don't know anything about coding",
+      "turns": [
+        {
+          "role": "student",
+          "text": "I have to be honest — I don't really know anything about coding. I'm nervous I'm already behind."
+        },
+        {
+          "role": "tutor",
+          "text": "You're not behind — you're exactly where everyone starts. Coding is just writing instructions the computer follows one line at a time, and you already ran one yesterday. Ready for the tiniest possible step?"
+        },
+        {
+          "role": "student",
+          "text": "Okay... what's the step?"
+        },
+        {
+          "role": "tutor",
+          "text": "Type print(\"hi\", 5) in the editor and press Run — just that. Then tell me: what showed up in the output?"
+        },
+        {
+          "role": "student",
+          "text": "It says hi 5. There's a space in the middle!"
+        },
+        {
+          "role": "tutor",
+          "text": "You just found today's first power-up all by yourself: the comma prints both things and adds that space for you. See — you're doing coding right now. Shall we try a second power-up?"
+        }
+      ]
+    }
   ]
 }

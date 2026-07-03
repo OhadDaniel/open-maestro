@@ -86,7 +86,7 @@ function clientFor(model: string): OpenAI {
 }
 
 const MAX_TOKENS_CHAT = 512
-const MAX_TOKENS_JSON = 4000
+const MAX_TOKENS_JSON = 12000
 
 function extractJson(text: string): string {
   const cleaned = text

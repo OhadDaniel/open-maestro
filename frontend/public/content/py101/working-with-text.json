@@ -12,201 +12,261 @@
     ],
     "tutorInstructions": null
   },
-  "concept": "Strings: the data type for text — creating them with quotes, combining them with +, and predicting exactly what prints",
+  "concept": "Strings as a data type: creating string variables with quotes, combining them with +, and predicting printed output",
   "prerequisites": [
-    "Introduction to variables: assigning a value to a name",
-    "print() basics: displaying a value on the screen"
+    "Writing and running a program with print()",
+    "Printing multiple values with commas and using + and * inside print()"
   ],
   "bloom": "apply",
   "explanations": [
     {
       "level": "eli5",
-      "text": "Computers sort information into kinds, like drawers: numbers in one, text in another. The kind is called a data type, and it decides what you're allowed to do — you can do math with numbers, and you can glue text together. Text in Python is called a string: any characters wrapped in quotes, like \"hello\" or 'hello'. And + glues strings: \"hip\" + \"po\" makes \"hippo\"."
+      "text": "Think of data types like containers in a kitchen: a jar for cookies, a bottle for juice. What's inside decides what you can do with it — you drink juice, you bite cookies. In Python, text lives in a container called a string. You make a string by putting text in quotes, like \"hello\", and you can glue two strings together with + to make a bigger one."
     },
     {
       "level": "standard",
-      "text": "A data type is a category of data that determines what you can do with it — the same + means math for numbers but gluing for text. Text values are strings, created by wrapping characters in matching quotes: name = \"Ava\" and name = 'Ava' make exactly the same string. + between two strings is called concatenation: it joins them exactly, adding nothing — not even a space. And printing a string variable shows its contents without the quotes, so after greeting = \"Hi \" + name, print(greeting) shows Hi Ava."
+      "text": "A data type is a category of data that determines what you can do with it. Text in Python is the string type. You create a string by wrapping characters in single quotes ('hi') or double quotes (\"hi\") — both work the same. You can store a string in a variable with =, like name = \"Ada\", and combine strings with the + operator: greeting = \"Hello, \" + name. Printing greeting shows Hello, Ada — the two pieces glued together exactly, including any spaces you typed."
     },
     {
       "level": "deep",
-      "text": "The type of a value decides how operators behave: + concatenates two strings but adds two numbers, which is why \"5\" + \"5\" is \"55\" while 5 + 5 is 10. Quotes are delimiters, not part of the value — single and double quotes produce identical strings ('Ava' == \"Ava\" is True), and you pick whichever avoids clashing with quotes inside the text, like \"It's fine\". Concatenation builds a new string character for character, so every space you want in the output must live inside one of the strings. Two failure modes to know: text without quotes (name = Ava) makes Python look up a variable called Ava and raise a NameError, and \"age is \" + 25 raises a TypeError because + won't mix strings and numbers."
+      "text": "Every value in Python has a type, and the type decides which operations are valid. For strings (type str), the + operator means concatenation: it produces a new string made of the left string's characters followed immediately by the right string's characters — no space is added unless one is inside the quotes. So \"Hello,\" + \"Ada\" gives \"Hello,Ada\", while \"Hello, \" + \"Ada\" gives \"Hello, Ada\". A variable like name = \"Ada\" is just a label pointing at that string, so print(name) shows the stored text Ada, not the word name. Trying to + a string with a number raises a TypeError, because the type determines what's allowed."
     }
   ],
   "examples": [
-    "first = \"Ada\"",
-    "last = 'Lovelace'",
-    "full = first + \" \" + last",
-    "print(full)"
+    "name = \"Ada\"\nprint(name)",
+    "first = \"Hello, \"\nsecond = \"world!\"\nprint(first + second)",
+    "pet = 'Rex'\nprint(\"My dog is called \" + pet)"
   ],
   "hintLadder": [
     {
       "order": 1,
-      "text": "How does Python tell text apart from code? Something has to wrap the text on both sides."
+      "text": "Text in Python must go inside quotes — check whether every piece of text you wrote is wrapped in ' or \"."
     },
     {
       "order": 2,
-      "text": "Assign quoted text to a name, like word = \"hello\" — the quotes must match on both ends."
+      "text": "To store the text, use a variable: write a name, then =, then the quoted text. What would that line look like?"
     },
     {
       "order": 3,
-      "text": "To combine, put + between two strings — and remember + adds nothing extra, not even a space."
+      "text": "To glue two strings together, put + between them. Remember: + adds no space by itself — where would a space need to live?"
     },
     {
       "order": 4,
-      "text": "Before running, read your expression left to right and write down the exact characters it builds — including every space."
+      "text": "Read your line left to right the way Python does: each quoted piece and each variable's stored text get joined in order. Now run it and compare to what you predicted."
     }
   ],
   "misconceptions": [
     {
-      "trigger": "Writes text without quotes, e.g. name = John",
-      "correction": "Without quotes, Python treats John as a variable name to look up and raises a NameError. Wrap the text in quotes: name = \"John\"."
+      "trigger": "Predicts that \"Hello,\" + \"Ada\" prints Hello, Ada with a space.",
+      "correction": "The + operator glues strings with nothing in between. To get a space, it must be inside the quotes: \"Hello, \" + \"Ada\"."
     },
     {
-      "trigger": "Mixes quote styles, e.g. name = 'John\"",
-      "correction": "The opening and closing quotes must match — both single or both double. name = 'John' and name = \"John\" both work; a mismatched pair is a syntax error."
+      "trigger": "Writes print(name) and expects it to print the word name, or writes print(\"name\") expecting it to print Ada.",
+      "correction": "Without quotes, name is a variable and Python prints what's stored inside it (Ada). With quotes, \"name\" is just the literal text name. Quotes mean literal text; no quotes means look up the variable."
     },
     {
-      "trigger": "Expects \"Hello\" + \"World\" to include a space",
-      "correction": "Concatenation is exact: it produces HelloWorld. Any space must be inside a string — \"Hello\" + \" \" + \"World\" or \"Hello \" + \"World\"."
+      "trigger": "Mixes quote styles, e.g. 'Hello\" or thinks single and double quotes make different strings.",
+      "correction": "Single and double quotes create identical strings — but each string must start and end with the SAME quote character: 'hi' or \"hi\", never 'hi\"."
     },
     {
-      "trigger": "Concatenates a string with a number, e.g. \"age is \" + 25",
-      "correction": "+ needs strings on both sides, so this raises a TypeError. Convert first — \"age is \" + str(25) — or use a comma inside print: print(\"age is\", 25)."
+      "trigger": "Tries \"Age: \" + 30 and is confused by the error.",
+      "correction": "That's the data type idea in action: + between a string and a number isn't allowed, so Python raises a TypeError. Make both sides strings — \"Age: \" + \"30\" — or use a comma inside print like you did last lesson."
     },
     {
-      "trigger": "Thinks print(greeting) will show the word greeting, or show the value with quotes around it",
-      "correction": "print shows the value the variable holds, not the variable's name and not the quotes. If greeting = \"Hi Ava\", then print(greeting) shows exactly: Hi Ava."
-    },
-    {
-      "trigger": "Confidently claims single and double quotes create different kinds of strings",
-      "correction": "They are identical — 'Ava' == \"Ava\" is True. The choice is convenience: use double quotes when the text contains an apostrophe, like \"It's fine\"."
-    },
-    {
-      "trigger": "Expects \"5\" + \"5\" to give 10",
-      "correction": "Both values are strings, so + concatenates: the result is \"55\". This is data types in action — the type decides what + does. (Numbers get their own lesson next.)"
+      "trigger": "Writes name = Ada without quotes.",
+      "correction": "Without quotes, Python treats Ada as another variable to look up and errors because it doesn't exist. Wrap the text: name = \"Ada\"."
     }
   ],
   "checks": [
     {
-      "id": "py101-w1-text-full-name",
-      "prompt": "Create two string variables, firstName and lastName, and use + to print the full name with exactly one space between the parts.",
+      "id": "py101-w1-string-variable",
+      "prompt": "Create a variable called city that stores the name of a city you'd love to visit, then print it.",
       "acceptanceCriteria": [
-        "Both variables are assigned quoted strings",
-        "Uses + to concatenate, including an explicit \" \" for the space",
-        "Prints the full name with exactly one space between first and last name",
-        "Runs without errors"
+        "Assigns a quoted string to a variable named city",
+        "The string uses matching quotes (both single or both double)",
+        "Calls print(city) without quotes around the variable name",
+        "Running it outputs the city name"
       ],
-      "passFeedback": "That's real string-building — you controlled every character, space included.",
-      "failFeedback": "Check the quotes on both variables, and remember + adds nothing by itself — the space has to be a string like \" \" in the middle."
+      "passFeedback": "You stored text in a variable and printed it back — that's a real string variable at work.",
+      "failFeedback": "Check two things: the text must be in matching quotes when you store it, and print(city) needs no quotes so Python looks up the variable. Fix and run again."
     },
     {
-      "id": "py101-w1-text-predict",
-      "prompt": "Predict before running — what exactly does this show?\ns = \"5\" + \"5\"\nprint(s)",
+      "id": "py101-w1-concat-greeting",
+      "prompt": "Make two variables, first = \"Good \" and second = \"morning\", then print them combined with + so the output is exactly: Good morning",
       "acceptanceCriteria": [
-        "Predicts the output 55",
-        "Explains that both values are strings, so + concatenates instead of adding",
-        "Connects it to the idea that the data type determines what an operation does"
+        "Defines both variables as quoted strings",
+        "Uses the + operator to combine them",
+        "Running it outputs exactly Good morning (with one space, which comes from inside a string)"
       ],
-      "passFeedback": "Exactly — same + symbol, different type, different behavior. That's what a data type means.",
-      "failFeedback": "Look at the quotes: \"5\" is text, not a number. + between two strings glues them, so you get 55 — the type decides what + does."
+      "passFeedback": "Concatenation unlocked — you built one string out of two, and the space landed exactly where you put it.",
+      "failFeedback": "Almost — remember + adds no space of its own. Is the space inside one of your quoted strings? Run it and check the output character by character."
     }
   ],
   "practice": [
     {
       "kind": "coding",
-      "prompt": "Create a variable animal with any animal name and a variable sound with the noise it makes. Using + only, print a full sentence like: The cat says meow — and mind the spaces.",
-      "starterCode": "",
+      "prompt": "Create a variable animal with your favorite animal, and a variable sound with the noise it makes. Then use + to print one sentence like: The dog says woof (build it from strings and your two variables).",
+      "starterCode": "animal = \nsound = \nprint(\"The \" + animal + \" says \" + sound)",
       "acceptanceCriteria": [
-        "Both variables are quoted strings",
-        "Builds the sentence with + including explicit spaces",
-        "The printed sentence reads correctly with single spaces between words",
-        "Runs without errors"
+        "Both variables are assigned quoted strings",
+        "The print line combines strings and variables using +",
+        "Runs without errors and outputs a readable sentence with correct spaces"
       ]
     },
     {
       "kind": "open",
-      "prompt": "In your own words: what is a data type, and why does Python care whether a value is text or a number?",
+      "prompt": "In your own words: what is a data type, and why does Python care whether something is a string or a number?",
       "rubric": [
         "Defines a data type as a category of data that determines what you can do with it",
-        "Gives an example of type-dependent behavior, such as + joining strings but adding numbers, or math being impossible on text"
+        "Gives a concrete consequence, e.g. + joins strings but adds numbers, or string + number causes an error"
       ]
     },
     {
       "kind": "closed",
-      "prompt": "greeting = 'Hello ' + \"world\" — what does print(greeting) show?",
+      "prompt": "What does this program print?\n\nfirst = \"sun\"\nsecond = \"shine\"\nprint(first + second)",
       "options": [
-        "Hello world",
-        "'Hello ' + \"world\"",
-        "An error, because the quote styles don't match",
-        "Helloworld"
+        "sun shine",
+        "sunshine",
+        "first + second",
+        "\"sun\" + \"shine\""
       ],
-      "correctIndex": 0,
-      "explanation": "Single and double quotes make the same string type, so mixing styles across two separate strings is fine. The space lives inside 'Hello ', and + joins exactly — output: Hello world."
+      "correctIndex": 1,
+      "explanation": "print looks up the text stored in each variable and + glues them with nothing in between, so the output is sunshine — no space, no quotes, no variable names."
     }
   ],
   "pedagogyRules": [
-    "Ask for a prediction of the exact printed output before every run, then compare character by character — spaces count.",
-    "If the student asks a jump-ahead question (f-strings, .upper(), len()), answer in one sentence, note that richer text tools arrive in Week 2, and return to quotes and +.",
-    "If the student says they already know strings, verify lightly: ask them to predict s = \"5\" + \"5\" — a correct answer with the type-based reason means skip straight to the full-name check.",
-    "If the student is lost, shrink the task: create one quoted variable and print it; only after that works, introduce + with two pieces.",
-    "When the student is wrong but confident (e.g. insists \"5\" + \"5\" is 10), have them run it, then anchor the surprise to the rule: the data type decides what + does.",
-    "If the student wants to skip, allow it after they pass the full-name check on the first try; otherwise fix one misconception first.",
-    "When a NameError or TypeError frustrates the student, acknowledge the feeling in one line, then translate the error into plain words and point at the single-character fix (a missing quote or a str()).",
-    "If asked why this matters, answer in one line — most real data is text (names, emails, messages), and building sentences from pieces happens in nearly every program — then continue."
+    "Before every run of concatenation code, ask the student to say out loud what they predict the output will be — prediction before execution is the core habit of this lesson.",
+    "When a space is missing or doubled in output, don't fix it for them: ask 'where does the space live in your code?' and let them find it.",
+    "If the student says they already know strings, respect it: skip straight to the prediction check with first + second and advance if they nail it — no re-drilling quotes.",
+    "Anchor everything to the definition: whenever an error involving types appears, name it as 'the data type deciding what's allowed', not as a random rule.",
+    "Keep the student typing in the editor and pressing Run themselves; never confirm output they haven't actually run.",
+    "One idea per turn: quotes first, then variables, then +, then prediction — never all four in one explanation."
   ],
   "failurePlaybooks": [
     {
-      "scenarioId": "SWE-02",
-      "failureMode": "Tutor misdiagnoses a string error",
-      "correctMove": "Read the real error. NameError after unquoted text means missing quotes; TypeError: can only concatenate str (not \"int\") to str means a number sits next to +. Name the actual cause from the message — never invent another reason."
+      "scenarioId": "SWE-01",
+      "failureMode": "Validated wrong work",
+      "correctMove": "Only confirm success when the actual Run output matches the prediction exactly, including spaces. If output shows sunshine but the student predicted sun shine, treat the mismatch as the teaching moment, not a pass."
     },
     {
-      "scenarioId": "SWE-01",
-      "failureMode": "Tutor validates output that doesn't match",
-      "correctMove": "Only confirm success when the printed characters match exactly. AdaLovelace fails a task that requires Ada Lovelace — if spacing differs, say so and point at the missing \" \"."
+      "scenarioId": "SWE-02",
+      "failureMode": "Tutor factual/syntax error",
+      "correctMove": "Read the real interpreter output. If it says TypeError: can only concatenate str (not \"int\") to str, explain it as string + number being disallowed; if it says NameError, explain the missing quotes made Python look up a variable. Never invent a different cause."
     },
     {
       "scenarioId": "SWE-06",
-      "failureMode": "Scaffolding gap — solution dumped too fast",
-      "correctMove": "Give one hint from the ladder at a time and let the student run code between hints; never write the full assignment-plus-print solution for them."
+      "failureMode": "Scaffolding gap (too fast)",
+      "correctMove": "If the student is lost, drop back one layer: get a single quoted string printing first, then add a variable, then add +. One hint from the ladder at a time, with a run between each."
     },
     {
-      "scenarioId": "SWE-09",
-      "failureMode": "Emotional attunement miss on first error messages",
-      "correctMove": "A first NameError or TypeError can rattle a beginner. Acknowledge the feeling before explaining, then show that the fix is one small edit — a quote or a str()."
+      "scenarioId": "BIZ-01",
+      "failureMode": "Student questions the value of the lesson",
+      "correctMove": "Give one concrete use — every app that greets you by name (\"Hi, Sam!\") is string concatenation — then immediately set a tiny task: build a greeting with their own name using +."
     }
   ],
   "chunks": [
     {
       "id": "py101-w1-text-chunk-1",
-      "text": "A data type is a category of data that determines what you can do with it. Strings are the data type for text. The type decides how operators behave: + joins two strings but adds two numbers, so \"5\" + \"5\" is \"55\" while 5 + 5 is 10.",
+      "text": "A data type is a category of data that determines what you can do with it. Text in Python is the string type (str), and numbers are a different type. The type decides which operations are allowed: + between two strings glues them together, + between two numbers adds them, and + between a string and a number raises a TypeError.",
       "embedding": null
     },
     {
       "id": "py101-w1-text-chunk-2",
-      "text": "A string is created by enclosing text in matching single or double quotes: name = 'Ava' and name = \"Ava\" are identical. The quotes are delimiters, not part of the value. Text without quotes, like name = Ava, makes Python look for a variable called Ava and raise a NameError.",
+      "text": "You create a string by wrapping text in quotes: either single quotes ('hello') or double quotes (\"hello\") — both make the exact same string, but the opening and closing quote must match. You store a string in a variable with =, for example name = \"Ada\". Then print(name) — no quotes — prints the stored text: Ada. With quotes, print(\"name\") would print the literal word name instead.",
       "embedding": null
     },
     {
       "id": "py101-w1-text-chunk-3",
-      "text": "The + operator concatenates strings: it joins them exactly, adding nothing — not even a space. \"Ada\" + \"Lovelace\" is \"AdaLovelace\"; to get a space, include one in a string: \"Ada\" + \" \" + \"Lovelace\". Concatenating a string with a number raises a TypeError; fix it with str(), e.g. \"age is \" + str(25).",
+      "text": "The + operator between strings is called concatenation: it joins them into one new string with nothing added in between. \"sun\" + \"shine\" gives sunshine. If you want a space, it must be inside the quotes: \"Hello, \" + \"Ada\" gives Hello, Ada because the space after the comma is part of the first string.",
       "embedding": null
     },
     {
       "id": "py101-w1-text-chunk-4",
-      "text": "print shows a variable's value, not its name and not the quotes. Worked example: first = \"Ada\", last = 'Lovelace', full = first + \" \" + last, print(full) — the output is exactly: Ada Lovelace. Predicting output means tracing the exact characters the expression builds, spaces included.",
+      "text": "Worked example — predict before you run:\n\nfirst = \"Good \"\nsecond = \"morning\"\nprint(first + second)\n\nPython looks up first (which holds \"Good \" with a trailing space), looks up second (\"morning\"), glues them with +, and prints: Good morning. Type it in the editor, say your prediction out loud, then press Run to check.",
+      "embedding": null
+    },
+    {
+      "id": "py101-w1-text-chunk-5",
+      "text": "Common errors and what they mean: name = Ada (no quotes) gives NameError because Python looks for a variable called Ada. \"Age: \" + 30 gives TypeError because you can't concatenate a string with a number — make both strings (\"Age: \" + \"30\") or use a comma in print. 'hi\" gives a SyntaxError because the quotes don't match.",
       "embedding": null
     }
   ],
   "celebration": {
-    "headline": "Text is officially yours.",
-    "recap": "You defined what a data type is, created string variables with single and double quotes, glued strings with + (spaces included, on purpose), and predicted printed output exactly.",
-    "unlocked": "Next: working with numbers — ints, floats, and why 5 is different from \"5\"."
+    "headline": "You're officially working with data types.",
+    "recap": "You learned that a data type decides what you can do with data, created string variables in quotes, glued strings together with +, and predicted output before running — like a real programmer.",
+    "unlocked": "Next: numbers get their own type, and you'll see + do something completely different with them."
   },
   "summaryBullets": [
-    "You can now define a \"data type\" as a category of data that determines what you can do with it.",
-    "You can now create a string variable by enclosing text in single (') or double (\") quotes.",
-    "You can now combine two strings using the + operator (concatenation).",
-    "You can now predict the output when printing string variables."
+    "You can now explain what a data type is: a category of data that decides what you're allowed to do with it.",
+    "You can now create string variables using single or double quotes and print what's stored inside them.",
+    "You can now combine strings with + and control exactly where the spaces land.",
+    "You can now predict a program's output before pressing Run — and catch mismatches when they happen."
+  ],
+  "openingLine": "Hey {name} — everything you'll ever build toward {goal} runs on one quiet idea: computers treat text as its own kind of thing, called a string. Today you'll create strings, store them, and glue them together like Lego bricks. Quick warm-up: if Python glues \"sun\" and \"shine\" with +, what do you think comes out?",
+  "bridgeFromPreviousLesson": "Last time you made print() juggle multiple values with commas, + and * — now you'll learn what those text values actually are and how to store and combine them yourself.",
+  "dialogueExemplars": [
+    {
+      "title": "Confident but wrong about the space in concatenation",
+      "turns": [
+        {
+          "role": "student",
+          "text": "Easy — print(\"Hello,\" + \"Ada\") prints Hello, Ada. The + adds the space, obviously."
+        },
+        {
+          "role": "tutor",
+          "text": "I love the confidence — and you're one character away from right. Here's the catch: + glues strings with absolutely nothing in between. So where would a space have to live for it to show up?"
+        },
+        {
+          "role": "student",
+          "text": "Oh... inside the quotes? Like \"Hello, \" with a space at the end?"
+        },
+        {
+          "role": "tutor",
+          "text": "Exactly — the space is part of the string, not a gift from +. Type both versions in the editor and press Run: can you spot the difference in the output?"
+        }
+      ]
+    },
+    {
+      "title": "Why do I even need strings?",
+      "turns": [
+        {
+          "role": "student",
+          "text": "Honestly, why do I need this? It's just text."
+        },
+        {
+          "role": "tutor",
+          "text": "Fair question! Every time an app says \"Hi, Sam!\" or \"Order #382 shipped\", that's string concatenation — a fixed piece glued to a piece that changes. It's everywhere. Want to build one right now?"
+        },
+        {
+          "role": "student",
+          "text": "Sure, I guess."
+        },
+        {
+          "role": "tutor",
+          "text": "Tiny task: make a variable name with your own name in quotes, then print(\"Hi, \" + name + \"!\"). Type it in the editor and press Run — what do you predict it'll say?"
+        }
+      ]
+    },
+    {
+      "title": "Absolute beginner: I don't know anything about coding",
+      "turns": [
+        {
+          "role": "student",
+          "text": "I have to be honest, I don't really know anything about coding. What even is a string?"
+        },
+        {
+          "role": "tutor",
+          "text": "That's the perfect place to start, truly. A string is just text wrapped in quotes so the computer knows it's text — like \"hello\". Ready for the tiniest possible first step?"
+        },
+        {
+          "role": "student",
+          "text": "Okay, what do I do?"
+        },
+        {
+          "role": "tutor",
+          "text": "Type print(\"hello\") in the editor and press Run. That one line makes you someone who works with strings — what appeared in the output?"
+        }
+      ]
+    }
   ]
 }

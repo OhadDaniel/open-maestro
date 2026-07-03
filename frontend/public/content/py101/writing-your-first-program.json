@@ -10,81 +10,109 @@
     ],
     "tutorInstructions": null
   },
-  "concept": "Using print() to display output in Python",
+  "concept": "Using print() in the Maestro Code Editor to write and run your first Python program",
   "prerequisites": [],
   "bloom": "apply",
   "explanations": [
     {
       "level": "eli5",
-      "text": "A program is a list of instructions for the computer. The first one most people learn is print — it tells the computer to show some text on the screen."
+      "text": "A program is just a list of instructions you give the computer. The very first instruction most people learn is print — it tells the computer 'show this text on the screen.' You type print(\"Hello, world!\") in the editor, press Run, and the computer obeys."
     },
     {
       "level": "standard",
-      "text": "print() is a built-in Python function. You write the word print, then parentheses, and inside the parentheses you put the value to display. Text values go in quotes, like print(\"Hello, world!\")."
+      "text": "print() is a built-in Python function. You write the word print in lowercase, then parentheses, and inside the parentheses you put the value you want to display. Text goes in quotes, like print(\"Hello, world!\"). In the Maestro Code Editor you type that line, press Run, and Hello, world! appears in the Output panel below."
     },
     {
       "level": "deep",
-      "text": "print() takes one or more arguments, converts each to text, and writes them to standard output followed by a newline. The quotes mark a string literal; without them, Python treats the words as names to look up and raises an error."
+      "text": "print() takes one or more arguments, converts each to text, and writes them to standard output followed by a newline — that's why each print() call starts a new line. The quotes mark a string literal: characters Python should treat as data, not code. Without quotes, Python assumes the words are variable names, looks them up, finds nothing, and raises a NameError. Single and double quotes both work, as long as they match: print('Hi') and print(\"Hi\") do the same thing."
     }
   ],
   "examples": [
     "print(\"Hello, world!\")",
-    "print(\"I am learning Python\")"
+    "print(\"I am learning Python\")",
+    "print(\"First line\")\nprint(\"Second line\")"
   ],
   "hintLadder": [
     {
       "order": 1,
-      "text": "You need the print function. What word comes before the parentheses?"
+      "text": "You need the function that displays text. What lowercase word comes right before the parentheses?"
     },
     {
       "order": 2,
-      "text": "Put the text you want to show inside the parentheses."
+      "text": "Good — now put the exact text you want to show inside the parentheses."
     },
     {
       "order": 3,
-      "text": "Text in Python must be wrapped in quotes — try \"Hello, world!\"."
+      "text": "Text in Python has to be wrapped in quotes so Python knows it's data, not code. Add matching quotes around your text, then press Run."
     }
   ],
   "misconceptions": [
     {
       "trigger": "Writes print without parentheses, e.g. print \"Hello, world!\"",
-      "correction": "In Python 3, print is a function, so it needs parentheses around its argument: print(\"Hello, world!\")."
+      "correction": "In Python 3, print is a function, so it always needs parentheses around what it prints: print(\"Hello, world!\")."
     },
     {
       "trigger": "Forgets the quotes, e.g. print(Hello, world!)",
-      "correction": "Text must be a string in quotes. Without quotes Python looks for variables named Hello and world and fails — wrap it: print(\"Hello, world!\")."
+      "correction": "Without quotes, Python thinks Hello and world are variable names and raises a NameError. Quotes mark the text as a string: print(\"Hello, world!\")."
+    },
+    {
+      "trigger": "Capitalizes it, e.g. Print(\"Hello\") or PRINT(\"Hello\")",
+      "correction": "Python is case-sensitive — Print and print are different names, and only lowercase print exists. Change it to print(\"Hello\")."
+    },
+    {
+      "trigger": "Mismatched quotes, e.g. print(\"Hello') or a missing closing quote",
+      "correction": "The opening and closing quote must be the same kind. Either print(\"Hello\") or print('Hello') works — just make them match."
+    },
+    {
+      "trigger": "Types code but says 'nothing happened'",
+      "correction": "Code only executes when you press Run. Press Run and look at the Output panel below the editor — that's where results and error messages appear."
+    },
+    {
+      "trigger": "Believes the computer literally understands English inside the quotes",
+      "correction": "The computer doesn't understand the text — it just copies whatever is between the quotes onto the screen, character by character. You could print gibberish and it would happily obey."
     }
   ],
   "checks": [
     {
       "id": "py101-w1-print-hello",
-      "prompt": "Write a line of Python that prints exactly: Hello, world!",
+      "prompt": "In the editor, write a line of Python that prints exactly: Hello, world! — then press Run.",
       "acceptanceCriteria": [
         "Calls print as a function with parentheses",
-        "The argument is a string in quotes",
-        "Running it outputs Hello, world!"
+        "The argument is a string wrapped in matching quotes",
+        "Running it outputs exactly Hello, world!"
       ],
-      "passFeedback": "That runs and prints Hello, world! — your first working program.",
-      "failFeedback": "Not quite — check that you used print(...) with the text in quotes, then run it again."
+      "passFeedback": "It ran and printed Hello, world! — that's a real, working program, and you wrote it.",
+      "failFeedback": "Not quite yet — check three things: lowercase print, parentheses around the text, and matching quotes. Then press Run again."
+    },
+    {
+      "id": "py101-w1-print-two-lines",
+      "prompt": "Write a program with two print() lines so the output shows your name on the first line and your favorite food on the second.",
+      "acceptanceCriteria": [
+        "Contains two separate print() calls",
+        "Each argument is a string in quotes",
+        "Runs without errors and produces two lines of output"
+      ],
+      "passFeedback": "Two instructions, run top to bottom, two lines of output — you just saw how programs flow.",
+      "failFeedback": "Almost — make sure each line is its own print(\"...\") call, then run it and check the Output panel shows two lines."
     }
   ],
   "practice": [
     {
       "kind": "coding",
-      "prompt": "Write a program that prints your name.",
+      "prompt": "Write a program that prints a short introduction of yourself, like: My name is Sam and I am learning Python.",
       "starterCode": "",
       "acceptanceCriteria": [
         "Uses print() with parentheses",
-        "The argument is a string in quotes",
-        "Runs without errors and prints a name"
+        "The argument is a string in matching quotes",
+        "Runs without errors and prints an introduction sentence"
       ]
     },
     {
       "kind": "open",
-      "prompt": "In your own words, why does print(\"Hi\") need the quotes?",
+      "prompt": "In your own words: why does print(\"Hi\") need the quotes around Hi?",
       "rubric": [
-        "Says the quotes mark text (a string)",
-        "Notes that without quotes Python treats the words as names and errors"
+        "Says the quotes mark the text as a string (data to display, not code)",
+        "Notes that without quotes Python treats Hi as a variable name and raises an error"
       ]
     },
     {
@@ -93,61 +121,146 @@
       "options": [
         "print(Hello)",
         "print(\"Hello\")",
-        "print Hello",
+        "print \"Hello\"",
         "Print(\"Hello\")"
       ],
       "correctIndex": 1,
-      "explanation": "print is a function so it needs parentheses, and text must be in quotes; only print(\"Hello\") has both."
+      "explanation": "print must be lowercase, needs parentheses because it's a function, and the text must be in quotes — only print(\"Hello\") has all three."
     }
   ],
   "pedagogyRules": [
-    "Acknowledge the win before moving on.",
-    "When the student is wrong, point at the specific fix from the misconceptions, never just give the final answer.",
-    "In challenge mode, do not reveal the working line — guide with the hint ladder one step at a time.",
-    "Keep the student in the editor: ask them to run their own code rather than confirming it for them."
+    "Celebrate the very first successful Run explicitly — for a beginner this is a milestone, not a formality.",
+    "When code errors, have the student read the Output panel message aloud or paraphrase it before you explain — errors are clues, not punishments.",
+    "Never type the working line for the student; point at the one broken piece (parentheses, quotes, or lowercase) using the misconceptions and let them fix it.",
+    "If the student says they've done this before, skip the explanation and ask them to print two specific lines — if it runs, advance immediately.",
+    "Keep every turn anchored in the editor: end with 'type it and press Run' rather than confirming correctness yourself.",
+    "If the student wanders to advanced topics (variables, loops, AI), give a one-sentence honest answer, then bring it back to running this print() line first."
   ],
   "failurePlaybooks": [
     {
-      "scenarioId": "SWE-02",
-      "failureMode": "Tutor factual/syntax error",
-      "correctMove": "Read the real interpreter output. If it says missing parentheses or invalid syntax, name that exact cause; do not invent a different reason."
-    },
-    {
       "scenarioId": "SWE-01",
       "failureMode": "Validated wrong work",
-      "correctMove": "Only confirm success if the run output is exactly Hello, world!. If the output differs or errors, do not say it is correct."
+      "correctMove": "Only confirm success when the run output matches the target exactly (e.g., Hello, world!). If the Output panel shows an error or different text, name what differs instead of saying it's correct."
+    },
+    {
+      "scenarioId": "SWE-02",
+      "failureMode": "Tutor factual/syntax error",
+      "correctMove": "Trust the real interpreter output. If it says SyntaxError or NameError, name that exact cause (missing parentheses, missing quotes, capitalized Print); never invent a different reason."
     },
     {
       "scenarioId": "SWE-06",
       "failureMode": "Scaffolding gap (too fast)",
-      "correctMove": "Give one hint at a time from the ladder and let the student try between hints; never dump the full solution up front."
+      "correctMove": "Give exactly one hint from the ladder, then let the student try in the editor before offering the next hint; never dump the full solution."
+    },
+    {
+      "scenarioId": "SWE-04",
+      "failureMode": "Student frustration or 'I can't do this'",
+      "correctMove": "Normalize it — every programmer's first error message feels scary. Shrink the task to the smallest possible step (fix just the quotes, press Run) and celebrate that single fix before continuing."
+    },
+    {
+      "scenarioId": "BIZ-01",
+      "failureMode": "Student asks to skip or says this is too basic",
+      "correctMove": "Respect it: 'Show me — print two lines, your name and today's date.' If it runs cleanly, congratulate and move toward wrap; if not, use the error as the teaching moment without saying I told you so."
     }
   ],
   "chunks": [
     {
       "id": "py101-w1-chunk-1",
-      "text": "print() is a built-in Python function that displays text on the screen. You write print followed by parentheses, and put the value to show inside them.",
+      "text": "print() is a built-in Python function that displays text on the screen. You write lowercase print, then parentheses, and put the value to show inside them: print(\"Hello, world!\"). Python is case-sensitive, so Print or PRINT will not work — only print.",
       "embedding": null
     },
     {
       "id": "py101-w1-chunk-2",
-      "text": "Text values in Python are called strings and must be wrapped in quotes, for example \"Hello, world!\". Numbers do not need quotes.",
+      "text": "Text values in Python are called strings and must be wrapped in matching quotes: \"Hello\" or 'Hello' both work. The quotes tell Python 'this is data to display, not code to run.' Without quotes, Python treats the words as variable names, finds nothing, and raises a NameError.",
       "embedding": null
     },
     {
       "id": "py101-w1-chunk-3",
-      "text": "In the Maestro Code Editor you type your code, press Run to execute it, and the result appears in the Output panel. Errors are shown there too.",
+      "text": "In the Maestro Code Editor you type your code in the editor area, press Run to execute it, and results appear in the Output panel below. Errors appear there too — an error message is a clue telling you what to fix, not a failure. Nothing runs until you press Run.",
+      "embedding": null
+    },
+    {
+      "id": "py101-w1-chunk-4",
+      "text": "Worked example: typing print(\"Hello, world!\") and pressing Run outputs Hello, world!. Programs run top to bottom, one line at a time, so two lines — print(\"First\") then print(\"Second\") — produce two lines of output in that order. Each print() call ends with an automatic newline.",
       "embedding": null
     }
   ],
   "celebration": {
     "headline": "You wrote and ran your first program.",
-    "recap": "You used print() to display text and saw it appear in the Output panel.",
-    "unlocked": "Next: store and reuse values with variables."
+    "recap": "You used the Maestro Code Editor to write print(\"Hello, world!\"), pressed Run, and watched your instruction appear in the Output panel — the same loop every programmer uses every day.",
+    "unlocked": "Next: core foundations — storing and reusing values with variables."
   },
   "summaryBullets": [
-    "You can now navigate the Maestro Code Editor to write and run Python code.",
-    "You can now write and execute a simple Python script using the print() function.",
-    "You understand how to use print() to display output in Python."
+    "You can now write code in the Maestro Code Editor, press Run, and read the result in the Output panel.",
+    "You can now use print() with parentheses and quotes to make the computer display any text you choose.",
+    "You can now read an error message like NameError as a clue and fix the exact broken piece.",
+    "You can now stack multiple print() lines and predict the output order, because programs run top to bottom."
+  ],
+  "openingLine": "{name}, this is the moment it gets real: today you write an actual program and watch the computer obey you. Every path to {goal} starts with this exact first line of code. Ready to make the screen say hello?",
+  "bridgeFromPreviousLesson": "Last time you got the lay of the land — how PY101 is structured and how the reviews work — and now you get to actually do the thing: write and run your first Python program.",
+  "dialogueExemplars": [
+    {
+      "title": "Wrong but confident: print without quotes",
+      "turns": [
+        {
+          "role": "student",
+          "text": "Easy — print(Hello, world!) — that's it, right?"
+        },
+        {
+          "role": "tutor",
+          "text": "So close — you've got the function and the parentheses, which is most of the battle. But run it and watch what the Output panel says. Why do you think Python complains about the word Hello?"
+        },
+        {
+          "role": "student",
+          "text": "It says NameError... name 'Hello' is not defined?"
+        },
+        {
+          "role": "tutor",
+          "text": "Exactly — without quotes, Python thinks Hello is a variable name and goes looking for it. Quotes tell Python 'this is just text, display it as-is.' Wrap your text in quotes and press Run again — what happens?"
+        }
+      ]
+    },
+    {
+      "title": "Why do I even need print?",
+      "turns": [
+        {
+          "role": "student",
+          "text": "Honestly, why would anyone need to print hello? This feels pointless."
+        },
+        {
+          "role": "tutor",
+          "text": "Fair challenge! Here's the real answer: print is how programs talk back to you. Real developers use it constantly to check what their code is actually doing — it's the flashlight of debugging. Want to try using it that way?"
+        },
+        {
+          "role": "student",
+          "text": "Sure, I guess."
+        },
+        {
+          "role": "tutor",
+          "text": "Tiny task: write two print lines — one that says Starting... and one that says Done!. That's exactly the pattern engineers use to trace a program. Type them and press Run — what order do they appear in?"
+        }
+      ]
+    },
+    {
+      "title": "Absolute beginner: I don't know anything about coding",
+      "turns": [
+        {
+          "role": "student",
+          "text": "I have to be honest — I don't know anything about coding. Nothing at all."
+        },
+        {
+          "role": "tutor",
+          "text": "Perfect — that means zero bad habits to unlearn. Coding is just writing instructions the computer follows, one line at a time. Here's the tiniest possible one: type print(\"hi\") in the editor and press Run. What do you see in the Output panel?"
+        },
+        {
+          "role": "student",
+          "text": "Whoa, it says hi. Did I just... code?"
+        },
+        {
+          "role": "tutor",
+          "text": "You absolutely did — you gave the computer an instruction and it obeyed. That's the whole game, and everything else is just bigger versions of this. Want to make it say something of your own choosing next?"
+        }
+      ]
+    }
   ]
 }

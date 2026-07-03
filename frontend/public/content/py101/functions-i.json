@@ -11,206 +11,281 @@
     ],
     "tutorInstructions": null
   },
-  "concept": "Why functions exist, and how to define one with def and run it by calling it with arguments",
+  "concept": "Defining and calling Python functions with parameters to reuse code instead of repeating it",
   "prerequisites": [
-    "Creating and using variables to store values",
-    "Printing values with print(), including multiple values with commas"
+    "Using print() to display output",
+    "Storing values in variables",
+    "Reading a traceback to find what went wrong"
   ],
   "bloom": "apply",
   "explanations": [
     {
       "level": "eli5",
-      "text": "Imagine you teach a friend a little handshake once and give it a name. From then on you just say \"do the greeting handshake\" — no re-explaining every step. A function is exactly that: you wrap a few lines of code under a name with def, and later you run them any time by calling the name with parentheses. The parentheses can even carry a value in — greet(\"Ada\") — so the same steps work for Ada, for Grace, for anyone."
+      "text": "A function is like a recipe you write once and use whenever you want. Instead of copying the same steps over and over, you give the steps a name — then you just say the name and the computer does all the steps. If the recipe needs ingredients, you pass them in when you call it."
     },
     {
       "level": "standard",
-      "text": "The moment you catch yourself copying the same lines with tiny changes, you want a function. def greet(name): starts one — the word def, a name you choose, parentheses holding a parameter, and a colon. The indented lines underneath are the body: the steps that run. Defining runs nothing; the body runs only when you call the function, like greet(\"Ada\") or greet(friend) with a variable. Whatever value sits in the call slides into the parameter name. Two parameters work the same way, separated by a comma: def add(a, b): called as add(3, 4)."
+      "text": "You define a function with def, a name, parentheses, and a colon, then indent the body. Parameters are named inputs inside the parentheses. Nothing runs until you call the function by writing its name with values in parentheses. For example: def greet(name): print(\"Hello, \" + name) — then greet(\"Sam\") runs the body with name set to \"Sam\". Calling it again with a different value reuses the same code with new input."
     },
     {
       "level": "deep",
-      "text": "Mechanically, def creates a function and binds it to a name — the body is stored, not executed. Execution happens at the call: Python matches each argument to a parameter by position (first value to first parameter) and runs the body with those values filled in. The caller can pass a literal like \"Ada\" or a variable like friend — the function only ever sees the value, never the caller's variable name. Get the count wrong and Python is precise about it: greet() gives TypeError: greet() missing 1 required positional argument: 'name', while greet(\"Ada\", \"Bob\") gives TypeError: greet() takes 1 positional argument but 2 were given. One more subtlety: print(greet) without parentheses shows something like <function greet at 0x101c2f380> — the parentheses are what actually run it."
+      "text": "def creates a function object and binds it to a name; the indented block is its body and only executes on a call. Parameters like name in def greet(name): are local variables that receive the arguments you pass at the call site — greet(\"Sam\") passes the literal \"Sam\", and greet(friend) passes whatever the variable friend refers to. Order matters for positional arguments: in def repeat(word, times):, the first argument fills word and the second fills times. If you call a function before its def has run, or misspell its name, Python raises a NameError; passing the wrong number of arguments raises a TypeError — and the traceback points you at the call that caused it."
     }
   ],
   "examples": [
-    "def greet(name):\n    print(\"Hello,\", name)\n\ngreet(\"Ada\")\ngreet(\"Grace\")",
-    "def add(a, b):\n    print(a + b)\n\nadd(3, 4)",
-    "def greet(name):\n    print(\"Hello,\", name)\n\nfriend = \"Sam\"\ngreet(friend)",
-    "def cheer():\n    print(\"Go team!\")\n\ncheer()\ncheer()\ncheer()"
+    "def greet(name):\n    print(\"Hello, \" + name)\n\ngreet(\"Sam\")\ngreet(\"Ana\")",
+    "def repeat(word, times):\n    print(word * times)\n\nrepeat(\"ha\", 3)",
+    "friend = \"Maya\"\ngreet(friend)"
   ],
   "hintLadder": [
     {
       "order": 1,
-      "text": "Start with the shape of the def line: def, the function's name, parentheses, then a colon at the end."
+      "text": "A function definition starts with a special keyword. Which three-letter word tells Python you are about to define a function?"
     },
     {
       "order": 2,
-      "text": "Every line that belongs to the function must be indented underneath the def line — that indentation is what makes it the body."
+      "text": "After def comes the function name, then parentheses holding the parameter names, then a colon at the end of the line."
     },
     {
       "order": 3,
-      "text": "A parameter is just a name inside the parentheses — pick one that describes the value the caller will send in."
+      "text": "The body — the lines the function runs — must be indented under the def line. Try indenting with four spaces."
     },
     {
       "order": 4,
-      "text": "Defining runs nothing. Check: does your code actually call the function afterwards — its name, parentheses, and a value inside them?"
+      "text": "Defining is not running. After the def block, add a separate line that calls the function: its name followed by parentheses with a value inside."
     }
   ],
   "misconceptions": [
     {
-      "trigger": "Defines the function but never calls it, then wonders why nothing prints",
-      "correction": "def only teaches Python the recipe — nothing runs until you call it. Add greet(\"Ada\") below the definition, at the left margin, and run again."
+      "trigger": "Defines the function correctly but nothing appears in the output, because they never call it.",
+      "correction": "A def only teaches Python the recipe — it doesn't cook it. Add a call after the definition, like greet(\"Sam\"), and run again to see output."
     },
     {
-      "trigger": "Writes the function name without parentheses, e.g. print(greet)",
-      "correction": "That shows something like <function greet at 0x101c2f380> instead of running anything. Parentheses are the go button: greet(\"Ada\") runs the body."
+      "trigger": "Forgets the colon or the indentation, e.g. def greet(name) with the body flush left.",
+      "correction": "The def line must end with a colon, and every line of the body must be indented under it. Python uses that indentation to know what belongs to the function."
     },
     {
-      "trigger": "Leaves the colon off the def line, e.g. def greet(name)",
-      "correction": "Python stops with SyntaxError: expected ':'. Every def line ends with a colon — it announces that an indented body comes next."
+      "trigger": "Calls the function with quotes around the whole call, e.g. print(\"greet(Sam)\"), or puts the call inside a string.",
+      "correction": "A call is code, not text. Write greet(\"Sam\") on its own line — only the argument is a string in quotes, not the whole call."
     },
     {
-      "trigger": "Writes the body at the left margin instead of indenting it",
-      "correction": "Python raises IndentationError: expected an indented block after function definition on line 1. Indent the body (four spaces is the convention) so Python knows those lines belong to the function."
+      "trigger": "Confuses parameters and arguments, e.g. writes def greet(\"Sam\"): with a literal in the def line.",
+      "correction": "In the def line you write parameter names — placeholders like name — without quotes. The actual values (arguments) go in the call: greet(\"Sam\")."
     },
     {
-      "trigger": "Calls greet() with empty parentheses when greet has a parameter",
-      "correction": "Python answers TypeError: greet() missing 1 required positional argument: 'name' — the call must supply one value, like greet(\"Ada\"). A parameter is a promise the caller has to keep."
+      "trigger": "Swaps argument order in a two-parameter function, e.g. repeat(3, \"ha\") for def repeat(word, times).",
+      "correction": "Positional arguments fill parameters in order: the first argument becomes word, the second becomes times. Match the order in the def line — repeat(\"ha\", 3)."
     },
     {
-      "trigger": "Thinks the variable passed in must have the same name as the parameter, e.g. only a variable called name may go into greet(name)",
-      "correction": "Any variable or literal works — only the value travels. friend = \"Sam\" then greet(friend) prints Hello, Sam. The parameter name lives inside the function; the caller's names are its own business."
-    },
-    {
-      "trigger": "Confidently claims functions are pointless because copy-paste does the same job",
-      "correction": "Copy-paste means every future fix must be repeated in every copy. With a function you fix one place. Change the greeting text inside greet once, run it, and watch every call update at the same time."
+      "trigger": "Believes functions are only for 'big' programs and copy-pasting is fine for now.",
+      "correction": "Copy-paste breaks the moment you need a change: you must fix every copy. A function is one place to change — edit the body once and every call is updated."
     }
   ],
   "checks": [
     {
-      "id": "py101-w2-functions-i-define-call",
-      "prompt": "Define a function greet that takes one parameter name and prints Hello, <name>! — then call it twice: once with a literal like \"Ada\", and once passing a variable.",
+      "id": "py101-w2-define-and-call-greet",
+      "prompt": "Define a function called greet that takes one parameter, name, and prints Hello, followed by that name. Then call it twice with two different names.",
       "acceptanceCriteria": [
-        "Uses def greet(name): with the colon, and an indented body",
-        "The body prints a greeting that uses the parameter",
-        "Calls the function twice: once with a string literal, once with a variable",
-        "Runs without errors and prints two greetings on two lines"
+        "Uses def greet(name): with a colon and an indented body",
+        "The body uses print() and includes the name parameter in the output",
+        "Contains at least two calls to greet with string arguments after the definition",
+        "Running it prints two different greetings without errors"
       ],
-      "passFeedback": "That's the whole cycle — define once, call twice, and the same body served two different people.",
-      "failFeedback": "Walk the shape: a def line ending in a colon, an indented body that uses name, then two unindented calls below — one with a quoted string, one with a variable you created."
+      "passFeedback": "You defined a function once and reused it twice — that's the whole point of functions, working.",
+      "failFeedback": "Check three things: def greet(name): ends in a colon, the print line is indented under it, and you call greet(\"...\") on unindented lines afterward."
     },
     {
-      "id": "py101-w2-functions-i-predict",
-      "prompt": "Predict before running: exactly what does this program print, line by line?\ndef add(a, b):\n    print(a + b)\n\nadd(2, 3)\nadd(10, 20)",
+      "id": "py101-w2-two-param-call",
+      "prompt": "Define a function repeat(word, times) that prints the word repeated that many times (hint: word * times). Call it once with literals, and once passing a variable as the word.",
       "acceptanceCriteria": [
-        "Predicts 5 as the first line of output",
-        "Predicts 30 as the second line",
-        "Explains that the body runs once per call, with each call's values sliding into a and b"
+        "Defines repeat with exactly two parameters, word and times",
+        "The body prints word * times",
+        "One call uses literal arguments, e.g. repeat(\"ha\", 3)",
+        "One call passes a variable as the first argument, e.g. w = \"hi\" then repeat(w, 2)",
+        "Runs without errors and prints the repeated text"
       ],
-      "passFeedback": "Exactly — one body, two calls, two different results. That's reuse in action.",
-      "failFeedback": "Trace one call at a time: add(2, 3) puts 2 into a and 3 into b, so the body prints 5. Then the second call starts fresh with 10 and 20."
+      "passFeedback": "Two parameters, called with both literals and a variable — you've got the full define-and-call pattern.",
+      "failFeedback": "Make sure the def line lists both parameters, the call gives the word first and the number second, and one call uses a variable instead of a quoted string."
     }
   ],
   "practice": [
     {
       "kind": "coding",
-      "prompt": "Write a function ticket(name, seat) that prints one line like: Ada -> seat 12 (the name, an arrow, the word seat, and the seat number). Call it for two different people, and at least one call must pass variables instead of literals.",
-      "starterCode": "",
+      "prompt": "Write a function welcome(name, city) that prints a message like: Welcome to Paris, Maya! Then call it with two different name/city pairs, and once using variables for both arguments.",
+      "starterCode": "# Define welcome(name, city) below, then call it.\n",
       "acceptanceCriteria": [
-        "Defines ticket with two parameters and an indented body",
-        "The body uses both parameters in a single print",
-        "Calls the function twice with different values, at least once with variables",
-        "Runs without errors and prints two ticket lines"
+        "Defines welcome with two parameters using def, parentheses, and a colon",
+        "The body is indented and uses print() with both parameters in the message",
+        "Calls welcome at least twice with different literal arguments",
+        "At least one call passes variables as arguments",
+        "Runs without errors and prints the expected messages"
       ]
     },
     {
       "kind": "open",
-      "prompt": "In your own words: why is defining a function better than copying the same three lines five times? Give two reasons.",
+      "prompt": "You have the same three print lines copy-pasted five times in a program, and now you need to change the wording. In your own words, how would a function help here?",
       "rubric": [
-        "One place to change: editing the definition updates every call, while copies must each be fixed separately",
-        "Reuse with different data: the same body works for any argument passed in",
-        "Bonus: a good function name documents what the code does"
+        "Says the repeated lines can become one function defined once",
+        "Says each copy becomes a short call to that function",
+        "Notes the wording change now happens in one place (the body) and all calls get the update"
       ]
     },
     {
       "kind": "closed",
-      "prompt": "What does this program print?\ndef greet(name):\n    print(\"Hi,\", name)\n\ngreet",
+      "prompt": "Given def greet(name): with body print(\"Hi, \" + name), which line correctly calls it?",
       "options": [
-        "Hi, name",
-        "Hi, Ada",
-        "Nothing — greet is never actually called, because there are no parentheses",
-        "TypeError: greet() missing 1 required positional argument: 'name'"
+        "greet name",
+        "def greet(\"Ana\")",
+        "greet(\"Ana\")",
+        "greet(Ana)"
       ],
       "correctIndex": 2,
-      "explanation": "A bare greet without parentheses just mentions the function — it never runs the body, so nothing prints. Parentheses trigger the call: greet() would raise the missing-argument TypeError, and greet(\"Ada\") would print Hi, Ada."
+      "explanation": "A call is the function name with parentheses, and text arguments need quotes. greet name has no parentheses, def starts a definition (not a call), and greet(Ana) without quotes makes Python look for a variable named Ana and raise a NameError."
     }
   ],
   "pedagogyRules": [
-    "Teach the anatomy one piece at a time in this order — def line, indented body, then the call — and have the student run code after each piece, predicting the output first.",
-    "If the student asks a jump-ahead question (return values, default parameters, loops), answer in one sentence, note that return arrives in Functions III, and come back to define-and-call.",
-    "If the student says they already know functions, skip the explanation: ask them to predict print(greet) without parentheses and greet(\"Ada\", \"Bob\") when greet takes one parameter; two correct predictions with reasons means go straight to the check.",
-    "If the student is lost, shrink to zero parameters: def cheer(): with one print inside, called three times. Only add a parameter once that runs and makes sense.",
-    "When the student is wrong but confident, don't argue — have them run their exact line and read the real output or traceback aloud, then name the one rule it demonstrates.",
-    "If the student wants to skip ahead, allow it once they pass the greet check on the first try; otherwise fix one thing first.",
-    "If a TypeError or IndentationError causes frustration, acknowledge it, then point out that the last line of the traceback names the exact problem — count the arguments or check the indentation, one fix.",
-    "If asked why this matters, answer in one line — every app they use is thousands of functions calling each other; this is the unit real programs are built from — then continue the lesson."
+    "Always separate the two steps out loud: first define, then call. If output is missing, ask 'did you call it?' before anything else.",
+    "When a call errors, have the student read the traceback themselves — NameError means misspelled or not-yet-defined, TypeError means wrong number of arguments — and connect it to last lesson's skill.",
+    "Never fix indentation for the student; ask them which lines should belong to the function body and let them indent.",
+    "If the student says they already know functions, skip the explanation and go straight to the two-parameter check; advance on a clean run.",
+    "In challenge mode, guide with one hint-ladder step at a time and let the student run between hints; do not show a full working def.",
+    "When motivation dips, point at concrete repetition in their own code and ask which lines they'd hate to copy five times.",
+    "Keep return values out of scope: if asked about return, say it's next lesson, give a one-line preview, and steer back to defining and calling."
   ],
   "failurePlaybooks": [
     {
-      "scenarioId": "SWE-02",
-      "failureMode": "Tutor misdiagnoses an argument-count error",
-      "correctMove": "Read the last traceback line literally. missing 1 required positional argument: 'name' means the call supplied too few values; takes 1 positional argument but 2 were given means too many. Point at the call site, not the def line, and never invent a different cause."
+      "scenarioId": "SWE-01",
+      "failureMode": "Validated wrong work",
+      "correctMove": "Only confirm success when the student's run actually prints the expected output. A def with no call produces no output — that is not a pass; ask them to add a call and run again."
     },
     {
-      "scenarioId": "SWE-01",
-      "failureMode": "Tutor validates a program where the function is defined but never called",
-      "correctMove": "Only confirm success when output actually appears. A definition alone prints nothing — if the student's run shows no output, say so and ask where the call is."
+      "scenarioId": "SWE-02",
+      "failureMode": "Tutor factual/syntax error",
+      "correctMove": "Trust the real interpreter output. If the traceback says IndentationError, name indentation; if NameError, name the misspelled or missing definition; never invent a different cause."
     },
     {
       "scenarioId": "SWE-06",
-      "failureMode": "Scaffolding gap — tutor dumps the complete def plus call",
-      "correctMove": "Give one hint from the ladder at a time and let the student run code between hints; the student types every line of the definition and the call themselves."
+      "failureMode": "Scaffolding gap (too fast)",
+      "correctMove": "If the student is lost, drop back to a one-parameter function they define and call before attempting two parameters; one new idea per run."
     },
     {
-      "scenarioId": "SWE-03",
-      "failureMode": "Challenge-answer leak",
-      "correctMove": "During checks and practice, never type the working def line or the call — describe the shape (def, name, parentheses, colon, indented body) and let the student produce the code."
+      "scenarioId": "SWE-04",
+      "failureMode": "Student wants to skip or jump ahead (e.g. to return values or loops)",
+      "correctMove": "Acknowledge the curiosity, give a one-sentence preview, then require one clean run of a two-parameter function call before moving on."
     }
   ],
   "chunks": [
     {
       "id": "py101-w2-functions-i-chunk-1",
-      "text": "A function wraps a few lines of code under a name so they can be reused. Why it matters: with copy-paste, every fix must be repeated in every copy; with a function, you fix the one definition and every call updates. Defining uses the keyword def; running the function later is called calling it.",
+      "text": "Functions exist to kill repetition. If you write the same lines of code in several places, you must fix every copy when something changes. A function lets you write those lines once, give them a name, and reuse them anywhere by calling the name. One change in the function body updates every place that calls it.",
       "embedding": null
     },
     {
       "id": "py101-w2-functions-i-chunk-2",
-      "text": "The anatomy of a definition: def, the function's name, parentheses holding zero or more parameters, and a colon — then an indented body underneath. Worked example:\ndef greet(name):\n    print(\"Hello,\", name)\nDefining runs nothing: Python just stores the recipe under the name greet.",
+      "text": "A Python function definition has four parts: the keyword def, the function name, parentheses holding zero or more parameter names, and a colon. The body — the lines the function runs — is indented underneath. Example:\n\ndef greet(name):\n    print(\"Hello, \" + name)\n\nDefining a function does not run it; the body only executes when the function is called.",
       "embedding": null
     },
     {
       "id": "py101-w2-functions-i-chunk-3",
-      "text": "Calling runs the body: write the function's name with parentheses and the values to send in. greet(\"Ada\") prints Hello, Ada. The value in the call is the argument; it slides into the parameter name. Literals and variables both work — friend = \"Sam\" then greet(friend) prints Hello, Sam, because only the value travels, never the variable's name.",
+      "text": "You call a function by writing its name with parentheses containing arguments — the actual values for its parameters. greet(\"Sam\") passes the literal string \"Sam\", so inside the body name is \"Sam\". You can also pass a variable: friend = \"Maya\" then greet(friend) passes the value \"Maya\". Each call runs the body fresh with the new input.",
       "embedding": null
     },
     {
       "id": "py101-w2-functions-i-chunk-4",
-      "text": "Two parameters are separated by a comma and filled by position — the first argument goes to the first parameter. Worked example:\ndef add(a, b):\n    print(a + b)\nadd(3, 4) prints 7, because a becomes 3 and b becomes 4. The same body serves every pair of numbers you call it with.",
+      "text": "With two parameters, arguments fill parameters in order (positional). Example:\n\ndef repeat(word, times):\n    print(word * times)\n\nrepeat(\"ha\", 3) prints hahaha because word becomes \"ha\" and times becomes 3. Swapping them — repeat(3, \"ha\") — still runs here because Python multiplies either way, but in general order matters: the first argument goes to the first parameter.",
       "embedding": null
     },
     {
       "id": "py101-w2-functions-i-chunk-5",
-      "text": "Common stumbles, with Python's exact words: leaving off the colon gives SyntaxError: expected ':'; an unindented body gives IndentationError: expected an indented block after function definition on line 1; greet() with a missing value gives TypeError: greet() missing 1 required positional argument: 'name'; greet(\"Ada\", \"Bob\") gives TypeError: greet() takes 1 positional argument but 2 were given; and a bare greet without parentheses runs nothing at all.",
+      "text": "Common function errors and their tracebacks: calling a function before its def has run, or misspelling its name, raises NameError. Forgetting the colon raises SyntaxError. A body that is not indented raises IndentationError. Calling with the wrong number of arguments — greet() when the def has one parameter — raises TypeError saying a required argument is missing. The traceback's last line names the error type; the arrow above it points at the offending line.",
       "embedding": null
     }
   ],
   "celebration": {
-    "headline": "You just built your first reusable machine.",
-    "recap": "You saw why functions kill repetition, learned the def-name-parentheses-colon-body shape, and defined functions with one and two parameters — then called them with literals and variables and watched one body serve many values.",
-    "unlocked": "Next: Functions II — we go inside the function while it runs and trace exactly how values travel from the call into the parameters."
+    "headline": "You wrote your first reusable function.",
+    "recap": "You defined functions with def, gave them one and two parameters, and called them with both literals and variables — writing code once and reusing it on demand.",
+    "unlocked": "Next: functions that hand a result back with return, so you can use their answers in more code."
   },
   "summaryBullets": [
-    "You can now understand how functions reduce repetition and improve reuse.",
-    "You can now understand the structure of Python functions.",
-    "You can now define a function with one or two parameters and call it with literals and variables."
+    "You can now explain why one function beats five copy-pasted blocks: one body to edit, many calls that all update.",
+    "You can now write a complete function definition — def, name, parameters, colon, and an indented body.",
+    "You can now call a function with literal values like greet(\"Sam\") and with variables like greet(friend).",
+    "You can now define and call a two-parameter function, keeping the arguments in the right order.",
+    "You can now use a traceback to tell a missing call, a misspelled name, and a wrong argument count apart."
+  ],
+  "openingLine": "{name}, ever copy-pasted the same lines of code three times and thought 'there has to be a better way'? There is — it's called a function, and today you'll write your own. Ready to see how one line can replace five?",
+  "bridgeFromPreviousLesson": "Last time you learned to read tracebacks and pinpoint what went wrong — today that skill pays off immediately, because functions come with their own classic errors, and you'll be able to decode every one of them.",
+  "dialogueExemplars": [
+    {
+      "title": "Wrong but confident: defining means running",
+      "turns": [
+        {
+          "role": "student",
+          "text": "I wrote def greet(name): print(\"Hello, \" + name) and ran it. It's done — but the output is empty, so print must be broken."
+        },
+        {
+          "role": "tutor",
+          "text": "Your def is actually perfect — nice work on the colon and indentation. But a def only teaches Python the recipe; it never cooks it. What line could you add after the definition to actually run it?"
+        },
+        {
+          "role": "student",
+          "text": "Oh... maybe greet(\"Sam\") on a new line?"
+        },
+        {
+          "role": "tutor",
+          "text": "Exactly — that's a call, and calls are what make the body run. Type it under your def and press Run. What shows up in the output?"
+        }
+      ]
+    },
+    {
+      "title": "Why do I even need functions?",
+      "turns": [
+        {
+          "role": "student",
+          "text": "Honestly, why do I need this? I can just copy-paste my print lines wherever I want them."
+        },
+        {
+          "role": "tutor",
+          "text": "Fair question — copy-paste works until something changes. Imagine a game that prints a 3-line welcome banner in ten places, and the studio renames the game: with copy-paste you fix ten spots, with a function you fix one body and all ten calls update. Want to feel that yourself?"
+        },
+        {
+          "role": "student",
+          "text": "Okay, show me."
+        },
+        {
+          "role": "tutor",
+          "text": "Tiny task: write def banner(): with two indented print lines, call it three times, and run. Then change one word inside the body and run again — how many places did you have to edit?"
+        },
+        {
+          "role": "student",
+          "text": "Just one! All three banners changed."
+        },
+        {
+          "role": "tutor",
+          "text": "That's the whole superpower: write once, reuse everywhere, change in one place. Ready to add a parameter so the banner can greet different players?"
+        }
+      ]
+    },
+    {
+      "title": "Swapped arguments in a two-parameter call",
+      "turns": [
+        {
+          "role": "student",
+          "text": "I wrote def welcome(name, city): print(\"Welcome to \" + city + \", \" + name + \"!\") and called welcome(\"Paris\", \"Maya\") — but it printed Welcome to Maya, Paris! That's backwards."
+        },
+        {
+          "role": "tutor",
+          "text": "Good catch reading your own output — the code ran, it just got the wrong ingredients. Arguments fill parameters in order: your first argument lands in name and your second lands in city. Looking at your def line, which value should come first in the call?"
+        },
+        {
+          "role": "student",
+          "text": "The name — so welcome(\"Maya\", \"Paris\")."
+        },
+        {
+          "role": "tutor",
+          "text": "Exactly right. Order in the call must match the order in the def line. Swap them in the editor and press Run — does Maya get welcomed to Paris now?"
+        }
+      ]
+    }
   ]
 }

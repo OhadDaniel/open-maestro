@@ -10,204 +10,266 @@
     ],
     "tutorInstructions": null
   },
-  "concept": "Inspecting a value's type with type() and converting between str, int, and float — including the traps: truncation and unconvertible values",
+  "concept": "Inspecting data types with type() and converting values with str(), int(), and float()",
   "prerequisites": [
-    "Working with text: creating strings with quotes and joining them with +",
-    "Working with numbers: int vs float, and why 5 is different from \"5\""
+    "Variables and assignment",
+    "Strings, integers, and floats as distinct value types",
+    "Using print() to display output"
   ],
   "bloom": "apply",
   "explanations": [
     {
       "level": "eli5",
-      "text": "Sometimes a number is wearing a disguise: \"5\" in quotes is text pretending to be a number. type() is how you check the label — ask print(type(x)) and Python tells you exactly what it's holding. And str(), int(), and float() are the changing rooms: int(\"5\") turns the text \"5\" into the real number 5. Why care? Because Python treats them completely differently — \"5\" + \"5\" glues into \"55\", while 5 + 5 adds up to 10."
+      "text": "Every value in Python has a kind — text, whole number, or decimal number. type() is like asking Python \"what kind of thing is this?\" And str(), int(), and float() are like costume changers: they take a value and give you back a new version of it in a different kind. Try print(type(42)) and Python tells you it's an int."
     },
     {
       "level": "standard",
-      "text": "type(value) reports what kind of data you have: print(type(5)) shows <class 'int'>, print(type(\"5\")) shows <class 'str'>, print(type(5.0)) shows <class 'float'>. To convert, call the function named after the type you want: int(\"42\") gives 42, float(\"4.5\") gives 4.5, and str(42) gives \"42\" so you can glue it with +. Two rules keep you safe. First, conversions return a NEW value and leave the variable alone — write age = int(age) to actually keep the result. Second, two traps: int(\"4.5\") fails with a ValueError because int() won't parse a decimal string (go through float() first), and int(4.9) is 4, because int() chops off decimals instead of rounding."
+      "text": "type() tells you a value's data type: type(\"5\") is str, type(5) is int, type(5.0) is float. This matters because \"5\" and 5 behave differently — \"5\" + \"5\" is \"55\" but 5 + 5 is 10. To convert, use int(\"5\") to get the number 5, float(\"5.0\") to get 5.0, and str(5) to get the text \"5\". Try: age = \"21\" then print(int(age) + 1) — you get 22."
     },
     {
       "level": "deep",
-      "text": "type() only reports — it never changes anything. Conversions can fail, and when they do Python stops with a precise message: int(\"hello\") raises ValueError: invalid literal for int() with base 10: 'hello', and the quoted part shows you the exact text it choked on. The decimal-string route is two steps: int(float(\"4.5\")) gives 4. Truncation goes toward zero, so int(4.9) is 4 and int(-4.9) is -4 — if you want nearest, that's round(4.9), a different tool. Going the other way is always safe: float(7) is 7.0 and str() succeeds on anything. The payoff is debugging power: + concatenates for strings and adds for numbers, so when output looks wrong — 55 where you expected 10 — print(type(x)) is the flashlight that shows you why."
+      "text": "type(x) returns the class object of x, so print(type(3.14)) shows <class 'float'>. Conversions create new values; they never change the original. int(\"42\") parses digit text into an integer but int(\"hi\") raises a ValueError, and int(\"3.5\") also fails because the string isn't a plain integer — you'd need int(float(\"3.5\")). int(3.9) truncates toward zero, giving 3, not 4 — it doesn't round. str() works on almost anything and is what you need before gluing a number onto a string with +."
     }
   ],
   "examples": [
-    "print(type(5))\nprint(type(\"5\"))\nprint(type(5.0))",
-    "print(int(\"42\") + 1)",
-    "print(float(\"4.5\") * 2)",
-    "print(\"Age: \" + str(21))",
-    "print(int(4.9))",
-    "score = \"10\"\nscore = int(score)\nprint(score + 5)"
+    "print(type(\"hello\"))  # <class 'str'>",
+    "print(type(42))       # <class 'int'>",
+    "print(type(3.14))     # <class 'float'>",
+    "age = \"21\"\nprint(int(age) + 1)  # 22",
+    "score = 95\nprint(\"Score: \" + str(score))  # Score: 95",
+    "print(float(\"2.5\") * 2)  # 5.0"
   ],
   "hintLadder": [
     {
       "order": 1,
-      "text": "Start by finding out what you actually have: print(type(your_variable)) and read the label."
+      "text": "First check what kind of value you're holding — which function tells you a value's data type?"
     },
     {
       "order": 2,
-      "text": "Now decide what type the operation needs — math wants int or float, gluing with + wants strings on every side."
+      "text": "You have text that looks like a number. Which converter turns a string like \"7\" into a whole number you can do math with?"
     },
     {
       "order": 3,
-      "text": "Pick the converter named after the type you want, and remember it hands back a new value — store the result or use it right away."
-    },
-    {
-      "order": 4,
-      "text": "If a conversion errors, read the ValueError closely: the quoted part is the exact text Python couldn't convert — does it really look like the number you want?"
+      "text": "Wrap the variable in the converter before doing the math, like converter(variable), then use the result in your calculation."
     }
   ],
   "misconceptions": [
     {
-      "trigger": "Treats \"5\" and 5 as the same thing",
-      "correction": "Quotes make text. \"5\" + \"5\" is \"55\" but 5 + 5 is 10 — same characters, completely different behavior. When in doubt, print(type(x)) and read the label."
+      "trigger": "Believes \"5\" and 5 are the same thing because they look identical when printed",
+      "correction": "They print the same but behave differently: \"5\" + \"5\" gives \"55\" (text gluing) while 5 + 5 gives 10 (math). Run print(type(\"5\")) and print(type(5)) to see they are str and int."
     },
     {
-      "trigger": "Calls int(age) but never uses the result, then wonders why age + 1 still fails",
-      "correction": "Conversions return a new value and leave the variable untouched. A bare int(age) does nothing lasting — write age = int(age) to keep the converted value."
+      "trigger": "Expects int(3.9) to round to 4",
+      "correction": "int() truncates — it chops off the decimal part, so int(3.9) is 3. If you want proper rounding, use round(3.9), which you learned last lesson."
     },
     {
-      "trigger": "Tries int(\"4.5\") to convert a decimal string",
-      "correction": "int() can't parse a decimal string — it raises ValueError: invalid literal for int() with base 10: '4.5'. Use float(\"4.5\"), or int(float(\"4.5\")) if you truly need a whole number."
+      "trigger": "Tries int(\"3.5\") and gets a ValueError",
+      "correction": "int() can only parse strings that look like whole numbers. For \"3.5\", convert to float first: int(float(\"3.5\")) gives 3."
     },
     {
-      "trigger": "Expects int(4.9) to round up to 5",
-      "correction": "int() truncates — it chops the decimals toward zero: int(4.9) is 4 and int(-4.9) is -4. If you want the nearest whole number, that's round(4.9), which gives 5."
+      "trigger": "Tries print(\"Age: \" + 21) and gets a TypeError",
+      "correction": "You can't glue a string and a number with +. Convert the number first: print(\"Age: \" + str(21))."
     },
     {
-      "trigger": "Confidently claims type() converts the value",
-      "correction": "type() is read-only: it reports and changes nothing. Converting is a separate act — str(), int(), or float(). Run x = \"7\" then type(x) then int(x) and check type(x) again: still str, until you reassign."
-    },
-    {
-      "trigger": "Believes a failed conversion like int(\"hello\") quietly returns 0",
-      "correction": "There is no silent fallback — the program stops with ValueError: invalid literal for int() with base 10: 'hello'. That loud stop is a feature: it points at the exact value that couldn't become a number."
+      "trigger": "Thinks int(x) changes x itself",
+      "correction": "Converters return a new value; the original is untouched. If age = \"21\", then int(age) gives 21 but age is still the string \"21\" unless you reassign: age = int(age)."
     }
   ],
   "checks": [
     {
-      "id": "py101-w2-checking-facts-convert",
-      "prompt": "The variable score holds the string \"12\". Write code that converts it and prints the number 15 by adding 3.",
+      "id": "py101-w2-check-type",
+      "prompt": "Create a variable price = 4.99 and print its data type.",
       "acceptanceCriteria": [
-        "Converts with int(score) and uses the result (e.g. score = int(score) or int(score) + 3)",
-        "Prints exactly: 15",
-        "Runs without errors"
+        "Assigns 4.99 (no quotes) to a variable",
+        "Calls type() on the variable inside print()",
+        "Running it outputs <class 'float'>"
       ],
-      "passFeedback": "That's the full move: check what you have, convert it, then compute — 12 the text became 15 the number.",
-      "failFeedback": "Trace the types: score starts as the string \"12\". Did you convert it with int() and actually use the converted result before adding 3?"
+      "passFeedback": "Exactly — 4.99 is a float, and type() confirmed it. You just checked the facts.",
+      "failFeedback": "Not quite — make sure 4.99 has no quotes, and print the result of type(price). The output should say <class 'float'>."
     },
     {
-      "id": "py101-w2-checking-facts-predict",
-      "prompt": "Predict before running — what does each line show?\nprint(type(\"7\"))\nprint(\"7\" + \"7\")\nprint(int(\"7\") + 7)",
+      "id": "py101-w2-check-convert",
+      "prompt": "You have birth_year = \"2005\" (a string). Convert it and print the person's age in 2025 by computing 2025 minus the birth year.",
       "acceptanceCriteria": [
-        "Predicts <class 'str'> for the first line",
-        "Predicts 77 for the second line",
-        "Predicts 14 for the third line",
-        "Explains that + glues strings but adds numbers"
+        "Uses int() to convert the string \"2005\" to a number",
+        "Subtracts the converted value from 2025",
+        "Runs without errors and prints 20"
       ],
-      "passFeedback": "Perfect reading — you tracked each value's type and knew which + you'd get.",
-      "failFeedback": "Run all three and compare: \"7\" is text so + glues it into 77, but int(\"7\") is a real 7, so + does math and gives 14."
+      "passFeedback": "That's it — int() turned the text into a number you could subtract. Output: 20.",
+      "failFeedback": "Check that you wrapped birth_year in int() before subtracting — 2025 - \"2005\" fails because you can't subtract text from a number."
     }
   ],
   "practice": [
     {
       "kind": "coding",
-      "prompt": "The variable price arrived as the string \"19.99\". Convert it to a number, compute the cost of 2 items, and print exactly: Total: 39.98",
-      "starterCode": "price = \"19.99\"\n",
+      "prompt": "You have quantity = \"3\" and price = \"4.50\", both strings. Convert them to the right number types, compute the total cost, and print it as: Total: 13.50 (hint: your money-format from last lesson works here).",
+      "starterCode": "quantity = \"3\"\nprice = \"4.50\"\n# convert, multiply, and print the total\n",
       "acceptanceCriteria": [
-        "Converts with float(price), not int(price)",
-        "Multiplies the converted value by 2",
-        "Output matches exactly: Total: 39.98",
-        "Runs without errors"
+        "Converts quantity with int() and price with float()",
+        "Multiplies the converted values",
+        "Runs without errors and prints Total: 13.50 (or Total: 13.5 if unformatted)"
       ]
     },
     {
       "kind": "open",
-      "prompt": "Why does Python refuse to run \"Age: \" + 21, and what are two different ways to fix it?",
+      "prompt": "In your own words, why does \"2\" + \"2\" give \"22\" while 2 + 2 gives 4? How would you check which one you have?",
       "rubric": [
-        "+ between a string and a number raises a TypeError because + needs both sides to be strings to concatenate",
-        "Fix one: convert the number — \"Age: \" + str(21)",
-        "Fix two: skip + entirely — print(\"Age:\", 21) or an f-string like f\"Age: {21}\""
+        "Explains that + joins strings but adds numbers, so the type decides the behavior",
+        "Says type() reveals whether a value is a str, int, or float"
       ]
     },
     {
       "kind": "closed",
-      "prompt": "What does print(int(7.8)) show?",
+      "prompt": "What does print(int(7.8)) output?",
       "options": [
         "8",
         "7",
         "7.8",
-        "A ValueError"
+        "It raises a ValueError"
       ],
       "correctIndex": 1,
-      "explanation": "int() truncates toward zero rather than rounding, so int(7.8) is 7. Rounding to nearest is a different function: round(7.8) gives 8."
+      "explanation": "int() truncates the decimal part rather than rounding, so int(7.8) is 7. Use round(7.8) if you want 8."
     }
   ],
   "pedagogyRules": [
-    "Whenever output or an error surprises the student, make print(type(x)) the reflex first move — diagnose the type before touching the code.",
-    "If the student asks a jump-ahead question (booleans, lists, isinstance), answer in one line — yes, Python has more types and they're coming soon — then return to str, int, and float.",
-    "If the student says they already know this, ask them to predict print(int(\"4.5\")) and print(int(4.9)); calling the ValueError and the truncation to 4 correctly earns a jump straight to the convert check.",
-    "If the student is lost, shrink to one contrast: run print(\"5\" + \"5\") and print(5 + 5) side by side, name the difference, and only then introduce the converters one at a time.",
-    "When the student is wrong but confident, don't argue — have them run the exact line, read the real output or ValueError aloud, and name the one rule it demonstrates.",
-    "If the student wants to skip ahead, allow it after a first-try pass of the convert check; otherwise fix one thing first.",
-    "If a ValueError causes frustration, reframe it: the message quotes the exact text Python couldn't convert — read the quoted part together and the fix usually names itself.",
-    "If asked why this matters, answer in one line — in the very next lesson everything a user types arrives as text, and every real program converts before computing — then continue."
+    "Whenever a student is surprised by a result, have them run print(type(...)) on the value before explaining — let the evidence speak first.",
+    "Always demonstrate the str-vs-int difference with the \"5\" + \"5\" vs 5 + 5 contrast; it's the fastest way to make types feel real.",
+    "If the student hits a TypeError or ValueError, ask them to read the error message aloud and name which type Python expected before offering the fix.",
+    "Never say int() rounds — always say it truncates, and connect back to round() from the previous lesson when rounding is what they want.",
+    "If the student says they already know types, skip re-explanation and go straight to the int(\"3.5\") trap or int(3.9) as a light verification, then advance.",
+    "Keep the student in the editor: when they predict an output, ask them to type it and press Run to check their prediction."
   ],
   "failurePlaybooks": [
     {
-      "scenarioId": "SWE-02",
-      "failureMode": "Tutor confuses ValueError with TypeError when diagnosing",
-      "correctMove": "Read the actual last line. ValueError: invalid literal for int() with base 10: '4.5' means the value couldn't be converted; a TypeError means types were combined wrongly (like \"5\" + 5). Name the one that's on screen — never the other."
+      "scenarioId": "SWE-01",
+      "failureMode": "Validated wrong work",
+      "correctMove": "Only confirm a conversion is correct if the run output matches: type checks must show the expected class, and math on converted values must print the right number. If they printed \"55\" when 10 was expected, do not call it correct — point at the string types."
     },
     {
-      "scenarioId": "SWE-01",
-      "failureMode": "Tutor validates output of the wrong type or shape",
-      "correctMove": "Only confirm success when the output matches exactly: 9.0 is not 9, 55 is not 10, and Total: 39.98 requires those exact characters. If it differs, say so and point at the difference."
+      "scenarioId": "SWE-02",
+      "failureMode": "Tutor factual/syntax error",
+      "correctMove": "Read the real interpreter output. A ValueError from int(\"3.5\") means the string isn't a plain integer; a TypeError from \"Age: \" + 21 means mixed types with +. Name the actual cause shown in the Output panel, never a guessed one."
     },
     {
       "scenarioId": "SWE-06",
-      "failureMode": "Scaffolding gap — tutor dumps the full conversion solution",
-      "correctMove": "Give one hint from the ladder at a time — first type(), then which converter, then storing the result — and let the student run code between hints."
+      "failureMode": "Scaffolding gap (too fast)",
+      "correctMove": "When a student is stuck converting, give one ladder hint at a time — first type-checking, then which converter, then how to wrap it — and let them run code between hints. Never paste the full working line."
     },
     {
-      "scenarioId": "SWE-03",
-      "failureMode": "Challenge-answer leak",
-      "correctMove": "During checks and practice, never type the final converted line — guide with the ladder and let the student choose and apply the converter themselves."
+      "scenarioId": "SWE-04",
+      "failureMode": "Student wants to skip or jumps ahead (e.g., asks about input() or lists)",
+      "correctMove": "Answer in one sentence (e.g., 'input() always gives you a string — which is exactly why conversion matters'), then steer back with a tiny task: convert one string to a number and print the type to prove it worked."
+    },
+    {
+      "scenarioId": "BIZ-01",
+      "failureMode": "Student frustrated by repeated ValueError/TypeError",
+      "correctMove": "Acknowledge the frustration, shrink the task to a single line — print(int(\"7\")) — get one green run, then rebuild toward the original exercise one step at a time."
     }
   ],
   "chunks": [
     {
-      "id": "py101-w2-checking-facts-chunk-1",
-      "text": "type(value) reports a value's data type without changing anything: print(type(5)) shows <class 'int'>, print(type(\"5\")) shows <class 'str'>, print(type(5.0)) shows <class 'float'>. It's the first move whenever output looks wrong — check what you actually have before fixing anything.",
+      "id": "py101-w2-chunk-1",
+      "text": "type() tells you what kind of value you have. print(type(\"hello\")) shows <class 'str'>, print(type(42)) shows <class 'int'>, and print(type(3.14)) shows <class 'float'>. This matters because the type decides behavior: \"5\" + \"5\" gives \"55\" (text joined together) while 5 + 5 gives 10 (math).",
       "embedding": null
     },
     {
-      "id": "py101-w2-checking-facts-chunk-2",
-      "text": "str(), int(), and float() convert values: int(\"42\") is 42, float(\"4.5\") is 4.5, str(42) is \"42\", float(7) is 7.0. Each returns a NEW value and leaves the variable untouched — a bare int(age) changes nothing; write age = int(age) to keep the result.",
+      "id": "py101-w2-chunk-2",
+      "text": "int() converts a value to a whole number: int(\"21\") gives 21, so you can do math with text digits. But int() truncates decimals — int(3.9) is 3, not 4 (use round() if you want rounding). And int(\"3.5\") raises a ValueError because the string isn't a plain integer; convert in two steps instead: int(float(\"3.5\")) gives 3.",
       "embedding": null
     },
     {
-      "id": "py101-w2-checking-facts-chunk-3",
-      "text": "Two int() traps. First: int(\"4.5\") raises ValueError: invalid literal for int() with base 10: '4.5' — int() won't parse decimal strings; route through float(\"4.5\"), or int(float(\"4.5\")) for a whole number. Second: int() truncates toward zero rather than rounding — int(4.9) is 4 and int(-4.9) is -4; nearest-whole-number is round()'s job.",
+      "id": "py101-w2-chunk-3",
+      "text": "float() converts a value to a decimal number: float(\"2.5\") gives 2.5 and float(3) gives 3.0. str() converts a value to text: str(95) gives \"95\". You need str() before joining a number onto a string with +, because \"Score: \" + 95 raises a TypeError while \"Score: \" + str(95) prints Score: 95.",
       "embedding": null
     },
     {
-      "id": "py101-w2-checking-facts-chunk-4",
-      "text": "Why types matter: + behaves per type. \"5\" + \"5\" is \"55\" (gluing), 5 + 5 is 10 (math), and \"Age: \" + 21 raises TypeError: can only concatenate str (not \"int\") to str. Fixes: convert with str(21), or sidestep + with print(\"Age:\", 21).",
+      "id": "py101-w2-chunk-4",
+      "text": "Converters return a new value and never change the original. If age = \"21\", then int(age) produces 21 but age is still the string \"21\". To keep the converted version, reassign it: age = int(age). Worked example: birth_year = \"2005\"; age = 2025 - int(birth_year); print(age) outputs 20.",
       "embedding": null
     },
     {
-      "id": "py101-w2-checking-facts-chunk-5",
-      "text": "The full worked flow: score = \"10\" arrives as text; score = int(score) converts and reassigns; print(score + 5) now prints 15. Debugging recipe: surprising output → print(type(x)) → pick the right converter → assign the result → rerun.",
+      "id": "py101-w2-chunk-5",
+      "text": "Reading conversion errors: ValueError: invalid literal for int() means the string couldn't be parsed as a whole number (like int(\"hi\") or int(\"3.5\")). TypeError: can only concatenate str (not \"int\") to str means you tried to glue a number onto text with + — wrap the number in str() first. The Output panel in the editor shows these messages when you press Run.",
       "embedding": null
     }
   ],
   "celebration": {
-    "headline": "No value can fool you anymore.",
-    "recap": "You checked labels with type(), converted disguised numbers with int() and float(), glued numbers into sentences with str(), and learned the two traps — int(\"4.5\") is a ValueError and int(4.9) chops to 4.",
-    "unlocked": "Next: input() — everything a user types arrives as a string, and you now hold exactly the tools to convert it."
+    "headline": "You can now interrogate and transform any value.",
+    "recap": "You used type() to check what kind of value you're holding, and str(), int(), and float() to convert values so math works on digit-text and numbers can join strings.",
+    "unlocked": "Next: get real input from a user — which always arrives as a string, so your new conversion skills are about to earn their keep."
   },
   "summaryBullets": [
-    "You can now use type() to check a variable's data type.",
-    "You can now use the str(), int(), and float() functions to convert values between data types.",
-    "You understand inspecting a value's type with type() and converting between str, int, and float."
+    "You can now use type() to reveal whether any value is a str, int, or float — and predict how + will behave because of it.",
+    "You can now convert digit-text like \"21\" into real numbers with int() and float() so math actually works on it.",
+    "You can now use str() to turn numbers into text so they can join strings without a TypeError.",
+    "You can now read a ValueError or TypeError in the Output panel and name exactly which conversion fixes it.",
+    "You can now explain why int(3.9) gives 3, not 4 — and reach for round() when rounding is what you really want."
+  ],
+  "openingLine": "Hey {name} — quick puzzle: what does \"5\" + \"5\" give you in Python? If your gut says 10, this lesson is going to be a fun surprise. Type print(\"5\" + \"5\") in the editor, press Run, and tell me what you see.",
+  "bridgeFromPreviousLesson": "Last time you controlled how numbers look with round() and f\"{x:.2f}\" — now you'll go one level deeper and control what kind of value you actually have, checking types with type() and converting between them.",
+  "dialogueExemplars": [
+    {
+      "title": "Wrong but confident: int() rounds",
+      "turns": [
+        {
+          "role": "student",
+          "text": "Easy — int(3.9) is 4, because it rounds to the nearest whole number."
+        },
+        {
+          "role": "tutor",
+          "text": "I love the confidence, but Python has a sneaky move here. int() doesn't round — it chops off the decimal part entirely. Want to prove it? Type print(int(3.9)) and press Run."
+        },
+        {
+          "role": "student",
+          "text": "Whoa, it printed 3. So how do I actually get 4?"
+        },
+        {
+          "role": "tutor",
+          "text": "You already know the tool — round() from last lesson! round(3.9) gives 4, int(3.9) gives 3. Can you run both side by side to see the difference?"
+        }
+      ]
+    },
+    {
+      "title": "Why do I even need type conversion?",
+      "turns": [
+        {
+          "role": "student",
+          "text": "Honestly, why would I ever convert types? Numbers are numbers."
+        },
+        {
+          "role": "tutor",
+          "text": "Here's the thing: data from the outside world almost always arrives as text. When a user types their age into an app, Python sees \"25\" — a string — and \"25\" + 1 crashes. Every real program that takes input needs this."
+        },
+        {
+          "role": "student",
+          "text": "Okay, that's actually annoying. So how do I fix it?"
+        },
+        {
+          "role": "tutor",
+          "text": "One little wrapper: int(\"25\") + 1 gives 26. Try it — set age = \"25\" in the editor, then print(int(age) + 1). What do you get?"
+        }
+      ]
+    },
+    {
+      "title": "Frustrated by a TypeError",
+      "turns": [
+        {
+          "role": "student",
+          "text": "This is broken. print(\"Score: \" + 95) keeps giving me some TypeError and I don't get why."
+        },
+        {
+          "role": "tutor",
+          "text": "Not broken — Python is actually being helpful here. Read the message: it says it can only concatenate str to str. It's telling you it won't glue a number onto text. What could you wrap 95 in to make it text first?"
+        },
+        {
+          "role": "student",
+          "text": "Oh... str(95)?"
+        },
+        {
+          "role": "tutor",
+          "text": "Exactly right. Change it to print(\"Score: \" + str(95)) and press Run — you should see Score: 95. Did it work?"
+        }
+      ]
+    }
   ]
 }

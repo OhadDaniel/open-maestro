@@ -13,7 +13,7 @@ const CONTENT_DIR = fileURLToPath(
 )
 const EXAMPLE = readFileSync(`${CONTENT_DIR}writing-your-first-program.json`, 'utf8')
 
-async function bakeOne(
+export async function bakeOne(
   slug: string,
   lesson: RawLesson,
   context: BakeBriefContext,
@@ -65,7 +65,7 @@ async function main(): Promise<void> {
   }
 }
 
-main().catch((error: unknown) => {
+if (process.argv[1]?.endsWith("run-bake.ts")) main().catch((error: unknown) => {
   console.error('bake failed:', error)
   process.exit(1)
 })
