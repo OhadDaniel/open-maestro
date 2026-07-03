@@ -26,8 +26,10 @@ export function statusFor(percent: number, trackLabel: string): string {
   return 'Your tutor is ready.'
 }
 
+export const MODEL_DISPLAY_NAME = 'Qwen3 4B'
+
 export const DOWNLOAD_COPY = {
   kicker: 'Bringing your tutor to your device',
-  footer: 'Runs entirely on your device · Works offline',
+  footer: `${MODEL_DISPLAY_NAME} · Runs entirely on your device · Works offline`,
   cta: 'Meet your tutor',
 } as const
