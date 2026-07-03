@@ -1,6 +1,7 @@
 import { OPENING_BOOTSTRAP } from '../ai/offline-provider'
 import type { TutorProvider } from '../ai/provider'
 import type { ProviderMessage, ProviderRequest } from '../ai/provider.types'
+import { stripThinkBlock } from '../ai/strip-think'
 import type { BakedLesson } from '../content/baked.types'
 import type { TutorSession } from '../content/session.types'
 import type { LearnerProfile } from '../memory/learner-profile.types'
@@ -52,7 +53,7 @@ export function createProviderTutor(provider: TutorProvider): TutorRunner {
   return {
     stream: async (request, onToken) => {
       let text = ''
-      for await (const event of provider.streamMessage(request)) {
+      for await (const event of stripThinkBlock(provider.streamMessage(request))) {
         if (event.type === 'text_delta') {
           text += event.text
           onToken(event.text)
