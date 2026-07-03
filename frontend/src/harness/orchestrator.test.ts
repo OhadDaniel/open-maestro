@@ -3,12 +3,14 @@ import { OPENING_BOOTSTRAP } from '../ai/offline-provider'
 import type { TutorProvider } from '../ai/provider'
 import type { ProviderMessage, ProviderRequest, ProviderStreamEvent } from '../ai/provider.types'
 import { WRITING_YOUR_FIRST_PROGRAM } from '../content/samples/writing-your-first-program'
-import { emptyProfile, withName } from '../memory/learner-profile'
+import { emptyProfile, withGoal, withName } from '../memory/learner-profile'
 import { buildTutorRequest } from '../tutor/tutor-engine'
 import { createSession } from '../tutor/session'
 import { buildContext } from './buildContext'
 import { NO_MISCONCEPTION, PASS_THROUGH_MOVE } from './constants'
-import { defaultHarnessDeps, handleTurn, openLesson } from './orchestrator'
+import { defaultHarnessDeps, handleTurn, openLesson, renderOpeningLine } from './orchestrator'
+
+const BAKED_NO_OPENING = { ...WRITING_YOUR_FIRST_PROGRAM, openingLine: '' }
 
 function fakeProvider(chunks: string[]): TutorProvider {
   return {
@@ -48,12 +50,43 @@ describe('handleTurn (slice 0)', () => {
 })
 
 describe('openLesson (slice 2)', () => {
-  it('streams a tutor-led opening grounded in the lesson and greeting by name', async () => {
+  it('falls back to provider stream when openingLine is empty', async () => {
     let captured: ProviderRequest | undefined
     const provider: TutorProvider = {
       async *streamMessage(request): AsyncIterable<ProviderStreamEvent> {
         captured = request
         yield { type: 'text_delta', text: 'Hi Dana' }
+        yield { type: 'message_stop', stopReason: 'stop' }
+      },
+    }
+    const deps = defaultHarnessDeps(provider)
+    const session = createSession(BAKED_NO_OPENING.lesson.id)
+    const profile = withName(emptyProfile(), 'Dana')
+    let streamed = ''
+    const draft = await openLesson(
+      {
+        baked: BAKED_NO_OPENING,
+        session,
+        profile,
+        onToken: (token) => {
+          streamed += token
+        },
+      },
+      deps,
+    )
+    expect(draft).toBe('Hi Dana')
+    expect(streamed).toBe('Hi Dana')
+    expect(captured?.system).toContain(BAKED_NO_OPENING.lesson.title)
+    expect(captured?.system).toContain('Dana')
+    expect(captured?.system).toContain('open the lesson yourself')
+    expect(captured?.messages.at(-1)?.content).toBe(OPENING_BOOTSTRAP)
+  })
+
+  it('uses openingLine verbatim (no provider call) when non-empty', async () => {
+    let providerCalled = false
+    const provider: TutorProvider = {
+      async *streamMessage(): AsyncIterable<ProviderStreamEvent> {
+        providerCalled = true
         yield { type: 'message_stop', stopReason: 'stop' }
       },
     }
@@ -66,18 +99,54 @@ describe('openLesson (slice 2)', () => {
         baked: WRITING_YOUR_FIRST_PROGRAM,
         session,
         profile,
-        onToken: (token) => {
-          streamed += token
-        },
+        onToken: (t) => { streamed += t },
       },
       deps,
     )
-    expect(draft).toBe('Hi Dana')
-    expect(streamed).toBe('Hi Dana')
-    expect(captured?.system).toContain(WRITING_YOUR_FIRST_PROGRAM.lesson.title)
-    expect(captured?.system).toContain('Dana')
-    expect(captured?.system).toContain('open the lesson yourself')
-    expect(captured?.messages.at(-1)?.content).toBe(OPENING_BOOTSTRAP)
+    expect(providerCalled).toBe(false)
+    expect(draft).toContain('Dana')
+    expect(streamed).toBe(draft)
+  })
+})
+
+describe('renderOpeningLine', () => {
+  const base = { ...WRITING_YOUR_FIRST_PROGRAM, bridgeFromPreviousLesson: null }
+
+  it('substitutes {name} from the learner profile', () => {
+    const baked = { ...base, openingLine: 'Hi {name} — ready?' }
+    expect(renderOpeningLine(baked, withName(emptyProfile(), 'Dana'))).toBe('Hi Dana — ready?')
+  })
+
+  it('uses "there" when profile name is null', () => {
+    const baked = { ...base, openingLine: 'Hi {name}!' }
+    expect(renderOpeningLine(baked, emptyProfile())).toBe('Hi there!')
+  })
+
+  it('substitutes {goal} from the learner profile', () => {
+    const baked = { ...base, openingLine: 'Goal: {goal}.' }
+    const profile = withGoal(emptyProfile(), 'become a developer')
+    expect(renderOpeningLine(baked, profile)).toBe('Goal: become a developer.')
+  })
+
+  it('replaces {goal} with empty string when goal is null', () => {
+    const baked = { ...base, openingLine: 'Motivated by: {goal}.' }
+    expect(renderOpeningLine(baked, emptyProfile())).toBe('Motivated by: .')
+  })
+
+  it('appends bridge when non-null', () => {
+    const baked = {
+      ...base,
+      openingLine: 'Hi {name}.',
+      bridgeFromPreviousLesson: 'Last time you learned variables.',
+    }
+    const result = renderOpeningLine(baked, withName(emptyProfile(), 'Sam'))
+    expect(result).toContain('Hi Sam.')
+    expect(result).toContain('Last time you learned variables.')
+  })
+
+  it('does not append bridge when null', () => {
+    const baked = { ...base, openingLine: 'Hi {name}.', bridgeFromPreviousLesson: null }
+    expect(renderOpeningLine(baked, withName(emptyProfile(), 'Sam'))).toBe('Hi Sam.')
   })
 })
 

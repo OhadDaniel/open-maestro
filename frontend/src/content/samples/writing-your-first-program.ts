@@ -114,4 +114,44 @@ export const WRITING_YOUR_FIRST_PROGRAM: BakedLesson = {
     'You can now write and execute a simple Python script using the print() function.',
     'You understand how to use print() to display output in Python.',
   ],
+  openingLine:
+    'Hi {name} — welcome to "Writing your first program." We\'re going to run real code before this lesson is over. Ready to say hello to the world?',
+  bridgeFromPreviousLesson: null,
+  dialogueExemplars: [
+    {
+      title: 'Student unsure about print syntax',
+      turns: [
+        { role: 'student', text: 'Do I need the parentheses every time?' },
+        {
+          role: 'tutor',
+          text: 'Yes — in Python 3 print is a function, so the parentheses are always required.',
+        },
+        { role: 'student', text: 'What happens if I forget them?' },
+        {
+          role: 'tutor',
+          text: 'You get a SyntaxError. Python is telling you the call is missing the ().',
+        },
+        { role: 'student', text: "Got it — I'll add them." },
+        {
+          role: 'tutor',
+          text: 'Exactly. Try it now and see what the output panel shows.',
+        },
+      ],
+    },
+    {
+      title: 'Student hits a NameError',
+      turns: [
+        { role: 'student', text: 'I wrote print(Hello) and got a NameError.' },
+        {
+          role: 'tutor',
+          text: 'Python treated Hello as a variable name, not text. Wrap it in quotes: print("Hello").',
+        },
+        { role: 'student', text: 'Oh — because text needs quotes?' },
+        {
+          role: 'tutor',
+          text: "Exactly. Without quotes Python looks for a variable called Hello, can't find it, and fails.",
+        },
+      ],
+    },
+  ],
 }

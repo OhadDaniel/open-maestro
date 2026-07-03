@@ -1,5 +1,5 @@
 import type { BakedLesson } from './baked.types'
-import { bakedLessonSchema } from './baked.types'
+import { runtimeBakedLessonSchema } from './baked.types'
 
 const CONTENT_BASE = '/content'
 
@@ -12,5 +12,5 @@ export async function loadBakedLesson(
     throw new Error(`Lesson not found: ${courseId}/${lessonSlug}`)
   }
   const data: unknown = await response.json()
-  return bakedLessonSchema.parse(data)
+  return runtimeBakedLessonSchema.parse(data)
 }

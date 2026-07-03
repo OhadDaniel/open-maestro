@@ -1,5 +1,5 @@
 import { TUTOR_BASE_SYSTEM_PROMPT, buildLessonContextBlock } from '../ai/tutor-prompt'
-import type { BakedLesson } from '../content/baked.types'
+import type { BakedLesson, DialogueExemplar } from '../content/baked.types'
 import type { TutorMode, TutorSession } from '../content/session.types'
 import { renderProfileSnapshot } from '../memory/learner-profile'
 import type { LearnerProfile } from '../memory/learner-profile.types'
@@ -81,6 +81,23 @@ function formatMoments(): string {
   return ['In common moments, handle them like this:', ...lines].join('\n')
 }
 
+export function formatDialogueExemplars(exemplars: DialogueExemplar[]): string {
+  if (exemplars.length === 0) {
+    return ''
+  }
+  const blocks = exemplars.map(
+    (ex) =>
+      `[${ex.title}]\n` +
+      ex.turns
+        .map((turn) => `${turn.role === 'student' ? 'Student' : 'You'}: "${turn.text}"`)
+        .join('\n'),
+  )
+  return [
+    'Example lesson dialogues — match this style and depth; do not reuse the wording:',
+    ...blocks,
+  ].join('\n\n')
+}
+
 function formatExemplars(exemplars: Exemplar[]): string {
   const blocks = exemplars.map(
     (exemplar) =>
@@ -110,6 +127,9 @@ export function buildTutorSystemPrompt(
     formatSection(`Mode: ${session.mode}`, MODE_RULES[session.mode]),
     formatMoments(),
     formatExemplars(policy.exemplars),
+    formatDialogueExemplars(baked.dialogueExemplars),
     formatSection('Lesson-specific rules', baked.pedagogyRules),
-  ].join('\n\n')
+  ]
+    .filter(Boolean)
+    .join('\n\n')
 }

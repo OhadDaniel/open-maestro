@@ -213,7 +213,24 @@ const OPENING_MOVE: TeachingMove = {
   reason: 'lesson-opening',
 }
 
+export function renderOpeningLine(baked: BakedLesson, profile: LearnerProfile): string {
+  const name = profile.name ?? 'there'
+  let text = baked.openingLine
+    .replace('{name}', name)
+    .replace('{goal}', profile.goal ?? '')
+    .trim()
+  if (baked.bridgeFromPreviousLesson !== null) {
+    text += '\n\n' + baked.bridgeFromPreviousLesson
+  }
+  return text
+}
+
 export async function openLesson(input: OpeningInput, deps: HarnessDeps): Promise<string> {
+  if (input.baked.openingLine.length > 0) {
+    const text = renderOpeningLine(input.baked, input.profile)
+    input.onToken(text)
+    return text
+  }
   const messages: ProviderMessage[] = [{ role: 'user', content: OPENING_BOOTSTRAP }]
   const request = buildContext({
     baked: input.baked,

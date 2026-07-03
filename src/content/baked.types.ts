@@ -56,6 +56,22 @@ export const failurePlaybookSchema = z
   .strict()
 export type FailurePlaybook = z.infer<typeof failurePlaybookSchema>
 
+export const dialogueExemplarTurnSchema = z
+  .object({
+    role: z.enum(['student', 'tutor']),
+    text: z.string().min(1),
+  })
+  .strict()
+export type DialogueExemplarTurn = z.infer<typeof dialogueExemplarTurnSchema>
+
+export const dialogueExemplarSchema = z
+  .object({
+    title: z.string().min(1),
+    turns: z.array(dialogueExemplarTurnSchema).min(3).max(6),
+  })
+  .strict()
+export type DialogueExemplar = z.infer<typeof dialogueExemplarSchema>
+
 export const bakedChunkSchema = z
   .object({
     id: z.string().min(1),
@@ -90,9 +106,19 @@ export const bakedLessonSchema = z
     failurePlaybooks: z.array(failurePlaybookSchema).min(1),
     chunks: z.array(bakedChunkSchema).min(1),
     celebration: celebrationSchema,
+    summaryBullets: z.array(z.string().min(1)).min(3).max(5),
+    openingLine: z.string().min(1),
+    bridgeFromPreviousLesson: z.string().min(1).nullable(),
+    dialogueExemplars: z.array(dialogueExemplarSchema).min(2).max(3),
   })
   .strict()
 export type BakedLesson = z.infer<typeof bakedLessonSchema>
+
+export const runtimeBakedLessonSchema = bakedLessonSchema.extend({
+  openingLine: z.string().default(''),
+  bridgeFromPreviousLesson: z.string().nullable().default(null),
+  dialogueExemplars: z.array(dialogueExemplarSchema).default([]),
+})
 
 export function parseBakedLesson(data: unknown): BakedLesson {
   return bakedLessonSchema.parse(data)
