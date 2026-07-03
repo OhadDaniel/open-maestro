@@ -202,5 +202,10 @@
     "headline": "You know where variables live — and where they die.",
     "recap": "You watched a local vanish the moment its function returned, saw globals readable but shadowed by inside assignments, decoded NameError and UnboundLocalError, and refactored a global-reading function into one fed by parameters and answered by return.",
     "unlocked": "Next: you now hold Week 2's full toolkit — division, modulo, conversions, input, tracebacks, functions, and scope — ready to combine into small programs that solve real problems."
-  }
+  },
+  "summaryBullets": [
+    "You can now understand that variables created inside a function exist only within that function's scope (local).",
+    "You can now explain how local and global scopes differ and identify when each is used.",
+    "You can now demonstrate how data can be passed into functions through parameters instead of relying on global variables."
+  ]
 }

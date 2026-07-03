@@ -203,5 +203,10 @@
     "headline": "You just turned stories into code.",
     "recap": "You translated two-step word problems into arithmetic, let precedence — and parentheses — keep the steps in order, computed results right inside print() with clear labels, and chose the formulation a human can actually read.",
     "unlocked": "Next week: division modes — / and // split numbers in two different ways, and remainders start doing real work."
-  }
+  },
+  "summaryBullets": [
+    "You can now translate a two-step word problem into an arithmetic expression and compute the result.",
+    "You can now do arithmetic directly inside print() to produce clear, useful outputs.",
+    "You can now compare two equivalent formulations and choose the clearer one."
+  ]
 }

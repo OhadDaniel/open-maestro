@@ -198,5 +198,10 @@
     "headline": "Your program just had its first conversation.",
     "recap": "You asked with input(), learned that every answer arrives as a string, converted counts with int() and prices with float(), and replied with a friendly computed summary — the ask → compute → respond loop behind every real app.",
     "unlocked": "Next: when things break mid-conversation, Python writes you a report — the traceback — and you'll learn to read it like a pro."
-  }
+  },
+  "summaryBullets": [
+    "You can now explain why programs interact with users and when input() is appropriate; collect input with clear prompts.",
+    "You can now convert numeric inputs to the correct type before computing and print a friendly summary.",
+    "You understand making programs interactive: reading answers with input(), converting numeric answers with int() and float() before computing, and replying with a friendly summary."
+  ]
 }

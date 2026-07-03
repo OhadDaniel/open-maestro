@@ -1,8 +1,8 @@
 import { z } from 'zod'
 
 export const AFFECT_STATES = ['engaged', 'confused', 'frustrated', 'bored', 'confident'] as const
-export const MASTERY_STATUSES = ['unseen', 'shaky', 'mastered'] as const
-export const TEACHING_ACTIONS = ['explain', 'hint', 'advance', 'quiz', 'encourage', 'close'] as const
+export const MASTERY_STATUSES = ['unseen', 'practicing', 'mastered'] as const
+export const TEACHING_ACTIONS = ['explain', 'hint', 'advance', 'quiz', 'encourage', 'close', 'offer-wrap', 'wrap-lesson'] as const
 
 export const affectSignalSchema = z.object({
   state: z.enum(AFFECT_STATES),

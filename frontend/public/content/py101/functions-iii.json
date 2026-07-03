@@ -202,5 +202,10 @@
     "headline": "Your functions can hand back answers now.",
     "recap": "You separated showing a value (print) from delivering it (return), watched a missing return turn into None and a NoneType error, caught returned values at the call site, and wrote early returns that exit special cases at the door.",
     "unlocked": "Next: scope and local variables — where the names inside your functions live, and why they vanish when the function ends."
-  }
+  },
+  "summaryBullets": [
+    "You can now differentiate printing vs returning values.",
+    "You can now use return to pass results and apply early returns.",
+    "You understand return vs print."
+  ]
 }

@@ -21,8 +21,6 @@ export const INITIAL_USER: SessionUser = {
   why: '',
 }
 
-export const NAME_FALLBACK = 'Explorer'
-
 export const INITIAL_PROGRESS: SessionProgress = {
   level: 3,
   levelPct: 35,

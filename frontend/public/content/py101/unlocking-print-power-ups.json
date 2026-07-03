@@ -201,5 +201,10 @@
     "headline": "print() just got superpowers.",
     "recap": "You printed several values with commas, saw that every print takes its own line, glued strings with +, repeated them with *, and learned why \"Score: \" + 10 fails but print(\"Score:\", 10) works.",
     "unlocked": "Next: variables — give a value a name so you can reuse it anywhere."
-  }
+  },
+  "summaryBullets": [
+    "You can now print multiple values using commas.",
+    "You can now understand that printing is always on a new line.",
+    "You can now print multiple text and numeric values using the + and * operators."
+  ]
 }

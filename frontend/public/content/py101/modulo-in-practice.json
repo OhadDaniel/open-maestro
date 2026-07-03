@@ -202,5 +202,10 @@
     "headline": "% just became your pattern detector.",
     "recap": "You used x % 2 to split the world into even and odd — and explained why 0 and 1 are the only possible verdicts — then wrapped endless counts onto circles: weekdays with % 7, rotating turns with % 3, one formula instead of a ladder of cases.",
     "unlocked": "Next: rounding and money format — round() and f-strings make your float answers look like real prices."
-  }
+  },
+  "summaryBullets": [
+    "You can now use x % 2 to detect parity and explain why it works.",
+    "You can now apply modulo to cyclic positions (e.g., every Nth item, rotating shifts) to simplify branching.",
+    "You understand using % as a pattern tool: x % 2 for even/odd, and x % n to wrap endless counts onto repeating cycles like weekdays and rotating shifts."
+  ]
 }

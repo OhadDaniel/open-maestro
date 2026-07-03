@@ -18,6 +18,7 @@ const base = {
   mastery: EMPTY_MASTERY,
   misconception: NO_MISCONCEPTION,
   turnIndex: 0,
+  userMessage: '',
 }
 
 describe('controller (slice 1)', () => {
@@ -28,19 +29,79 @@ describe('controller (slice 1)', () => {
     expect(controller({ ...base, session: sessionWith('exam') }).action).toBe('quiz')
   })
 
-  it('closes when the turn budget is reached (anti-loop)', () => {
+  it('wraps lesson when the turn budget is reached (anti-loop)', () => {
     const budget = lesson.lesson.masteryOutcomes.length * TURNS_PER_OUTCOME + TURN_BUDGET_BUFFER
-    expect(controller({ ...base, session: sessionWith('explain'), turnIndex: budget }).action).toBe('close')
+    expect(controller({ ...base, session: sessionWith('explain'), turnIndex: budget }).action).toBe('wrap-lesson')
   })
 
-  it('closes when all outcomes are mastered', () => {
+  it('offers wrap when all outcomes are mastered (first time)', () => {
     const mastery: MasterySignal = {
       skills: lesson.lesson.masteryOutcomes.map((_outcome, index) => ({
         id: String(index),
         status: 'mastered',
       })),
     }
-    expect(controller({ ...base, session: sessionWith('explain'), mastery }).action).toBe('close')
+    expect(controller({ ...base, session: sessionWith('explain'), mastery }).action).toBe('offer-wrap')
+  })
+
+  it('wraps lesson when all mastered, wrap already offered, and user agrees', () => {
+    const mastery: MasterySignal = {
+      skills: lesson.lesson.masteryOutcomes.map((_outcome, index) => ({
+        id: String(index),
+        status: 'mastered',
+      })),
+    }
+    const session = { ...sessionWith('explain'), progress: { ...sessionWith('explain').progress, wrapOffered: true } }
+    expect(controller({ ...base, session, mastery, userMessage: 'yes please wrap it up' }).action).toBe('wrap-lesson')
+  })
+
+  it('declines wrap and resumes normal move when user says no', () => {
+    const mastery: MasterySignal = {
+      skills: lesson.lesson.masteryOutcomes.map((_outcome, index) => ({
+        id: String(index),
+        status: 'mastered',
+      })),
+    }
+    const session = { ...sessionWith('explain'), progress: { ...sessionWith('explain').progress, wrapOffered: true } }
+    const move = controller({ ...base, session, mastery, userMessage: 'no, more practice please' })
+    expect(move.action).not.toBe('offer-wrap')
+    expect(move.action).not.toBe('wrap-lesson')
+    expect(move.reason).toBe('wrap-declined')
+  })
+
+  it('does not offer-wrap again when wrapDeclined is true', () => {
+    const mastery: MasterySignal = {
+      skills: lesson.lesson.masteryOutcomes.map((_outcome, index) => ({
+        id: String(index),
+        status: 'mastered',
+      })),
+    }
+    const session = {
+      ...sessionWith('explain'),
+      progress: { ...sessionWith('explain').progress, wrapOffered: true, wrapDeclined: true },
+    }
+    const move = controller({ ...base, session, mastery })
+    expect(move.action).not.toBe('offer-wrap')
+  })
+
+  it('returns advance with confident-claim reason when student is confident', () => {
+    const confident: AffectSignal = { state: 'confident', confidence: 0.8, cues: [] }
+    const move = controller({ ...base, session: sessionWith('explain'), affect: confident })
+    expect(move.action).toBe('advance')
+    expect(move.reason).toBe('confident-claim')
+  })
+
+  it('wrap-lesson rules include the verbatim summaryBullets instruction', () => {
+    const mastery: MasterySignal = {
+      skills: lesson.lesson.masteryOutcomes.map((_outcome, index) => ({
+        id: String(index),
+        status: 'mastered',
+      })),
+    }
+    const session = { ...sessionWith('explain'), progress: { ...sessionWith('explain').progress, wrapOffered: true } }
+    const move = controller({ ...base, session, mastery, userMessage: 'sure' })
+    expect(move.action).toBe('wrap-lesson')
+    expect(move.rules.join(' ')).toContain('summaryBullets')
   })
 
   it('acts on strong affect', () => {

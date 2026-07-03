@@ -35,6 +35,15 @@ export const ACTION_RULES: Record<Action, readonly string[]> = {
     'Name one concrete thing they can do now that they could not do at the start.',
     'Point them to the "Next lesson" button and stop — do not invent new tasks or exercises.',
   ],
+  'offer-wrap': [
+    'Ask in ONE short line only: would they like to wrap up or do one more practice round?',
+    'No summary, no teaching, no new questions — just the single offer and stop.',
+  ],
+  'wrap-lesson': [
+    'Output the summary bullets verbatim from the lesson JSON summaryBullets field — do not paraphrase them.',
+    'Add exactly one warm sentence of your own at the end, celebrating what they accomplished.',
+    'Nothing else — no new questions, no hints, no next steps beyond the celebration.',
+  ],
 }
 
 export const MODE_DEFAULT_ACTION: Record<TutorMode, Action> = {
@@ -43,6 +52,18 @@ export const MODE_DEFAULT_ACTION: Record<TutorMode, Action> = {
   challenge: 'hint',
   exam: 'quiz',
 }
+
+export const WRAP_DECLINE_PHRASES: readonly string[] = [
+  'no',
+  'not yet',
+  'more',
+  'continue',
+  'keep going',
+  'another',
+  'practice',
+  'more practice',
+  'one more',
+]
 
 export function misconceptionRules(signal: MisconceptionSignal): string[] {
   const base = [

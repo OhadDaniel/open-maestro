@@ -26,7 +26,7 @@ export function useLessonThread(baked: BakedLesson, sessionProvider: TutorProvid
     session,
     profile,
     onProfileLearned,
-    () => undefined,
+    () => {},
   )
 
   const startedRef = useRef(false)

@@ -203,5 +203,10 @@
     "headline": "Error messages just became your allies.",
     "recap": "You met the traceback's three parts, learned to read it bottom-up — type and message first, then file and line — and can now tell NameError, TypeError, ValueError, and ZeroDivisionError apart and name the fix category for each.",
     "unlocked": "Next: functions — and with them, tracebacks that show a whole chain of calls, which you now know exactly how to read."
-  }
+  },
+  "summaryBullets": [
+    "You can now understand why Python provides a traceback and how it helps identify what went wrong.",
+    "You can now identify parts of a traceback and different types of tracebacks.",
+    "You understand reading Python tracebacks: why they exist, their three parts, the bottom-up reading order, and telling NameError, TypeError, ValueError, and ZeroDivisionError apart."
+  ]
 }

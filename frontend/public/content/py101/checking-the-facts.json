@@ -204,5 +204,10 @@
     "headline": "No value can fool you anymore.",
     "recap": "You checked labels with type(), converted disguised numbers with int() and float(), glued numbers into sentences with str(), and learned the two traps — int(\"4.5\") is a ValueError and int(4.9) chops to 4.",
     "unlocked": "Next: input() — everything a user types arrives as a string, and you now hold exactly the tools to convert it."
-  }
+  },
+  "summaryBullets": [
+    "You can now use type() to check a variable's data type.",
+    "You can now use the str(), int(), and float() functions to convert values between data types.",
+    "You understand inspecting a value's type with type() and converting between str, int, and float."
+  ]
 }

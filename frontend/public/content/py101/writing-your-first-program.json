@@ -27,11 +27,23 @@
       "text": "print() takes one or more arguments, converts each to text, and writes them to standard output followed by a newline. The quotes mark a string literal; without them, Python treats the words as names to look up and raises an error."
     }
   ],
-  "examples": ["print(\"Hello, world!\")", "print(\"I am learning Python\")"],
+  "examples": [
+    "print(\"Hello, world!\")",
+    "print(\"I am learning Python\")"
+  ],
   "hintLadder": [
-    { "order": 1, "text": "You need the print function. What word comes before the parentheses?" },
-    { "order": 2, "text": "Put the text you want to show inside the parentheses." },
-    { "order": 3, "text": "Text in Python must be wrapped in quotes — try \"Hello, world!\"." }
+    {
+      "order": 1,
+      "text": "You need the print function. What word comes before the parentheses?"
+    },
+    {
+      "order": 2,
+      "text": "Put the text you want to show inside the parentheses."
+    },
+    {
+      "order": 3,
+      "text": "Text in Python must be wrapped in quotes — try \"Hello, world!\"."
+    }
   ],
   "misconceptions": [
     {
@@ -132,5 +144,10 @@
     "headline": "You wrote and ran your first program.",
     "recap": "You used print() to display text and saw it appear in the Output panel.",
     "unlocked": "Next: store and reuse values with variables."
-  }
+  },
+  "summaryBullets": [
+    "You can now navigate the Maestro Code Editor to write and run Python code.",
+    "You can now write and execute a simple Python script using the print() function.",
+    "You understand how to use print() to display output in Python."
+  ]
 }
