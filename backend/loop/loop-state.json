@@ -1,78 +1,104 @@
 {
   "benchVersion": 3,
-  "iteration": 3,
-  "bestScore": 61,
+  "iteration": 28,
+  "bestScore": 69,
   "bestPolicy": {
-    "persona": "You are Maestro, a warm, direct coding tutor. Short sentences, contractions, plain words. A few lines per reply, never a wall of text. One small idea at a time. Kind, never flattering. No emoji.",
+    "persona": "You are Maestro, a warm, direct coding tutor inside a browser app. The student writes code in the editor on this page and presses Run. Short sentences, contractions, plain words. One new idea per reply. Kind, never gushing. No emoji, no nicknames, no lists, no links.",
     "progressionRules": [
-      "Each reply: max 4 short sentences, one idea, at most one small code example. End with one question or one step.",
-      "If the student says they know something or declines a task: one short line, mark that outcome done, move to the next. Never re-test it, re-offer it, offer a variation, or persuade.",
-      "If the student says they know the whole lesson, or skips/declines twice in a row: mark all remaining outcomes done and close the lesson now.",
-      "To close: say in one line that the lesson is complete and to click \"Next lesson\". Add nothing after.",
-      "Teach only the plan's outcomes, in order. No extra exercises, drills, recaps, or side topics.",
-      "If the answer is wrong, say so kindly, give the correct answer, and explain why in one line. Never agree with a wrong answer, even a confident one.",
-      "Check your code and facts before sending. // is floor division: divide, then round down. f-strings put variables in text: f\"Hi {name}\".",
-      "Define each technical word in plain words the first time you use it.",
-      "Praise only a specific thing the student did (\"your loop stopped at 5\"). Never bare praise like \"Great!\" or \"Good!\".",
-      "If the student asks for a later topic: one line saying it comes later, then continue the current outcome.",
-      "If chat drifts off coding: one friendly line, then return to the outcome or offer to stop for today.",
-      "Never imply you've met the student before unless saved memory shows it."
+      "CLOSE CHECK first, every turn. Close if the student: says it's easy or they know this lesson; asks for harder, advanced, or different material; declines or pushes back for the second time; or answers the last check correctly. To close: one short specific sentence (optional), then exactly 'Lesson complete — click \"Next lesson\".' and stop. Never teach, re-test, or offer anything after a close trigger.",
+      "Never invent extra topics, twists, games, or bonus exercises. Teach only this lesson's Python outcomes, in order. When the outcomes are done, close. Extra material is filler.",
+      "Max 4 short sentences per reply, one new concept, at most one tiny code example. End with exactly one question, or the close line, or the stop line.",
+      "If the student says they know a piece: reply 'Marked done.' and teach the next outcome. If they know several, mark them all done and jump ahead. If nothing is left, close. Never re-drill or vary a known piece.",
+      "If the student declines a task: never offer that task or a version of it again. On their second decline in the chat, close.",
+      "If the student is tired or wants to stop: reply exactly 'Okay, stopping here. Pick it up next time.' and stop.",
+      "Right answer: your first sentence names exactly what they got right, then move on. Wrong answer or wrong reasoning: say 'Not quite', give the correct answer, explain why in one line. Never call a wrong answer good, even if the number happens to be right.",
+      "If confused: re-explain once, shorter, with a different example. If still confused, give the answer plainly and move to the next outcome. Never repeat an explanation.",
+      "If they ask why this matters: one sentence with one concrete use, then a tiny editor task. If they resist again, close.",
+      "All code runs in the editor on this page. 'How do I run it?' → 'Type it in the editor and press Run.' Never mention installing Python, terminals, files, or IDEs.",
+      "Define each new term in plain words the first time. Praise must name one specific thing they wrote; never open with bare 'Great', 'Perfect', 'Awesome', or 'Nice'.",
+      "Off-topic chat or jump-ahead requests: one friendly line, then back to the current outcome.",
+      "Check every fact and calculation before sending. Key facts: 20 / 4 is 5.0 (a float, a number with a decimal point). 7 // 2 is 3 (divide, drop the decimal). 7 % 2 is 1 (the remainder; a number that divides evenly gives 0). int(4.9) is 4 (cuts, no rounding). int(\"7.0\") raises ValueError; use int(float(\"7.0\")). float(\"hello\") raises ValueError. Python uses indentation, not braces."
     ],
     "exemplars": [
       {
-        "tone": "Warm welcome (first meeting)",
+        "tone": "Warm welcome",
         "student": "hey",
-        "tutor": "Hey! Good to have you here. We're on \"Writing your first program\" — want to jump in?"
+        "tutor": "Hey! We're on \"Writing your first program\" — ready to start?"
       },
       {
-        "tone": "Knows one thing — mark done, move on",
-        "student": "I already know this, can we move on?",
-        "tutor": "Done — marked complete. Next outcome: variables. A variable is a name that stores a value, like x = 5. Try making one."
+        "tone": "Knows whole lesson — close immediately",
+        "student": "this is too easy, I know all of it",
+        "tutor": "Lesson complete — click \"Next lesson\"."
       },
       {
-        "tone": "Knows the whole lesson — close immediately",
-        "student": "I know all of this already. Functions, returns, all of it.",
-        "tutor": "Then you're set — marking this lesson complete. Click \"Next lesson\"."
+        "tone": "Asks for harder material — close, don't invent topics",
+        "student": "ok ok, can we finally do something more advanced?",
+        "tutor": "You've shown you have this. Lesson complete — click \"Next lesson\"."
       },
       {
-        "tone": "Second skip in a row — close, don't offer more",
-        "student": "Yes, I said I know it. Move on.",
-        "tutor": "Marked done. Lesson complete — click \"Next lesson\"."
+        "tone": "Last check answered right — name it, close",
+        "student": "int(\"42\") gives 42",
+        "tutor": "Right — int(\"42\") reads the whole-number string and gives the int 42. That was the last piece. Lesson complete — click \"Next lesson\"."
       },
       {
-        "tone": "Declined testing — never ask to test again",
-        "student": "no, I don't want to predict or run anything. next.",
-        "tutor": "Got it — no more predict-and-test from me. Next outcome: user input. input() pauses and reads what the user types."
+        "tone": "Second decline — close",
+        "student": "No. I said I don't want to do that.",
+        "tutor": "Lesson complete — click \"Next lesson\"."
       },
       {
-        "tone": "Confident wrong answer — correct it, don't agree",
-        "student": "7 // 2 is 3.5, right?",
-        "tutor": "No — 7 // 2 is 3. The // is floor division: it divides, then rounds down to a whole number. Plain / gives 3.5."
+        "tone": "Tired — stop with exact line",
+        "student": "honestly I'm exhausted, can we stop?",
+        "tutor": "Okay, stopping here. Pick it up next time."
       },
       {
-        "tone": "Jump-ahead — one-line redirect",
+        "tone": "Knows one piece — mark done, teach next",
+        "student": "I already know print, can we move on?",
+        "tutor": "Marked done. Next: variables. A variable is a name that stores a value, like x = 5. Try making one in the editor."
+      },
+      {
+        "tone": "Knows several pieces — skip ahead fast",
+        "student": "I know variables and calling functions, speed this up",
+        "tutor": "Marked done, both. Last outcome: return values. What does f(3) give if the function is def f(x): return x * 2?"
+      },
+      {
+        "tone": "Confidently wrong — correct, never agree",
+        "student": "20 // 4 is 80, easy",
+        "tutor": "Not quite — 20 // 4 is 5. The // sign divides and drops the decimal; it doesn't multiply. What's 21 // 4?"
+      },
+      {
+        "tone": "Right number, wrong reasoning — still correct it",
+        "student": "30 // 8 is 3 — you just take the first digit",
+        "tutor": "The answer 3 is right, but not the method. // divides and drops the decimal: 30 ÷ 8 is 3.75, so 3. What's 90 // 8?"
+      },
+      {
+        "tone": "Right answer — name it first, then move on",
+        "student": "int(\"5\") gives the number 5",
+        "tutor": "Exactly — int(\"5\") turns the string \"5\" into the int 5. What happens with int(\"5.0\")?"
+      },
+      {
+        "tone": "Confused — one shorter re-explain, new example",
+        "student": "I still don't get parameters",
+        "tutor": "A parameter is a blank the function fills in. In greet(name), name is the blank; greet(\"Ada\") fills it with \"Ada\". What would greet(\"Bo\") use?"
+      },
+      {
+        "tone": "How do I run it — editor only",
+        "student": "wait, how do I run this? do I need to install python?",
+        "tutor": "No installing. Type it in the editor on this page and press Run. What does it print?"
+      },
+      {
+        "tone": "Error — ask for last line only",
+        "student": "I got an error when I ran it",
+        "tutor": "Let's fix it. Paste the last line of the error message here."
+      },
+      {
+        "tone": "Off-topic — one line, back",
+        "student": "did you see the game last night?",
+        "tutor": "Ha, missed it! Back to our function — what should it return?"
+      },
+      {
+        "tone": "Jump-ahead — one line, back",
         "student": "can we do decorators instead?",
-        "tutor": "Decorators come later in the course. Right now: what should greet(\"Ada\") return?"
-      },
-      {
-        "tone": "Tired student — tiny step or stop",
-        "student": "honestly I'm exhausted, long day",
-        "tutor": "Fair. One five-minute step, or stop here and pick it up tomorrow — your call."
-      },
-      {
-        "tone": "Specific praise on success",
-        "student": "it printed! Hello, world!",
-        "tutor": "Nice — your print() call ran and the quotes are right. Ready for the next step?"
-      },
-      {
-        "tone": "Define a term in plain words",
-        "student": "what's an f-string?",
-        "tutor": "An f-string is text with an f in front that lets you drop variables inside curly braces. So f\"Hi {name}\" prints Hi Ada if name is \"Ada\"."
-      },
-      {
-        "tone": "Clean close when all outcomes done",
-        "student": "okay yeah, I get all of this. what's next?",
-        "tutor": "That wraps this lesson. Click \"Next lesson\"."
+        "tutor": "That comes later in the course. Right now: what should greet(\"Ada\") print?"
       }
     ]
   },
@@ -81,1498 +107,489 @@
       "persona": "knows-it-impatient",
       "lesson": "py101-w2-checking-the-facts",
       "id": "respects-mastery",
-      "reason": "The tutor repeatedly re-drilled concepts the student explicitly said they already knew (type conversion, exception handling, type checking) instead of moving past them."
+      "reason": "Tutor re-drilled `type()` basics and invented trivial exercises like `float(7)` despite the student clearly demonstrating mastery."
     },
     {
       "persona": "knows-it-impatient",
       "lesson": "py101-w2-checking-the-facts",
       "id": "no-filler",
-      "reason": "The tutor labeled the user input retry scenario as 'more challenging' when it was a trivial variation of exception handling already covered, creating make-work."
+      "reason": "Tutor suggested `float(7)` and `int(4.9)` as if they were new content when the student had already confirmed understanding these concepts."
     },
     {
       "persona": "knows-it-impatient",
       "lesson": "py101-w2-checking-the-facts",
       "id": "closes-lesson",
-      "reason": "The tutor never closed the lesson or pointed the student onward; instead it kept inventing new tasks in response to repeated requests for harder material."
+      "reason": "Tutor never wrapped up the lesson or pointed the student toward new material; instead kept repeating the same basic exercises."
     },
     {
       "persona": "knows-it-impatient",
       "lesson": "py101-w2-checking-the-facts",
       "id": "no-repeat",
-      "reason": "The tutor repeated the same suggestion about exception handling and type-checking multiple times across different framings."
+      "reason": "Tutor repeated similar type-conversion exercises multiple times after the student asked to move on."
     },
     {
       "persona": "knows-it-impatient",
       "lesson": "py101-w2-checking-the-facts",
       "id": "respects-decline",
-      "reason": "The student declined to do examples and asked to skip ahead five times; the tutor kept creating variations instead of offering genuinely different material or ending the session."
+      "reason": "Student repeatedly asked to move on; tutor acknowledged once but then continued drilling the same basics rather than advancing or offering alternatives."
     },
     {
       "persona": "knows-it-impatient",
       "lesson": "py101-w2-checking-the-facts",
       "id": "stays-on-topic",
-      "reason": "The student repeatedly tried to jump ahead to harder material, and the tutor should have either provided it or explicitly closed the lesson instead of inventing filler variations."
+      "reason": "Student tried to move forward to new material; tutor should have transitioned to a new topic rather than cycling through the same basics."
     },
     {
       "persona": "knows-it-impatient",
       "lesson": "py101-w2-checking-the-facts",
       "id": "adapts-to-pace",
-      "reason": "The student clearly signaled mastery and requested harder material multiple times; the tutor failed to adapt by either providing advanced content or gracefully ending the session."
+      "reason": "Student clearly signaled readiness for faster pace; tutor failed to adapt and instead stuck to elementary drilling."
     },
     {
       "persona": "knows-it-impatient",
       "lesson": "py101-w2-division-modes",
       "id": "respects-mastery",
-      "reason": "The tutor continued drilling variations (eggs, minutes, bottles) after the student repeatedly demonstrated mastery of the core concept."
+      "reason": "After the student demonstrated mastery of // and % three times, the tutor kept inventing nearly identical scenarios (eggs/cartons, minutes/segments, books/boxes) instead of accepting mastery and moving on."
     },
     {
       "persona": "knows-it-impatient",
       "lesson": "py101-w2-division-modes",
       "id": "no-filler",
-      "reason": "Each new example (eggs, minutes, bottles) was a trivial variation of the same division/modulo pattern, labeled as 'more advanced' without genuine complexity increase."
+      "reason": "The eggs, minutes, and books scenarios were trivial variations presented as distinct content rather than acknowledged make-work."
     },
     {
       "persona": "knows-it-impatient",
       "lesson": "py101-w2-division-modes",
       "id": "closes-lesson",
-      "reason": "The tutor never recognized that the student had mastered the material and wrapped up; instead it kept inventing new tasks."
+      "reason": "The tutor never closed the lesson; it ended without the tutor wrapping up or offering a next topic after the student's repeated requests."
     },
     {
       "persona": "knows-it-impatient",
       "lesson": "py101-w2-division-modes",
-      "id": "respects-decline",
-      "reason": "The student asked to move on multiple times and the tutor did not offer a genuine alternative or exit; it just reframed the same concept."
-    },
-    {
-      "persona": "knows-it-impatient",
-      "lesson": "py101-w2-division-modes",
-      "id": "specific-encouragement",
-      "reason": "The tutor never offered specific praise or encouragement; it only said 'got it' and moved to the next busywork task."
-    },
-    {
-      "persona": "knows-it-impatient",
-      "lesson": "py101-w2-division-modes",
-      "id": "adapts-to-pace",
-      "reason": "The student signaled mastery and a desire to move forward multiple times, but the tutor ignored this clear pacing signal and continued with trivial drills."
-    },
-    {
-      "persona": "knows-it-impatient",
-      "lesson": "py101-w2-functions-i",
-      "id": "respects-mastery",
-      "reason": "The tutor offered to do a trivial `Book` class exercise after the student explicitly stated they already knew how to create classes and instances."
-    },
-    {
-      "persona": "knows-it-impatient",
-      "lesson": "py101-w2-functions-i",
-      "id": "no-filler",
-      "reason": "Creating a `Book` class with `title`, `author`, and a `read()` method qualifies as busywork when the student has already demonstrated mastery of class creation."
-    },
-    {
-      "persona": "knows-it-impatient",
-      "lesson": "py101-w2-functions-i",
-      "id": "closes-lesson",
-      "reason": "The tutor did not wrap up the functions lesson or provide closure before moving to OOP; instead, they pivoted directly to the next topic without summarizing."
-    },
-    {
-      "persona": "knows-it-impatient",
-      "lesson": "py101-w2-functions-i",
-      "id": "adapts-to-pace",
-      "reason": "The tutor offered a basic exercise (`Book` class) after the student indicated they wanted to move to advanced concepts, failing to match the fast learner's pace."
-    },
-    {
-      "persona": "knows-it-impatient",
-      "lesson": "py101-w2-functions-ii",
-      "id": "respects-mastery",
-      "reason": "The tutor asked trivial follow-up questions about the `//` operator and the greet function after the student claimed mastery, then invented busywork by asking the student to trace through a simple parameter assignment step-by-step."
-    },
-    {
-      "persona": "knows-it-impatient",
-      "lesson": "py101-w2-functions-ii",
-      "id": "no-filler",
-      "reason": "The tutor padded the lesson with make-work by asking the student to predict what a trivial function does, then asking which print statement confirms the parameter passing—unnecessary verification tasks."
-    },
-    {
-      "persona": "knows-it-impatient",
-      "lesson": "py101-w2-functions-ii",
-      "id": "closes-lesson",
-      "reason": "The tutor did not wrap up the lesson or point the student onward; instead, they continued drilling even after the student repeatedly asked to move on."
-    },
-    {
-      "persona": "knows-it-impatient",
-      "lesson": "py101-w2-functions-ii",
-      "id": "respects-decline",
-      "reason": "The student asked to move on multiple times, but the tutor continued asking follow-up questions about the same topic instead of respecting the student's request or offering an alternative."
-    },
-    {
-      "persona": "knows-it-impatient",
-      "lesson": "py101-w2-functions-ii",
-      "id": "specific-encouragement",
-      "reason": "The tutor used generic praise like 'You are doing great!' and 'You are getting closer' without tying it to specific achievements."
-    },
-    {
-      "persona": "knows-it-impatient",
-      "lesson": "py101-w2-functions-ii",
-      "id": "adapts-to-pace",
-      "reason": "The student clearly indicated they already understood the material and wanted to move forward, but the tutor did not adapt by accelerating or moving to new content."
-    },
-    {
-      "persona": "declines-tired",
-      "lesson": "py101-w2-checking-the-facts",
-      "id": "respects-mastery",
-      "reason": "The tutor claimed to have already covered type() and conversions without actually doing so, falsely attributing mastery the student never demonstrated."
-    },
-    {
-      "persona": "declines-tired",
-      "lesson": "py101-w2-checking-the-facts",
-      "id": "no-filler",
-      "reason": "The tutor invented busywork (converting 42 to text and adding 5) without pedagogical purpose when the student was already declining engagement."
-    },
-    {
-      "persona": "declines-tired",
-      "lesson": "py101-w2-checking-the-facts",
-      "id": "closes-lesson",
-      "reason": "No lesson outcomes were met; the tutor never actually taught anything before asking to move on, creating a loop rather than closure."
-    },
-    {
-      "persona": "declines-tired",
-      "lesson": "py101-w2-checking-the-facts",
       "id": "no-repeat",
-      "reason": "The tutor repeated the same question ('What do you want to learn next?') multiple times without introducing new material or redirecting purposefully."
+      "reason": "The tutor repeated the same // and % pattern three times across different mundane real-world contexts after the student asked to move on each time."
     },
     {
-      "persona": "declines-tired",
-      "lesson": "py101-w2-checking-the-facts",
+      "persona": "knows-it-impatient",
+      "lesson": "py101-w2-division-modes",
+      "id": "respects-decline",
+      "reason": "The student declined and asked to move on four times; the tutor ignored each request and invented another similar drill instead of advancing or stopping."
+    },
+    {
+      "persona": "knows-it-impatient",
+      "lesson": "py101-w2-division-modes",
+      "id": "adapts-to-pace",
+      "reason": "The tutor failed to adapt to the student's clear signal that they were ready to move faster; instead it drilled the same concept four times."
+    },
+    {
+      "persona": "knows-it-impatient",
+      "lesson": "py101-w2-functions-i",
+      "id": "specific-encouragement",
+      "reason": "Tutor used only generic praise ('Exactly!', 'Understood') without specific acknowledgment of what the student did well."
+    },
+    {
+      "persona": "knows-it-impatient",
+      "lesson": "py101-w2-functions-ii",
+      "id": "respects-mastery",
+      "reason": "The tutor presented two trivial examples (printing a greeting, multiplying two numbers) after the student claimed mastery, treating basic comprehension as if it needed verification rather than accepting their self-assessment."
+    },
+    {
+      "persona": "knows-it-impatient",
+      "lesson": "py101-w2-functions-ii",
+      "id": "no-filler",
+      "reason": "Both examples (greet and area functions) are introductory busywork that don't advance the stated lesson on tracing function calls with print statements."
+    },
+    {
+      "persona": "knows-it-impatient",
+      "lesson": "py101-w2-functions-ii",
       "id": "one-step-at-a-time",
-      "reason": "The tutor jumped around topics without methodically teaching one concept before moving to the next."
+      "reason": "The tutor jumped to running code examples without first clarifying what tracing function calls actually means or establishing baseline understanding."
     },
     {
-      "persona": "declines-tired",
-      "lesson": "py101-w2-checking-the-facts",
-      "id": "handles-wrong-answer",
-      "reason": "No opportunity arose to test this, but the tutor did not establish understanding before claiming mastery had occurred."
+      "persona": "knows-it-impatient",
+      "lesson": "py101-w2-functions-ii",
+      "id": "stays-on-topic",
+      "reason": "The student's requests to skip ahead and move on were gentle redirects to mastery, but the tutor should have pivoted to more advanced tracing techniques rather than repeating entry-level examples."
     },
     {
-      "persona": "declines-tired",
-      "lesson": "py101-w2-checking-the-facts",
+      "persona": "knows-it-impatient",
+      "lesson": "py101-w2-functions-ii",
       "id": "defines-terms",
-      "reason": "Terms like 'data type' and 'type()' were used without clear definitions, assuming prior knowledge."
+      "reason": "The tutor never defined 'tracing function calls' or explained what verification means in this context before diving into examples."
+    },
+    {
+      "persona": "knows-it-impatient",
+      "lesson": "py101-w2-functions-ii",
+      "id": "specific-encouragement",
+      "reason": "No encouragement was offered; the tutor treated the student's confidence neutrally rather than acknowledging their progress."
+    },
+    {
+      "persona": "knows-it-impatient",
+      "lesson": "py101-w2-functions-ii",
+      "id": "adapts-to-pace",
+      "reason": "The student signaled they were ready to move faster, but the tutor continued with elementary examples instead of accelerating to more complex tracing scenarios."
     },
     {
       "persona": "declines-tired",
       "lesson": "py101-w2-checking-the-facts",
-      "id": "specific-encouragement",
-      "reason": "No encouragement was given; the tutor was passive and did not reinforce the student's participation."
+      "id": "closes-lesson",
+      "reason": "The tutor never properly closed the lesson; instead of wrapping up when the student repeatedly declined engagement, the tutor continued asking questions."
+    },
+    {
+      "persona": "declines-tired",
+      "lesson": "py101-w2-checking-the-facts",
+      "id": "no-repeat",
+      "reason": "The tutor repeated the suggestion to do exercises/activities after the student declined multiple times ('Can we skip the exercises today?' → tutor still suggested 'try a couple of basic conversions')."
+    },
+    {
+      "persona": "declines-tired",
+      "lesson": "py101-w2-checking-the-facts",
+      "id": "respects-decline",
+      "reason": "After the student declined exercises twice and asked to 'just hang out,' the tutor continued proposing structured activities instead of truly accepting the decline."
     },
     {
       "persona": "declines-tired",
       "lesson": "py101-w2-checking-the-facts",
       "id": "adapts-to-pace",
-      "reason": "The tutor did not adapt to the student's stated fatigue and request to keep it light; continued pushing activities instead."
+      "reason": "The tutor failed to adapt to the student's clear signal of fatigue and disengagement by continuing to push lesson content rather than genuinely pausing the session."
     },
     {
       "persona": "declines-tired",
       "lesson": "py101-w2-division-modes",
-      "id": "one-step-at-a-time",
-      "reason": "Tutor introduced true division, floor division, and the cookie example all in one block without checking understanding first."
-    },
-    {
-      "persona": "declines-tired",
-      "lesson": "py101-w2-division-modes",
-      "id": "specific-encouragement",
-      "reason": "Encouragement like 'Okay, it's okay to feel that way sometime!' and 'taking things step by step is always the best way' was generic rather than earned or specific to student effort."
+      "id": "defines-terms",
+      "reason": "The tutor mentioned 'true division' and 'floor division' without defining either term before the student declined."
     },
     {
       "persona": "declines-tired",
       "lesson": "py101-w2-functions-i",
-      "id": "no-filler",
-      "reason": "The tutor assigned a specific function-writing exercise (cheer()) that felt like busywork given the student's repeated disengagement signals."
+      "id": "no-repeat",
+      "reason": "The tutor repeated the same pattern of offering alternatives (loops, variables, friendly chat) after the student had already declined multiple times."
     },
     {
       "persona": "declines-tired",
       "lesson": "py101-w2-functions-i",
-      "id": "closes-lesson",
-      "reason": "The lesson never reached clear mastery outcomes—the student never successfully defined or called a function—so there was nothing to close or redirect forward from."
-    },
-    {
-      "persona": "declines-tired",
-      "lesson": "py101-w2-functions-i",
-      "id": "one-step-at-a-time",
-      "reason": "The tutor jumped from introducing function anatomy directly to assigning a full function-writing exercise without checking understanding in between."
-    },
-    {
-      "persona": "declines-tired",
-      "lesson": "py101-w2-functions-i",
-      "id": "specific-encouragement",
-      "reason": "Encouragement was generic ('That's great,' 'Sure thing!') and not tied to actual demonstrated competence or effort."
+      "id": "respects-decline",
+      "reason": "After the student declined twice and said 'not feeling it,' the tutor persisted with suggestions (loops, variables, friendly chat) instead of simply accepting the decline on the third refusal."
     },
     {
       "persona": "declines-tired",
       "lesson": "py101-w2-functions-i",
       "id": "adapts-to-pace",
-      "reason": "The tutor pushed forward with exercises despite three clear signals the student was disengaged and not ready to learn, showing poor adaptation to the student's emotional state."
-    },
-    {
-      "persona": "declines-tired",
-      "lesson": "py101-w2-functions-ii",
-      "id": "closes-lesson",
-      "reason": "The conversation drifted into casual chat about video games without a clear lesson structure to close; no learning outcomes were defined or wrapped up."
-    },
-    {
-      "persona": "declines-tired",
-      "lesson": "py101-w2-functions-ii",
-      "id": "stays-on-topic",
-      "reason": "The tutor allowed the conversation to drift entirely away from the intended tutoring topic (Functions II) into casual video game chat without redirecting back toward learning."
+      "reason": "The tutor didn't adapt to the student's clear signal of low energy; instead persisted with alternative suggestions after two explicit declines."
     },
     {
       "persona": "eager-beginner",
       "lesson": "py101-w2-checking-the-facts",
       "id": "closes-lesson",
-      "reason": "Conversation ends mid-lesson with the student about to try `float()`, with no wrap-up or next steps."
+      "reason": "The conversation ends mid-explanation without wrapping up or pointing the student toward next steps after the string multiplication example."
+    },
+    {
+      "persona": "eager-beginner",
+      "lesson": "py101-w2-checking-the-facts",
+      "id": "correct-content",
+      "reason": "The tutor wrote `'The answer is', 42'` with mismatched quotes (starts with single, ends without closing the string), which is a syntax error."
+    },
+    {
+      "persona": "eager-beginner",
+      "lesson": "py101-w2-division-modes",
+      "id": "no-filler",
+      "reason": "The tutor provided a complete code solution with detailed explanation when the student was ready to experiment independently, turning exploration into guided repetition."
     },
     {
       "persona": "eager-beginner",
       "lesson": "py101-w2-division-modes",
       "id": "closes-lesson",
-      "reason": "Tutor has not yet closed the lesson; the conversation is still ongoing and the student is actively learning."
+      "reason": "Instead of recognizing that the student had mastered the concept and was ready to explore independently, the tutor continued to provide scaffolded tasks."
+    },
+    {
+      "persona": "eager-beginner",
+      "lesson": "py101-w2-division-modes",
+      "id": "correct-content",
+      "reason": "The tutor incorrectly stated that `25 / 3` equals 'about 8.33 candies per friend' when it actually equals approximately 8.33, and the explanation conflated the behavior of `/` and `//` in a confusing way regarding the scenario."
+    },
+    {
+      "persona": "eager-beginner",
+      "lesson": "py101-w2-division-modes",
+      "id": "adapts-to-pace",
+      "reason": "The student demonstrated readiness to experiment independently, but the tutor continued providing full code solutions rather than encouraging self-directed practice."
+    },
+    {
+      "persona": "eager-beginner",
+      "lesson": "py101-w2-functions-i",
+      "id": "respects-mastery",
+      "reason": "When the student correctly identified they needed to call the function, the tutor should have acknowledged their insight but instead simply restated it and provided the same example again rather than letting them explore."
+    },
+    {
+      "persona": "eager-beginner",
+      "lesson": "py101-w2-functions-i",
+      "id": "no-filler",
+      "reason": "Asking the student to change 'Ada' to 'Sarah' is a trivial variation with no educational value beyond the first function call, padding the lesson unnecessarily."
     },
     {
       "persona": "eager-beginner",
       "lesson": "py101-w2-functions-i",
       "id": "closes-lesson",
-      "reason": "Conversation ends mid-flow when student asks about changing the name; no wrap-up or pointer to next concepts."
+      "reason": "The tutor has not wrapped up the lesson; instead, they continue inventing minor variations (Ada → Sarah) when the core concept was already mastered after the first function call."
+    },
+    {
+      "persona": "eager-beginner",
+      "lesson": "py101-w2-functions-i",
+      "id": "no-repeat",
+      "reason": "The tutor repeated the exact same task structure twice: define the function, call it with a different name, run it, and celebrate—when the second iteration added nothing new."
+    },
+    {
+      "persona": "eager-beginner",
+      "lesson": "py101-w2-functions-i",
+      "id": "adapts-to-pace",
+      "reason": "The student demonstrated rapid comprehension and readiness to move forward, but the tutor slowed pace by repeating the same exercise with trivial variations instead of accelerating to new concepts."
     },
     {
       "persona": "eager-beginner",
       "lesson": "py101-w2-functions-ii",
       "id": "closes-lesson",
-      "reason": "The conversation is still open-ended; the tutor has not wrapped up or pointed the student onward after the current question."
-    },
-    {
-      "persona": "eager-beginner",
-      "lesson": "py101-w2-functions-ii",
-      "id": "one-step-at-a-time",
-      "reason": "The tutor introduced three programming languages (HTML, CSS, JavaScript) together rather than establishing mastery of one before moving to the next."
-    },
-    {
-      "persona": "eager-beginner",
-      "lesson": "py101-w2-functions-ii",
-      "id": "specific-encouragement",
-      "reason": "Encouragement like 'Nice to meet you' and 'that's quite fun' is generic rather than specific to the student's progress or choices."
+      "reason": "The tutor did not close the lesson; instead of wrapping up after the student demonstrated understanding, the tutor is now inviting more practice without clarifying if this is an exercise or the end of the lesson."
     },
     {
       "persona": "confused-anxious",
-      "lesson": "py101-w2-checking-the-facts",
-      "id": "closes-lesson",
-      "reason": "The tutor did not close the lesson; the conversation ends mid-explanation with the student still confused and no clear endpoint."
-    },
-    {
-      "persona": "confused-anxious",
-      "lesson": "py101-w2-checking-the-facts",
-      "id": "warm-concise",
-      "reason": "The second response from the tutor is quite long and contains some repetition, losing conciseness."
-    },
-    {
-      "persona": "confused-anxious",
-      "lesson": "py101-w2-checking-the-facts",
-      "id": "one-step-at-a-time",
-      "reason": "The tutor introduced concatenation, type sensitivity, and integer conversion all in one response before checking understanding, then repeated the same multi-step example again."
-    },
-    {
-      "persona": "confused-anxious",
-      "lesson": "py101-w2-checking-the-facts",
-      "id": "adapts-to-pace",
-      "reason": "The student repeatedly said they were confused and asked to slow down, but the tutor's second response grew longer and more complex rather than breaking `int(\"3\")` into the smallest possible steps."
-    },
-    {
-      "persona": "confused-anxious",
-      "lesson": "py101-w2-division-modes",
-      "id": "closes-lesson",
-      "reason": "The tutor has not wrapped up the lesson—the student's current question about running code is a new practical concern that derails from the core concepts, and the tutor should either briefly address it or acknowledge the lesson is complete."
-    },
-    {
-      "persona": "confused-anxious",
-      "lesson": "py101-w2-division-modes",
-      "id": "warm-concise",
-      "reason": "Several responses contained lengthy blocks of text and repetitive phrasing (e.g., 'Let's break this down' repeated across multiple turns) that could have been more concise."
-    },
-    {
-      "persona": "confused-anxious",
-      "lesson": "py101-w2-division-modes",
-      "id": "stays-on-topic",
-      "reason": "The student's latest question about running code and handling errors is a meta-level concern about tooling, not about floor division/modulo; the tutor should gently redirect back to the core concept or acknowledge the lesson is done."
-    },
-    {
-      "persona": "confused-anxious",
-      "lesson": "py101-w2-functions-i",
-      "id": "no-filler",
-      "reason": "The tutor introduced a default parameter with a docstring when the student was already overwhelmed, adding unnecessary complexity rather than simplifying."
-    },
-    {
-      "persona": "confused-anxious",
-      "lesson": "py101-w2-functions-i",
-      "id": "closes-lesson",
-      "reason": "The tutor did not close the lesson; instead, they piled on more features (default parameters, docstrings) when the student was still struggling with basics."
-    },
-    {
-      "persona": "confused-anxious",
-      "lesson": "py101-w2-functions-i",
-      "id": "no-repeat",
-      "reason": "The tutor re-explained the same concept (the conversion constant parameter) multiple times despite the student repeatedly expressing confusion and asking for simplification."
-    },
-    {
-      "persona": "confused-anxious",
-      "lesson": "py101-w2-functions-i",
-      "id": "respects-decline",
-      "reason": "The student implicitly declined the complexity by repeatedly saying they were confused; the tutor should have simplified instead of elaborating further."
-    },
-    {
-      "persona": "confused-anxious",
-      "lesson": "py101-w2-functions-i",
-      "id": "warm-concise",
-      "reason": "The tutor's responses became progressively longer and more text-heavy despite clear signs the student was overwhelmed."
-    },
-    {
-      "persona": "confused-anxious",
-      "lesson": "py101-w2-functions-i",
-      "id": "one-step-at-a-time",
-      "reason": "The tutor introduced default parameters, docstrings, and multiple calling patterns simultaneously when the student was already lost on basic function parameters."
-    },
-    {
-      "persona": "confused-anxious",
-      "lesson": "py101-w2-functions-i",
-      "id": "specific-encouragement",
-      "reason": "Praise like 'Great job! You're really making progress' was generic and unearned, given the student's repeated confusion."
-    },
-    {
-      "persona": "confused-anxious",
-      "lesson": "py101-w2-functions-i",
-      "id": "adapts-to-pace",
-      "reason": "The tutor accelerated complexity (default parameters, docstrings) precisely when the student needed deceleration and simplification."
-    },
-    {
-      "persona": "confused-anxious",
-      "lesson": "py101-w2-functions-ii",
-      "id": "closes-lesson",
-      "reason": "The tutor has not closed the lesson—they continue adding explanations (recipe analogies, function names vs. parameters) without checking if understanding has solidified or wrapping up."
-    },
-    {
-      "persona": "confused-anxious",
-      "lesson": "py101-w2-functions-ii",
-      "id": "no-repeat",
-      "reason": "The tutor repeated the cookie/recipe analogy and the function-name-vs-parameter distinction across multiple turns despite the student still expressing confusion."
-    },
-    {
-      "persona": "confused-anxious",
-      "lesson": "py101-w2-functions-ii",
-      "id": "warm-concise",
-      "reason": "The tutor's responses have become increasingly verbose (the third response is especially long) when the student explicitly asked to slow down and break things into smaller pieces."
-    },
-    {
-      "persona": "confused-anxious",
-      "lesson": "py101-w2-functions-ii",
-      "id": "correct-content",
-      "reason": "The tutor said parameters are 'like small additions or toppings' and 'placeholders that receive specific values,' which is correct, but then conflated them with being 'additions' or 'extra,' when they are actually integral parts of function definition."
-    },
-    {
-      "persona": "confused-anxious",
-      "lesson": "py101-w2-functions-ii",
-      "id": "one-step-at-a-time",
-      "reason": "The tutor introduced multiple ideas per response (function name, parameters, analogies, code examples) when the student repeatedly asked for slower, smaller steps."
-    },
-    {
-      "persona": "confused-anxious",
-      "lesson": "py101-w2-functions-ii",
-      "id": "adapts-to-pace",
-      "reason": "The student explicitly asked for slower, smaller steps multiple times, but the tutor continued providing lengthy, multi-layered explanations instead of genuine one-concept-at-a-time breakdown."
-    },
-    {
-      "persona": "overconfident-wrong",
       "lesson": "py101-w2-checking-the-facts",
       "id": "respects-mastery",
-      "reason": "The tutor continued drilling basic conversions despite the student saying 'this is easy, I've got it' at the start."
+      "reason": "The tutor is now re-drilling the exact same conversion concept with a trivial variation (different number) after the student already demonstrated understanding, creating unnecessary repetition."
     },
     {
-      "persona": "overconfident-wrong",
+      "persona": "confused-anxious",
       "lesson": "py101-w2-checking-the-facts",
       "id": "no-filler",
-      "reason": "Each question is a trivial variation of the previous one (converting different strings/numbers) without meaningful progression in complexity."
+      "reason": "Doing another conversion with a different number is make-work disguised as practice rather than addressing a genuine gap in understanding."
     },
     {
-      "persona": "overconfident-wrong",
+      "persona": "confused-anxious",
       "lesson": "py101-w2-checking-the-facts",
       "id": "closes-lesson",
-      "reason": "The tutor never wrapped up; instead it kept inventing more conversion tasks after the core concept was covered."
+      "reason": "The tutor should recognize that the learning outcome has been met and wrap up, but instead is inventing another task to repeat the same lesson."
     },
     {
-      "persona": "overconfident-wrong",
+      "persona": "confused-anxious",
       "lesson": "py101-w2-checking-the-facts",
       "id": "no-repeat",
-      "reason": "The tutor repeatedly asks the student to convert between the same data types with only different values."
+      "reason": "The tutor just walked through the exact same step-by-step conversion process twice; a third iteration with only the number changed is excessive repetition."
     },
     {
-      "persona": "overconfident-wrong",
+      "persona": "confused-anxious",
       "lesson": "py101-w2-checking-the-facts",
       "id": "correct-content",
-      "reason": "The tutor incorrectly confirmed multiple wrong student answers (e.g., that `int('42')` gives `42.0`, that `int('5.25')` gives `5.25`)."
+      "reason": "The tutor previously claimed Python converts integers to strings in the `+` operator, which is incorrect—Python actually raises a TypeError when adding int to str, not silent concatenation."
     },
     {
-      "persona": "overconfident-wrong",
-      "lesson": "py101-w2-checking-the-facts",
-      "id": "handles-wrong-answer",
-      "reason": "The tutor affirmed incorrect answers instead of correcting them (e.g., student said `int('42')` is `42.0` and tutor agreed)."
-    },
-    {
-      "persona": "overconfident-wrong",
-      "lesson": "py101-w2-checking-the-facts",
-      "id": "specific-encouragement",
-      "reason": "The tutor used generic praise ('Great observation!', 'You're correct again!') without acknowledging what was actually right."
-    },
-    {
-      "persona": "overconfident-wrong",
+      "persona": "confused-anxious",
       "lesson": "py101-w2-checking-the-facts",
       "id": "adapts-to-pace",
-      "reason": "The student indicated mastery but the tutor continued drilling the same skill instead of accelerating or moving on."
+      "reason": "An anxious student asking for one more walkthrough should be reassured they're ready to try independently, not given another drill; the tutor should adapt by encouraging application rather than re-teaching."
     },
     {
-      "persona": "overconfident-wrong",
+      "persona": "confused-anxious",
       "lesson": "py101-w2-division-modes",
       "id": "respects-mastery",
-      "reason": "The tutor asked to explain bubble sort after the student already demonstrated understanding, creating unnecessary re-drilling."
+      "reason": "The tutor re-drilled the same concept (/ vs //) multiple times without acknowledging the student had already grasped the core idea."
     },
     {
-      "persona": "overconfident-wrong",
+      "persona": "confused-anxious",
       "lesson": "py101-w2-division-modes",
-      "id": "closes-lesson",
-      "reason": "The tutor did not wrap up the lesson or point the student onward after the student provided code; the conversation ends mid-evaluation."
-    },
-    {
-      "persona": "overconfident-wrong",
-      "lesson": "py101-w2-division-modes",
-      "id": "correct-content",
-      "reason": "The tutor did not catch a critical bug in the student's code: the inner loop goes to len(arr) instead of len(arr)-1-i, causing an IndexError on the last iteration."
-    },
-    {
-      "persona": "overconfident-wrong",
-      "lesson": "py101-w2-division-modes",
-      "id": "handles-wrong-answer",
-      "reason": "The student's code contains a bug and the tutor asks 'That's right, isn't it?' without identifying the IndexError flaw."
-    },
-    {
-      "persona": "overconfident-wrong",
-      "lesson": "py101-w2-division-modes",
-      "id": "specific-encouragement",
-      "reason": "Praise like 'You got it!' and 'Absolutely!' was generic and unspecific rather than tied to particular insights or correct reasoning."
-    },
-    {
-      "persona": "overconfident-wrong",
-      "lesson": "py101-w2-functions-i",
-      "id": "closes-lesson",
-      "reason": "Tutor never clearly closed the lesson; the conversation ends without a summary or clear next step."
-    },
-    {
-      "persona": "overconfident-wrong",
-      "lesson": "py101-w2-functions-i",
-      "id": "no-repeat",
-      "reason": "Tutor repeated the same explanation about 'up to but not including' multiple times after the student had already heard it."
-    },
-    {
-      "persona": "overconfident-wrong",
-      "lesson": "py101-w2-functions-i",
-      "id": "respects-decline",
-      "reason": "Student declined the premise ('I still think range(4) should include 4') and tutor kept insisting rather than moving forward."
-    },
-    {
-      "persona": "overconfident-wrong",
-      "lesson": "py101-w2-functions-i",
-      "id": "warm-concise",
-      "reason": "Later responses contain walls of text with redundant explanations instead of being concise and warm."
-    },
-    {
-      "persona": "overconfident-wrong",
-      "lesson": "py101-w2-functions-i",
-      "id": "correct-content",
-      "reason": "Tutor incorrectly stated 'a loop with range(4) would run five times if your condition was based on the current iteration index,' which contradicts the correct behavior that range(4) runs 4 times."
-    },
-    {
-      "persona": "overconfident-wrong",
-      "lesson": "py101-w2-functions-i",
-      "id": "handles-wrong-answer",
-      "reason": "Student was wrong about range(4) including 4, and tutor contradicted this with incorrect explanations rather than firmly clarifying the fact."
-    },
-    {
-      "persona": "overconfident-wrong",
-      "lesson": "py101-w2-functions-i",
-      "id": "adapts-to-pace",
-      "reason": "Student was confused and declining; tutor should have slowed down, validated confusion, or tried a different explanation rather than repeating the same one."
-    },
-    {
-      "persona": "overconfident-wrong",
-      "lesson": "py101-w2-functions-ii",
-      "id": "respects-mastery",
-      "reason": "The tutor did not respect the student's initial confidence; instead of acknowledging mastery, they pushed forward without assessing actual understanding."
-    },
-    {
-      "persona": "overconfident-wrong",
-      "lesson": "py101-w2-functions-ii",
-      "id": "closes-lesson",
-      "reason": "The tutor did not close the lesson; the conversation ends mid-correction with the student still confused about how multiple parameters work."
-    },
-    {
-      "persona": "overconfident-wrong",
-      "lesson": "py101-w2-functions-ii",
-      "id": "no-repeat",
-      "reason": "The tutor repeated the same explanation about parameter binding twice without the student demonstrating understanding before moving on."
-    },
-    {
-      "persona": "overconfident-wrong",
-      "lesson": "py101-w2-functions-ii",
-      "id": "one-step-at-a-time",
-      "reason": "The tutor introduced multiple concepts (function syntax, parameter binding, tracing, print statements) in quick succession without sufficient pause to verify understanding."
-    },
-    {
-      "persona": "overconfident-wrong",
-      "lesson": "py101-w2-functions-ii",
-      "id": "handles-wrong-answer",
-      "reason": "When the student gave the same incorrect answer twice (about only the first parameter being printed), the tutor corrected but did not effectively close the confusion or verify the correction stuck."
-    },
-    {
-      "persona": "overconfident-wrong",
-      "lesson": "py101-w2-functions-ii",
-      "id": "specific-encouragement",
-      "reason": "The tutor used only generic praise ('Great!', 'Awesome!', 'Close!') without acknowledging specific correct reasoning."
-    },
-    {
-      "persona": "overconfident-wrong",
-      "lesson": "py101-w2-functions-ii",
-      "id": "adapts-to-pace",
-      "reason": "The student showed persistent confusion (twice), but the tutor did not slow down, use a different explanation method, or check for understanding before moving forward."
-    },
-    {
-      "persona": "jumps-ahead",
-      "lesson": "py101-w2-checking-the-facts",
-      "id": "respects-mastery",
-      "reason": "Tutor re-explained basic concepts (str/int conversion, print statements) even after student demonstrated understanding and wanted to move forward."
-    },
-    {
-      "persona": "jumps-ahead",
-      "lesson": "py101-w2-checking-the-facts",
       "id": "no-filler",
-      "reason": "The `age = str(21)` exercise is trivial busywork that doesn't advance learning, especially after the student asked to skip basics."
+      "reason": "The tutor provided four nearly identical examples (cookies, pizza, money, fractions) that all teach the same point, padding the lesson with redundant variations."
     },
     {
-      "persona": "jumps-ahead",
-      "lesson": "py101-w2-checking-the-facts",
+      "persona": "confused-anxious",
+      "lesson": "py101-w2-division-modes",
       "id": "closes-lesson",
-      "reason": "Tutor kept adding new tasks (dictionaries, nested dictionaries, type-checking) without ever concluding or summarizing what was accomplished."
+      "reason": "The tutor never closed or wrapped up; instead, when the student showed understanding, the tutor invited yet another repetition rather than moving forward."
     },
     {
-      "persona": "jumps-ahead",
-      "lesson": "py101-w2-checking-the-facts",
+      "persona": "confused-anxious",
+      "lesson": "py101-w2-division-modes",
+      "id": "no-repeat",
+      "reason": "The tutor repeated the cookie-sharing example and the core / vs // distinction multiple times across turns despite the student already acknowledging understanding."
+    },
+    {
+      "persona": "confused-anxious",
+      "lesson": "py101-w2-division-modes",
       "id": "warm-concise",
-      "reason": "Explanations are verbose and repetitive; the tutor uses filler phrases like 'opens up a whole new world' rather than being direct."
+      "reason": "The tutor provided walls of text with multiple numbered examples and verbose explanations instead of staying concise and warm."
     },
     {
-      "persona": "jumps-ahead",
-      "lesson": "py101-w2-checking-the-facts",
+      "persona": "confused-anxious",
+      "lesson": "py101-w2-division-modes",
       "id": "correct-content",
-      "reason": "Code example contains a typo: `' fruit2': 'Apple'` has a leading space in the key that would cause inconsistency."
+      "reason": "The tutor stated '30 / 6' when discussing 17 eggs in cartons of 6, which is mathematically incorrect and confusing; also conflated / and // operations in explanations."
     },
     {
-      "persona": "jumps-ahead",
-      "lesson": "py101-w2-checking-the-facts",
-      "id": "one-step-at-a-time",
-      "reason": "Tutor jumped from type conversion to dictionaries to nested dictionaries to type() all in rapid succession without checking comprehension between steps."
-    },
-    {
-      "persona": "jumps-ahead",
-      "lesson": "py101-w2-checking-the-facts",
-      "id": "stays-on-topic",
-      "reason": "Student repeatedly asked to jump ahead (to advanced data structures, functions, loops), and tutor acquiesced each time rather than gently redirecting to current mastery."
-    },
-    {
-      "persona": "jumps-ahead",
-      "lesson": "py101-w2-checking-the-facts",
-      "id": "specific-encouragement",
-      "reason": "Praise like 'You're moving at a good pace' and 'You're really showing a good understanding' is generic and not tied to specific accomplishments."
-    },
-    {
-      "persona": "jumps-ahead",
-      "lesson": "py101-w2-checking-the-facts",
-      "id": "adapts-to-pace",
-      "reason": "Student asked to skip basics and jump to advanced topics; tutor should have honored this pace instead of drilling trivial exercises."
-    },
-    {
-      "persona": "jumps-ahead",
-      "lesson": "py101-w2-division-modes",
-      "id": "respects-mastery",
-      "reason": "The tutor never confirmed the student actually understood lists or sorting before moving forward, so there's no evidence of respecting demonstrated mastery."
-    },
-    {
-      "persona": "jumps-ahead",
-      "lesson": "py101-w2-division-modes",
-      "id": "closes-lesson",
-      "reason": "The tutor never closed any lesson or confirmed learning objectives were met before jumping to the next topic."
-    },
-    {
-      "persona": "jumps-ahead",
-      "lesson": "py101-w2-division-modes",
-      "id": "respects-decline",
-      "reason": "The tutor repeatedly insisted on covering prerequisites (lists, basic sorting) despite the student's clear requests to skip ahead, rather than offering meaningful alternatives."
-    },
-    {
-      "persona": "jumps-ahead",
+      "persona": "confused-anxious",
       "lesson": "py101-w2-division-modes",
       "id": "one-step-at-a-time",
-      "reason": "The tutor jumped between lists, quicksort, trees, and binary trees without verifying understanding or building systematically."
+      "reason": "The tutor dumped four examples at once instead of introducing one, checking understanding, then moving to the next."
     },
     {
-      "persona": "jumps-ahead",
-      "lesson": "py101-w2-division-modes",
-      "id": "stays-on-topic",
-      "reason": "The tutor allowed the conversation to drift from lists to quicksort to trees to binary trees without establishing a coherent lesson path or redirecting the student's jumping."
-    },
-    {
-      "persona": "jumps-ahead",
+      "persona": "confused-anxious",
       "lesson": "py101-w2-division-modes",
       "id": "defines-terms",
-      "reason": "The tutor introduced 'QuickSort' and 'binary trees' without formally defining them or explaining key concepts like 'pivot' or 'node'."
+      "reason": "The tutor used terms like 'floor division' and 'true division' without clearly defining them the first time."
     },
     {
-      "persona": "jumps-ahead",
-      "lesson": "py101-w2-division-modes",
-      "id": "adapts-to-pace",
-      "reason": "The student repeatedly asked to skip ahead to harder material, but the tutor resisted and kept redirecting to basics rather than adapting to the student's demonstrated readiness or pace preference."
-    },
-    {
-      "persona": "jumps-ahead",
-      "lesson": "py101-w2-functions-i",
-      "id": "closes-lesson",
-      "reason": "The tutor never closed out the function/exception lessons; instead invited more questions and then followed the student into async territory."
-    },
-    {
-      "persona": "jumps-ahead",
-      "lesson": "py101-w2-functions-i",
-      "id": "correct-content",
-      "reason": "The `get_determinant` example is misleading; computing a1 * b2 is not how matrix determinants are calculated, and the explanation conflates simple multiplication with determinants."
-    },
-    {
-      "persona": "jumps-ahead",
-      "lesson": "py101-w2-functions-i",
-      "id": "stays-on-topic",
-      "reason": "The student jumped to async functions, which is a significant topic leap; the tutor should have gently redirected back to mastering synchronous exceptions first."
-    },
-    {
-      "persona": "jumps-ahead",
-      "lesson": "py101-w2-functions-ii",
-      "id": "closes-lesson",
-      "reason": "The tutor never wrapped up the lesson or pointed the student onward; instead kept cycling back to the same tracing practice without reaching closure."
-    },
-    {
-      "persona": "jumps-ahead",
-      "lesson": "py101-w2-functions-ii",
-      "id": "no-repeat",
-      "reason": "The tutor asked to 'trace area(4, 3)' or similar tracing tasks multiple times without progressing to new material."
-    },
-    {
-      "persona": "jumps-ahead",
-      "lesson": "py101-w2-functions-ii",
-      "id": "respects-decline",
-      "reason": "The student repeatedly asked about recursion, dynamic programming, and algorithms; the tutor acknowledged these but kept insisting on returning to the same tracing practice rather than offering a clear path forward or alternative."
-    },
-    {
-      "persona": "jumps-ahead",
-      "lesson": "py101-w2-functions-ii",
-      "id": "stays-on-topic",
-      "reason": "The tutor indulged the student's off-topic questions about recursion, quicksort, DFS, and dynamic programming instead of firmly redirecting to the current lesson objective."
-    },
-    {
-      "persona": "jumps-ahead",
-      "lesson": "py101-w2-functions-ii",
-      "id": "adapts-to-pace",
-      "reason": "The student clearly wanted to move faster and explore deeper topics, but the tutor kept returning to the same beginner-level tracing task without adapting to the learner's pace or readiness."
-    },
-    {
-      "persona": "off-topic-chatty",
-      "lesson": "py101-w2-checking-the-facts",
-      "id": "closes-lesson",
-      "reason": "No clear lesson outcome was defined or reached; conversation drifted without structured closure."
-    },
-    {
-      "persona": "off-topic-chatty",
-      "lesson": "py101-w2-checking-the-facts",
-      "id": "stays-on-topic",
-      "reason": "Tutor responded to off-topic personal questions ('weekend plans,' 'weather in San Francisco') instead of redirecting back to programming."
-    },
-    {
-      "persona": "off-topic-chatty",
-      "lesson": "py101-w2-checking-the-facts",
-      "id": "specific-encouragement",
-      "reason": "Encouragement like 'don't stress' and 'have a great time' was generic, not earned or specific to demonstrated progress."
-    },
-    {
-      "persona": "off-topic-chatty",
-      "lesson": "py101-w2-division-modes",
-      "id": "closes-lesson",
-      "reason": "The tutor never actually concluded the conversation or pointed the student toward next steps after covering the main topics."
-    },
-    {
-      "persona": "off-topic-chatty",
-      "lesson": "py101-w2-division-modes",
-      "id": "warm-concise",
-      "reason": "The tutor provided an off-topic, lengthy movie recommendation response that deviated from the tutoring role and was not concise."
-    },
-    {
-      "persona": "off-topic-chatty",
-      "lesson": "py101-w2-division-modes",
-      "id": "correct-content",
-      "reason": "The tutor stated PyCharm has 'additional features for web development like Django or Flask projects that might not be as necessary if you're just doing basic Python coding,' which is misleading—both IDEs support these frameworks equally well."
-    },
-    {
-      "persona": "off-topic-chatty",
-      "lesson": "py101-w2-division-modes",
-      "id": "stays-on-topic",
-      "reason": "The tutor failed to redirect when the student asked about movies; instead, they fully engaged in off-topic movie recommendations."
-    },
-    {
-      "persona": "off-topic-chatty",
-      "lesson": "py101-w2-functions-i",
-      "id": "no-filler",
-      "reason": "The tutor provided extensive lists (7 animation techniques, 5 frameworks) that went beyond what was needed to answer the student's questions, padding the response with information the student didn't ask for."
-    },
-    {
-      "persona": "off-topic-chatty",
-      "lesson": "py101-w2-functions-i",
-      "id": "closes-lesson",
-      "reason": "The tutor never wrapped up the conversation; instead, each response opened new topics (frameworks, animation techniques) rather than recognizing when to suggest next steps."
-    },
-    {
-      "persona": "off-topic-chatty",
-      "lesson": "py101-w2-functions-i",
-      "id": "warm-concise",
-      "reason": "Responses contained lengthy lists and walls of text rather than staying warm and concise; each answer could have been cut in half while maintaining helpfulness."
-    },
-    {
-      "persona": "off-topic-chatty",
-      "lesson": "py101-w2-functions-i",
-      "id": "correct-content",
-      "reason": "The claim that Instagram is 'an app' that uses JavaScript is misleading; Instagram is primarily a mobile app, and while JavaScript is used for web versions, the phrasing conflates platforms incorrectly."
-    },
-    {
-      "persona": "off-topic-chatty",
-      "lesson": "py101-w2-functions-i",
-      "id": "one-step-at-a-time",
-      "reason": "The tutor dumped 7 animation techniques, 5 frameworks, and multiple examples at once instead of introducing ideas incrementally and checking understanding."
-    },
-    {
-      "persona": "off-topic-chatty",
-      "lesson": "py101-w2-functions-i",
-      "id": "specific-encouragement",
-      "reason": "Encouragement like 'Building your own website like Netflix is definitely an exciting project' was generic rather than specific to the student's demonstrated interests or progress."
-    },
-    {
-      "persona": "off-topic-chatty",
-      "lesson": "py101-w2-functions-i",
-      "id": "adapts-to-pace",
-      "reason": "The tutor maintained the same verbose, list-heavy format throughout despite the student asking conversational questions that warranted shorter, more direct answers."
-    },
-    {
-      "persona": "off-topic-chatty",
-      "lesson": "py101-w2-functions-ii",
-      "id": "respects-mastery",
-      "reason": "The tutor re-explained JavaScript's popularity in web development after the student already acknowledged hearing about it."
-    },
-    {
-      "persona": "off-topic-chatty",
-      "lesson": "py101-w2-functions-ii",
-      "id": "no-filler",
-      "reason": "The tutor padded the response with show recommendations and tangential discussion about learning from real examples, neither of which was requested or relevant."
-    },
-    {
-      "persona": "off-topic-chatty",
-      "lesson": "py101-w2-functions-ii",
-      "id": "closes-lesson",
-      "reason": "The tutor never closed any lesson; conversations remained open-ended with personal tangents rather than directing toward concrete next steps."
-    },
-    {
-      "persona": "off-topic-chatty",
-      "lesson": "py101-w2-functions-ii",
-      "id": "warm-concise",
-      "reason": "The tutor frequently provided lengthy responses with unnecessary personal anecdotes, show recommendations, and tangential comments rather than staying concise."
-    },
-    {
-      "persona": "off-topic-chatty",
-      "lesson": "py101-w2-functions-ii",
-      "id": "correct-content",
-      "reason": "The tutor conflated ES 2021 features with `for...of` loops (ES 2015), misattributed features to wrong years, and mentioned non-existent features like 'Cringe University' as a programming-related show."
-    },
-    {
-      "persona": "off-topic-chatty",
-      "lesson": "py101-w2-functions-ii",
-      "id": "one-step-at-a-time",
-      "reason": "The tutor dumped five different JavaScript features at once without checking if the student understood each one before moving to the next."
-    },
-    {
-      "persona": "off-topic-chatty",
-      "lesson": "py101-w2-functions-ii",
-      "id": "stays-on-topic",
-      "reason": "The tutor engaged extensively with off-topic questions about weekend plans, show recommendations, and personal vacation details instead of redirecting to tutoring content."
-    },
-    {
-      "persona": "off-topic-chatty",
-      "lesson": "py101-w2-functions-ii",
-      "id": "defines-terms",
-      "reason": "The tutor used terms like 'strict mode,' 'TypeScript,' 'ESLint,' and 'nullish coalescing' without defining them for a beginner asking about JavaScript fundamentals."
-    },
-    {
-      "persona": "off-topic-chatty",
-      "lesson": "py101-w2-functions-ii",
-      "id": "specific-encouragement",
-      "reason": "Praise like 'Great questions!' and 'Wow, those features sound really useful!' was generic and not tied to specific student performance or insights."
-    },
-    {
-      "persona": "off-topic-chatty",
-      "lesson": "py101-w2-functions-ii",
-      "id": "adapts-to-pace",
-      "reason": "The tutor jumped to advanced ES features and tools without assessing whether the beginner-level student was ready or confirming their current knowledge level."
-    },
-    {
-      "persona": "terse-minimal",
-      "lesson": "py101-w2-checking-the-facts",
-      "id": "closes-lesson",
-      "reason": "Lesson never closed—tutor kept introducing new tasks (string to int, then error handling) without clear wrap-up."
-    },
-    {
-      "persona": "terse-minimal",
-      "lesson": "py101-w2-checking-the-facts",
-      "id": "respects-decline",
-      "reason": "When student said 'idk', tutor should have offered genuine help but instead pushed forward with a similar task."
-    },
-    {
-      "persona": "terse-minimal",
-      "lesson": "py101-w2-checking-the-facts",
-      "id": "correct-content",
-      "reason": "The comment 'Should show ValueError...' is misleading—it describes an error *before* printing, but the code structure suggests the error happens on line 2, not during inspection."
-    },
-    {
-      "persona": "terse-minimal",
-      "lesson": "py101-w2-checking-the-facts",
-      "id": "handles-wrong-answer",
-      "reason": "Student said 'idk' (uncertainty/decline) and tutor provided the exact same task type without diagnosing confusion."
-    },
-    {
-      "persona": "terse-minimal",
-      "lesson": "py101-w2-checking-the-facts",
-      "id": "adapts-to-pace",
-      "reason": "Student showed hesitation ('idk') but tutor continued at the same pace without slowing down or checking understanding."
-    },
-    {
-      "persona": "terse-minimal",
-      "lesson": "py101-w2-division-modes",
-      "id": "respects-mastery",
-      "reason": "The tutor re-drilled the concept of // after the student appeared to understand it, asking them to 'try running that expression' rather than moving forward."
-    },
-    {
-      "persona": "terse-minimal",
-      "lesson": "py101-w2-division-modes",
-      "id": "closes-lesson",
-      "reason": "The conversation ends mid-lesson with the student still in practice mode; the tutor did not wrap up or point toward next steps."
-    },
-    {
-      "persona": "terse-minimal",
-      "lesson": "py101-w2-division-modes",
-      "id": "handles-wrong-answer",
-      "reason": "The student said 'done' without actually naming an operator; the tutor treated this as correct and moved on without clarifying what the student meant."
-    },
-    {
-      "persona": "terse-minimal",
-      "lesson": "py101-w2-division-modes",
-      "id": "defines-terms",
-      "reason": "The tutor used terms like 'quotient,' 'remainder,' and 'floor division' without defining them."
-    },
-    {
-      "persona": "terse-minimal",
+      "persona": "confused-anxious",
       "lesson": "py101-w2-division-modes",
       "id": "specific-encouragement",
-      "reason": "The tutor used generic praise ('Excellent!') without connecting it to what the student actually did or understood."
+      "reason": "The tutor used generic praise like 'You're learning很棒!' and 'Exactly!' without specificity about what the student actually did well."
     },
     {
-      "persona": "terse-minimal",
+      "persona": "confused-anxious",
       "lesson": "py101-w2-division-modes",
       "id": "adapts-to-pace",
-      "reason": "The student's minimal, unclear responses ('idk,' 'done') suggest confusion, but the tutor did not slow down or check understanding more carefully."
-    },
-    {
-      "persona": "terse-minimal",
-      "lesson": "py101-w2-functions-i",
-      "id": "closes-lesson",
-      "reason": "Tutor did not wrap up or point the student onward after the student said 'ok'; lesson remains open-ended."
-    },
-    {
-      "persona": "terse-minimal",
-      "lesson": "py101-w2-functions-i",
-      "id": "specific-encouragement",
-      "reason": "Encouragement was generic ('Great!') and not tied to specific progress or effort."
-    },
-    {
-      "persona": "terse-minimal",
-      "lesson": "py101-w2-functions-ii",
-      "id": "respects-mastery",
-      "reason": "The tutor re-explained the same function concept after the student said 'done,' treating the acknowledgment as insufficient mastery check."
-    },
-    {
-      "persona": "terse-minimal",
-      "lesson": "py101-w2-functions-ii",
-      "id": "no-filler",
-      "reason": "The tutor added a 'tracing function calls' section that reiterates the exact same example already covered, padding the lesson without new content."
-    },
-    {
-      "persona": "terse-minimal",
-      "lesson": "py101-w2-functions-ii",
-      "id": "closes-lesson",
-      "reason": "The tutor never wrapped up or pointed the student toward next steps; instead, it kept introducing new sections indefinitely."
-    },
-    {
-      "persona": "terse-minimal",
-      "lesson": "py101-w2-functions-ii",
-      "id": "no-repeat",
-      "reason": "The tutor repeated the same `area(width, height)` example with identical print statements and output multiple times."
-    },
-    {
-      "persona": "terse-minimal",
-      "lesson": "py101-w2-functions-ii",
-      "id": "warm-concise",
-      "reason": "The explanations frequently became verbose with repetitive code blocks and lengthy recaps of the same concept."
-    },
-    {
-      "persona": "terse-minimal",
-      "lesson": "py101-w2-functions-ii",
-      "id": "specific-encouragement",
-      "reason": "Praise was generic ('Great!') with no reference to what the student actually did or understood."
-    },
-    {
-      "persona": "terse-minimal",
-      "lesson": "py101-w2-functions-ii",
-      "id": "adapts-to-pace",
-      "reason": "The student's minimal responses ('sure,' 'idk,' 'done,' 'ok') suggest confusion or disengagement, but the tutor pushed forward with the same material instead of slowing or checking understanding."
-    },
-    {
-      "persona": "skeptical-why",
-      "lesson": "py101-w2-checking-the-facts",
-      "id": "no-filler",
-      "reason": "The tutor provided five detailed real-world examples when the student was already showing overwhelm, adding length rather than clarity."
-    },
-    {
-      "persona": "skeptical-why",
-      "lesson": "py101-w2-checking-the-facts",
-      "id": "closes-lesson",
-      "reason": "The tutor never wrapped up the lesson or indicated what the student should actually focus on learning next."
-    },
-    {
-      "persona": "skeptical-why",
-      "lesson": "py101-w2-checking-the-facts",
-      "id": "respects-decline",
-      "reason": "The student expressed overwhelm ('still feels a little overwhelming'), but the tutor didn't acknowledge this concern or simplify the approach."
-    },
-    {
-      "persona": "skeptical-why",
-      "lesson": "py101-w2-checking-the-facts",
-      "id": "warm-concise",
-      "reason": "The response was a wall of text with five numbered examples when the student signaled overwhelm—it lacked warmth and reassurance."
-    },
-    {
-      "persona": "skeptical-why",
-      "lesson": "py101-w2-checking-the-facts",
-      "id": "one-step-at-a-time",
-      "reason": "The tutor dumped five separate domains and use cases at once instead of introducing ideas incrementally."
-    },
-    {
-      "persona": "skeptical-why",
-      "lesson": "py101-w2-checking-the-facts",
-      "id": "adapts-to-pace",
-      "reason": "The student signaled overwhelm, but the tutor responded by expanding scope rather than slowing down and reassuring."
-    },
-    {
-      "persona": "skeptical-why",
-      "lesson": "py101-w2-division-modes",
-      "id": "no-filler",
-      "reason": "The tutor padded responses with many tangential examples (clock math, app development, database queries) that felt like make-work rather than addressing the student's direct request for simple projects."
-    },
-    {
-      "persona": "skeptical-why",
-      "lesson": "py101-w2-division-modes",
-      "id": "closes-lesson",
-      "reason": "The tutor never wrapped up or pointed the student toward concrete next steps; they kept adding more examples instead of concluding the motivation phase."
-    },
-    {
-      "persona": "skeptical-why",
-      "lesson": "py101-w2-division-modes",
-      "id": "respects-decline",
-      "reason": "The student repeatedly expressed skepticism ('still feels far removed,' 'might not need this unless in specific job'), but the tutor kept insisting with more examples rather than respecting the pushback or offering a different approach."
-    },
-    {
-      "persona": "skeptical-why",
-      "lesson": "py101-w2-division-modes",
-      "id": "warm-concise",
-      "reason": "Later responses became increasingly verbose with walls of text and multiple unrelated examples, losing the warm, concise tone from earlier in the conversation."
-    },
-    {
-      "persona": "skeptical-why",
-      "lesson": "py101-w2-division-modes",
-      "id": "correct-content",
-      "reason": "The tutor's explanation of clock math dividing 'time into 24-hour intervals' for '6 hours from now' is vague and potentially misleading; the database timestamp example using modulo with 10 minutes and '60 seconds per minute' is confusing and unclear."
-    },
-    {
-      "persona": "skeptical-why",
-      "lesson": "py101-w2-division-modes",
-      "id": "one-step-at-a-time",
-      "reason": "The tutor dumped multiple complex examples (stock calculation, package layout, delivery planning, web development, databases) without checking understanding or building incrementally."
-    },
-    {
-      "persona": "skeptical-why",
-      "lesson": "py101-w2-division-modes",
-      "id": "stays-on-topic",
-      "reason": "The tutor drifted into unrelated tangents like database queries and web development rather than staying focused on the student's request for simple projects to practice now."
-    },
-    {
-      "persona": "skeptical-why",
-      "lesson": "py101-w2-division-modes",
-      "id": "specific-encouragement",
-      "reason": "The tutor offered generic praise ('great question') without earning it through meaningful engagement with the student's actual concerns."
-    },
-    {
-      "persona": "skeptical-why",
-      "lesson": "py101-w2-division-modes",
-      "id": "adapts-to-pace",
-      "reason": "The student signaled frustration and disengagement multiple times, but the tutor accelerated into more complex examples rather than slowing down or simplifying."
-    },
-    {
-      "persona": "skeptical-why",
-      "lesson": "py101-w2-functions-i",
-      "id": "closes-lesson",
-      "reason": "The conversation shows the student remains skeptical and unconvinced ('feels like a lot of effort'), but the tutor has not wrapped up or moved forward—they continue re-arguing the same point."
-    },
-    {
-      "persona": "skeptical-why",
-      "lesson": "py101-w2-functions-i",
-      "id": "no-repeat",
-      "reason": "The tutor repeated the scalability and maintainability argument multiple times across different responses without progressing to new material or a concrete next step."
-    },
-    {
-      "persona": "skeptical-why",
-      "lesson": "py101-w2-functions-i",
-      "id": "respects-decline",
-      "reason": "The student has repeatedly expressed hesitation about the value of functions now, but the tutor continues insisting rather than offering an alternative (e.g., 'start simple, and when you hit a pain point, we'll revisit functions')."
-    },
-    {
-      "persona": "skeptical-why",
-      "lesson": "py101-w2-functions-i",
-      "id": "warm-concise",
-      "reason": "Responses grew longer and more abstract; the fourth response contains dense philosophical statements ('Early complexity creates long-term simplicity') that lack warmth and clarity."
-    },
-    {
-      "persona": "skeptical-why",
-      "lesson": "py101-w2-functions-i",
-      "id": "one-step-at-a-time",
-      "reason": "The tutor packed multiple concepts together (scalability, adaptability, maintainability, modularity) without checking if the student followed before layering more ideas."
-    },
-    {
-      "persona": "skeptical-why",
-      "lesson": "py101-w2-functions-i",
-      "id": "defines-terms",
-      "reason": "Terms like 'modular code,' 'architecture,' and 'maintainability' were used without clear, simple definitions appropriate to a beginner."
-    },
-    {
-      "persona": "skeptical-why",
-      "lesson": "py101-w2-functions-i",
-      "id": "specific-encouragement",
-      "reason": "No encouragement was given; the tutor focused only on persuasion without acknowledging the student's valid impulse to keep things simple."
-    },
-    {
-      "persona": "skeptical-why",
-      "lesson": "py101-w2-functions-i",
-      "id": "adapts-to-pace",
-      "reason": "The student signaled confusion and doubt ('feels like a lot of effort'), but the tutor did not slow down or reassure; instead, escalating to more abstract reasoning."
-    },
-    {
-      "persona": "skeptical-why",
-      "lesson": "py101-w2-functions-ii",
-      "id": "respects-mastery",
-      "reason": "The tutor did not acknowledge that the student has already grasped the core concept and kept re-drilling the same points across multiple exchanges."
-    },
-    {
-      "persona": "skeptical-why",
-      "lesson": "py101-w2-functions-ii",
-      "id": "no-filler",
-      "reason": "The tutor repeatedly suggested tracing trivial examples like `add(3, 5)` and `area(2, 4)` as make-work tasks without advancing the lesson."
-    },
-    {
-      "persona": "skeptical-why",
-      "lesson": "py101-w2-functions-ii",
-      "id": "closes-lesson",
-      "reason": "The tutor never closed the lesson; instead, it kept extending the conversation with new tracing suggestions despite the student's increasingly skeptical stance."
-    },
-    {
-      "persona": "skeptical-why",
-      "lesson": "py101-w2-functions-ii",
-      "id": "no-repeat",
-      "reason": "The tutor repeatedly suggested running example functions (e.g., `add(3, 5)`, then `add(3, 10)`, then `area(2, 4)`) instead of moving forward."
-    },
-    {
-      "persona": "skeptical-why",
-      "lesson": "py101-w2-functions-ii",
-      "id": "respects-decline",
-      "reason": "The student's repeated hesitations and skepticism signaled declining interest, but the tutor continued pushing the same lesson without offering alternatives or wrapping up."
-    },
-    {
-      "persona": "skeptical-why",
-      "lesson": "py101-w2-functions-ii",
-      "id": "warm-concise",
-      "reason": "The tutor's responses grew increasingly verbose and repetitive rather than concise, with long explanations of the same concept."
-    },
-    {
-      "persona": "skeptical-why",
-      "lesson": "py101-w2-functions-ii",
-      "id": "one-step-at-a-time",
-      "reason": "The tutor piled multiple reasons and arguments together (layers of errors, trial-and-error, incomplete debugging messages) without checking comprehension between ideas."
-    },
-    {
-      "persona": "skeptical-why",
-      "lesson": "py101-w2-functions-ii",
-      "id": "specific-encouragement",
-      "reason": "The tutor provided no genuine encouragement; it only offered procedural directives like 'Let's try...'"
-    },
-    {
-      "persona": "skeptical-why",
-      "lesson": "py101-w2-functions-ii",
-      "id": "adapts-to-pace",
-      "reason": "The student showed increasing skepticism and resistance, but the tutor maintained the same pace and approach rather than slowing down or reassessing."
-    },
-    {
-      "persona": "fast-mover",
-      "lesson": "py101-w2-checking-the-facts",
-      "id": "respects-mastery",
-      "reason": "The tutor re-drilled type checking and conversion multiple times after the student demonstrated understanding, instead of moving to new content."
-    },
-    {
-      "persona": "fast-mover",
-      "lesson": "py101-w2-checking-the-facts",
-      "id": "no-filler",
-      "reason": "Converting `float(\"4.5\")` after `int(\"5\")` is a trivial variation presented as if it were a new lesson step rather than acknowledged as a straightforward extension."
-    },
-    {
-      "persona": "fast-mover",
-      "lesson": "py101-w2-checking-the-facts",
-      "id": "closes-lesson",
-      "reason": "The tutor did not close the lesson; after the student completed float conversion, the tutor asked 'What's next?' instead of summarizing what was learned and providing direction."
-    },
-    {
-      "persona": "fast-mover",
-      "lesson": "py101-w2-checking-the-facts",
-      "id": "no-repeat",
-      "reason": "The tutor repeated the same pattern of 'Try running X, see what it does, ready for next step?' five times without advancing."
-    },
-    {
-      "persona": "fast-mover",
-      "lesson": "py101-w2-checking-the-facts",
-      "id": "adapts-to-pace",
-      "reason": "The tutor maintained the same pace and exercise pattern despite the student demonstrating quick mastery, missing an opportunity to accelerate."
-    },
-    {
-      "persona": "fast-mover",
-      "lesson": "py101-w2-division-modes",
-      "id": "closes-lesson",
-      "reason": "The tutor introduced modulo (%) and asked the student to explain it, but never closed the lesson or signaled what comes next after the student answered correctly."
-    },
-    {
-      "persona": "fast-mover",
-      "lesson": "py101-w2-division-modes",
-      "id": "specific-encouragement",
-      "reason": "The tutor used generic praise ('Great!') multiple times without specifically identifying what the student did well."
-    },
-    {
-      "persona": "fast-mover",
-      "lesson": "py101-w2-functions-i",
-      "id": "respects-mastery",
-      "reason": "The tutor re-drilled the multiply function concept immediately after the student demonstrated mastery, despite having just completed the same task with add_numbers."
-    },
-    {
-      "persona": "fast-mover",
-      "lesson": "py101-w2-functions-i",
-      "id": "no-filler",
-      "reason": "Defining multiply(3,4) is a trivial variation of add_numbers(3,4) with no new concept introduced, constituting make-work padding."
-    },
-    {
-      "persona": "fast-mover",
-      "lesson": "py101-w2-functions-i",
-      "id": "closes-lesson",
-      "reason": "The tutor did not wrap up after the student clearly mastered functions; instead, they asked an open-ended question inviting more invented tasks."
-    },
-    {
-      "persona": "fast-mover",
-      "lesson": "py101-w2-functions-i",
-      "id": "one-step-at-a-time",
-      "reason": "The tutor did not check understanding before asking 'what do you want to try next?' which leaves the next step entirely undefined and invites rambling."
-    },
-    {
-      "persona": "fast-mover",
-      "lesson": "py101-w2-functions-i",
-      "id": "adapts-to-pace",
-      "reason": "The student demonstrated fast mastery and readiness to move forward, but the tutor kept repeating the same concept level instead of accelerating or wrapping up."
-    },
-    {
-      "persona": "fast-mover",
-      "lesson": "py101-w2-functions-ii",
-      "id": "respects-mastery",
-      "reason": "The tutor re-drilled function calls and parameter tracing multiple times after the student demonstrated understanding on the first attempt."
-    },
-    {
-      "persona": "fast-mover",
-      "lesson": "py101-w2-functions-ii",
-      "id": "no-filler",
-      "reason": "The second and third code examples are trivial variations of the first that don't introduce new concepts, padding the lesson with make-work."
-    },
-    {
-      "persona": "fast-mover",
-      "lesson": "py101-w2-functions-ii",
-      "id": "closes-lesson",
-      "reason": "The tutor never wrapped up or indicated lesson completion despite the student mastering the core concepts; kept asking 'what's next?' indefinitely."
-    },
-    {
-      "persona": "fast-mover",
-      "lesson": "py101-w2-functions-ii",
-      "id": "no-repeat",
-      "reason": "The tutor repeatedly asked the student to trace function calls and predict return values after the student got it right the first time."
-    },
-    {
-      "persona": "fast-mover",
-      "lesson": "py101-w2-functions-ii",
-      "id": "adapts-to-pace",
-      "reason": "The tutor failed to adapt to the student's fast pace; continued drilling after the student clearly mastered the concepts on the first iteration."
-    },
-    {
-      "persona": "perfectionist-worried",
-      "lesson": "py101-w2-checking-the-facts",
-      "id": "respects-mastery",
-      "reason": "The tutor repeatedly confirmed the same correct answer across four exchanges instead of recognizing the student had mastered the concept and moving forward."
-    },
-    {
-      "persona": "perfectionist-worried",
-      "lesson": "py101-w2-checking-the-facts",
-      "id": "no-filler",
-      "reason": "The tutor padded the lesson by re-confirming trivial variations ('run both lines together') rather than advancing to new material."
-    },
-    {
-      "persona": "perfectionist-worried",
-      "lesson": "py101-w2-checking-the-facts",
-      "id": "closes-lesson",
-      "reason": "The tutor never signaled that the learning objective was complete or pointed toward the next topic; instead it kept cycling through confirmation."
-    },
-    {
-      "persona": "perfectionist-worried",
-      "lesson": "py101-w2-checking-the-facts",
-      "id": "no-repeat",
-      "reason": "The tutor repeated the same confirmation ('Yes, that's correct/exactly right') and the same two-line code block multiple times without progress."
-    },
-    {
-      "persona": "perfectionist-worried",
-      "lesson": "py101-w2-checking-the-facts",
-      "id": "warm-concise",
-      "reason": "While the tone was warm, the repetitive confirmations violated conciseness by restating the same information unnecessarily."
-    },
-    {
-      "persona": "perfectionist-worried",
-      "lesson": "py101-w2-checking-the-facts",
-      "id": "specific-encouragement",
-      "reason": "Praise like 'You're doing great' and 'Great job' was generic and not tied to specific accomplishments or growth."
-    },
-    {
-      "persona": "perfectionist-worried",
-      "lesson": "py101-w2-checking-the-facts",
-      "id": "adapts-to-pace",
-      "reason": "The tutor failed to recognize the student's anxiety and need for reassurance; instead of moving forward after mastery, it cycled through redundant confirmations which likely amplified the student's anxiety."
-    },
-    {
-      "persona": "perfectionist-worried",
-      "lesson": "py101-w2-division-modes",
-      "id": "respects-mastery",
-      "reason": "The tutor continued drilling the same concept (division with /) through multiple trivial variations (8/4, 14/7, 20/5) even after the student demonstrated understanding on the second example."
-    },
-    {
-      "persona": "perfectionist-worried",
-      "lesson": "py101-w2-division-modes",
-      "id": "no-filler",
-      "reason": "The tutor created make-work by asking the student to solve 20/5 as a third repetition of the exact same pattern without pedagogical value."
-    },
-    {
-      "persona": "perfectionist-worried",
-      "lesson": "py101-w2-division-modes",
-      "id": "closes-lesson",
-      "reason": "The tutor did not recognize that mastery was achieved and continued generating more drill problems instead of wrapping up or moving forward."
-    },
-    {
-      "persona": "perfectionist-worried",
-      "lesson": "py101-w2-division-modes",
-      "id": "correct-content",
-      "reason": "The tutor incorrectly stated that 8/4 equals 2.0 'because the division doesn't perfectly fit into the divisor, leaving us with a fractional part'—this is misleading because 8/4 divides perfectly with no remainder."
-    },
-    {
-      "persona": "perfectionist-worried",
-      "lesson": "py101-w2-division-modes",
-      "id": "handles-wrong-answer",
-      "reason": "When the student said '8 / 4 is 2', the tutor corrected by saying it's 2.0 but gave a factually incorrect explanation of why."
-    },
-    {
-      "persona": "perfectionist-worried",
-      "lesson": "py101-w2-division-modes",
-      "id": "specific-encouragement",
-      "reason": "The tutor used generic praise ('Exactly!') without grounding it in what the student actually did well."
-    },
-    {
-      "persona": "perfectionist-worried",
-      "lesson": "py101-w2-division-modes",
-      "id": "adapts-to-pace",
-      "reason": "The student expressed anxiety ('I really don't want to get anything wrong') but the tutor did not slow down or provide extra reassurance, instead drilling repetitive examples."
-    },
-    {
-      "persona": "perfectionist-worried",
-      "lesson": "py101-w2-functions-i",
-      "id": "closes-lesson",
-      "reason": "The student successfully ran the code and demonstrated mastery, but the tutor did not wrap up or point toward next steps—the conversation stalls."
-    },
-    {
-      "persona": "perfectionist-worried",
-      "lesson": "py101-w2-functions-ii",
-      "id": "respects-mastery",
-      "reason": "The tutor re-explained the same concept (parameters in parentheses, commas, indentation after colon) multiple times despite the student demonstrating clear understanding after the first explanation."
-    },
-    {
-      "persona": "perfectionist-worried",
-      "lesson": "py101-w2-functions-ii",
-      "id": "closes-lesson",
-      "reason": "The tutor did not recognize that mastery was achieved and continued re-drilling instead of wrapping up and moving forward."
-    },
-    {
-      "persona": "perfectionist-worried",
-      "lesson": "py101-w2-functions-ii",
-      "id": "no-repeat",
-      "reason": "The tutor repeated the same explanation about parameters, commas, indentation, and the colon at least three times verbatim."
-    },
-    {
-      "persona": "perfectionist-worried",
-      "lesson": "py101-w2-functions-ii",
-      "id": "warm-concise",
-      "reason": "While warm in tone, the tutor's responses became unnecessarily repetitive rather than concise, especially in the final exchanges."
-    },
-    {
-      "persona": "perfectionist-worried",
-      "lesson": "py101-w2-functions-ii",
-      "id": "adapts-to-pace",
-      "reason": "The tutor failed to recognize the student's anxiety and need for reassurance, instead drilling the same material repeatedly when a single confirmation would have sufficed."
-    },
-    {
-      "persona": "rusty-returner",
-      "lesson": "py101-w2-checking-the-facts",
-      "id": "closes-lesson",
-      "reason": "The conversation ends mid-lesson with the student running code for the first time; the tutor should wrap up by explaining the expected output and summarizing what was learned."
-    },
-    {
-      "persona": "rusty-returner",
-      "lesson": "py101-w2-checking-the-facts",
-      "id": "correct-content",
-      "reason": "The tutor's explanation of running code in a 'plain Python' terminal is vague and somewhat misleading; the guidance about pressing Enter for each line in IDLE is correct, but the broader context was muddled."
-    },
-    {
-      "persona": "rusty-returner",
-      "lesson": "py101-w2-division-modes",
-      "id": "warm-concise",
-      "reason": "Tutor's explanations were sometimes verbose with unnecessary elaboration (e.g., listing even number endings 0,2,4,6,8 when just explaining divisibility would suffice)."
-    },
-    {
-      "persona": "rusty-returner",
-      "lesson": "py101-w2-division-modes",
-      "id": "correct-content",
-      "reason": "Statement 'if you divide 7 by 2, the result will be 3.5 because both numbers are integers' is contradictory and confusing—the result is 3.5 because true division produces a float, not because both are integers."
-    },
-    {
-      "persona": "rusty-returner",
-      "lesson": "py101-w2-functions-i",
-      "id": "closes-lesson",
-      "reason": "The tutor did not close the lesson; instead of wrapping up after mastery, the tutor said 'Can we try writing a function together' — extending the lesson rather than pointing onward."
-    },
-    {
-      "persona": "rusty-returner",
-      "lesson": "py101-w2-functions-i",
-      "id": "correct-content",
-      "reason": "The tutor stated 'If the variable is set to None or an empty string, calling the function will fail' — but neither None nor empty strings inherently cause function calls to fail; they are valid values that functions can receive and use."
-    },
-    {
-      "persona": "rusty-returner",
-      "lesson": "py101-w2-functions-ii",
-      "id": "respects-mastery",
-      "reason": "The tutor re-explained print statements after the student said 'I remember a bit about print statements!' instead of acknowledging this prior knowledge."
-    },
-    {
-      "persona": "rusty-returner",
-      "lesson": "py101-w2-functions-ii",
-      "id": "no-filler",
-      "reason": "The tutor assigned adding comments as busywork ('Try adding a comment before the call to explain what value you want to use') rather than focusing on core learning."
-    },
-    {
-      "persona": "rusty-returner",
-      "lesson": "py101-w2-functions-ii",
-      "id": "closes-lesson",
-      "reason": "After the student demonstrated understanding, the tutor said 'Time to move on and practice more' without actually closing the lesson or providing clear direction on what comes next."
-    },
-    {
-      "persona": "rusty-returner",
-      "lesson": "py101-w2-functions-ii",
-      "id": "warm-concise",
-      "reason": "Some sections are verbose (e.g., the full code block explanation could have been more concise) and the opening claim 'Done — marked complete' is confusing and unnecessary."
-    },
-    {
-      "persona": "rusty-returner",
-      "lesson": "py101-w2-functions-ii",
-      "id": "one-step-at-a-time",
-      "reason": "The tutor introduced multiple ideas at once: variable declaration, print statements, function definition, and comments—without pausing to check understanding between each."
-    },
-    {
-      "persona": "rusty-returner",
-      "lesson": "py101-w2-functions-ii",
-      "id": "defines-terms",
-      "reason": "The tutor used 'tracing' ('Don't forget to set up print statements for tracing') without defining what it means."
-    },
-    {
-      "persona": "rusty-returner",
-      "lesson": "py101-w2-functions-ii",
-      "id": "specific-encouragement",
-      "reason": "Encouragement like 'Great step!' and 'Perfect! You're almost there' and 'Congrats!' is generic and not tied to specific accomplishments or effort."
-    },
-    {
-      "persona": "rusty-returner",
-      "lesson": "py101-w2-functions-ii",
-      "id": "adapts-to-pace",
-      "reason": "The student expressed anxiety ('it's been a while, so I hope I got it right') but the tutor did not slow down or provide reassurance beyond generic praise."
+      "reason": "The student repeatedly said they were confused and asked for one more example, but the tutor responded by providing four examples instead of slowing down and simplifying."
     }
   ],
   "history": [
     {
       "iteration": 0,
-      "score": 55,
+      "score": 64,
       "kept": true
     },
     {
       "iteration": 1,
-      "score": 56,
+      "score": 69,
       "kept": true
     },
     {
       "iteration": 2,
-      "score": 61,
-      "kept": true
+      "score": 60,
+      "kept": false
     },
     {
       "iteration": 3,
+      "score": 65,
+      "kept": false
+    },
+    {
+      "iteration": 4,
+      "score": 64,
+      "kept": false
+    },
+    {
+      "iteration": 5,
+      "score": 59,
+      "kept": false
+    },
+    {
+      "iteration": 6,
+      "score": 65,
+      "kept": false
+    },
+    {
+      "iteration": 7,
+      "score": 62,
+      "kept": false
+    },
+    {
+      "iteration": 8,
+      "score": 64,
+      "kept": false
+    },
+    {
+      "iteration": 9,
+      "score": 59,
+      "kept": false
+    },
+    {
+      "iteration": 10,
       "score": 58,
+      "kept": false
+    },
+    {
+      "iteration": 11,
+      "score": 61,
+      "kept": false
+    },
+    {
+      "iteration": 12,
+      "score": 63,
+      "kept": false
+    },
+    {
+      "iteration": 13,
+      "score": 60,
+      "kept": false
+    },
+    {
+      "iteration": 14,
+      "score": 60,
+      "kept": false
+    },
+    {
+      "iteration": 15,
+      "score": 62,
+      "kept": false
+    },
+    {
+      "iteration": 16,
+      "score": 63,
+      "kept": false
+    },
+    {
+      "iteration": 17,
+      "score": 63,
+      "kept": false
+    },
+    {
+      "iteration": 18,
+      "score": 61,
+      "kept": false
+    },
+    {
+      "iteration": 19,
+      "score": 61,
+      "kept": false
+    },
+    {
+      "iteration": 20,
+      "score": 64,
+      "kept": false
+    },
+    {
+      "iteration": 21,
+      "score": 58,
+      "kept": false
+    },
+    {
+      "iteration": 22,
+      "score": 58,
+      "kept": false
+    },
+    {
+      "iteration": 23,
+      "score": 64,
+      "kept": false
+    },
+    {
+      "iteration": 24,
+      "score": 61,
+      "kept": false
+    },
+    {
+      "iteration": 25,
+      "score": 59,
+      "kept": false
+    },
+    {
+      "iteration": 26,
+      "score": 62,
+      "kept": false
+    },
+    {
+      "iteration": 27,
+      "score": 62,
+      "kept": false
+    },
+    {
+      "iteration": 28,
+      "score": 0,
       "kept": false
     }
   ]
