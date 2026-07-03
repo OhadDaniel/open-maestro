@@ -3,6 +3,7 @@ import { DeckContainer } from './features/deck/components/DeckContainer'
 import { SessionProvider } from './features/session/SessionContext'
 import { LessonViewProvider } from './features/lessonview/LessonViewContext'
 import { LessonChatProvider } from './features/lessonchat/LessonChatContext'
+import { LessonThreadProvider } from './features/deck/screens/lesson/LessonThreadContext'
 
 function App() {
   return (
@@ -10,7 +11,9 @@ function App() {
       <ProgressProvider>
         <LessonViewProvider>
           <LessonChatProvider>
-            <DeckContainer />
+            <LessonThreadProvider>
+              <DeckContainer />
+            </LessonThreadProvider>
           </LessonChatProvider>
         </LessonViewProvider>
       </ProgressProvider>

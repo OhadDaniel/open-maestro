@@ -1,15 +1,8 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
-import type { TutorProvider } from '../../../../ai/provider'
-import { resolveTutorProvider } from '../../../../ai/resolve-provider'
-import type { BakedLesson } from '../../../../content/baked.types'
-import { loadProfile, saveProfile } from '../../../../memory/profile-store'
-import type { LearnerProfile } from '../../../../memory/learner-profile.types'
-import { createSession } from '../../../../tutor/session'
-import { useTutorChat } from '../../../lesson/hooks/useTutorChat'
+import { useEffect, useRef } from 'react'
 import { useLessonChatContext } from '../../../lessonchat/LessonChatContext'
-import { useSession } from '../../../session/SessionContext'
 import { useDeckNav } from '../../DeckContext'
 import { ScreenShell } from '../../components/ScreenShell'
+import { useLessonThreadContext } from '../lesson/LessonThreadContext'
 import { CodeChatPane } from './CodeChatPane'
 import { CodeEditorPane } from './CodeEditorPane'
 
@@ -29,36 +22,18 @@ export function CodeScreen() {
   return <CodeSession baked={baked} />
 }
 
-function CodeSession({ baked }: { baked: BakedLesson }) {
+function CodeSession({ baked }: { baked: NonNullable<ReturnType<typeof useLessonChatContext>['baked']> }) {
   const { goTo } = useDeckNav()
-  const { provider } = useSession()
   const { code, setCode, run, running, runResult, runCount, hasRun } = useLessonChatContext()
-  const [profile, setProfile] = useState<LearnerProfile>(() => loadProfile())
-  const session = useMemo(() => createSession(baked.lesson.id), [baked.lesson.id])
-  const tutorProvider = useMemo<TutorProvider>(
-    () => resolveTutorProvider(provider, baked, profile.name),
-    [provider, baked, profile.name],
-  )
-  const onProfileLearned = (learned: LearnerProfile) => {
-    saveProfile(learned)
-    setProfile(learned)
-  }
-  const { messages, isStreaming, sendMessage } = useTutorChat(
-    tutorProvider,
-    baked,
-    session,
-    profile,
-    onProfileLearned,
-    () => undefined,
-  )
+  const { messages, isStreaming, send } = useLessonThreadContext()
 
   const handledRunRef = useRef(runCount)
   useEffect(() => {
     if (runCount > handledRunRef.current && runResult !== null) {
       handledRunRef.current = runCount
-      void sendMessage(runMessage(code, runResult.output))
+      send(runMessage(code, runResult.output))
     }
-  }, [runCount, runResult, code, sendMessage])
+  }, [runCount, runResult, code, send])
 
   return (
     <ScreenShell background="var(--surface)">

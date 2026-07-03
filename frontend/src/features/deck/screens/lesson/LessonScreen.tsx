@@ -4,17 +4,15 @@ import { useViewedLesson } from '../../../lessonview/useViewedLesson'
 import { AppNav } from '../../../appnav/AppNav'
 import { useLessonChatContext } from '../../../lessonchat/LessonChatContext'
 import { LESSON_CHAT_COPY } from '../../../lessonchat/lessonchat.constants'
-import { useSession } from '../../../session/SessionContext'
 import { useDeckNav } from '../../DeckContext'
 import { ScreenShell } from '../../components/ScreenShell'
 import { Composer } from './Composer'
 import { LessonHeader } from './LessonHeader'
 import { LiveMessage, TypingBubble } from './ChatBubbles'
-import { useLessonThread } from './useLessonThread'
+import { useLessonThreadContext } from './LessonThreadContext'
 
 export function LessonScreen() {
   const { goTo } = useDeckNav()
-  const { provider } = useSession()
   const { baked, ready } = useLessonChatContext()
   const { weekIndex, lessonIndex, title } = useViewedLesson()
   const lessonMeta = `PY101 · Week ${weekIndex + 1} · Lesson ${lessonIndex + 1}`
@@ -26,7 +24,7 @@ export function LessonScreen() {
         <div style={{ flex: 1, display: 'flex', flexDirection: 'column', minWidth: 0 }}>
           <LessonHeader step={2} title={title} meta={lessonMeta} onBack={() => goTo('week')} />
           {ready && baked !== null ? (
-            <LessonThread baked={baked} provider={provider} onOpenCode={() => goTo('code')} />
+            <LessonThread onOpenCode={() => goTo('code')} />
           ) : (
             <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--fg-3)', fontSize: 14 }}>Loading your lesson…</div>
           )}
@@ -36,15 +34,9 @@ export function LessonScreen() {
   )
 }
 
-type LessonThreadProps = {
-  baked: NonNullable<ReturnType<typeof useLessonChatContext>['baked']>
-  provider: ReturnType<typeof useSession>['provider']
-  onOpenCode: () => void
-}
-
-function LessonThread({ baked, provider, onOpenCode }: LessonThreadProps) {
+function LessonThread({ onOpenCode }: { onOpenCode: () => void }) {
   const revealRef = useReveal<HTMLDivElement>()
-  const { messages, isStreaming, send } = useLessonThread(baked, provider)
+  const { messages, isStreaming, send } = useLessonThreadContext()
 
   return (
     <>
