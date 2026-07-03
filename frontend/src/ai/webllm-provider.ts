@@ -5,7 +5,7 @@ import type {
 import type { TutorProvider } from './provider'
 import type { ProviderRequest, ProviderStreamEvent } from './provider.types'
 
-export const DEFAULT_WEBLLM_MODEL = 'Qwen2.5-Coder-3B-Instruct-q4f16_1-MLC'
+export const DEFAULT_WEBLLM_MODEL = 'Qwen3-4B-q4f16_1-MLC'
 
 export type LoadProgress = { progress: number; text: string }
 
@@ -13,8 +13,8 @@ export function isWebGpuAvailable(): boolean {
   return typeof navigator !== 'undefined' && 'gpu' in navigator
 }
 
-const STRONG_MODEL = 'Qwen2.5-Coder-7B-Instruct-q4f16_1-MLC'
-const STANDARD_MODEL = 'Qwen2.5-Coder-3B-Instruct-q4f16_1-MLC'
+const STRONG_MODEL = 'Qwen3-4B-q4f16_1-MLC'
+const STANDARD_MODEL = 'Qwen3-4B-q4f16_1-MLC'
 const HIGH_MEMORY_GB = 8
 
 export function pickBestModel(): string {
@@ -61,6 +61,7 @@ export class WebLlmProvider implements TutorProvider {
     const stream = await this.engine.chat.completions.create({
       stream: true,
       messages: toWebLlmMessages(request),
+      extra_body: { enable_thinking: false },
     })
     for await (const chunk of stream) {
       const text = chunk.choices[0]?.delta?.content ?? ''

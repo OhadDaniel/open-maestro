@@ -25,12 +25,8 @@ export function useDownloadProgress(
       return
     }
     startedRef.current = true
-    let active = true
 
     const finish = (provider: TutorProvider | null) => {
-      if (!active) {
-        return
-      }
       setPercent(100)
       setDone(true)
       if (provider !== null) {
@@ -40,41 +36,26 @@ export function useDownloadProgress(
 
     if (reduced) {
       finish(null)
-      return () => {
-        active = false
-      }
+      return
     }
 
     if (!isWebGpuAvailable()) {
       const tracker = { value: 0 }
-      const animation = animate(tracker, {
+      animate(tracker, {
         value: 100,
         duration: DOWNLOAD_DURATION,
         ease: EASE.inOutQuart,
-        onUpdate: () => {
-          if (active) {
-            setPercent(tracker.value)
-          }
-        },
+        onUpdate: () => setPercent(tracker.value),
         onComplete: () => finish(null),
       })
-      return () => {
-        active = false
-        animation.pause()
-      }
+      return
     }
 
     WebLlmProvider.create(pickBestModel(), (report) => {
-      if (active) {
-        setPercent(Math.max(1, Math.min(99, report.progress * 100)))
-      }
+      setPercent(Math.max(1, Math.min(99, report.progress * 100)))
     })
       .then(finish)
       .catch(() => finish(null))
-
-    return () => {
-      active = false
-    }
   }, [existing, setProvider, reduced])
 
   return { percent, done }
