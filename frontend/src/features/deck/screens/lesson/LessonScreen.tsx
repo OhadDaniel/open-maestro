@@ -53,7 +53,7 @@ function LessonThread({ baked, provider, onOpenCode }: LessonThreadProps) {
           {messages.length === 0 ? (
             <TypingBubble />
           ) : (
-            messages.map((message) => <LiveMessage key={message.id} message={message} />)
+            messages.map((message) => <LiveMessage key={message.id} message={message} onSend={send} />)
           )}
           <div style={{ display: 'flex' }}>
             <button

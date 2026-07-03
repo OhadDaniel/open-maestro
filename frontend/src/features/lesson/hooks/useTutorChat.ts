@@ -95,7 +95,7 @@ export function useTutorChat(
         { id: replyId, role: 'tutor', text: '' },
       ])
       setIsStreaming(true)
-      await handleTurn(
+      const { action } = await handleTurn(
         {
           userMessage: trimmed,
           baked,
@@ -115,6 +115,19 @@ export function useTutorChat(
         },
         deps,
       )
+      if (action === 'offer-wrap') {
+        setMessages((prev) =>
+          prev.map((message) =>
+            message.id === replyId
+              ? {
+                  ...message,
+                  kind: 'offer-wrap' as const,
+                  meta: { goalCount: baked.lesson.masteryOutcomes.length },
+                }
+              : message,
+          ),
+        )
+      }
       setIsStreaming(false)
       onReplyComplete(replyId)
     },

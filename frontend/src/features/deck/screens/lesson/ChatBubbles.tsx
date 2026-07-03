@@ -35,8 +35,52 @@ export function TypingBubble() {
   )
 }
 
-export function LiveMessage({ message }: { message: ChatMessage }) {
+function OfferWrapBubble({
+  goalCount,
+  onSend,
+}: {
+  goalCount: number
+  onSend: (text: string) => void
+}) {
+  return (
+    <TutorBubble>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+        <span>{`You've reached all ${goalCount} goals of this lesson.`}</span>
+        <div style={{ display: 'flex', gap: 8 }}>
+          <button
+            onClick={() => onSend('Wrap it up')}
+            style={{ padding: '8px 16px', borderRadius: 20, background: 'var(--accent)', color: '#fff', border: 'none', cursor: 'pointer', fontSize: 14 }}
+          >
+            Wrap it up
+          </button>
+          <button
+            onClick={() => onSend('one more practice')}
+            style={{ padding: '8px 16px', borderRadius: 20, background: 'var(--surface-2)', color: 'var(--fg-1)', border: '1px solid var(--border)', cursor: 'pointer', fontSize: 14 }}
+          >
+            One more practice
+          </button>
+        </div>
+      </div>
+    </TutorBubble>
+  )
+}
+
+export function LiveMessage({
+  message,
+  onSend,
+}: {
+  message: ChatMessage
+  onSend?: (text: string) => void
+}) {
   if (message.role === 'tutor') {
+    if (message.kind === 'offer-wrap') {
+      return (
+        <OfferWrapBubble
+          goalCount={message.meta?.goalCount ?? 0}
+          onSend={onSend ?? (() => {})}
+        />
+      )
+    }
     return <TutorBubble>{message.text.length > 0 ? message.text : '…'}</TutorBubble>
   }
   return <UserBubble>{message.text}</UserBubble>

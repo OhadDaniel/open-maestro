@@ -27,7 +27,7 @@ describe('handleTurn (slice 0)', () => {
     const deps = defaultHarnessDeps(provider)
     const session = createSession(WRITING_YOUR_FIRST_PROGRAM.lesson.id)
     let streamed = ''
-    const draft = await handleTurn(
+    const { draft } = await handleTurn(
       {
         userMessage: 'hi',
         baked: WRITING_YOUR_FIRST_PROGRAM,

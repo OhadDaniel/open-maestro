@@ -149,7 +149,9 @@ function applySessionEffects(
   return next
 }
 
-export async function handleTurn(input: TurnInput, deps: HarnessDeps): Promise<string> {
+export type TurnResult = { draft: string; action: TeachingMove['action'] }
+
+export async function handleTurn(input: TurnInput, deps: HarnessDeps): Promise<TurnResult> {
   const affect = deps.affectObserver(input.userMessage, input.messages)
   const mastery = deps.masteryTracer(input.session, input.baked)
   const misconception = deps.misconceptionDiagnoser(input.userMessage, input.baked)
@@ -162,6 +164,17 @@ export async function handleTurn(input: TurnInput, deps: HarnessDeps): Promise<s
     turnIndex: countStudentTurns(input.messages),
     userMessage: input.userMessage,
   })
+
+  if (move.action === 'offer-wrap') {
+    queueMicrotask(() => {
+      const updatedSession = applySessionEffects(input.session, move, mastery)
+      if (updatedSession !== input.session) input.onSessionUpdated(updatedSession)
+      const updated = deps.memoryCurator(input.userMessage, input.profile)
+      if (updated !== input.profile) input.onProfileLearned(updated)
+    })
+    return { draft: '', action: 'offer-wrap' }
+  }
+
   const request = buildContext({
     baked: input.baked,
     session: input.session,
@@ -174,20 +187,12 @@ export async function handleTurn(input: TurnInput, deps: HarnessDeps): Promise<s
     ? await generateGuarded(request, input, deps)
     : await deps.tutor.stream(request, input.onToken)
   queueMicrotask(() => {
-    const updatedSession = applySessionEffects(
-      input.session,
-      move,
-      mastery,
-    )
-    if (updatedSession !== input.session) {
-      input.onSessionUpdated(updatedSession)
-    }
+    const updatedSession = applySessionEffects(input.session, move, mastery)
+    if (updatedSession !== input.session) input.onSessionUpdated(updatedSession)
     const updated = deps.memoryCurator(input.userMessage, input.profile)
-    if (updated !== input.profile) {
-      input.onProfileLearned(updated)
-    }
+    if (updated !== input.profile) input.onProfileLearned(updated)
   })
-  return draft
+  return { draft, action: move.action }
 }
 
 export type OpeningInput = {
