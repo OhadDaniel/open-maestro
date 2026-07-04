@@ -4,12 +4,12 @@ import { WRITING_YOUR_FIRST_PROGRAM } from '../../content/samples/writing-your-f
 import { createSession, masterOutcome } from '../../tutor/session'
 import { evaluateMasteryTurn } from './masteryCompletion'
 
-// Minimal 3-outcome welcome lesson for welcome-specific tests
+// Minimal 3-outcome welcome lesson for welcome-specific tests (ID matches actual JSON)
 const WELCOME_LESSON: BakedLesson = {
   ...WRITING_YOUR_FIRST_PROGRAM,
   lesson: {
     ...WRITING_YOUR_FIRST_PROGRAM.lesson,
-    id: 'welcome-to-py101',
+    id: 'py101-w1-welcome',
     masteryOutcomes: [
       'Understand how learning works in Maestro',
       'Print a greeting using print()',
@@ -23,9 +23,19 @@ function runMsg(code: string, output: string): string {
 }
 
 describe('evaluateMasteryTurn', () => {
+  // Test 0: engagement reply on welcome outcome 0 → claimed 0
+  it('"yes" on welcome lesson outcome 0 → claimed outcome 0', () => {
+    const session = createSession('py101-w1-welcome')
+    const result = evaluateMasteryTurn({ baked: WELCOME_LESSON, session, userMessage: 'yes ready' })
+    expect(result?.kind).toBe('claimed')
+    if (result?.kind === 'claimed') {
+      expect(result.outcomeIndex).toBe(0)
+    }
+  })
+
   // Test 1: arbitrary (non-canned) string on welcome → lesson-complete when 0 already mastered
   it('custom print text on welcome lesson (outcome 0 mastered) → lesson-complete', () => {
-    const session = masterOutcome(createSession('welcome-to-py101'), 0)
+    const session = masterOutcome(createSession('py101-w1-welcome'), 0)
     const result = evaluateMasteryTurn({
       baked: WELCOME_LESSON,
       session,
@@ -38,7 +48,7 @@ describe('evaluateMasteryTurn', () => {
 
   // Test 2: canned "Hello, PY101!" on welcome → demonstrated outcome 1 only (not complete)
   it('canned Hello, PY101! on welcome lesson → demonstrated outcome 1, not lesson-complete', () => {
-    const session = masterOutcome(createSession('welcome-to-py101'), 0)
+    const session = masterOutcome(createSession('py101-w1-welcome'), 0)
     const result = evaluateMasteryTurn({
       baked: WELCOME_LESSON,
       session,
@@ -108,7 +118,7 @@ describe('evaluateMasteryTurn', () => {
     expect(result?.evidence?.quotedStrings).toContain('Hello, world!')
   })
 
-  // Bonus: print on 1st of 2 outcomes → demonstrated (not complete)
+    // Bonus: print on 1st of 2 outcomes → demonstrated (not complete)
   it('print run on first practicing outcome (general lesson) → demonstrated outcome 0', () => {
     const session = createSession(WRITING_YOUR_FIRST_PROGRAM.lesson.id)
     const result = evaluateMasteryTurn({
@@ -121,5 +131,74 @@ describe('evaluateMasteryTurn', () => {
     if (result?.kind === 'demonstrated') {
       expect(result.outcomeIndex).toBe(0)
     }
+  })
+})
+
+// Mock for unlocking-print-power-ups (3 outcomes: commas, newlines, +/*)
+const POWER_UPS_LESSON: BakedLesson = {
+  ...WRITING_YOUR_FIRST_PROGRAM,
+  lesson: {
+    ...WRITING_YOUR_FIRST_PROGRAM.lesson,
+    id: 'py101-w1-unlocking-print-power-ups',
+    masteryOutcomes: [
+      'Use commas in print() to combine values',
+      'Use multiple print() calls to create new lines',
+      'Use + and * to build strings',
+    ],
+  },
+}
+
+describe('evaluateMasteryTurn — unlocking-print-power-ups', () => {
+  it('comma print demonstrates outcome 0', () => {
+    const session = createSession('py101-w1-unlocking-print-power-ups')
+    const result = evaluateMasteryTurn({
+      baked: POWER_UPS_LESSON,
+      session,
+      userMessage: runMsg('print("Hello", "world")', 'Hello world'),
+      runResult: { ok: true, output: 'Hello world' },
+    })
+    expect(result?.kind).toBe('demonstrated')
+    if (result?.kind === 'demonstrated') {
+      expect(result.outcomeIndex).toBe(0)
+    }
+  })
+
+  it('single print without comma does not demonstrate outcome 0', () => {
+    const session = createSession('py101-w1-unlocking-print-power-ups')
+    const result = evaluateMasteryTurn({
+      baked: POWER_UPS_LESSON,
+      session,
+      userMessage: runMsg('print("hello")', 'hello'),
+      runResult: { ok: true, output: 'hello' },
+    })
+    expect(result).toBeNull()
+  })
+
+  it('two print calls with two output lines demonstrates outcome 1', () => {
+    const session = masterOutcome(createSession('py101-w1-unlocking-print-power-ups'), 0)
+    const result = evaluateMasteryTurn({
+      baked: POWER_UPS_LESSON,
+      session,
+      userMessage: runMsg('print("line1")\nprint("line2")', 'line1\nline2'),
+      runResult: { ok: true, output: 'line1\nline2' },
+    })
+    expect(result?.kind).toBe('demonstrated')
+    if (result?.kind === 'demonstrated') {
+      expect(result.outcomeIndex).toBe(1)
+    }
+  })
+
+  it('string repetition on last outcome → lesson-complete', () => {
+    const session = masterOutcome(
+      masterOutcome(createSession('py101-w1-unlocking-print-power-ups'), 0),
+      1,
+    )
+    const result = evaluateMasteryTurn({
+      baked: POWER_UPS_LESSON,
+      session,
+      userMessage: runMsg('print("=" * 10)', '=========='),
+      runResult: { ok: true, output: '==========' },
+    })
+    expect(result?.kind).toBe('lesson-complete')
   })
 })

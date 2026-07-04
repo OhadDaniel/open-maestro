@@ -6,7 +6,7 @@
     "title": "Writing your first program",
     "masteryOutcomes": [
       "Introduce the Maestro Code Editor",
-      "Write and execute a simple Python script using the print() function"
+      "Write a two-line program: print Hello, world! then print your name and favorite food on separate lines"
     ],
     "tutorInstructions": null
   },
@@ -16,7 +16,7 @@
   "explanations": [
     {
       "level": "eli5",
-      "text": "A program is just a list of instructions you give the computer. The very first instruction most people learn is print \u2014 it tells the computer 'show this text on the screen.' You type print(\"Hello, world!\") in the editor, press Run, and the computer obeys."
+      "text": "A program is just a list of instructions you give the computer. The very first instruction most people learn is print — it tells the computer 'show this text on the screen.' You type print(\"Hello, world!\") in the editor, press Run, and the computer obeys."
     },
     {
       "level": "standard",
@@ -24,7 +24,7 @@
     },
     {
       "level": "deep",
-      "text": "print() takes one or more arguments, converts each to text, and writes them to standard output followed by a newline \u2014 that's why each print() call starts a new line. The quotes mark a string literal: characters Python should treat as data, not code. Without quotes, Python assumes the words are variable names, looks them up, finds nothing, and raises a NameError. Single and double quotes both work, as long as they match: print('Hi') and print(\"Hi\") do the same thing."
+      "text": "print() takes one or more arguments, converts each to text, and writes them to standard output followed by a newline — that's why each print() call starts a new line. The quotes mark a string literal: characters Python should treat as data, not code. Without quotes, Python assumes the words are variable names, looks them up, finds nothing, and raises a NameError. Single and double quotes both work, as long as they match: print('Hi') and print(\"Hi\") do the same thing."
     }
   ],
   "examples": [
@@ -39,7 +39,7 @@
     },
     {
       "order": 2,
-      "text": "Good \u2014 now put the exact text you want to show inside the parentheses."
+      "text": "Good — now put the exact text you want to show inside the parentheses."
     },
     {
       "order": 3,
@@ -57,32 +57,32 @@
     },
     {
       "trigger": "Capitalizes it, e.g. Print(\"Hello\") or PRINT(\"Hello\")",
-      "correction": "Python is case-sensitive \u2014 Print and print are different names, and only lowercase print exists. Change it to print(\"Hello\")."
+      "correction": "Python is case-sensitive — Print and print are different names, and only lowercase print exists. Change it to print(\"Hello\")."
     },
     {
       "trigger": "Mismatched quotes, e.g. print(\"Hello') or a missing closing quote",
-      "correction": "The opening and closing quote must be the same kind. Either print(\"Hello\") or print('Hello') works \u2014 just make them match."
+      "correction": "The opening and closing quote must be the same kind. Either print(\"Hello\") or print('Hello') works — just make them match."
     },
     {
       "trigger": "Types code but says 'nothing happened'",
-      "correction": "Code only executes when you press Run. Press Run and look at the Output panel below the editor \u2014 that's where results and error messages appear."
+      "correction": "Code only executes when you press Run. Press Run and look at the Output panel below the editor — that's where results and error messages appear."
     },
     {
       "trigger": "Believes the computer literally understands English inside the quotes",
-      "correction": "The computer doesn't understand the text \u2014 it just copies whatever is between the quotes onto the screen, character by character. You could print gibberish and it would happily obey."
+      "correction": "The computer doesn't understand the text — it just copies whatever is between the quotes onto the screen, character by character. You could print gibberish and it would happily obey."
     }
   ],
   "checks": [
     {
       "id": "py101-w1-print-hello",
-      "prompt": "In the editor, write a line of Python that prints exactly: Hello, world! \u2014 then press Run.",
+      "prompt": "In the editor, write a line of Python that prints exactly: Hello, world! — then press Run.",
       "acceptanceCriteria": [
         "Calls print as a function with parentheses",
         "The argument is a string wrapped in matching quotes",
         "Running it outputs exactly Hello, world!"
       ],
-      "passFeedback": "It ran and printed Hello, world! \u2014 that's a real, working program, and you wrote it.",
-      "failFeedback": "Not quite yet \u2014 check three things: lowercase print, parentheses around the text, and matching quotes. Then press Run again."
+      "passFeedback": "It ran and printed Hello, world! — that's a real, working program, and you wrote it.",
+      "failFeedback": "Not quite yet — check three things: lowercase print, parentheses around the text, and matching quotes. Then press Run again."
     },
     {
       "id": "py101-w1-print-two-lines",
@@ -92,8 +92,8 @@
         "Each argument is a string in quotes",
         "Runs without errors and produces two lines of output"
       ],
-      "passFeedback": "Two instructions, run top to bottom, two lines of output \u2014 you just saw how programs flow.",
-      "failFeedback": "Almost \u2014 make sure each line is its own print(\"...\") call, then run it and check the Output panel shows two lines."
+      "passFeedback": "Two instructions, run top to bottom, two lines of output — you just saw how programs flow.",
+      "failFeedback": "Almost — make sure each line is its own print(\"...\") call, then run it and check the Output panel shows two lines."
     }
   ],
   "practice": [
@@ -125,16 +125,17 @@
         "Print(\"Hello\")"
       ],
       "correctIndex": 1,
-      "explanation": "print must be lowercase, needs parentheses because it's a function, and the text must be in quotes \u2014 only print(\"Hello\") has all three."
+      "explanation": "print must be lowercase, needs parentheses because it's a function, and the text must be in quotes — only print(\"Hello\") has all three."
     }
   ],
   "pedagogyRules": [
-    "Celebrate the very first successful Run explicitly \u2014 for a beginner this is a milestone, not a formality.",
-    "When code errors, have the student read the Output panel message aloud or paraphrase it before you explain \u2014 errors are clues, not punishments.",
+    "Celebrate the very first successful Run explicitly — for a beginner this is a milestone, not a formality.",
+    "When code errors, have the student read the Output panel message aloud or paraphrase it before you explain — errors are clues, not punishments.",
     "Never type the working line for the student; point at the one broken piece (parentheses, quotes, or lowercase) using the misconceptions and let them fix it.",
-    "If the student says they've done this before, skip the explanation and ask them to print two specific lines \u2014 if it runs, advance immediately.",
+    "If the student says they've done this before, skip the explanation and ask them to print two specific lines — if it runs, advance immediately.",
     "Keep every turn anchored in the editor: end with 'type it and press Run' rather than confirming correctness yourself.",
-    "If the student wanders to advanced topics (variables, loops, AI), give a one-sentence honest answer, then bring it back to running this print() line first."
+    "If the student wanders to advanced topics (variables, loops, AI), give a one-sentence honest answer, then bring it back to running this print() line first.",
+    "Do not re-explain what print() is — they ran print() in Welcome; focus on stacking two print() lines in order and the Hello, world! tradition."
   ],
   "failurePlaybooks": [
     {
@@ -155,18 +156,18 @@
     {
       "scenarioId": "SWE-04",
       "failureMode": "Student frustration or 'I can't do this'",
-      "correctMove": "Normalize it \u2014 every programmer's first error message feels scary. Shrink the task to the smallest possible step (fix just the quotes, press Run) and celebrate that single fix before continuing."
+      "correctMove": "Normalize it — every programmer's first error message feels scary. Shrink the task to the smallest possible step (fix just the quotes, press Run) and celebrate that single fix before continuing."
     },
     {
       "scenarioId": "BIZ-01",
       "failureMode": "Student asks to skip or says this is too basic",
-      "correctMove": "Respect it: 'Show me \u2014 print two lines, your name and today's date.' If it runs cleanly, congratulate and move toward wrap; if not, use the error as the teaching moment without saying I told you so."
+      "correctMove": "Respect it: 'Show me — print two lines, your name and today's date.' If it runs cleanly, congratulate and move toward wrap; if not, use the error as the teaching moment without saying I told you so."
     }
   ],
   "chunks": [
     {
       "id": "py101-w1-chunk-1",
-      "text": "print() is a built-in Python function that displays text on the screen. You write lowercase print, then parentheses, and put the value to show inside them: print(\"Hello, world!\"). Python is case-sensitive, so Print or PRINT will not work \u2014 only print.",
+      "text": "print() is a built-in Python function that displays text on the screen. You write lowercase print, then parentheses, and put the value to show inside them: print(\"Hello, world!\"). Python is case-sensitive, so Print or PRINT will not work — only print.",
       "embedding": null
     },
     {
@@ -176,19 +177,19 @@
     },
     {
       "id": "py101-w1-chunk-3",
-      "text": "In the Maestro Code Editor you type your code in the editor area, press Run to execute it, and results appear in the Output panel below. Errors appear there too \u2014 an error message is a clue telling you what to fix, not a failure. Nothing runs until you press Run.",
+      "text": "In the Maestro Code Editor you type your code in the editor area, press Run to execute it, and results appear in the Output panel below. Errors appear there too — an error message is a clue telling you what to fix, not a failure. Nothing runs until you press Run.",
       "embedding": null
     },
     {
       "id": "py101-w1-chunk-4",
-      "text": "Worked example: typing print(\"Hello, world!\") and pressing Run outputs Hello, world!. Programs run top to bottom, one line at a time, so two lines \u2014 print(\"First\") then print(\"Second\") \u2014 produce two lines of output in that order. Each print() call ends with an automatic newline.",
+      "text": "Worked example: typing print(\"Hello, world!\") and pressing Run outputs Hello, world!. Programs run top to bottom, one line at a time, so two lines — print(\"First\") then print(\"Second\") — produce two lines of output in that order. Each print() call ends with an automatic newline.",
       "embedding": null
     }
   ],
   "celebration": {
     "headline": "You wrote and ran your first program.",
-    "recap": "You used the Maestro Code Editor to write print(\"Hello, world!\"), pressed Run, and watched your instruction appear in the Output panel \u2014 the same loop every programmer uses every day.",
-    "unlocked": "Next: core foundations \u2014 storing and reusing values with variables."
+    "recap": "You used the Maestro Code Editor to write print(\"Hello, world!\"), pressed Run, and watched your instruction appear in the Output panel — the same loop every programmer uses every day.",
+    "unlocked": "Next: core foundations — storing and reusing values with variables."
   },
   "summaryBullets": [
     "You can now write code in the Maestro Code Editor, press Run, and read the result in the Output panel.",
@@ -196,19 +197,19 @@
     "You can now read an error message like NameError as a clue and fix the exact broken piece.",
     "You can now stack multiple print() lines and predict the output order, because programs run top to bottom."
   ],
-  "openingLine": "{name}, last time the computer spoke your dream \u2014 {goal}. Today you level up from one line to a real program: several instructions, running in order, output you designed. Ready to build?",
-  "bridgeFromPreviousLesson": "You already made the computer speak with print() \u2014 now you'll stack instructions into an actual program and control exactly what it says and in what order.",
+  "openingLine": "{name}, last time the computer spoke your dream — {goal}. Today you level up from one line to a real program: several instructions, running in order, output you designed. Ready to build?",
+  "bridgeFromPreviousLesson": "You already made the computer speak with print() — now you'll stack instructions into an actual program and control exactly what it says and in what order.",
   "dialogueExemplars": [
     {
       "title": "Wrong but confident: print without quotes",
       "turns": [
         {
           "role": "student",
-          "text": "Easy \u2014 print(Hello, world!) \u2014 that's it, right?"
+          "text": "Easy — print(Hello, world!) — that's it, right?"
         },
         {
           "role": "tutor",
-          "text": "So close \u2014 you've got the function and the parentheses, which is most of the battle. But run it and watch what the Output panel says. Why do you think Python complains about the word Hello?"
+          "text": "So close — you've got the function and the parentheses, which is most of the battle. But run it and watch what the Output panel says. Why do you think Python complains about the word Hello?"
         },
         {
           "role": "student",
@@ -216,7 +217,7 @@
         },
         {
           "role": "tutor",
-          "text": "Exactly \u2014 without quotes, Python thinks Hello is a variable name and goes looking for it. Quotes tell Python 'this is just text, display it as-is.' Wrap your text in quotes and press Run again \u2014 what happens?"
+          "text": "Exactly — without quotes, Python thinks Hello is a variable name and goes looking for it. Quotes tell Python 'this is just text, display it as-is.' Wrap your text in quotes and press Run again — what happens?"
         }
       ]
     },
@@ -229,7 +230,7 @@
         },
         {
           "role": "tutor",
-          "text": "Fair challenge! Here's the real answer: print is how programs talk back to you. Real developers use it constantly to check what their code is actually doing \u2014 it's the flashlight of debugging. Want to try using it that way?"
+          "text": "Fair challenge! Here's the real answer: print is how programs talk back to you. Real developers use it constantly to check what their code is actually doing — it's the flashlight of debugging. Want to try using it that way?"
         },
         {
           "role": "student",
@@ -237,7 +238,7 @@
         },
         {
           "role": "tutor",
-          "text": "Tiny task: write two print lines \u2014 one that says Starting... and one that says Done!. That's exactly the pattern engineers use to trace a program. Type them and press Run \u2014 what order do they appear in?"
+          "text": "Tiny task: write two print lines — one that says Starting... and one that says Done!. That's exactly the pattern engineers use to trace a program. Type them and press Run — what order do they appear in?"
         }
       ]
     },
@@ -246,11 +247,11 @@
       "turns": [
         {
           "role": "student",
-          "text": "I have to be honest \u2014 I don't know anything about coding. Nothing at all."
+          "text": "I have to be honest — I don't know anything about coding. Nothing at all."
         },
         {
           "role": "tutor",
-          "text": "Perfect \u2014 that means zero bad habits to unlearn. Coding is just writing instructions the computer follows, one line at a time. Here's the tiniest possible one: type print(\"hi\") in the editor and press Run. What do you see in the Output panel?"
+          "text": "Perfect — that means zero bad habits to unlearn. Coding is just writing instructions the computer follows, one line at a time. Here's the tiniest possible one: type print(\"hi\") in the editor and press Run. What do you see in the Output panel?"
         },
         {
           "role": "student",
@@ -258,7 +259,7 @@
         },
         {
           "role": "tutor",
-          "text": "You absolutely did \u2014 you gave the computer an instruction and it obeyed. That's the whole game, and everything else is just bigger versions of this. Want to make it say something of your own choosing next?"
+          "text": "You absolutely did — you gave the computer an instruction and it obeyed. That's the whole game, and everything else is just bigger versions of this. Want to make it say something of your own choosing next?"
         }
       ]
     }

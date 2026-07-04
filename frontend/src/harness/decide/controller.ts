@@ -79,6 +79,11 @@ function stepContextRules(
       'This lesson uses code — mention the **Open code panel** button at the bottom of the chat so the student knows where to write and run Python.',
     )
   }
+  if (lesson.lesson.id === 'py101-w1-writing-your-first-program') {
+    rules.push(
+      "Student already knows print() from Welcome — do NOT re-teach print basics or repeat 'in this course you learn by doing'; focus on Hello, world! and two-line programs in order.",
+    )
+  }
   return rules
 }
 
