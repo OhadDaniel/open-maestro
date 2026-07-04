@@ -35,15 +35,15 @@
   "hintLadder": [
     {
       "order": 1,
-      "hint": "Everything starts with the word print, then parentheses right after it."
+      "text": "Everything starts with the word print, then parentheses right after it."
     },
     {
       "order": 2,
-      "hint": "Inside the parentheses, put your words between quotes: print(\"like this\")."
+      "text": "Inside the parentheses, put your words between quotes: print(\"like this\")."
     },
     {
       "order": 3,
-      "hint": "Type exactly: print(\"Hello, PY101!\") \u2014 then press Run and read the output panel."
+      "text": "Type exactly: print(\"Hello, PY101!\") \u2014 then press Run and read the output panel."
     }
   ],
   "misconceptions": [
@@ -92,7 +92,9 @@
     {
       "kind": "open",
       "prompt": "In one sentence: what does print() do, and why do the quotes matter?",
-      "rubric": "Mentions that print displays text in the output, and that quotes mark the exact text (their words, not code)."
+      "rubric": [
+        "Mentions that print displays text in the output, and that quotes mark the exact text (their words, not code)."
+      ]
     },
     {
       "kind": "closed",
@@ -200,6 +202,10 @@
         {
           "role": "tutor",
           "text": "Run it and watch \u2014 you'll get a NameError. Without quotes, Python hunts for a variable named Hello. The quotes say: these are my words, not code. Try print(\"Hello\") \u2014 what changes?"
+        },
+        {
+          "role": "student",
+          "text": "oh wow yeah, NameError... and with quotes it just says Hello"
         }
       ]
     },
@@ -213,6 +219,10 @@
         {
           "role": "tutor",
           "text": "Every app you've ever used shows you text somewhere \u2014 print is the seed of that. It's also how coders see inside their programs. Make it print your name, then tell me what you'd want an app of yours to say."
+        },
+        {
+          "role": "student",
+          "text": "ok fair, it printed my name"
         }
       ]
     }
