@@ -43,7 +43,6 @@ function CodeSession({ baked }: { baked: NonNullable<ReturnType<typeof useLesson
           messages={messages}
           isStreaming={isStreaming}
           onBack={() => goTo('lesson')}
-          onFinish={() => goTo('lessondone')}
         />
         <CodeEditorPane
           code={code}

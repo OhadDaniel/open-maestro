@@ -8,7 +8,6 @@ type CodeChatPaneProps = {
   messages: ChatMessage[]
   isStreaming: boolean
   onBack: () => void
-  onFinish: () => void
 }
 
 function MiniBubble({ children }: { children: React.ReactNode }) {
@@ -22,9 +21,8 @@ function MiniBubble({ children }: { children: React.ReactNode }) {
   )
 }
 
-export function CodeChatPane({ title, messages, isStreaming, onBack, onFinish }: CodeChatPaneProps) {
+export function CodeChatPane({ title, messages, isStreaming, onBack }: CodeChatPaneProps) {
   const tutorReplies = messages.filter((message) => message.role === 'tutor' && message.text.trim().length > 0)
-  const canFinish = tutorReplies.length > 0 && !isStreaming
 
   return (
     <div style={{ flex: '0 0 500px', display: 'flex', flexDirection: 'column', minWidth: 0, borderRight: '1px solid var(--border)' }}>
@@ -42,12 +40,6 @@ export function CodeChatPane({ title, messages, isStreaming, onBack, onFinish }:
           <MiniBubble key={message.id}>{message.text}</MiniBubble>
         ))}
         {isStreaming && tutorReplies.length === 0 && <MiniBubble>{CODE_SCREEN_COPY.reading}</MiniBubble>}
-        <div style={{ display: 'flex', justifyContent: 'flex-end', opacity: canFinish ? 1 : 0, pointerEvents: canFinish ? 'auto' : 'none', transition: 'opacity .4s var(--e-out)' }}>
-          <button type="button" onClick={onFinish} style={{ display: 'inline-flex', alignItems: 'center', gap: 7, height: 36, padding: '0 16px', fontSize: 14, fontWeight: 600, background: 'var(--accent)', color: 'var(--ink)', border: 'none', borderRadius: '9999px 9999px 0 9999px', cursor: 'pointer' }}>
-            {CODE_SCREEN_COPY.finishLesson}
-            <Icon name="check" size={15} />
-          </button>
-        </div>
       </div>
       <div style={{ flex: 'none', padding: '12px 20px 16px' }}>
         <div style={{ background: 'var(--surface-muted)', border: '1px solid var(--border-strong)', borderRadius: 14, padding: '5px 6px 6px' }}>

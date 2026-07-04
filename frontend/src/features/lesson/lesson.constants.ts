@@ -3,7 +3,6 @@ export const LESSON_LABELS = {
   send: 'Send',
   thinking: 'Maestro is typing…',
   understood: 'I understand',
-  finish: 'Finish lesson',
   progressRail: 'Your progress',
 } as const
 

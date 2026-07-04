@@ -2,7 +2,6 @@ export const CODE_SCREEN_COPY = {
   fileName: 'main.py',
   run: 'Run',
   starting: 'Starting Python…',
-  finishLesson: 'Finish lesson',
   consoleLabel: 'Console',
   composerPlaceholder: 'Message Maestro',
   runIntro: "Here's your code. Press Run to try it — I'll read what it prints and help from there.",
