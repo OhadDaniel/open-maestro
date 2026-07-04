@@ -26,21 +26,20 @@ export type OnToken = (text: string) => void
 const TW_CHARS = 3
 const TW_DELAY_MS = 25
 
-async function typewriterEmit(
+async function typewriterReveal(
   text: string,
-  onToken: OnToken,
+  onReveal: (text: string) => void,
   skipRef?: { current: boolean },
 ): Promise<void> {
-  for (let i = 0; i < text.length; i += TW_CHARS) {
+  for (let pos = TW_CHARS; pos < text.length; pos += TW_CHARS) {
     if (skipRef?.current) {
-      onToken(text.slice(i))
+      onReveal(text)
       return
     }
-    onToken(text.slice(i, Math.min(i + TW_CHARS, text.length)))
-    if (i + TW_CHARS < text.length) {
-      await new Promise<void>((r) => setTimeout(r, TW_DELAY_MS))
-    }
+    onReveal(text.slice(0, pos))
+    await new Promise<void>((r) => setTimeout(r, TW_DELAY_MS))
   }
+  onReveal(text)
 }
 
 export type TurnInput = {
@@ -220,6 +219,7 @@ export type OpeningInput = {
   session: TutorSession
   profile: LearnerProfile
   onToken: OnToken
+  onReveal?: (text: string) => void
   skipRef?: { current: boolean }
 }
 
@@ -260,7 +260,11 @@ export function renderOpeningLine(baked: BakedLesson, profile: LearnerProfile): 
 export async function openLesson(input: OpeningInput, deps: HarnessDeps): Promise<string> {
   if (input.baked.openingLine.length > 0) {
     const text = renderOpeningLine(input.baked, input.profile)
-    await typewriterEmit(text, input.onToken, input.skipRef)
+    if (input.onReveal !== undefined) {
+      await typewriterReveal(text, input.onReveal, input.skipRef)
+    } else {
+      input.onToken(text)
+    }
     return text
   }
   const messages: ProviderMessage[] = [{ role: 'user', content: OPENING_BOOTSTRAP }]

@@ -75,6 +75,12 @@ export function useTutorChat(
               message.id === replyId ? { ...message, text: message.text + token } : message,
             ),
           ),
+        onReveal: (text) =>
+          setMessages((prev) =>
+            prev.map((message) =>
+              message.id === replyId ? { ...message, text } : message,
+            ),
+          ),
       },
       deps,
     )

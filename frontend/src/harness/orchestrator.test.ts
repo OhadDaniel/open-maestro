@@ -93,20 +93,46 @@ describe('openLesson (slice 2)', () => {
     const deps = defaultHarnessDeps(provider)
     const session = createSession(WRITING_YOUR_FIRST_PROGRAM.lesson.id)
     const profile = withName(emptyProfile(), 'Dana')
-    let streamed = ''
+    let revealed = ''
     const draft = await openLesson(
       {
         baked: WRITING_YOUR_FIRST_PROGRAM,
         session,
         profile,
         skipRef: { current: true },
-        onToken: (t) => { streamed += t },
+        onToken: () => {},
+        onReveal: (t) => { revealed = t },
       },
       deps,
     )
     expect(providerCalled).toBe(false)
     expect(draft).toContain('Dana')
-    expect(streamed).toBe(draft)
+    expect(revealed).toBe(draft)
+  })
+
+  it('uses onReveal with cumulative text for typewriter reveal', async () => {
+    const provider: TutorProvider = {
+      async *streamMessage(): AsyncIterable<ProviderStreamEvent> {
+        yield { type: 'message_stop', stopReason: 'stop' }
+      },
+    }
+    const deps = defaultHarnessDeps(provider)
+    const session = createSession(WRITING_YOUR_FIRST_PROGRAM.lesson.id)
+    const profile = withName(emptyProfile(), 'Dana')
+    const revealCalls: string[] = []
+    await openLesson(
+      {
+        baked: WRITING_YOUR_FIRST_PROGRAM,
+        session,
+        profile,
+        skipRef: { current: true },
+        onToken: () => {},
+        onReveal: (t) => { revealCalls.push(t) },
+      },
+      deps,
+    )
+    expect(revealCalls.length).toBe(1)
+    expect(revealCalls[0]).toContain('Dana')
   })
 })
 
