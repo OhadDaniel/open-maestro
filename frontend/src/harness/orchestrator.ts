@@ -76,9 +76,8 @@ export type TurnInput = {
   onToken: OnToken
   onProfileLearned: (profile: LearnerProfile) => void
   onSessionUpdated: (session: TutorSession) => void
-  runResult?: { ok: boolean; output: string }  // H10(a): run-driven mastery
-  stuckCount?: number                           // H10(b): anti-stuck valve turns
-  hasRunOk?: boolean                            // H10(b): successful run in stuck window
+  runResult?: { ok: boolean; output: string }
+  stuckCount?: number
 }
 
 export type TutorRunner = {
@@ -169,33 +168,11 @@ function applySessionEffects(
   session: TutorSession,
   move: TeachingMove,
   mastery: ReturnType<typeof masteryTracer>,
-  runResult?: { ok: boolean; output: string },
-  stuckCount = 0,
-  hasRunOk = false,
 ): SessionEffects {
   let next = session
   let masteryAdvanced = false
 
-  // H10(a): run-driven mastery — a successful run IS the demonstration
-  if (runResult?.ok && runResult.output.trim().length > 0) {
-    const practicingIndex = mastery.skills.findIndex((s) => s.status === 'practicing')
-    if (practicingIndex >= 0 && !next.progress.masteredOutcomes.includes(String(practicingIndex))) {
-      next = masterOutcome(next, practicingIndex)
-      masteryAdvanced = true
-    }
-  }
-
-  // Existing: confident-claim advance
-  if (move.action === 'advance' && move.reason === 'confident-claim') {
-    const practicingIndex = mastery.skills.findIndex((s) => s.status === 'practicing')
-    if (practicingIndex >= 0 && !next.progress.masteredOutcomes.includes(String(practicingIndex))) {
-      next = masterOutcome(next, practicingIndex)
-      masteryAdvanced = true
-    }
-  }
-
-  // H10(b): anti-stuck valve — 3+ same-outcome turns with a successful run → force-advance
-  if (stuckCount >= 3 && hasRunOk) {
+  if (move.action === 'advance') {
     const practicingIndex = mastery.skills.findIndex((s) => s.status === 'practicing')
     if (practicingIndex >= 0 && !next.progress.masteredOutcomes.includes(String(practicingIndex))) {
       next = masterOutcome(next, practicingIndex)
@@ -235,12 +212,12 @@ export async function handleTurn(input: TurnInput, deps: HarnessDeps): Promise<T
     misconception,
     turnIndex: countStudentTurns(input.messages),
     userMessage: input.userMessage,
+    runResult: input.runResult,
+    turnsOnCurrentOutcome: input.stuckCount ?? 0,
   })
 
   if (move.action === 'offer-wrap') {
-    const effects = applySessionEffects(
-      input.session, move, mastery, input.runResult, input.stuckCount, input.hasRunOk,
-    )
+    const effects = applySessionEffects(input.session, move, mastery)
     queueMicrotask(() => {
       if (effects.session !== input.session) input.onSessionUpdated(effects.session)
       const updated = deps.memoryCurator(input.userMessage, input.profile)
@@ -264,6 +241,11 @@ export async function handleTurn(input: TurnInput, deps: HarnessDeps): Promise<T
     draft = await generateGuarded(request, input, deps)
   } else {
     draft = await deps.tutor.stream(request, NO_STREAM)
+    // P1-4: grounding guard applies to all modes
+    const grounding = deps.groundingGuard(draft, input.baked)
+    if (grounding.tripped && grounding.directive !== undefined) {
+      draft = await regenerate(request, grounding.directive, deps)
+    }
   }
 
   // H10(c): repetition guard — regenerate if draft is too similar to previous tutor message
@@ -274,9 +256,7 @@ export async function handleTurn(input: TurnInput, deps: HarnessDeps): Promise<T
 
   input.onToken(draft)
 
-  const effects = applySessionEffects(
-    input.session, move, mastery, input.runResult, input.stuckCount, input.hasRunOk,
-  )
+  const effects = applySessionEffects(input.session, move, mastery)
   queueMicrotask(() => {
     if (effects.session !== input.session) input.onSessionUpdated(effects.session)
     const updated = deps.memoryCurator(input.userMessage, input.profile)

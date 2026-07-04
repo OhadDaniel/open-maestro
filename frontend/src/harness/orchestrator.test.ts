@@ -68,14 +68,14 @@ describe('handleTurn — H10 run-mastery + anti-stuck + repetition guard', () =>
     expect(updatedSession.progress.masteredOutcomes).not.toContain('0')
   })
 
-  it('H10(b): force-advances stuck outcome after 3 turns with successful run', async () => {
-    const provider = fakeProvider(['Same explanation again.'])
+  it('advances when turnsOnCurrentOutcome reaches MAX_TURNS_PER_OUTCOME (2)', async () => {
+    const provider = fakeProvider(['Moving on.'])
     const deps = defaultHarnessDeps(provider)
     const session = createSession(WRITING_YOUR_FIRST_PROGRAM.lesson.id)
     let updatedSession = session
     await handleTurn(
       {
-        userMessage: 'I still do not get it',
+        userMessage: 'still confused',
         baked: WRITING_YOUR_FIRST_PROGRAM,
         session,
         profile: emptyProfile(),
@@ -83,15 +83,14 @@ describe('handleTurn — H10 run-mastery + anti-stuck + repetition guard', () =>
         onToken: () => {},
         onProfileLearned: () => {},
         onSessionUpdated: (s) => { updatedSession = s },
-        stuckCount: 3,
-        hasRunOk: true,
+        stuckCount: 2,
       },
       deps,
     )
     expect(updatedSession.progress.masteredOutcomes).toContain('0')
   })
 
-  it('H10(b): does not force-advance when stuck without a run', async () => {
+  it('does not advance when turnsOnCurrentOutcome < MAX_TURNS_PER_OUTCOME', async () => {
     const provider = fakeProvider(['Let me explain differently.'])
     const deps = defaultHarnessDeps(provider)
     const session = createSession(WRITING_YOUR_FIRST_PROGRAM.lesson.id)
@@ -106,8 +105,7 @@ describe('handleTurn — H10 run-mastery + anti-stuck + repetition guard', () =>
         onToken: () => {},
         onProfileLearned: () => {},
         onSessionUpdated: (s) => { updatedSession = s },
-        stuckCount: 3,
-        hasRunOk: false,
+        stuckCount: 1,
       },
       deps,
     )
