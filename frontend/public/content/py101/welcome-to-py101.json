@@ -5,28 +5,27 @@
     "weekId": "py101-w1",
     "title": "Welcome to PY101!",
     "masteryOutcomes": [
-      "Feel welcomed into PY101 and motivated to begin learning Python.",
-      "Understand the PY101 structure: Writing your first program, Core foundations, Decisions and loops, and the Introduction to Python summary.",
-      "Understand that each unit ends with a review: reviews 1-3 are 10% each, untimed, with unlimited retakes.",
-      "Understand the final unit review is 60%, timed, with one retake; weekly discussions are 10%; 10 bonus points for passing all reviews on time."
+      "Meet Maestro and understand how learning works here: short conversations, real code, one climb at a time.",
+      "Type a line of Python in the editor, press Run, and read the output.",
+      "Make the computer print your own words \u2014 including the dream you shared with Maestro."
     ],
     "tutorInstructions": null
   },
-  "concept": "How PY101 is structured and graded, and how to succeed in it",
+  "concept": "Your first conversation with Maestro and your first real line of Python: how this course works, and making the computer speak your words with print().",
   "prerequisites": [],
   "bloom": "understand",
   "explanations": [
     {
       "level": "eli5",
-      "text": "PY101 is like a four-stop journey: first you write your very first program, then you learn the core building blocks, then you teach the computer to make decisions and repeat things, and finally you wrap it all up in a summary unit. At the end of each stop there's a short review to show what you learned — the first three are low-pressure practice, and the last one is the big one."
+      "text": "Coding is writing instructions a computer follows. Python is the friendliest language for it. print() is your first instruction: whatever you put between the quotes, the computer says out loud in the output panel."
     },
     {
       "level": "standard",
-      "text": "PY101 has four units in order: Writing your first program, Core foundations, Decisions and loops, and the Introduction to Python summary. Each unit ends with a review. Reviews 1-3 are worth 10% each, are untimed, and you can retake them as many times as you like. The final unit review is worth 60%, is timed, and allows exactly one retake. Weekly discussions add the last 10%. Pass every review on time and you earn 10 bonus points."
+      "text": "In this course you learn by doing: I explain one small idea, you type real Python in the editor on this page and press Run, and we look at what actually happened together. Your first tool is print(\"...\") \u2014 it displays any text you choose. The parentheses hand the text to print; the quotes mark where your words start and end."
     },
     {
       "level": "deep",
-      "text": "The grading is designed around mastery learning. Reviews 1-3 (10% each, untimed, unlimited retakes) exist so you can practice until concepts stick without grade anxiety — retaking them is a feature, not a failure. The final review (60%, timed, one retake) is summative: it checks that the skills are truly yours under light time pressure. Weekly discussions (10%) keep you explaining ideas in your own words, which cements them. The math checks out: 10 + 10 + 10 + 60 + 10 = 100, plus up to 10 bonus points for passing every review on time. The winning strategy is simple: use the unlimited retakes early so the final review feels easy."
+      "text": "print() is a function: a named action the computer performs. The text in quotes is a string \u2014 a piece of data. When you press Run, Python reads your file top to bottom and executes each instruction in order, so two print lines produce two lines of output, in the order you wrote them."
     }
   ],
   "examples": [
@@ -36,111 +35,87 @@
   "hintLadder": [
     {
       "order": 1,
-      "text": "Start with how many unit reviews there are, and remember that one of them is much bigger than the others."
+      "hint": "Everything starts with the word print, then parentheses right after it."
     },
     {
       "order": 2,
-      "text": "Reviews 1-3 all share the same small weight and are relaxed: untimed, retake as often as you like. The final one is the opposite in every way."
+      "hint": "Inside the parentheses, put your words between quotes: print(\"like this\")."
     },
     {
       "order": 3,
-      "text": "The pieces must add to 100%: three small reviews, one big timed final, and weekly discussions. What weight makes that work for the final?"
+      "hint": "Type exactly: print(\"Hello, PY101!\") \u2014 then press Run and read the output panel."
     }
   ],
   "misconceptions": [
     {
-      "trigger": "Assumes all reviews have unlimited retakes, including the final one.",
-      "correction": "Only reviews 1-3 have unlimited retakes. The final unit review is different: it's worth 60%, it's timed, and you get exactly one retake — so use the early reviews to practice until you're confident."
+      "trigger": "Writes print without quotes, e.g. print(Hello)",
+      "correction": "Without quotes Python looks for a variable named Hello and raises a NameError. Quotes tell Python these are your words, not code: print(\"Hello\")."
     },
     {
-      "trigger": "Thinks the final review is untimed like the others.",
-      "correction": "The final review is timed. Reviews 1-3 are the untimed ones — that's where you build speed and confidence so the timer on the final never feels tight."
-    },
-    {
-      "trigger": "Believes weekly discussions are optional extra credit.",
-      "correction": "Discussions are part of the core grade — they're worth 10%. The actual bonus is separate: 10 bonus points for passing all reviews on time."
-    },
-    {
-      "trigger": "Thinks retaking a review means they're failing the course.",
-      "correction": "Retakes on reviews 1-3 are by design and cost nothing — they're unlimited and untimed. Retaking until you master the material is exactly how the course is meant to be used."
-    },
-    {
-      "trigger": "Believes they must already know some coding to start PY101.",
-      "correction": "PY101 assumes zero experience. The very first unit is literally called Writing your first program — everything is built from the ground up, one small step at a time."
+      "trigger": "Thinks the code runs somewhere else or needs installing Python",
+      "correction": "Everything runs right here in the editor on this page \u2014 type, press Run, and the output appears below. Nothing to install, nothing leaves your device."
     }
   ],
   "checks": [
     {
-      "id": "py101-w1-welcome-grading",
-      "prompt": "In your own words: how is your PY101 grade built, and what makes the final review different from reviews 1-3?",
+      "id": "py101-w1-welcome-first-run",
+      "prompt": "Type print(\"Hello, PY101!\") in the editor, press Run, and tell me exactly what appeared in the output.",
       "acceptanceCriteria": [
-        "States reviews 1-3 are worth 10% each",
-        "States the final review is worth 60%",
-        "States the final review is timed and allows exactly one retake, while reviews 1-3 are untimed with unlimited retakes",
-        "Mentions weekly discussions are worth 10%"
+        "Mentions that the text Hello, PY101! appeared in the output",
+        "Shows they actually ran the code rather than guessing"
       ],
-      "passFeedback": "Exactly right — you know how the course works and how to play it smart: practice freely early, be ready for the timed final.",
-      "failFeedback": "Close — check the pieces: three 10% untimed reviews with unlimited retakes, one 60% timed final with a single retake, and 10% for discussions."
+      "passFeedback": "That's it \u2014 you just gave a computer an instruction and it obeyed. That's coding.",
+      "failFeedback": "Look at the output panel right under the editor \u2014 read me exactly what it shows."
     },
     {
-      "id": "py101-w1-welcome-structure",
-      "prompt": "Name the four units of PY101 in order.",
+      "id": "py101-w1-welcome-dream-print",
+      "prompt": "Now the real one: change the text inside the quotes so the computer prints YOUR dream \u2014 the one you told me. Run it and tell me what it says.",
       "acceptanceCriteria": [
-        "Names Writing your first program as the first unit",
-        "Names Core foundations second and Decisions and loops third",
-        "Names the Introduction to Python summary as the final unit"
+        "Edited the string inside print() to their own words",
+        "Reports the printed output matching what they wrote"
       ],
-      "passFeedback": "That's the map — and you're standing at the start of unit one right now.",
-      "failFeedback": "Almost — the order is: Writing your first program, Core foundations, Decisions and loops, then the Introduction to Python summary."
+      "passFeedback": "Your own dream, spoken by your own code. Remember this moment \u2014 every app you'll ever build starts exactly like this.",
+      "failFeedback": "Keep the print(\"...\") shape and only change the words between the quotes \u2014 then Run."
     }
   ],
   "practice": [
     {
       "kind": "coding",
-      "prompt": "Let's make the course officially begin. Type a line in the editor that prints: Hello, PY101! Then press Run and watch the Output panel.",
-      "starterCode": "",
+      "prompt": "Make the computer print your dream in your own words.",
+      "starterCode": "print(\"\")",
       "acceptanceCriteria": [
-        "Uses print() with parentheses",
-        "The argument is a string in quotes",
-        "Runs without errors and outputs Hello, PY101!"
+        "Uses print() with quotes",
+        "The string is their own text",
+        "Code runs without errors"
       ]
     },
     {
       "kind": "open",
-      "prompt": "Reviews 1-3 are untimed with unlimited retakes, but the final review is timed with one retake. Why do you think the course is designed that way, and how will you use that design to your advantage?",
-      "rubric": [
-        "Recognizes early reviews are for low-pressure practice and mastery (retakes are encouraged)",
-        "Recognizes the final review checks that skills are truly solid, hence timed and worth 60%",
-        "States a concrete personal strategy, e.g. retaking early reviews until confident before the final"
-      ]
+      "prompt": "In one sentence: what does print() do, and why do the quotes matter?",
+      "rubric": "Mentions that print displays text in the output, and that quotes mark the exact text (their words, not code)."
     },
     {
       "kind": "closed",
-      "prompt": "Which statement about PY101 grading is correct?",
+      "prompt": "Which line correctly prints the word Climb?",
       "options": [
-        "The final review is worth 60%, is timed, and allows one retake.",
-        "All four reviews are untimed with unlimited retakes.",
-        "Weekly discussions are worth 30% of the grade.",
-        "Reviews 1-3 are worth 20% each."
+        "print(Climb)",
+        "print(\"Climb\")",
+        "print \"Climb\""
       ],
-      "correctIndex": 0,
-      "explanation": "Reviews 1-3 are 10% each, untimed, with unlimited retakes; the final review is the big one — 60%, timed, one retake. Discussions add 10%, and passing everything on time earns 10 bonus points."
+      "correctIndex": 1,
+      "explanation": "print needs parentheses, and your words need quotes \u2014 print(\"Climb\")."
     }
   ],
   "pedagogyRules": [
-    "This is an orientation lesson — keep it warm and conversational, never a quiz-drill of grading facts.",
-    "Deliver the course tour one unit at a time; never list all four units plus the full grading scheme in a single turn.",
-    "If the student says they already know Python or want to skip ahead, respect it: give the three-sentence grading summary (10-10-10 untimed unlimited, 60 timed one retake, 10 discussions plus bonus), confirm they've got it, and move them forward.",
-    "If the student is anxious about grades or the timed final, immediately point at the unlimited retakes on reviews 1-3 as the built-in safety net.",
-    "Frame retakes as the designed path to mastery, never as remediation or failure.",
-    "If the student wanders into future topics like loops or variables, give a one-line teaser tied to the unit where it lives, then steer back to the tour.",
-    "End the lesson pointing them at the very next concrete step: writing their first program with print()."
+    "Get the learner to their first successful Run within the first three turns \u2014 action before theory.",
+    "Use the learner's own dream text as the material for the second print \u2014 never substitute a generic example.",
+    "If they hit NameError from missing quotes, celebrate it as their first real error and show the one-character-class fix."
   ],
   "failurePlaybooks": [
     {
       "scenarioId": "SWE-01",
       "failureMode": "Validated wrong work",
-      "correctMove": "Only confirm the student's grading summary if the numbers are exactly right: 10% each for reviews 1-3, 60% for the timed final with one retake, 10% for discussions, 10 bonus points for on-time passes. If any number is off, correct that specific number — do not wave it through."
+      "correctMove": "Only confirm the student's grading summary if the numbers are exactly right: 10% each for reviews 1-3, 60% for the timed final with one retake, 10% for discussions, 10 bonus points for on-time passes. If any number is off, correct that specific number \u2014 do not wave it through."
     },
     {
       "scenarioId": "SWE-06",
@@ -150,124 +125,94 @@
     {
       "scenarioId": "BIZ-01",
       "failureMode": "Student demotivated or intimidated before starting",
-      "correctMove": "Name the fear kindly, then point at the design: the first unit is literally writing one line of code, and the first three reviews are untimed with unlimited retakes — the course is built so beginners cannot fall through the cracks. Then give the tiniest next action."
+      "correctMove": "Name the fear kindly, then point at the design: the first unit is literally writing one line of code, and the first three reviews are untimed with unlimited retakes \u2014 the course is built so beginners cannot fall through the cracks. Then give the tiniest next action."
     },
     {
       "scenarioId": "BIZ-02",
       "failureMode": "Student wants to skip orientation entirely",
-      "correctMove": "Don't force the full tour. Give the compressed version — four units, 10-10-10-60-10 grading, timed final with one retake, bonus for on-time passes — verify with one quick question, and advance to writing their first program."
+      "correctMove": "Don't force the full tour. Give the compressed version \u2014 four units, 10-10-10-60-10 grading, timed final with one retake, bonus for on-time passes \u2014 verify with one quick question, and advance to writing their first program."
     }
   ],
   "chunks": [
     {
-      "id": "py101-w1-welcome-chunk-1",
-      "text": "PY101 has four units, taken in order: (1) Writing your first program, (2) Core foundations, (3) Decisions and loops, and (4) the Introduction to Python summary. Each unit builds directly on the one before it, starting from zero — no prior coding experience is assumed.",
+      "id": "welcome-how-it-works",
+      "text": "Learning here is a conversation: Maestro explains one small idea at a time, you type real Python in the editor on this page and press Run, and you look at the real output together. Everything runs on your own device \u2014 free, private, nothing to install.",
       "embedding": null
     },
     {
-      "id": "py101-w1-welcome-chunk-2",
-      "text": "Every unit in PY101 ends with a review. Reviews 1-3 are worth 10% of the grade each, are untimed, and allow unlimited retakes. Retaking them is encouraged — they exist for low-pressure practice until the material truly sticks.",
+      "id": "welcome-print-basics",
+      "text": "print(\"...\") is the instruction that makes the computer display text. The parentheses hand your text to print; the quotes mark exactly where your words begin and end. print(\"Hello, PY101!\") shows: Hello, PY101!",
       "embedding": null
     },
     {
-      "id": "py101-w1-welcome-chunk-3",
-      "text": "The final unit review is worth 60% of the grade, is timed, and allows exactly one retake. Weekly discussions make up the remaining 10%. The full grade is 10 + 10 + 10 + 60 + 10 = 100%. On top of that, passing all reviews on time earns 10 bonus points.",
+      "id": "welcome-no-quotes-error",
+      "text": "print(Hello) without quotes raises NameError, because Python thinks Hello is a variable name. Errors are clues, not failures: read the last line, fix the exact piece it names, run again.",
       "embedding": null
     },
     {
-      "id": "py101-w1-welcome-chunk-4",
-      "text": "The smart PY101 strategy: use the unlimited, untimed retakes on reviews 1-3 to build real mastery early, so the timed 60% final feels like familiar ground. Show up for weekly discussions to lock in the easy 10% and explain ideas in your own words.",
-      "embedding": null
-    },
-    {
-      "id": "py101-w1-welcome-chunk-5",
-      "text": "In the Maestro Code Editor you type Python code, press Run, and see the result in the Output panel. A first line to try: print(\"Hello, PY101!\") — press Run and the text Hello, PY101! appears in the output. That single line is a complete, working Python program.",
+      "id": "welcome-course-shape",
+      "text": "PY101 climbs in small steps: first making the computer speak (print), then storing values, then decisions and loops. Each lesson ends when you have shown you can do the thing \u2014 then you move up the mountain.",
       "embedding": null
     }
   ],
   "celebration": {
-    "headline": "You're officially in — and you know exactly how PY101 works.",
-    "recap": "You toured the four units, learned how your grade is built (three 10% untimed reviews with unlimited retakes, a 60% timed final with one retake, 10% discussions, plus bonus points for passing on time), and even ran your first line of Python.",
-    "unlocked": "Next: Writing your first program — you'll make the computer talk with print()."
+    "headline": "The computer just spoke your words.",
+    "recap": "You wrote your first real Python, ran it, and made the machine print your own dream. That is not a toy \u2014 it is the exact skill every program is built from.",
+    "unlocked": "Next: Writing your first program \u2014 stacking instructions and making the output truly yours."
   },
   "summaryBullets": [
-    "You can now name the four PY101 units in order: Writing your first program, Core foundations, Decisions and loops, and the Introduction to Python summary.",
-    "You can now explain how your grade is built: 10% each for reviews 1-3, 60% for the final review, and 10% for weekly discussions.",
-    "You can now say exactly what makes the final review different — timed, one retake — and plan to master material early using the unlimited retakes on reviews 1-3.",
-    "You can now describe how to earn the 10 bonus points: pass every review on time.",
-    "You can now type a line of Python in the Maestro editor, press Run, and see your output appear."
+    "You can now write a real Python instruction in the editor, press Run, and read the output.",
+    "You can now use print(\"...\") to make the computer say any words you choose \u2014 you made it say your dream.",
+    "You can now read an error like NameError as a clue and fix exactly what it points at.",
+    "You know how this climb works: one small idea, real code, and up we go."
   ],
-  "openingLine": "Hey {name}, welcome to PY101 — I'm genuinely glad you're here! You said you want to {goal}, and Python is one of the best first steps toward exactly that. Want a quick 60-second tour of how this course works before we write some real code?",
+  "openingLine": "Hey {name} \u2014 welcome to the mountain. Before any theory, I want you to feel the whole magic of coding in the next five minutes: you're going to make this computer say something that matters to you. Ready?",
   "bridgeFromPreviousLesson": null,
   "dialogueExemplars": [
     {
-      "title": "Wrong but confident about retakes",
+      "title": "Absolute beginner, first minute",
       "turns": [
         {
           "role": "student",
-          "text": "I read the syllabus — every review has unlimited retakes, so I can just wing the final and redo it until I pass."
+          "text": "honestly I have no idea what coding even is"
         },
         {
           "role": "tutor",
-          "text": "You're right about reviews 1-3 — those are untimed with unlimited retakes, so retake away. But the final review plays by different rules: it's timed and you get exactly one retake. And it's worth 60%, so it's the one to be ready for. Knowing that, when do you think the real practice should happen?"
+          "text": "Perfect starting point. Coding is writing instructions a computer follows \u2014 and you'll give your first one right now. Type print(\"hi\") in the editor and press Run. What shows up?"
         },
         {
           "role": "student",
-          "text": "Oh... during the first three reviews, I guess, since those are free."
+          "text": "it says hi!!"
         },
         {
           "role": "tutor",
-          "text": "Exactly — that's the whole design. Master everything early when retakes cost nothing, and the timed final becomes a victory lap. Ready to see what unit one covers?"
+          "text": "You just commanded a computer and it obeyed. That's the whole game \u2014 everything else is bigger versions of what you just did. Ready to make it say something that matters to you?"
         }
       ]
     },
     {
-      "title": "Why do I need a course tour?",
+      "title": "Wrong but confident: no quotes",
       "turns": [
         {
           "role": "student",
-          "text": "Honestly, why do I need to know the grading structure? Can't we just start coding?"
+          "text": "print(Hello) should work, quotes are just decoration"
         },
         {
           "role": "tutor",
-          "text": "Fair question — here's the real payoff. Students who know that reviews 1-3 are untimed with unlimited retakes use them as free practice, walk into the 60% timed final relaxed, and pick up 10 bonus points for passing on time. Two minutes of map-reading, better grade all semester. Quick check to lock it in: which review is the only timed one?"
-        },
-        {
-          "role": "student",
-          "text": "The final one — the 60% review."
-        },
-        {
-          "role": "tutor",
-          "text": "Nailed it, and that's all the admin you need. Now the fun part: shall we write your very first line of Python?"
+          "text": "Run it and watch \u2014 you'll get a NameError. Without quotes, Python hunts for a variable named Hello. The quotes say: these are my words, not code. Try print(\"Hello\") \u2014 what changes?"
         }
       ]
     },
     {
-      "title": "Absolute beginner, first day",
+      "title": "Why do I need this?",
       "turns": [
         {
           "role": "student",
-          "text": "I have to be honest — I don't know anything about coding. Nothing at all."
+          "text": "why start with print, seems useless"
         },
         {
           "role": "tutor",
-          "text": "Then you're in exactly the right place — PY101 starts from absolute zero. Coding is just writing instructions the computer can follow, one line at a time. Want to try the smallest possible one right now?"
-        },
-        {
-          "role": "student",
-          "text": "Okay... what do I do?"
-        },
-        {
-          "role": "tutor",
-          "text": "Type this into the editor: print(\"Hello, PY101!\") — then press Run. Whatever appears in the Output panel, you made happen. What do you see?"
-        },
-        {
-          "role": "student",
-          "text": "It says Hello, PY101! ... wait, that's it? I just coded?"
-        },
-        {
-          "role": "tutor",
-          "text": "That's it — a complete, working Python program, written by you on day one. And remember, your first three reviews are untimed with unlimited retakes, so there's zero pressure while you learn. Ready to see the four units ahead of you?"
+          "text": "Every app you've ever used shows you text somewhere \u2014 print is the seed of that. It's also how coders see inside their programs. Make it print your name, then tell me what you'd want an app of yours to say."
         }
       ]
     }
