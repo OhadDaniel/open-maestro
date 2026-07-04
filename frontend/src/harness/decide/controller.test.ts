@@ -284,3 +284,47 @@ describe('controller — P0-1 early advance triggers', () => {
     expect(move.rules.join(' ')).toContain(lesson.lesson.masteryOutcomes[0])
   })
 })
+
+describe('controller — offer-wrap decline phrases (no button pressed)', () => {
+  const allMastered: MasterySignal = {
+    skills: lesson.lesson.masteryOutcomes.map((_outcome, index) => ({
+      id: String(index),
+      status: 'mastered' as const,
+    })),
+  }
+  const wrapOfferedSession: TutorSession = {
+    ...createSession(lesson.lesson.id),
+    progress: { ...createSession(lesson.lesson.id).progress, wrapOffered: true },
+  }
+
+  it.each(['continue', 'keep going', 'practice'])(
+    '"%s" typed at offer-wrap counts as decline, not agreement',
+    (phrase) => {
+      const move = controller({
+        ...base,
+        session: wrapOfferedSession,
+        mastery: allMastered,
+        userMessage: phrase,
+      })
+      expect(move.action).not.toBe('wrap-lesson')
+      expect(move.reason).toBe('wrap-declined')
+    },
+  )
+
+  it('"continue" mid-lesson still advances (practicingIndex >= 0 takes priority)', () => {
+    const practicingMastery: MasterySignal = {
+      skills: lesson.lesson.masteryOutcomes.map((_, index) => ({
+        id: String(index),
+        status: index === 0 ? ('practicing' as const) : ('unseen' as const),
+      })),
+    }
+    const move = controller({
+      ...base,
+      session: createSession(lesson.lesson.id),
+      mastery: practicingMastery,
+      userMessage: 'continue',
+    })
+    expect(move.action).toBe('advance')
+    expect(move.reason).toBe('explicit-advance')
+  })
+})

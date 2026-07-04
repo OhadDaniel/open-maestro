@@ -59,6 +59,7 @@ export const WRAP_DECLINE_PHRASES: readonly string[] = [
   'no',
   'not yet',
   'more',
+  'continue',
   'keep going',
   'another',
   'practice',
