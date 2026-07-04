@@ -24,7 +24,7 @@ function fakeProvider(chunks: string[]): TutorProvider {
 }
 
 describe('handleTurn — H10 run-mastery + anti-stuck + repetition guard', () => {
-  it('H10(a): celebrates with explain action on successful run (does not auto-master)', async () => {
+  it('H10(a): print run on first outcome → advance (outcome-demonstrated), masters outcome 0', async () => {
     const provider = fakeProvider(['Your code ran and printed "hi" — you just made the computer output text!'])
     const deps = defaultHarnessDeps(provider)
     const session = createSession(WRITING_YOUR_FIRST_PROGRAM.lesson.id)
@@ -43,6 +43,33 @@ describe('handleTurn — H10 run-mastery + anti-stuck + repetition guard', () =>
       },
       deps,
     )
+    // evaluateMasteryTurn detects demonstration → advance (not celebrate)
+    expect(action).toBe('advance')
+    expect(masteryAdvanced).toBe(true)
+    expect(updatedSession.progress.masteredOutcomes).toContain('0')
+  })
+
+  it('H10(a): run-celebrate fires for runs with output but no quoted print match', async () => {
+    const provider = fakeProvider(['Great work running your code!'])
+    const deps = defaultHarnessDeps(provider)
+    const session = createSession(WRITING_YOUR_FIRST_PROGRAM.lesson.id)
+    let updatedSession = session
+    const { action, masteryAdvanced } = await handleTurn(
+      {
+        // print(x) with a variable — no quoted string, so detection heuristic does not fire
+        userMessage: 'I ran this code:\n\nx = 42\nprint(x)\n\nOutput:\n42',
+        baked: WRITING_YOUR_FIRST_PROGRAM,
+        session,
+        profile: emptyProfile(),
+        messages: [],
+        onToken: () => {},
+        onProfileLearned: () => {},
+        onSessionUpdated: (s) => { updatedSession = s },
+        runResult: { ok: true, output: '42' },
+      },
+      deps,
+    )
+    // No print("...") → evaluateMasteryTurn returns null → run-celebrate path fires
     expect(action).toBe('explain')
     expect(masteryAdvanced).toBe(false)
     expect(updatedSession.progress.masteredOutcomes).not.toContain('0')

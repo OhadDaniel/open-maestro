@@ -62,3 +62,8 @@ export function declineWrap(session: TutorSession): TutorSession {
 export function completeLesson(session: TutorSession): TutorSession {
   return { ...session, progress: { ...session.progress, completed: true } }
 }
+
+export function masterAllOutcomes(session: TutorSession, count: number): TutorSession {
+  const all = Array.from({ length: count }, (_, i) => String(i))
+  return { ...session, progress: { ...session.progress, masteredOutcomes: all } }
+}

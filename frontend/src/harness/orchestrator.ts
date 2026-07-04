@@ -2,15 +2,17 @@ import { OPENING_BOOTSTRAP } from '../ai/offline-provider'
 import type { TutorProvider } from '../ai/provider'
 import type { ProviderMessage, ProviderRequest } from '../ai/provider.types'
 import { stripThinkBlock } from '../ai/strip-think'
-import type { BakedLesson } from '../content/baked.types'
+import type { BakedLesson, Check } from '../content/baked.types'
 import type { TutorSession } from '../content/session.types'
 import type { LearnerProfile } from '../memory/learner-profile.types'
 import {
   completeLesson,
   declineWrap,
+  masterAllOutcomes,
   masterOutcome,
   offerWrap,
 } from '../tutor/session'
+import { parseRunMessage, type RunEvidence } from './sense/masteryCompletion'
 import { buildContext } from './buildContext'
 import { controller } from './decide/controller'
 import { memoryCurator } from './remember/memoryCurator'
@@ -178,6 +180,37 @@ async function generateGuarded(
   return draft
 }
 
+function checkForOutcome(baked: BakedLesson, outcomeIndex: number): Check | undefined {
+  if (baked.lesson.id === 'welcome-to-py101') {
+    if (outcomeIndex === 0) return undefined
+    return baked.checks[outcomeIndex - 1]
+  }
+  return baked.checks[outcomeIndex] ?? baked.checks[baked.checks.length - 1]
+}
+
+function renderLessonClosure(
+  baked: BakedLesson,
+  _profile: LearnerProfile,
+  evidence?: RunEvidence,
+): string {
+  const lastOutcomeIndex = baked.lesson.masteryOutcomes.length - 1
+  const check = checkForOutcome(baked, lastOutcomeIndex)
+  const parts: string[] = []
+
+  if (evidence) {
+    const firstLine = evidence.output.split('\n')[0]?.trim() ?? ''
+    if (firstLine.length > 0) {
+      parts.push(`There it is — your code printed: "${firstLine}".`)
+    }
+  }
+
+  parts.push("That's print() — you told the computer exactly what to say, and it said it.")
+  parts.push(check?.passFeedback ?? baked.celebration.recap)
+  parts.push("That's the modest mastery of this lesson on the climb. When you're ready, wrap up below.")
+
+  return parts.join('\n\n')
+}
+
 type SessionEffects = { session: TutorSession; masteryAdvanced: boolean }
 
 function applySessionEffects(
@@ -187,6 +220,11 @@ function applySessionEffects(
 ): SessionEffects {
   let next = session
   let masteryAdvanced = false
+
+  if (move.reason === 'lesson-complete') {
+    next = masterAllOutcomes(next, mastery.skills.length)
+    masteryAdvanced = true
+  }
 
   if (move.action === 'advance') {
     const practicingIndex = mastery.skills.findIndex((s) => s.status === 'practicing')
@@ -234,12 +272,17 @@ export async function handleTurn(input: TurnInput, deps: HarnessDeps): Promise<T
 
   if (move.action === 'offer-wrap') {
     const effects = applySessionEffects(input.session, move, mastery)
+    let draft = ''
+    if (move.reason === 'lesson-complete') {
+      const evidence = parseRunMessage(input.userMessage) ?? undefined
+      draft = renderLessonClosure(input.baked, input.profile, evidence)
+    }
     queueMicrotask(() => {
       if (effects.session !== input.session) input.onSessionUpdated(effects.session)
       const updated = deps.memoryCurator(input.userMessage, input.profile)
       if (updated !== input.profile) input.onProfileLearned(updated)
     })
-    return { draft: '', action: 'offer-wrap', masteryAdvanced: effects.masteryAdvanced }
+    return { draft, action: 'offer-wrap', masteryAdvanced: effects.masteryAdvanced }
   }
 
   const request = buildContext({

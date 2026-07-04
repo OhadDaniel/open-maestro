@@ -1,6 +1,7 @@
 import type { BakedLesson } from '../../content/baked.types'
 import type { TutorSession } from '../../content/session.types'
 import { AFFECT_ACT_THRESHOLD, MAX_TURNS_PER_OUTCOME, TURN_BUDGET_BUFFER } from '../constants'
+import { evaluateMasteryTurn } from '../sense/masteryCompletion'
 import type { AffectSignal, MasterySignal, MisconceptionSignal, TeachingMove } from '../types'
 import { ACTION_RULES, MODE_DEFAULT_ACTION, WRAP_DECLINE_PHRASES, misconceptionRules } from './playbooks'
 
@@ -84,6 +85,21 @@ function stepContextRules(
 export function controller(input: ControllerInput): TeachingMove {
   const practicingIndex = input.mastery.skills.findIndex((s) => s.status === 'practicing')
   const turns = input.turnsOnCurrentOutcome ?? 0
+
+  // EARLIEST: mastery completion detection — runs before explicit-advance and run-celebrate
+  const completion = evaluateMasteryTurn({
+    baked: input.lesson,
+    session: input.session,
+    userMessage: input.userMessage,
+    runResult: input.runResult,
+  })
+  if (completion?.kind === 'lesson-complete') {
+    return toMove('offer-wrap', [], 'lesson-complete')
+  }
+  if (completion?.kind === 'demonstrated') {
+    return toMove('advance', advanceRules(input.lesson, completion.outcomeIndex), 'outcome-demonstrated')
+  }
+  // 'claimed' falls through to explicit-advance below
 
   // EARLY: explicit "continue / next / got it / ..." → advance to next step
   if (practicingIndex >= 0 && isExplicitAdvanceRequest(input.userMessage)) {

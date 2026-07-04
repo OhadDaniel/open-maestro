@@ -58,16 +58,22 @@ export function TypingBubble() {
 }
 
 function OfferWrapBubble({
+  text,
   goalCount,
   onSend,
 }: {
+  text?: string
   goalCount: number
   onSend: (text: string) => void
 }) {
   return (
     <TutorBubble>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-        <span>{`You've reached all ${goalCount} goals of this lesson.`}</span>
+        <span style={{ whiteSpace: 'pre-wrap' }}>
+          {text && text.length > 0
+            ? text
+            : `You've reached all ${goalCount} goals of this lesson.`}
+        </span>
         <div style={{ display: 'flex', gap: 8 }}>
           <button
             onClick={() => onSend('Wrap it up')}
@@ -98,6 +104,7 @@ export function LiveMessage({
     if (message.kind === 'offer-wrap') {
       return (
         <OfferWrapBubble
+          text={message.text}
           goalCount={message.meta?.goalCount ?? 0}
           onSend={onSend ?? (() => {})}
         />
