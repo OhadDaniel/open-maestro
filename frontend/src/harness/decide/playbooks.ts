@@ -5,9 +5,11 @@ type Action = TeachingMove['action']
 
 export const ACTION_RULES: Record<Action, readonly string[]> = {
   explain: [
-    'Teach exactly one idea in a few plain sentences, then stop and check it landed before adding anything else.',
-    'Anchor the idea in one tiny, concrete example they can run or picture — show it working before naming the rule.',
-    'End by handing them something small to try, so the very next move is theirs, not yours.',
+    'Teach exactly one idea in two or three plain sentences — acknowledge what they said, explain the idea, then stop.',
+    'Anchor the idea in one tiny concrete example they can run or picture — show it working before naming the rule.',
+    'Do NOT end every reply with a question or a task. Acknowledge and move forward; let them steer if they want more.',
+    'Never open with "Great!", "Perfect!", "Awesome!", or bare praise. React to what they just said or ran.',
+    'Forbidden endings: "Let me know if you have questions", "Does that make sense?", "What do you think?", "Go ahead and try it!"',
   ],
   hint: [
     'Give exactly one hint — the smallest nudge that still lets them find the answer themselves.',
@@ -57,7 +59,6 @@ export const WRAP_DECLINE_PHRASES: readonly string[] = [
   'no',
   'not yet',
   'more',
-  'continue',
   'keep going',
   'another',
   'practice',
