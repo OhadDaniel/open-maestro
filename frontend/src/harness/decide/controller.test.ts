@@ -4,6 +4,7 @@ import type { TutorMode, TutorSession } from '../../content/session.types'
 import { createSession } from '../../tutor/session'
 import { EMPTY_MASTERY, NEUTRAL_AFFECT, NO_MISCONCEPTION, TURN_BUDGET_BUFFER, TURNS_PER_OUTCOME } from '../constants'
 import type { AffectSignal, MasterySignal } from '../types'
+import { affectObserver } from '../sense/affectObserver'
 import { controller } from './controller'
 
 const lesson = WRITING_YOUR_FIRST_PROGRAM
@@ -89,6 +90,20 @@ describe('controller (slice 1)', () => {
     const move = controller({ ...base, session: sessionWith('explain'), affect: confident })
     expect(move.action).toBe('advance')
     expect(move.reason).toBe('confident-claim')
+  })
+
+  it('"i understand it well lets move on" triggers advance with next outcome in directive', () => {
+    const affect = affectObserver('i understand it well lets move on', [])
+    const mastery: MasterySignal = {
+      skills: lesson.lesson.masteryOutcomes.map((_, index) => ({
+        id: String(index),
+        status: index === 0 ? 'practicing' : ('unseen' as const),
+      })),
+    }
+    const move = controller({ ...base, session: sessionWith('explain'), affect, mastery })
+    expect(move.action).toBe('advance')
+    expect(move.rules.join(' ')).toContain('Next outcome:')
+    expect(move.rules.join(' ')).toContain(lesson.lesson.masteryOutcomes[1])
   })
 
   it('advance directive contains the next unmastered outcome text', () => {

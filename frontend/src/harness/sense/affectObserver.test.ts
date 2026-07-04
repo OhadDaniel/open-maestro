@@ -31,6 +31,30 @@ describe('affectObserver confident detection', () => {
   })
 })
 
+describe('affectObserver explicit skip/advance requests', () => {
+  it('triggers confident on unambiguous advance requests', () => {
+    const phrases = [
+      'lets move on',
+      "let's move on",
+      'ok move on',
+      'skip this',
+      'skip it please',
+      'next step',
+    ]
+    for (const text of phrases) {
+      expect(affectObserver(text, []).state, text).toBe('confident')
+    }
+  })
+
+  it('"i understand it well lets move on" triggers confident', () => {
+    expect(affectObserver('i understand it well lets move on', []).state).toBe('confident')
+  })
+
+  it('"i understand now" alone does NOT trigger confident', () => {
+    expect(affectObserver('i understand now', []).state).not.toBe('confident')
+  })
+})
+
 describe('affectObserver confused detection', () => {
   it('triggers on clear confusion phrases', () => {
     expect(affectObserver("i don't get it", []).state).toBe('confused')
