@@ -38,7 +38,11 @@ export function useLessonThread(baked: BakedLesson, sessionProvider: TutorProvid
     void beginLesson()
   }, [beginLesson])
 
-  const send = useCallback((text: string) => void sendMessage(text), [sendMessage])
+  const send = useCallback(
+    (text: string, runResult?: { ok: boolean; output: string }) =>
+      void sendMessage(text, runResult),
+    [sendMessage],
+  )
 
   return { messages, isStreaming, send, skipTyping }
 }

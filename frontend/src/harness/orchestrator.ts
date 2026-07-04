@@ -42,6 +42,25 @@ async function typewriterReveal(
   onReveal(text)
 }
 
+// H10(c): repetition guard helpers
+const REPETITION_KEYWORD = /[a-z]{5,}/g
+const REPETITION_THRESHOLD = 0.6
+const REPHRASE_DIRECTIVE = 'React to what just happened, say it differently, shorter.'
+const MIN_REPETITION_LENGTH = 40
+
+function repetitionKeywords(text: string): Set<string> {
+  return new Set(text.toLowerCase().match(REPETITION_KEYWORD) ?? [])
+}
+
+function isRepetitive(draft: string, prevTutor: string): boolean {
+  if (draft.length < MIN_REPETITION_LENGTH || prevTutor.length < MIN_REPETITION_LENGTH) return false
+  const draftWords = repetitionKeywords(draft)
+  if (draftWords.size === 0) return false
+  const prevWords = repetitionKeywords(prevTutor)
+  const overlap = [...draftWords].filter((w) => prevWords.has(w)).length
+  return overlap / draftWords.size > REPETITION_THRESHOLD
+}
+
 export type TurnInput = {
   userMessage: string
   baked: BakedLesson
@@ -51,6 +70,9 @@ export type TurnInput = {
   onToken: OnToken
   onProfileLearned: (profile: LearnerProfile) => void
   onSessionUpdated: (session: TutorSession) => void
+  runResult?: { ok: boolean; output: string }  // H10(a): run-driven mastery
+  stuckCount?: number                           // H10(b): anti-stuck valve turns
+  hasRunOk?: boolean                            // H10(b): successful run in stuck window
 }
 
 export type TutorRunner = {
@@ -114,6 +136,7 @@ async function regenerate(
   return deps.tutor.stream(stricter, NO_STREAM)
 }
 
+// Returns draft without calling onToken — caller emits.
 async function generateGuarded(
   request: ProviderRequest,
   input: TurnInput,
@@ -124,7 +147,6 @@ async function generateGuarded(
   if (leak.tripped && leak.directive !== undefined) {
     draft = await regenerate(request, leak.directive, deps)
     if (deps.answerLeakGuard(draft, input.session, input.baked).tripped) {
-      input.onToken(WITHHOLD_FALLBACK)
       return WITHHOLD_FALLBACK
     }
   }
@@ -132,21 +154,46 @@ async function generateGuarded(
   if (grounding.tripped && grounding.directive !== undefined) {
     draft = await regenerate(request, grounding.directive, deps)
   }
-  input.onToken(draft)
   return draft
 }
+
+type SessionEffects = { session: TutorSession; masteryAdvanced: boolean }
 
 function applySessionEffects(
   session: TutorSession,
   move: TeachingMove,
   mastery: ReturnType<typeof masteryTracer>,
-): TutorSession {
+  runResult?: { ok: boolean; output: string },
+  stuckCount = 0,
+  hasRunOk = false,
+): SessionEffects {
   let next = session
+  let masteryAdvanced = false
 
+  // H10(a): run-driven mastery — a successful run IS the demonstration
+  if (runResult?.ok && runResult.output.trim().length > 0) {
+    const practicingIndex = mastery.skills.findIndex((s) => s.status === 'practicing')
+    if (practicingIndex >= 0 && !next.progress.masteredOutcomes.includes(String(practicingIndex))) {
+      next = masterOutcome(next, practicingIndex)
+      masteryAdvanced = true
+    }
+  }
+
+  // Existing: confident-claim advance
   if (move.action === 'advance' && move.reason === 'confident-claim') {
     const practicingIndex = mastery.skills.findIndex((s) => s.status === 'practicing')
-    if (practicingIndex >= 0) {
+    if (practicingIndex >= 0 && !next.progress.masteredOutcomes.includes(String(practicingIndex))) {
       next = masterOutcome(next, practicingIndex)
+      masteryAdvanced = true
+    }
+  }
+
+  // H10(b): anti-stuck valve — 3+ same-outcome turns with a successful run → force-advance
+  if (stuckCount >= 3 && hasRunOk) {
+    const practicingIndex = mastery.skills.findIndex((s) => s.status === 'practicing')
+    if (practicingIndex >= 0 && !next.progress.masteredOutcomes.includes(String(practicingIndex))) {
+      next = masterOutcome(next, practicingIndex)
+      masteryAdvanced = true
     }
   }
 
@@ -165,10 +212,10 @@ function applySessionEffects(
     next = completeLesson(next)
   }
 
-  return next
+  return { session: next, masteryAdvanced }
 }
 
-export type TurnResult = { draft: string; action: TeachingMove['action'] }
+export type TurnResult = { draft: string; action: TeachingMove['action']; masteryAdvanced: boolean }
 
 export async function handleTurn(input: TurnInput, deps: HarnessDeps): Promise<TurnResult> {
   const affect = deps.affectObserver(input.userMessage, input.messages)
@@ -185,13 +232,15 @@ export async function handleTurn(input: TurnInput, deps: HarnessDeps): Promise<T
   })
 
   if (move.action === 'offer-wrap') {
+    const effects = applySessionEffects(
+      input.session, move, mastery, input.runResult, input.stuckCount, input.hasRunOk,
+    )
     queueMicrotask(() => {
-      const updatedSession = applySessionEffects(input.session, move, mastery)
-      if (updatedSession !== input.session) input.onSessionUpdated(updatedSession)
+      if (effects.session !== input.session) input.onSessionUpdated(effects.session)
       const updated = deps.memoryCurator(input.userMessage, input.profile)
       if (updated !== input.profile) input.onProfileLearned(updated)
     })
-    return { draft: '', action: 'offer-wrap' }
+    return { draft: '', action: 'offer-wrap', masteryAdvanced: effects.masteryAdvanced }
   }
 
   const request = buildContext({
@@ -202,16 +251,33 @@ export async function handleTurn(input: TurnInput, deps: HarnessDeps): Promise<T
     move,
     misconception,
   })
-  const draft = isGuardedMode(input.session.mode)
-    ? await generateGuarded(request, input, deps)
-    : await deps.tutor.stream(request, input.onToken)
+
+  // Generate draft without streaming — emit after all guards pass
+  let draft: string
+  if (isGuardedMode(input.session.mode)) {
+    draft = await generateGuarded(request, input, deps)
+  } else {
+    draft = await deps.tutor.stream(request, NO_STREAM)
+  }
+
+  // H10(c): repetition guard — regenerate if draft is too similar to previous tutor message
+  const prevTutor = input.messages.findLast((m) => m.role === 'assistant')?.content ?? ''
+  if (isRepetitive(draft, prevTutor)) {
+    draft = await regenerate(request, REPHRASE_DIRECTIVE, deps)
+  }
+
+  input.onToken(draft)
+
+  const effects = applySessionEffects(
+    input.session, move, mastery, input.runResult, input.stuckCount, input.hasRunOk,
+  )
   queueMicrotask(() => {
-    const updatedSession = applySessionEffects(input.session, move, mastery)
-    if (updatedSession !== input.session) input.onSessionUpdated(updatedSession)
+    if (effects.session !== input.session) input.onSessionUpdated(effects.session)
     const updated = deps.memoryCurator(input.userMessage, input.profile)
     if (updated !== input.profile) input.onProfileLearned(updated)
   })
-  return { draft, action: move.action }
+
+  return { draft, action: move.action, masteryAdvanced: effects.masteryAdvanced }
 }
 
 export type OpeningInput = {

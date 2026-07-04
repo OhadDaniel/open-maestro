@@ -23,6 +23,132 @@ function fakeProvider(chunks: string[]): TutorProvider {
   }
 }
 
+describe('handleTurn — H10 run-mastery + anti-stuck + repetition guard', () => {
+  it('H10(a): masters practicing outcome when run succeeds with output', async () => {
+    const provider = fakeProvider(['Great job!'])
+    const deps = defaultHarnessDeps(provider)
+    const session = createSession(WRITING_YOUR_FIRST_PROGRAM.lesson.id)
+    let updatedSession = session
+    await handleTurn(
+      {
+        userMessage: 'I ran this code:\n\nprint("hi")\n\nOutput:\nhi',
+        baked: WRITING_YOUR_FIRST_PROGRAM,
+        session,
+        profile: emptyProfile(),
+        messages: [],
+        onToken: () => {},
+        onProfileLearned: () => {},
+        onSessionUpdated: (s) => { updatedSession = s },
+        runResult: { ok: true, output: 'hi' },
+      },
+      deps,
+    )
+    expect(updatedSession.progress.masteredOutcomes).toContain('0')
+  })
+
+  it('H10(a): does not master when run fails', async () => {
+    const provider = fakeProvider(['Try again.'])
+    const deps = defaultHarnessDeps(provider)
+    const session = createSession(WRITING_YOUR_FIRST_PROGRAM.lesson.id)
+    let updatedSession = session
+    await handleTurn(
+      {
+        userMessage: 'got an error',
+        baked: WRITING_YOUR_FIRST_PROGRAM,
+        session,
+        profile: emptyProfile(),
+        messages: [],
+        onToken: () => {},
+        onProfileLearned: () => {},
+        onSessionUpdated: (s) => { updatedSession = s },
+        runResult: { ok: false, output: 'SyntaxError: invalid syntax' },
+      },
+      deps,
+    )
+    expect(updatedSession.progress.masteredOutcomes).not.toContain('0')
+  })
+
+  it('H10(b): force-advances stuck outcome after 3 turns with successful run', async () => {
+    const provider = fakeProvider(['Same explanation again.'])
+    const deps = defaultHarnessDeps(provider)
+    const session = createSession(WRITING_YOUR_FIRST_PROGRAM.lesson.id)
+    let updatedSession = session
+    await handleTurn(
+      {
+        userMessage: 'I still do not get it',
+        baked: WRITING_YOUR_FIRST_PROGRAM,
+        session,
+        profile: emptyProfile(),
+        messages: [],
+        onToken: () => {},
+        onProfileLearned: () => {},
+        onSessionUpdated: (s) => { updatedSession = s },
+        stuckCount: 3,
+        hasRunOk: true,
+      },
+      deps,
+    )
+    expect(updatedSession.progress.masteredOutcomes).toContain('0')
+  })
+
+  it('H10(b): does not force-advance when stuck without a run', async () => {
+    const provider = fakeProvider(['Let me explain differently.'])
+    const deps = defaultHarnessDeps(provider)
+    const session = createSession(WRITING_YOUR_FIRST_PROGRAM.lesson.id)
+    let updatedSession = session
+    await handleTurn(
+      {
+        userMessage: 'still confused',
+        baked: WRITING_YOUR_FIRST_PROGRAM,
+        session,
+        profile: emptyProfile(),
+        messages: [],
+        onToken: () => {},
+        onProfileLearned: () => {},
+        onSessionUpdated: (s) => { updatedSession = s },
+        stuckCount: 3,
+        hasRunOk: false,
+      },
+      deps,
+    )
+    expect(updatedSession.progress.masteredOutcomes).not.toContain('0')
+  })
+
+  it('H10(c): regenerates when draft is highly similar to previous tutor message', async () => {
+    let callCount = 0
+    const provider: TutorProvider = {
+      async *streamMessage(): AsyncIterable<ProviderStreamEvent> {
+        callCount += 1
+        // First call: repetitive. Second call (regenerate): different.
+        const text = callCount === 1
+          ? 'Please write a print statement using the print function to display output with print'
+          : 'Now try running it — what happens?'
+        yield { type: 'text_delta', text }
+        yield { type: 'message_stop', stopReason: 'stop' }
+      },
+    }
+    const deps = defaultHarnessDeps(provider)
+    const session = createSession(WRITING_YOUR_FIRST_PROGRAM.lesson.id)
+    let emitted = ''
+    const prevTutorText = 'Please write a print statement using the print function to display output with print'
+    await handleTurn(
+      {
+        userMessage: 'ok',
+        baked: WRITING_YOUR_FIRST_PROGRAM,
+        session,
+        profile: emptyProfile(),
+        messages: [{ role: 'assistant', content: prevTutorText }],
+        onToken: (t) => { emitted = t },
+        onProfileLearned: () => {},
+        onSessionUpdated: () => {},
+      },
+      deps,
+    )
+    expect(callCount).toBe(2)
+    expect(emitted).toBe('Now try running it — what happens?')
+  })
+})
+
 describe('handleTurn (slice 0)', () => {
   it('streams tokens and returns the full draft', async () => {
     const provider = fakeProvider(['Hello', ', ', 'world'])

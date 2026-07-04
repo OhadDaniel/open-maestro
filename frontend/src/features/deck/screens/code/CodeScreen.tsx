@@ -31,7 +31,7 @@ function CodeSession({ baked }: { baked: NonNullable<ReturnType<typeof useLesson
   useEffect(() => {
     if (runCount > handledRunRef.current && runResult !== null) {
       handledRunRef.current = runCount
-      send(runMessage(code, runResult.output))
+      send(runMessage(code, runResult.output), { ok: runResult.ok, output: runResult.output })
     }
   }, [runCount, runResult, code, send])
 

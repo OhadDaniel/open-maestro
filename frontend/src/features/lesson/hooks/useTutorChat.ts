@@ -5,6 +5,7 @@ import type { BakedLesson } from '../../../content/baked.types'
 import type { TutorSession } from '../../../content/session.types'
 import { defaultHarnessDeps, handleTurn, openLesson } from '../../../harness/orchestrator'
 import type { LearnerProfile } from '../../../memory/learner-profile.types'
+import { masteryTracer } from '../../../harness/sense/masteryTracer'
 import type { ChatMessage } from '../lesson.types'
 
 const HISTORY_LIMIT = 12
@@ -26,13 +27,15 @@ function toProviderMessages(messages: ChatMessage[]): ProviderMessage[] {
     }))
 }
 
+type RunResult = { ok: boolean; output: string }
+
 type UseTutorChat = {
   messages: ChatMessage[]
   isStreaming: boolean
   session: TutorSession
   seedTutorMessage: (text: string) => void
   beginLesson: () => Promise<void>
-  sendMessage: (text: string) => Promise<void>
+  sendMessage: (text: string, runResult?: RunResult) => Promise<void>
   skipTyping: () => void
 }
 
@@ -50,6 +53,11 @@ export function useTutorChat(
   const deps = useMemo(() => defaultHarnessDeps(provider), [provider])
   const skipRef = useRef(false)
   const skipTyping = useCallback(() => { skipRef.current = true }, [])
+
+  // H10(b): anti-stuck tracking refs
+  const lastPracticingIdxRef = useRef(-1)
+  const stuckCountRef = useRef(0)
+  const runOkInWindowRef = useRef(false)
 
   const seedTutorMessage = useCallback((text: string) => {
     setMessages((prev) => [...prev, { id: nextId(), role: 'tutor', text }])
@@ -88,11 +96,26 @@ export function useTutorChat(
   }, [deps, baked, session, profile, isStreaming])
 
   const sendMessage = useCallback(
-    async (text: string) => {
+    async (text: string, runResult?: RunResult) => {
       const trimmed = text.trim()
       if (trimmed.length === 0 || isStreaming) {
         return
       }
+
+      // H10(b): update stuck-outcome tracking before the turn
+      const mastery = masteryTracer(session, baked)
+      const practicingIdx = mastery.skills.findIndex((s) => s.status === 'practicing')
+      if (practicingIdx >= 0 && practicingIdx === lastPracticingIdxRef.current) {
+        stuckCountRef.current += 1
+      } else {
+        stuckCountRef.current = 1
+        lastPracticingIdxRef.current = practicingIdx
+        runOkInWindowRef.current = false
+      }
+      if (runResult?.ok && runResult.output.trim().length > 0) {
+        runOkInWindowRef.current = true
+      }
+
       const studentMessage: ChatMessage = {
         id: nextId(),
         role: 'student',
@@ -106,7 +129,7 @@ export function useTutorChat(
         { id: replyId, role: 'tutor', text: '' },
       ])
       setIsStreaming(true)
-      const { action } = await handleTurn(
+      const { action, masteryAdvanced } = await handleTurn(
         {
           userMessage: trimmed,
           baked,
@@ -123,9 +146,20 @@ export function useTutorChat(
             ),
           onProfileLearned,
           onSessionUpdated: setSession,
+          runResult,
+          stuckCount: stuckCountRef.current,
+          hasRunOk: runOkInWindowRef.current,
         },
         deps,
       )
+
+      // H10(b): reset tracking when mastery advances
+      if (masteryAdvanced) {
+        stuckCountRef.current = 0
+        runOkInWindowRef.current = false
+        lastPracticingIdxRef.current = -1
+      }
+
       if (action === 'offer-wrap') {
         setMessages((prev) =>
           prev.map((message) =>
