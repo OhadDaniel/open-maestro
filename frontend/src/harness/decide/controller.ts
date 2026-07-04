@@ -19,6 +19,12 @@ export type ControllerInput = {
 const EXPLICIT_ADVANCE_RE =
   /\b(continue|next|got\s+it|i\s+understand|move\s+on|let'?s\s+go|let'?s\s+continue|skip)\b/i
 
+const CELEBRATE_RULES: readonly string[] = [
+  'Name exactly what their code just printed or produced — celebrate that specific output in one warm sentence.',
+  'In one more sentence, say what this means: what they just made the computer do.',
+  'Stop there — do not prompt next steps, do not ask a question. Let them lead.',
+]
+
 function isExplicitAdvanceRequest(msg: string): boolean {
   return EXPLICIT_ADVANCE_RE.test(msg)
 }
@@ -84,13 +90,13 @@ export function controller(input: ControllerInput): TeachingMove {
     return toMove('advance', advanceRules(input.lesson, practicingIndex), 'explicit-advance')
   }
 
-  // EARLY: successful run → the run IS the demonstration
+  // EARLY: successful run → celebrate (student must then explicitly advance)
   if (
     practicingIndex >= 0 &&
     input.runResult?.ok === true &&
     input.runResult.output.trim().length > 0
   ) {
-    return toMove('advance', advanceRules(input.lesson, practicingIndex), 'run-success')
+    return toMove('explain', CELEBRATE_RULES, 'run-celebrate')
   }
 
   // EARLY: per-step turn cap

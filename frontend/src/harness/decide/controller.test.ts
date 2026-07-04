@@ -204,7 +204,7 @@ describe('controller — P0-1 early advance triggers', () => {
     expect(move.reason).toBe('explicit-advance')
   })
 
-  it('advances on successful run with output', () => {
+  it('celebrates (not advances) on successful run with output', () => {
     const move = controller({
       ...base,
       session: sessionWith('explain'),
@@ -212,8 +212,8 @@ describe('controller — P0-1 early advance triggers', () => {
       userMessage: 'I ran this code',
       runResult: { ok: true, output: 'Hello, world!\n' },
     })
-    expect(move.action).toBe('advance')
-    expect(move.reason).toBe('run-success')
+    expect(move.action).toBe('explain')
+    expect(move.reason).toBe('run-celebrate')
   })
 
   it('does NOT advance on failed run', () => {
@@ -282,6 +282,28 @@ describe('controller — P0-1 early advance triggers', () => {
     expect(move.action).toBe('explain')
     expect(move.rules.join(' ')).toContain('Current step')
     expect(move.rules.join(' ')).toContain(lesson.lesson.masteryOutcomes[0])
+  })
+
+  it('step context on first outcome includes Open code panel hint', () => {
+    const move = controller({
+      ...base,
+      session: sessionWith('explain'),
+      mastery: practicingMastery,
+      userMessage: 'hi',
+    })
+    expect(move.rules.join(' ')).toContain('Open code panel')
+  })
+
+  it('explicit "continue" after celebrate still advances', () => {
+    const move = controller({
+      ...base,
+      session: sessionWith('explain'),
+      mastery: practicingMastery,
+      userMessage: 'ok continue',
+      // No runResult — this is the follow-up after celebration
+    })
+    expect(move.action).toBe('advance')
+    expect(move.reason).toBe('explicit-advance')
   })
 })
 

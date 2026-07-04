@@ -24,12 +24,12 @@ function fakeProvider(chunks: string[]): TutorProvider {
 }
 
 describe('handleTurn — H10 run-mastery + anti-stuck + repetition guard', () => {
-  it('H10(a): masters practicing outcome when run succeeds with output', async () => {
-    const provider = fakeProvider(['Great job!'])
+  it('H10(a): celebrates with explain action on successful run (does not auto-master)', async () => {
+    const provider = fakeProvider(['Your code ran and printed "hi" — you just made the computer output text!'])
     const deps = defaultHarnessDeps(provider)
     const session = createSession(WRITING_YOUR_FIRST_PROGRAM.lesson.id)
     let updatedSession = session
-    await handleTurn(
+    const { action, masteryAdvanced } = await handleTurn(
       {
         userMessage: 'I ran this code:\n\nprint("hi")\n\nOutput:\nhi',
         baked: WRITING_YOUR_FIRST_PROGRAM,
@@ -43,7 +43,9 @@ describe('handleTurn — H10 run-mastery + anti-stuck + repetition guard', () =>
       },
       deps,
     )
-    expect(updatedSession.progress.masteredOutcomes).toContain('0')
+    expect(action).toBe('explain')
+    expect(masteryAdvanced).toBe(false)
+    expect(updatedSession.progress.masteredOutcomes).not.toContain('0')
   })
 
   it('H10(a): does not master when run fails', async () => {
