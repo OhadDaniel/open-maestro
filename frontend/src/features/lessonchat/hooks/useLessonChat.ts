@@ -4,7 +4,7 @@ import { loadBakedLesson } from '../../../content/load-lesson'
 import { loadProfile } from '../../../memory/profile-store'
 import { useViewedLesson } from '../../lessonview/useViewedLesson'
 import { usePyodide } from '../../code/usePyodide'
-import { COURSE_ID, STARTER_CODE } from '../lessonchat.constants'
+import { COURSE_ID } from '../lessonchat.constants'
 
 const STDIN_FALLBACK = 'friend'
 
@@ -16,7 +16,7 @@ function demoStdin(): readonly string[] {
 export function useLessonChat() {
   const { slug: currentLessonSlug } = useViewedLesson()
   const [baked, setBaked] = useState<BakedLesson | null>(null)
-  const [code, setCode] = useState(STARTER_CODE)
+  const [code, setCode] = useState('')
   const [runCount, setRunCount] = useState(0)
   const { status, lastResult, run: runPy } = usePyodide()
 
@@ -26,15 +26,19 @@ export function useLessonChat() {
     }
     let active = true
     setBaked(null)
+    setCode('')
     void loadBakedLesson(COURSE_ID, currentLessonSlug)
       .then((lesson) => {
         if (active) {
           setBaked(lesson)
+          const coding = lesson.practice?.find((q) => q.kind === 'coding')
+          setCode(coding?.starterCode ?? '')
         }
       })
       .catch(() => {
         if (active) {
           setBaked(null)
+          setCode('')
         }
       })
     return () => {
