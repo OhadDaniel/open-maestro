@@ -28,6 +28,19 @@ describe('learner profile', () => {
     expect(profile.wins).toEqual(['printed Hello world'])
   })
 
+  it('stores goal verbatim regardless of phrasing', () => {
+    expect(withGoal(emptyProfile(), 'become a doctor').goal).toBe('become a doctor')
+    expect(withGoal(emptyProfile(), 'get a promotion').goal).toBe('get a promotion')
+    expect(withGoal(emptyProfile(), 'build my own website').goal).toBe('build my own website')
+  })
+
+  it('caps goal at the entry maximum', () => {
+    const long = 'a'.repeat(200)
+    const goal = withGoal(emptyProfile(), long).goal
+    expect(goal).not.toBeNull()
+    expect(goal!.length).toBeLessThanOrEqual(160)
+  })
+
   it('caps a list at the maximum, keeping the most recent', () => {
     let profile = emptyProfile()
     for (let index = 0; index < PROFILE_LIST_MAX + 3; index += 1) {

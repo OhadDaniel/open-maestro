@@ -30,3 +30,16 @@ describe('affectObserver confident detection', () => {
     }
   })
 })
+
+describe('affectObserver confused detection', () => {
+  it('triggers on clear confusion phrases', () => {
+    expect(affectObserver("i don't get it", []).state).toBe('confused')
+    expect(affectObserver("i'm lost", []).state).toBe('confused')
+    expect(affectObserver('lost me', []).state).toBe('confused')
+  })
+
+  it('does NOT trigger on bare "what?" — rhetorical or curious use', () => {
+    expect(affectObserver('what?', []).state).not.toBe('confused')
+    expect(affectObserver('what? cool', []).state).not.toBe('confused')
+  })
+})

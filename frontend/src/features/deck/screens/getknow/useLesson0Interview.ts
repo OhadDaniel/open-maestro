@@ -29,6 +29,7 @@ let skipCurrentBeat: (() => void) | null = null
 
 const TW_CHARS = 3
 const TW_DELAY_MS = 25
+const GOAL_CAP = 120
 
 async function typewriterBeat(
   text: string,
@@ -139,7 +140,7 @@ export function useLesson0Interview(provider: TutorProvider | null): Lesson0Inte
       }
 
       skipCurrentBeat?.()
-      persistProfile(withGoal(profile, trimmed))
+      persistProfile(withGoal(profile, trimmed.slice(0, GOAL_CAP)))
       const studentId = nextId()
       const replyId = nextId()
       setMessages((prev) => [

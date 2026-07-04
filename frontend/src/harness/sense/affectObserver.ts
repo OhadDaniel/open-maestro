@@ -14,7 +14,7 @@ const CUE_GROUPS: readonly CueGroup[] = [
   },
   {
     state: 'confused',
-    phrases: ["i don't get it", 'i dont get it', "i'm lost", 'im lost', 'confused', 'what?', 'no idea', "don't understand", 'dont understand', 'say that again', 'lost me'],
+    phrases: ["i don't get it", 'i dont get it', "i'm lost", 'im lost', 'confused', 'no idea', "don't understand", 'dont understand', 'say that again', 'lost me'],
   },
   {
     state: 'bored',

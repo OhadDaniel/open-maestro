@@ -20,4 +20,15 @@ describe('learnFromMessage', () => {
     const existing = { ...emptyProfile(), name: 'Matt' }
     expect(learnFromMessage(existing, 'call me Bob').name).toBe('Matt')
   })
+
+  it('does NOT extract a bare goal answer with no trigger phrase', () => {
+    expect(learnFromMessage(emptyProfile(), 'become a doctor').goal).toBeNull()
+    expect(learnFromMessage(emptyProfile(), 'get a promotion').goal).toBeNull()
+    expect(learnFromMessage(emptyProfile(), 'build my own website').goal).toBeNull()
+  })
+
+  it('does not overwrite an existing goal', () => {
+    const existing = { ...emptyProfile(), goal: 'become a developer' }
+    expect(learnFromMessage(existing, 'I want to be a nurse').goal).toBe('become a developer')
+  })
 })
