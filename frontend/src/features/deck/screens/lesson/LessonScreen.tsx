@@ -46,7 +46,7 @@ function LessonThread({ onOpenCode }: { onOpenCode: () => void }) {
 
   return (
     <>
-      <div onClick={skipTyping} style={{ flex: 1, overflowY: 'auto', padding: '28px 30px 12px', cursor: isStreaming ? 'default' : undefined }}>
+      <div onDoubleClick={skipTyping} style={{ flex: 1, overflowY: 'auto', padding: '28px 30px 12px', cursor: isStreaming ? 'default' : undefined }}>
         <div style={{ maxWidth: 660, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 14 }}>
           {messages.length === 0 ? (
             <TypingBubble />

@@ -133,21 +133,24 @@ export function useTutorChat(
         { id: replyId, role: 'tutor', text: '' },
       ])
       setIsStreaming(true)
-      const { action, masteryAdvanced } = await handleTurn(
+      let streamedText = ''
+      const { action, masteryAdvanced, draft } = await handleTurn(
         {
           userMessage: trimmed,
           baked,
           session: sessionRef.current,
           profile,
           messages: history,
-          onToken: (token) =>
+          onToken: (token) => {
+            streamedText += token
             setMessages((prev) =>
               prev.map((message) =>
                 message.id === replyId
                   ? { ...message, text: message.text + token }
                   : message,
               ),
-            ),
+            )
+          },
           onProfileLearned,
           onSessionUpdated,
           runResult,
@@ -155,6 +158,15 @@ export function useTutorChat(
         },
         deps,
       )
+
+      // Fix 4: reconcile if a guard replaced the draft after streaming began
+      if (draft.length > 0 && draft !== streamedText) {
+        setMessages((prev) =>
+          prev.map((message) =>
+            message.id === replyId ? { ...message, text: draft } : message,
+          ),
+        )
+      }
 
       if (masteryAdvanced) {
         stuckCountRef.current = 0
