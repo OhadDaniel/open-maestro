@@ -49,16 +49,21 @@ describe('handleTurn — H10 run-mastery + anti-stuck + repetition guard', () =>
     expect(updatedSession.progress.masteredOutcomes).toContain('0')
   })
 
-  it('H10(a): run-celebrate fires for runs with output but no quoted print match', async () => {
+  it('H10(a): run-celebrate fires for variable print on general-fallback lesson', async () => {
+    // Use a lesson ID not in LESSON_EVALUATORS — general heuristic requires print("literal")
+    const generalLesson = {
+      ...WRITING_YOUR_FIRST_PROGRAM,
+      lesson: { ...WRITING_YOUR_FIRST_PROGRAM.lesson, id: 'py101-w3-variables' },
+    }
     const provider = fakeProvider(['Great work running your code!'])
     const deps = defaultHarnessDeps(provider)
-    const session = createSession(WRITING_YOUR_FIRST_PROGRAM.lesson.id)
+    const session = createSession('py101-w3-variables')
     let updatedSession = session
     const { action, masteryAdvanced } = await handleTurn(
       {
-        // print(x) with a variable — no quoted string, so detection heuristic does not fire
+        // print(x) with a variable — no quoted string → general heuristic does not fire
         userMessage: 'I ran this code:\n\nx = 42\nprint(x)\n\nOutput:\n42',
-        baked: WRITING_YOUR_FIRST_PROGRAM,
+        baked: generalLesson,
         session,
         profile: emptyProfile(),
         messages: [],

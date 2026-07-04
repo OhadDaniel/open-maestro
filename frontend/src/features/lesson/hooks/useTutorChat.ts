@@ -4,9 +4,10 @@ import type { TutorProvider } from '../../../ai/provider'
 import type { ProviderMessage } from '../../../ai/provider.types'
 import type { BakedLesson } from '../../../content/baked.types'
 import type { TutorSession } from '../../../content/session.types'
-import { defaultHarnessDeps, handleTurn, openLesson } from '../../../harness/orchestrator'
+import { defaultHarnessDeps, handleTurn, openLesson, typewriterReveal } from '../../../harness/orchestrator'
 import type { LearnerProfile } from '../../../memory/learner-profile.types'
 import { masteryTracer } from '../../../harness/sense/masteryTracer'
+import { useReducedMotion } from '../../../shared/motion/useReducedMotion'
 import type { ChatMessage } from '../lesson.types'
 import { saveThread } from '../thread-store'
 
@@ -50,6 +51,7 @@ export function useTutorChat(
   onReplyComplete: (replyId: string) => void,
   initialMessages?: ChatMessage[],
 ): UseTutorChat {
+  const reducedMotion = useReducedMotion()
   const [messages, setMessages] = useState<ChatMessage[]>(initialMessages ?? [])
   const [isStreaming, setIsStreaming] = useState(false)
   const [session, setSession] = useState<TutorSession>(initialSession)
@@ -118,6 +120,7 @@ export function useTutorChat(
       if (trimmed.length === 0 || isStreaming) {
         return
       }
+      skipRef.current = false
 
       // stuck-outcome tracking before the turn
       const mastery = masteryTracer(sessionRef.current, baked)
@@ -168,13 +171,23 @@ export function useTutorChat(
         deps,
       )
 
-      // Fix 4: reconcile if a guard replaced the draft after streaming began
-      if (draft.length > 0 && draft !== streamedText) {
-        setMessages((prev) =>
-          prev.map((message) =>
-            message.id === replyId ? { ...message, text: draft } : message,
-          ),
-        )
+      // Typewriter for non-streamed drafts (guarded mode, guard-replaced, offer-wrap closure)
+      const alreadyStreamed = streamedText.length > 0 && draft === streamedText
+      if (draft.length > 0 && !alreadyStreamed) {
+        if (!reducedMotion) {
+          await typewriterReveal(
+            draft,
+            (revealed) =>
+              setMessages((prev) =>
+                prev.map((m) => (m.id === replyId ? { ...m, text: revealed } : m)),
+              ),
+            skipRef,
+          )
+        } else {
+          setMessages((prev) =>
+            prev.map((m) => (m.id === replyId ? { ...m, text: draft } : m)),
+          )
+        }
       }
 
       if (masteryAdvanced) {
@@ -198,7 +211,7 @@ export function useTutorChat(
       setIsStreaming(false)
       onReplyComplete(replyId)
     },
-    [deps, baked, session, profile, messages, isStreaming, onProfileLearned, onReplyComplete, onSessionUpdated],
+    [deps, baked, session, profile, messages, isStreaming, reducedMotion, onProfileLearned, onReplyComplete, onSessionUpdated],
   )
 
   return { messages, isStreaming, session, seedTutorMessage, beginLesson, sendMessage, skipTyping }
