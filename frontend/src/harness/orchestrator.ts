@@ -213,11 +213,21 @@ const OPENING_MOVE: TeachingMove = {
   reason: 'lesson-opening',
 }
 
+function dropGoalSentences(text: string): string {
+  // Split on sentence-terminal punctuation followed by whitespace,
+  // keeping the punctuation on the preceding sentence.
+  const parts = text.replace(/([.!?])\s+/g, '$1\x00').split('\x00')
+  return parts.filter((s) => !s.includes('{goal}')).join(' ')
+}
+
 export function renderOpeningLine(baked: BakedLesson, profile: LearnerProfile): string {
   const name = profile.name ?? 'there'
-  let text = baked.openingLine
+  const goalRaw = profile.goal
+  const base = goalRaw !== null ? baked.openingLine : dropGoalSentences(baked.openingLine)
+  const goalSubstitution = goalRaw !== null ? `"${goalRaw}"` : ''
+  let text = base
     .replace('{name}', name)
-    .replace('{goal}', profile.goal ?? '')
+    .replace('{goal}', goalSubstitution)
     .replace(/\{[^}]+\}/g, '')
     .trim()
   if (baked.bridgeFromPreviousLesson !== null) {

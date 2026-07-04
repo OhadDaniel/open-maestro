@@ -122,15 +122,26 @@ describe('renderOpeningLine', () => {
     expect(renderOpeningLine(baked, emptyProfile())).toBe('Hi there!')
   })
 
-  it('substitutes {goal} from the learner profile', () => {
+  it('substitutes {goal} wrapped in quotes when goal is present', () => {
     const baked = { ...base, openingLine: 'Goal: {goal}.' }
     const profile = withGoal(emptyProfile(), 'become a developer')
-    expect(renderOpeningLine(baked, profile)).toBe('Goal: become a developer.')
+    expect(renderOpeningLine(baked, profile)).toBe('Goal: "become a developer".')
   })
 
-  it('replaces {goal} with empty string when goal is null', () => {
+  it('drops the entire sentence containing {goal} when goal is null', () => {
     const baked = { ...base, openingLine: 'Motivated by: {goal}.' }
-    expect(renderOpeningLine(baked, emptyProfile())).toBe('Motivated by: .')
+    expect(renderOpeningLine(baked, emptyProfile())).toBe('')
+  })
+
+  it('drops only the {goal} sentence and keeps the rest', () => {
+    const baked = { ...base, openingLine: 'Hi {name}. Motivated by: {goal}. Let\'s start.' }
+    expect(renderOpeningLine(baked, withName(emptyProfile(), 'Sam'))).toBe('Hi Sam. Let\'s start.')
+  })
+
+  it('full persistence path: goal from profile renders quoted in opening', () => {
+    const profile = withGoal(withName(emptyProfile(), 'Sam'), 'become a Python developer')
+    const baked = { ...base, openingLine: 'Hi {name}. You said {goal}.' }
+    expect(renderOpeningLine(baked, profile)).toBe('Hi Sam. You said "become a Python developer".')
   })
 
   it('appends bridge when non-null', () => {
@@ -149,10 +160,9 @@ describe('renderOpeningLine', () => {
     expect(renderOpeningLine(baked, withName(emptyProfile(), 'Sam'))).toBe('Hi Sam.')
   })
 
-  it('strips any remaining unknown template vars so no raw braces reach the screen', () => {
-    const baked = { ...base, openingLine: 'Hi {name}, studying {course} — goal: {goal}.' }
-    const profile = withGoal(withName(emptyProfile(), 'Sam'), 'learn Python')
-    expect(renderOpeningLine(baked, profile)).toBe('Hi Sam, studying  — goal: learn Python.')
+  it('strips unknown template vars so no raw braces reach the screen', () => {
+    const baked = { ...base, openingLine: 'Hi {name}, studying {course}.' }
+    expect(renderOpeningLine(baked, withName(emptyProfile(), 'Sam'))).toBe('Hi Sam, studying .')
   })
 })
 

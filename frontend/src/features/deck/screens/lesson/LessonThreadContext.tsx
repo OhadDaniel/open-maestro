@@ -1,5 +1,6 @@
 import { createContext, useContext } from 'react'
 import { useLessonChatContext } from '../../../lessonchat/LessonChatContext'
+import { useProgressContext } from '../../../progress/ProgressContext'
 import { useSession } from '../../../session/SessionContext'
 import { useLessonThread } from './useLessonThread'
 
@@ -16,7 +17,8 @@ function ActiveThread({ children }: { children: React.ReactNode }) {
 
 export function LessonThreadProvider({ children }: { children: React.ReactNode }) {
   const { baked, ready } = useLessonChatContext()
-  if (!ready || baked === null) {
+  const { state } = useProgressContext()
+  if (!ready || baked === null || !state.firstRunDone) {
     return <>{children}</>
   }
   return <ActiveThread key={baked.lesson.id}>{children}</ActiveThread>
