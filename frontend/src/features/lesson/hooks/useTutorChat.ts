@@ -1,4 +1,5 @@
 import { useCallback, useMemo, useRef, useState } from 'react'
+import { flushSync } from 'react-dom'
 import type { TutorProvider } from '../../../ai/provider'
 import type { ProviderMessage } from '../../../ai/provider.types'
 import type { BakedLesson } from '../../../content/baked.types'
@@ -84,9 +85,11 @@ export function useTutorChat(
             ),
           ),
         onReveal: (text) =>
-          setMessages((prev) =>
-            prev.map((message) =>
-              message.id === replyId ? { ...message, text } : message,
+          flushSync(() =>
+            setMessages((prev) =>
+              prev.map((message) =>
+                message.id === replyId ? { ...message, text } : message,
+              ),
             ),
           ),
       },

@@ -23,21 +23,27 @@ import { groundingGuard } from './verify/groundingGuard'
 
 export type OnToken = (text: string) => void
 
-const TW_CHARS = 3
-const TW_DELAY_MS = 25
+const TW_CHARS = 3          // characters per reveal step
+const TW_CHAR_MS = 18       // target delay per character
+const TW_MIN_MS = 800       // minimum total reveal duration
 
 async function typewriterReveal(
   text: string,
   onReveal: (text: string) => void,
   skipRef?: { current: boolean },
 ): Promise<void> {
+  const steps = Math.max(1, Math.ceil(text.length / TW_CHARS))
+  const naturalMs = steps * TW_CHAR_MS * TW_CHARS
+  const delayMs = naturalMs < TW_MIN_MS
+    ? Math.ceil(TW_MIN_MS / steps)
+    : TW_CHAR_MS * TW_CHARS
   for (let pos = TW_CHARS; pos < text.length; pos += TW_CHARS) {
     if (skipRef?.current) {
       onReveal(text)
       return
     }
     onReveal(text.slice(0, pos))
-    await new Promise<void>((r) => setTimeout(r, TW_DELAY_MS))
+    await new Promise<void>((r) => setTimeout(r, delayMs))
   }
   onReveal(text)
 }

@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { OPENING_BOOTSTRAP } from '../ai/offline-provider'
 import type { TutorProvider } from '../ai/provider'
 import type { ProviderMessage, ProviderRequest, ProviderStreamEvent } from '../ai/provider.types'
@@ -146,6 +146,67 @@ describe('handleTurn — H10 run-mastery + anti-stuck + repetition guard', () =>
     )
     expect(callCount).toBe(2)
     expect(emitted).toBe('Now try running it — what happens?')
+  })
+})
+
+describe('openLesson — H7b typewriter rate', () => {
+  beforeEach(() => { vi.useFakeTimers() })
+  afterEach(() => { vi.useRealTimers() })
+
+  it('reveals opening line in ≥3 growing steps on first mount', async () => {
+    const provider: TutorProvider = {
+      async *streamMessage(): AsyncIterable<ProviderStreamEvent> {
+        yield { type: 'message_stop', stopReason: 'stop' }
+      },
+    }
+    const deps = defaultHarnessDeps(provider)
+    const session = createSession(WRITING_YOUR_FIRST_PROGRAM.lesson.id)
+    const profile = withName(emptyProfile(), 'Dana')
+    const reveals: string[] = []
+
+    const promise = openLesson(
+      {
+        baked: WRITING_YOUR_FIRST_PROGRAM,
+        session,
+        profile,
+        skipRef: { current: false },
+        onToken: () => {},
+        onReveal: (t) => { reveals.push(t) },
+      },
+      deps,
+    )
+    await vi.runAllTimersAsync()
+    await promise
+
+    expect(reveals.length).toBeGreaterThanOrEqual(3)
+    for (let i = 1; i < reveals.length; i++) {
+      expect(reveals[i].length).toBeGreaterThan(reveals[i - 1].length)
+    }
+    expect(reveals[reveals.length - 1]).toContain('Dana')
+  })
+
+  it('emits full text instantly when skipRef is true', async () => {
+    const deps = defaultHarnessDeps(fakeProvider([]))
+    const session = createSession(WRITING_YOUR_FIRST_PROGRAM.lesson.id)
+    const profile = withName(emptyProfile(), 'Dana')
+    const reveals: string[] = []
+
+    const promise = openLesson(
+      {
+        baked: WRITING_YOUR_FIRST_PROGRAM,
+        session,
+        profile,
+        skipRef: { current: true },
+        onToken: () => {},
+        onReveal: (t) => { reveals.push(t) },
+      },
+      deps,
+    )
+    await vi.runAllTimersAsync()
+    await promise
+
+    expect(reveals.length).toBe(1)
+    expect(reveals[0]).toContain('Dana')
   })
 })
 
