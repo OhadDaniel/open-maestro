@@ -25,7 +25,13 @@ export function CodeScreen() {
 function CodeSession({ baked }: { baked: NonNullable<ReturnType<typeof useLessonChatContext>['baked']> }) {
   const { goTo } = useDeckNav()
   const { code, setCode, run, running, runResult, runCount, hasRun } = useLessonChatContext()
-  const { messages, isStreaming, send } = useLessonThreadContext()
+  const { messages, isStreaming, session, send } = useLessonThreadContext()
+
+  useEffect(() => {
+    if (session.progress.completed) {
+      goTo('lessondone')
+    }
+  }, [session.progress.completed, goTo])
 
   const handledRunRef = useRef(runCount)
   useEffect(() => {

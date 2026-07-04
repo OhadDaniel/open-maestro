@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { Icon } from '../../../../shared/components/Icon'
 import { useViewedLesson } from '../../../lessonview/useViewedLesson'
 import { AppNav } from '../../../appnav/AppNav'
@@ -34,7 +35,14 @@ export function LessonScreen() {
 }
 
 function LessonThread({ onOpenCode }: { onOpenCode: () => void }) {
-  const { messages, isStreaming, send, skipTyping } = useLessonThreadContext()
+  const { goTo } = useDeckNav()
+  const { messages, isStreaming, session, send, skipTyping } = useLessonThreadContext()
+
+  useEffect(() => {
+    if (session.progress.completed) {
+      goTo('lessondone')
+    }
+  }, [session.progress.completed, goTo])
 
   return (
     <>
