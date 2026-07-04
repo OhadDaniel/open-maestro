@@ -10,5 +10,5 @@ export const PASS_THROUGH_MOVE: TeachingMove = {
 }
 
 export const AFFECT_ACT_THRESHOLD = 0.6
-export const TURNS_PER_OUTCOME = 4
+export const MAX_TURNS_PER_OUTCOME = 2
 export const TURN_BUDGET_BUFFER = 3

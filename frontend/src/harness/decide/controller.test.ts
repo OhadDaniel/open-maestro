@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
 import { WRITING_YOUR_FIRST_PROGRAM } from '../../content/samples/writing-your-first-program'
 import type { TutorMode, TutorSession } from '../../content/session.types'
 import { createSession } from '../../tutor/session'
-import { EMPTY_MASTERY, NEUTRAL_AFFECT, NO_MISCONCEPTION, TURN_BUDGET_BUFFER, TURNS_PER_OUTCOME } from '../constants'
+import { EMPTY_MASTERY, MAX_TURNS_PER_OUTCOME, NEUTRAL_AFFECT, NO_MISCONCEPTION, TURN_BUDGET_BUFFER } from '../constants'
 import type { AffectSignal, MasterySignal } from '../types'
 import { affectObserver } from '../sense/affectObserver'
 import { controller } from './controller'
@@ -31,7 +31,7 @@ describe('controller (slice 1)', () => {
   })
 
   it('wraps lesson when the turn budget is reached (anti-loop)', () => {
-    const budget = lesson.lesson.masteryOutcomes.length * TURNS_PER_OUTCOME + TURN_BUDGET_BUFFER
+    const budget = lesson.lesson.masteryOutcomes.length * MAX_TURNS_PER_OUTCOME + TURN_BUDGET_BUFFER
     expect(controller({ ...base, session: sessionWith('explain'), turnIndex: budget }).action).toBe('wrap-lesson')
   })
 
@@ -85,9 +85,15 @@ describe('controller (slice 1)', () => {
     expect(move.action).not.toBe('offer-wrap')
   })
 
-  it('returns advance with confident-claim reason when student is confident', () => {
+  it('returns advance with confident-claim reason when student is confident and there is a practicing outcome', () => {
     const confident: AffectSignal = { state: 'confident', confidence: 0.8, cues: [] }
-    const move = controller({ ...base, session: sessionWith('explain'), affect: confident })
+    const mastery: MasterySignal = {
+      skills: lesson.lesson.masteryOutcomes.map((_, index) => ({
+        id: String(index),
+        status: index === 0 ? ('practicing' as const) : ('unseen' as const),
+      })),
+    }
+    const move = controller({ ...base, session: sessionWith('explain'), affect: confident, mastery })
     expect(move.action).toBe('advance')
     expect(move.reason).toBe('confident-claim')
   })
@@ -154,5 +160,127 @@ describe('controller (slice 1)', () => {
     })
     expect(move.action).toBe('explain')
     expect(move.rules.join(' ')).toContain('quotes make a string')
+  })
+})
+
+describe('controller — P0-1 early advance triggers', () => {
+  const practicingMastery: MasterySignal = {
+    skills: lesson.lesson.masteryOutcomes.map((_, index) => ({
+      id: String(index),
+      status: index === 0 ? ('practicing' as const) : ('unseen' as const),
+    })),
+  }
+
+  it('advances on explicit "continue" before affect check', () => {
+    const move = controller({
+      ...base,
+      session: sessionWith('explain'),
+      mastery: practicingMastery,
+      userMessage: 'ok continue',
+    })
+    expect(move.action).toBe('advance')
+    expect(move.reason).toBe('explicit-advance')
+  })
+
+  it('advances on "I understand" before affect check', () => {
+    const move = controller({
+      ...base,
+      session: sessionWith('explain'),
+      mastery: practicingMastery,
+      userMessage: 'I understand it now',
+    })
+    expect(move.action).toBe('advance')
+    expect(move.reason).toBe('explicit-advance')
+  })
+
+  it('advances on "got it" before affect check', () => {
+    const move = controller({
+      ...base,
+      session: sessionWith('explain'),
+      mastery: practicingMastery,
+      userMessage: 'got it, thanks',
+    })
+    expect(move.action).toBe('advance')
+    expect(move.reason).toBe('explicit-advance')
+  })
+
+  it('advances on successful run with output', () => {
+    const move = controller({
+      ...base,
+      session: sessionWith('explain'),
+      mastery: practicingMastery,
+      userMessage: 'I ran this code',
+      runResult: { ok: true, output: 'Hello, world!\n' },
+    })
+    expect(move.action).toBe('advance')
+    expect(move.reason).toBe('run-success')
+  })
+
+  it('does NOT advance on failed run', () => {
+    const move = controller({
+      ...base,
+      session: sessionWith('explain'),
+      mastery: practicingMastery,
+      userMessage: 'got an error',
+      runResult: { ok: false, output: 'SyntaxError: invalid syntax' },
+    })
+    expect(move.action).not.toBe('advance')
+  })
+
+  it('advances via turn-cap at MAX_TURNS_PER_OUTCOME', () => {
+    const move = controller({
+      ...base,
+      session: sessionWith('explain'),
+      mastery: practicingMastery,
+      userMessage: 'still confused',
+      turnsOnCurrentOutcome: MAX_TURNS_PER_OUTCOME,
+    })
+    expect(move.action).toBe('advance')
+    expect(move.reason).toBe('turn-cap')
+  })
+
+  it('does NOT advance via turn-cap below MAX_TURNS_PER_OUTCOME', () => {
+    const move = controller({
+      ...base,
+      session: sessionWith('explain'),
+      mastery: practicingMastery,
+      userMessage: 'still confused',
+      turnsOnCurrentOutcome: MAX_TURNS_PER_OUTCOME - 1,
+    })
+    expect(move.action).not.toBe('advance')
+  })
+
+  it('advance rules include next outcome text', () => {
+    const move = controller({
+      ...base,
+      session: sessionWith('explain'),
+      mastery: practicingMastery,
+      userMessage: 'next',
+    })
+    expect(move.action).toBe('advance')
+    expect(move.rules.join(' ')).toContain('Next outcome:')
+    expect(move.rules.join(' ')).toContain(lesson.lesson.masteryOutcomes[1])
+  })
+
+  it('does NOT fire explicit advance when no outcome is practicing', () => {
+    const move = controller({
+      ...base,
+      session: sessionWith('explain'),
+      mastery: EMPTY_MASTERY,
+      userMessage: 'continue',
+    })
+    expect(move.action).not.toBe('advance')
+  })
+
+  it('mode-default move includes step context rule', () => {
+    const move = controller({
+      ...base,
+      session: sessionWith('explain'),
+      mastery: practicingMastery,
+      userMessage: '',
+    })
+    expect(move.action).toBe('explain')
+    expect(move.rules.join(' ')).toContain('Current step')
+    expect(move.rules.join(' ')).toContain(lesson.lesson.masteryOutcomes[0])
   })
 })
