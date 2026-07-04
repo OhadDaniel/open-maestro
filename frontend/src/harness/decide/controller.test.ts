@@ -91,6 +91,21 @@ describe('controller (slice 1)', () => {
     expect(move.reason).toBe('confident-claim')
   })
 
+  it('advance directive contains the next unmastered outcome text', () => {
+    const confident: AffectSignal = { state: 'confident', confidence: 0.8, cues: [] }
+    const mastery: MasterySignal = {
+      skills: lesson.lesson.masteryOutcomes.map((_, index) => ({
+        id: String(index),
+        status: index === 0 ? 'practicing' : 'unseen',
+      })),
+    }
+    const move = controller({ ...base, session: sessionWith('explain'), affect: confident, mastery })
+    expect(move.action).toBe('advance')
+    const secondOutcome = lesson.lesson.masteryOutcomes[1]
+    expect(move.rules.join(' ')).toContain(secondOutcome)
+    expect(move.rules.join(' ')).toContain('Next outcome:')
+  })
+
   it('wrap-lesson rules include the verbatim summaryBullets instruction', () => {
     const mastery: MasterySignal = {
       skills: lesson.lesson.masteryOutcomes.map((_outcome, index) => ({

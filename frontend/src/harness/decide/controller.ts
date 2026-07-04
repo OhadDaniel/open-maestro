@@ -50,7 +50,13 @@ export function controller(input: ControllerInput): TeachingMove {
       return toMove('quiz', ACTION_RULES.quiz, 'student is disengaged')
     }
     if (input.affect.state === 'confident') {
-      return toMove('advance', ACTION_RULES.advance, 'confident-claim')
+      const practicingIndex = input.mastery.skills.findIndex((s) => s.status === 'practicing')
+      const nextOutcome = input.lesson.lesson.masteryOutcomes[practicingIndex + 1]
+      const rules =
+        nextOutcome !== undefined
+          ? [...ACTION_RULES.advance, `Next outcome: ${nextOutcome} — teach exactly this`]
+          : ACTION_RULES.advance
+      return toMove('advance', rules, 'confident-claim')
     }
   }
   if (input.session.progress.completed) {
