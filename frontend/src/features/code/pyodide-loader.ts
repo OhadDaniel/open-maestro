@@ -60,6 +60,15 @@ function makeStdin(lines: readonly string[]): () => string {
   }
 }
 
+function trimTraceback(raw: string): string {
+  const lines = raw.split('\n')
+  const tracebackStart = lines.findLastIndex((l) => l.trim() === 'Traceback (most recent call last):')
+  if (tracebackStart === -1) return raw
+  const errorLine = lines.findIndex((l, i) => i > tracebackStart && /^[A-Za-z_][\w.]*Error\b/.test(l.trim()))
+  if (errorLine === -1) return raw
+  return [...lines.slice(0, tracebackStart), ...lines.slice(errorLine)].join('\n').trim()
+}
+
 export async function runPython(
   code: string,
   stdinLines: readonly string[] = [],
@@ -76,6 +85,6 @@ export async function runPython(
     await pyodide.runPythonAsync(code)
     return { output, ok: true }
   } catch (error) {
-    return { output: `${output}${String(error)}`, ok: false }
+    return { output: trimTraceback(`${output}${String(error)}`), ok: false }
   }
 }
