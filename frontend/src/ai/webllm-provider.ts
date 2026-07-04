@@ -36,6 +36,11 @@ function toWebLlmMessages(request: ProviderRequest): ChatCompletionMessageParam[
   return [system, ...turns]
 }
 
+const SAMPLING = {
+  temperature: 0.7,
+  top_p: 0.9,
+} as const
+
 export class WebLlmProvider implements TutorProvider {
   private readonly engine: MLCEngineInterface
 
@@ -61,6 +66,8 @@ export class WebLlmProvider implements TutorProvider {
     const stream = await this.engine.chat.completions.create({
       stream: true,
       messages: toWebLlmMessages(request),
+      temperature: SAMPLING.temperature,
+      top_p: SAMPLING.top_p,
       extra_body: { enable_thinking: false },
     })
     for await (const chunk of stream) {

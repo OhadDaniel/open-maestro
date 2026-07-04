@@ -14,6 +14,8 @@ export const SHARED_TEACHING_RULES = [
   'If an explanation must be longer, break it into short lines so it is easy to absorb; never a wall of text.',
   'If the student sounds stuck or nervous, acknowledge the feeling before explaining anything.',
   'Reinforce momentum: remind the student how far they have come and what comes next.',
+  'Your first sentence must directly react to what the student just said — acknowledge or build on it before teaching.',
+  'Never reproduce a lesson chunk verbatim; rephrase every concept in your own voice.',
 ]
 
 export const PROGRESSION_RULES = [
