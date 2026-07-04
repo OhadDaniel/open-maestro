@@ -13,7 +13,7 @@ export function useLessonThread(baked: BakedLesson, sessionProvider: TutorProvid
     () => resolveTutorProvider(sessionProvider, baked, profile.name),
     [sessionProvider, baked, profile.name],
   )
-  const session = useMemo(() => createSession(baked.lesson.id), [baked.lesson.id])
+  const initialSession = useMemo(() => createSession(baked.lesson.id), [baked.lesson.id])
 
   const onProfileLearned = useCallback((learned: LearnerProfile) => {
     saveProfile(learned)
@@ -23,7 +23,7 @@ export function useLessonThread(baked: BakedLesson, sessionProvider: TutorProvid
   const { messages, isStreaming, session, beginLesson, sendMessage, skipTyping } = useTutorChat(
     provider,
     baked,
-    session,
+    initialSession,
     profile,
     onProfileLearned,
     () => {},
