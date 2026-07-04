@@ -48,11 +48,20 @@ async function typewriterReveal(
   onReveal(text)
 }
 
-// H10(c): repetition guard helpers
+// Fix 1: repetition + phrase guard helpers
 const REPETITION_KEYWORD = /[a-z]{5,}/g
-const REPETITION_THRESHOLD = 0.6
-const REPHRASE_DIRECTIVE = 'React to what just happened, say it differently, shorter.'
+const REPETITION_THRESHOLD = 0.45
 const MIN_REPETITION_LENGTH = 40
+const REPHRASE_DIRECTIVE =
+  "Your previous message was too similar to the one before it. Say something new: react ONLY to what they just said or ran — do not repeat any sentence you already used."
+
+// Boilerplate phrases that signal model is echoing its own prior output
+const PARROTED_PHRASES: readonly string[] = [
+  "here's a nudge",
+  "in this course you learn",
+  "as i mentioned",
+  "as we discussed",
+]
 
 function repetitionKeywords(text: string): Set<string> {
   return new Set(text.toLowerCase().match(REPETITION_KEYWORD) ?? [])
@@ -65,6 +74,13 @@ function isRepetitive(draft: string, prevTutor: string): boolean {
   const prevWords = repetitionKeywords(prevTutor)
   const overlap = [...draftWords].filter((w) => prevWords.has(w)).length
   return overlap / draftWords.size > REPETITION_THRESHOLD
+}
+
+function hasParrotedPhrase(draft: string, prevTutor: string): boolean {
+  if (prevTutor.length === 0) return false
+  const draftLow = draft.toLowerCase()
+  const prevLow = prevTutor.toLowerCase()
+  return PARROTED_PHRASES.some((p) => draftLow.includes(p) && prevLow.includes(p))
 }
 
 export type TurnInput = {
@@ -235,26 +251,28 @@ export async function handleTurn(input: TurnInput, deps: HarnessDeps): Promise<T
     misconception,
   })
 
-  // Generate draft without streaming — emit after all guards pass
+  const prevTutor = input.messages.findLast((m) => m.role === 'assistant')?.content ?? ''
   let draft: string
   if (isGuardedMode(input.session.mode)) {
+    // Guarded: batch-generate with leak + grounding guards, then emit once
     draft = await generateGuarded(request, input, deps)
+    if (isRepetitive(draft, prevTutor) || hasParrotedPhrase(draft, prevTutor)) {
+      draft = await regenerate(request, REPHRASE_DIRECTIVE, deps)
+    }
+    input.onToken(draft)
   } else {
-    draft = await deps.tutor.stream(request, NO_STREAM)
-    // P1-4: grounding guard applies to all modes
+    // Non-guarded: stream tokens live to UI (Fix 4)
+    draft = await deps.tutor.stream(request, input.onToken)
+    // P1-4: grounding guard
     const grounding = deps.groundingGuard(draft, input.baked)
     if (grounding.tripped && grounding.directive !== undefined) {
       draft = await regenerate(request, grounding.directive, deps)
     }
+    // Fix 1: repetition + phrase guard (useTutorChat reconciles UI via returned draft)
+    if (isRepetitive(draft, prevTutor) || hasParrotedPhrase(draft, prevTutor)) {
+      draft = await regenerate(request, REPHRASE_DIRECTIVE, deps)
+    }
   }
-
-  // H10(c): repetition guard — regenerate if draft is too similar to previous tutor message
-  const prevTutor = input.messages.findLast((m) => m.role === 'assistant')?.content ?? ''
-  if (isRepetitive(draft, prevTutor)) {
-    draft = await regenerate(request, REPHRASE_DIRECTIVE, deps)
-  }
-
-  input.onToken(draft)
 
   const effects = applySessionEffects(input.session, move, mastery)
   queueMicrotask(() => {

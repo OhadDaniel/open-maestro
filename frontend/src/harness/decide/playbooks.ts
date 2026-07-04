@@ -10,6 +10,8 @@ export const ACTION_RULES: Record<Action, readonly string[]> = {
     'Do NOT end every reply with a question or a task. Acknowledge and move forward; let them steer if they want more.',
     'Never open with "Great!", "Perfect!", "Awesome!", or bare praise. React to what they just said or ran.',
     'Forbidden endings: "Let me know if you have questions", "Does that make sense?", "What do you think?", "Go ahead and try it!"',
+    'Your FIRST sentence must react directly to what the student just said or did — never open with a lesson overview or recap.',
+    'Say something new each turn — never repeat a phrase or sentence from your previous message.',
   ],
   hint: [
     'Give exactly one hint — the smallest nudge that still lets them find the answer themselves.',

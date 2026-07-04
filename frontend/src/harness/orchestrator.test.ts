@@ -117,7 +117,7 @@ describe('handleTurn — H10 run-mastery + anti-stuck + repetition guard', () =>
     const provider: TutorProvider = {
       async *streamMessage(): AsyncIterable<ProviderStreamEvent> {
         callCount += 1
-        // First call: repetitive. Second call (regenerate): different.
+        // First call: repetitive (>45% word overlap). Second call: fresh.
         const text = callCount === 1
           ? 'Please write a print statement using the print function to display output with print'
           : 'Now try running it — what happens?'
@@ -127,23 +127,54 @@ describe('handleTurn — H10 run-mastery + anti-stuck + repetition guard', () =>
     }
     const deps = defaultHarnessDeps(provider)
     const session = createSession(WRITING_YOUR_FIRST_PROGRAM.lesson.id)
-    let emitted = ''
     const prevTutorText = 'Please write a print statement using the print function to display output with print'
-    await handleTurn(
+    const { draft } = await handleTurn(
       {
         userMessage: 'ok',
         baked: WRITING_YOUR_FIRST_PROGRAM,
         session,
         profile: emptyProfile(),
         messages: [{ role: 'assistant', content: prevTutorText }],
-        onToken: (t) => { emitted = t },
+        onToken: () => {},
+        onProfileLearned: () => {},
+        onSessionUpdated: () => {},
+      },
+      deps,
+    )
+    // Guard fires → regenerate → returned draft is the replacement
+    expect(callCount).toBe(2)
+    expect(draft).toBe('Now try running it — what happens?')
+  })
+
+  it('H10(c): phrase guard regenerates when same boilerplate phrase appears in consecutive turns', async () => {
+    let callCount = 0
+    const provider: TutorProvider = {
+      async *streamMessage(): AsyncIterable<ProviderStreamEvent> {
+        callCount += 1
+        const text = callCount === 1
+          ? "Here's a nudge: remember to use the print function with parentheses"
+          : "Try typing print and see what the editor suggests"
+        yield { type: 'text_delta', text }
+        yield { type: 'message_stop', stopReason: 'stop' }
+      },
+    }
+    const deps = defaultHarnessDeps(provider)
+    const session = createSession(WRITING_YOUR_FIRST_PROGRAM.lesson.id)
+    const { draft } = await handleTurn(
+      {
+        userMessage: 'how?',
+        baked: WRITING_YOUR_FIRST_PROGRAM,
+        session,
+        profile: emptyProfile(),
+        messages: [{ role: 'assistant', content: "Here's a nudge: start with the word print" }],
+        onToken: () => {},
         onProfileLearned: () => {},
         onSessionUpdated: () => {},
       },
       deps,
     )
     expect(callCount).toBe(2)
-    expect(emitted).toBe('Now try running it — what happens?')
+    expect(draft).toBe("Try typing print and see what the editor suggests")
   })
 })
 
