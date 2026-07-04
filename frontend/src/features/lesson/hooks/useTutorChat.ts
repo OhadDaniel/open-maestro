@@ -51,14 +51,19 @@ export function useTutorChat(
   const [messages, setMessages] = useState<ChatMessage[]>([])
   const [isStreaming, setIsStreaming] = useState(false)
   const [session, setSession] = useState<TutorSession>(initialSession)
+  const sessionRef = useRef<TutorSession>(initialSession)
   const deps = useMemo(() => defaultHarnessDeps(provider), [provider])
   const skipRef = useRef(false)
   const skipTyping = useCallback(() => { skipRef.current = true }, [])
 
-  // H10(b): anti-stuck tracking refs
+  const onSessionUpdated = useCallback((updated: TutorSession) => {
+    sessionRef.current = updated
+    setSession(updated)
+  }, [])
+
+  // stuck-outcome tracking refs
   const lastPracticingIdxRef = useRef(-1)
   const stuckCountRef = useRef(0)
-  const runOkInWindowRef = useRef(false)
 
   const seedTutorMessage = useCallback((text: string) => {
     setMessages((prev) => [...prev, { id: nextId(), role: 'tutor', text }])
@@ -105,18 +110,14 @@ export function useTutorChat(
         return
       }
 
-      // H10(b): update stuck-outcome tracking before the turn
-      const mastery = masteryTracer(session, baked)
+      // stuck-outcome tracking before the turn
+      const mastery = masteryTracer(sessionRef.current, baked)
       const practicingIdx = mastery.skills.findIndex((s) => s.status === 'practicing')
       if (practicingIdx >= 0 && practicingIdx === lastPracticingIdxRef.current) {
         stuckCountRef.current += 1
       } else {
         stuckCountRef.current = 1
         lastPracticingIdxRef.current = practicingIdx
-        runOkInWindowRef.current = false
-      }
-      if (runResult?.ok && runResult.output.trim().length > 0) {
-        runOkInWindowRef.current = true
       }
 
       const studentMessage: ChatMessage = {
@@ -136,7 +137,7 @@ export function useTutorChat(
         {
           userMessage: trimmed,
           baked,
-          session,
+          session: sessionRef.current,
           profile,
           messages: history,
           onToken: (token) =>
@@ -148,18 +149,15 @@ export function useTutorChat(
               ),
             ),
           onProfileLearned,
-          onSessionUpdated: setSession,
+          onSessionUpdated,
           runResult,
           stuckCount: stuckCountRef.current,
-          hasRunOk: runOkInWindowRef.current,
         },
         deps,
       )
 
-      // H10(b): reset tracking when mastery advances
       if (masteryAdvanced) {
         stuckCountRef.current = 0
-        runOkInWindowRef.current = false
         lastPracticingIdxRef.current = -1
       }
 
@@ -179,7 +177,7 @@ export function useTutorChat(
       setIsStreaming(false)
       onReplyComplete(replyId)
     },
-    [deps, baked, session, profile, messages, isStreaming, onProfileLearned, onReplyComplete],
+    [deps, baked, session, profile, messages, isStreaming, onProfileLearned, onReplyComplete, onSessionUpdated],
   )
 
   return { messages, isStreaming, session, seedTutorMessage, beginLesson, sendMessage, skipTyping }
