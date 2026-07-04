@@ -22,7 +22,7 @@ const CUE_GROUPS: readonly CueGroup[] = [
   },
   {
     state: 'confident',
-    phrases: ['i already know', 'got it', 'obviously', 'i know this', 'this is easy', 'too easy'],
+    phrases: ['i know this', 'already know', 'too easy', "i've done this", 'ive done this'],
   },
   {
     state: 'engaged',
