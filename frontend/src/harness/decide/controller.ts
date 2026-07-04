@@ -67,6 +67,11 @@ function stepContextRules(
   if (masteredTexts.length > 0) {
     rules.push(`Already covered — do not re-teach: ${masteredTexts.join(', ')}.`)
   }
+  if (masteredTexts.length === 0) {
+    rules.push(
+      'This lesson uses code — mention the **Open code panel** button at the bottom of the chat so the student knows where to write and run Python.',
+    )
+  }
   return rules
 }
 
