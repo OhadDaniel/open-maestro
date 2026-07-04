@@ -23,7 +23,7 @@ export function GetKnowScreen() {
   const { provider } = useSession()
   const { markFirstRunDone } = useProgressContext()
   const { goTo } = useDeckNav()
-  const { messages, generating, beat, send } = useLesson0Interview(provider)
+  const { messages, generating, scriptedTyping, beat, send, skipBeat } = useLesson0Interview(provider)
   const bottomRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
@@ -61,11 +61,12 @@ export function GetKnowScreen() {
         </div>
 
         <div
+          onClick={skipBeat}
           style={{ position: 'absolute', top: 88, bottom: 88, left: 0, right: 0, overflowY: 'auto', padding: '24px 40px', zIndex: 5 }}
         >
           <div style={{ maxWidth: 660, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 14, paddingBottom: 8 }}>
             {messages.map((message) => {
-              const showTyping = generating && message.role === 'tutor' && message.text.length === 0
+              const showTyping = (generating || scriptedTyping) && message.role === 'tutor' && message.text.length === 0
               return (
                 <AnimatedBubble key={message.id}>
                   {showTyping ? (
