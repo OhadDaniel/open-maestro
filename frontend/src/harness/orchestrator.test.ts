@@ -99,6 +99,7 @@ describe('openLesson (slice 2)', () => {
         baked: WRITING_YOUR_FIRST_PROGRAM,
         session,
         profile,
+        skipRef: { current: true },
         onToken: (t) => { streamed += t },
       },
       deps,

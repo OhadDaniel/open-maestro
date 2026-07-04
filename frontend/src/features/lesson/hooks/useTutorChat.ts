@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useMemo, useRef, useState } from 'react'
 import type { TutorProvider } from '../../../ai/provider'
 import type { ProviderMessage } from '../../../ai/provider.types'
 import type { BakedLesson } from '../../../content/baked.types'
@@ -33,6 +33,7 @@ type UseTutorChat = {
   seedTutorMessage: (text: string) => void
   beginLesson: () => Promise<void>
   sendMessage: (text: string) => Promise<void>
+  skipTyping: () => void
 }
 
 export function useTutorChat(
@@ -47,6 +48,8 @@ export function useTutorChat(
   const [isStreaming, setIsStreaming] = useState(false)
   const [session, setSession] = useState<TutorSession>(initialSession)
   const deps = useMemo(() => defaultHarnessDeps(provider), [provider])
+  const skipRef = useRef(false)
+  const skipTyping = useCallback(() => { skipRef.current = true }, [])
 
   const seedTutorMessage = useCallback((text: string) => {
     setMessages((prev) => [...prev, { id: nextId(), role: 'tutor', text }])
@@ -56,6 +59,7 @@ export function useTutorChat(
     if (isStreaming) {
       return
     }
+    skipRef.current = false
     const replyId = nextId()
     setMessages((prev) => [...prev, { id: replyId, role: 'tutor', text: '' }])
     setIsStreaming(true)
@@ -64,6 +68,7 @@ export function useTutorChat(
         baked,
         session,
         profile,
+        skipRef,
         onToken: (token) =>
           setMessages((prev) =>
             prev.map((message) =>
@@ -134,5 +139,5 @@ export function useTutorChat(
     [deps, baked, session, profile, messages, isStreaming, onProfileLearned, onReplyComplete],
   )
 
-  return { messages, isStreaming, session, seedTutorMessage, beginLesson, sendMessage }
+  return { messages, isStreaming, session, seedTutorMessage, beginLesson, sendMessage, skipTyping }
 }

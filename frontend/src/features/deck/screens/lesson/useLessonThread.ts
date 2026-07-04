@@ -20,7 +20,7 @@ export function useLessonThread(baked: BakedLesson, sessionProvider: TutorProvid
     setProfile(learned)
   }, [])
 
-  const { messages, isStreaming, beginLesson, sendMessage } = useTutorChat(
+  const { messages, isStreaming, beginLesson, sendMessage, skipTyping } = useTutorChat(
     provider,
     baked,
     session,
@@ -40,5 +40,5 @@ export function useLessonThread(baked: BakedLesson, sessionProvider: TutorProvid
 
   const send = useCallback((text: string) => void sendMessage(text), [sendMessage])
 
-  return { messages, isStreaming, send }
+  return { messages, isStreaming, send, skipTyping }
 }

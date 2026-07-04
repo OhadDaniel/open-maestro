@@ -34,11 +34,11 @@ export function LessonScreen() {
 }
 
 function LessonThread({ onOpenCode }: { onOpenCode: () => void }) {
-  const { messages, isStreaming, send } = useLessonThreadContext()
+  const { messages, isStreaming, send, skipTyping } = useLessonThreadContext()
 
   return (
     <>
-      <div style={{ flex: 1, overflowY: 'auto', padding: '28px 30px 12px' }}>
+      <div onClick={skipTyping} style={{ flex: 1, overflowY: 'auto', padding: '28px 30px 12px', cursor: isStreaming ? 'default' : undefined }}>
         <div style={{ maxWidth: 660, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 14 }}>
           {messages.length === 0 ? (
             <TypingBubble />

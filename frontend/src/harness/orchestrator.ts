@@ -23,6 +23,26 @@ import { groundingGuard } from './verify/groundingGuard'
 
 export type OnToken = (text: string) => void
 
+const TW_CHARS = 3
+const TW_DELAY_MS = 25
+
+async function typewriterEmit(
+  text: string,
+  onToken: OnToken,
+  skipRef?: { current: boolean },
+): Promise<void> {
+  for (let i = 0; i < text.length; i += TW_CHARS) {
+    if (skipRef?.current) {
+      onToken(text.slice(i))
+      return
+    }
+    onToken(text.slice(i, Math.min(i + TW_CHARS, text.length)))
+    if (i + TW_CHARS < text.length) {
+      await new Promise<void>((r) => setTimeout(r, TW_DELAY_MS))
+    }
+  }
+}
+
 export type TurnInput = {
   userMessage: string
   baked: BakedLesson
@@ -200,6 +220,7 @@ export type OpeningInput = {
   session: TutorSession
   profile: LearnerProfile
   onToken: OnToken
+  skipRef?: { current: boolean }
 }
 
 const OPENING_MOVE: TeachingMove = {
@@ -239,7 +260,7 @@ export function renderOpeningLine(baked: BakedLesson, profile: LearnerProfile): 
 export async function openLesson(input: OpeningInput, deps: HarnessDeps): Promise<string> {
   if (input.baked.openingLine.length > 0) {
     const text = renderOpeningLine(input.baked, input.profile)
-    input.onToken(text)
+    await typewriterEmit(text, input.onToken, input.skipRef)
     return text
   }
   const messages: ProviderMessage[] = [{ role: 'user', content: OPENING_BOOTSTRAP }]
