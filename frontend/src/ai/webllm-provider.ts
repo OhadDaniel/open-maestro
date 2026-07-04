@@ -37,8 +37,8 @@ function toWebLlmMessages(request: ProviderRequest): ChatCompletionMessageParam[
 }
 
 const SAMPLING = {
-  temperature: 0.7,
-  top_p: 0.9,
+  temperature: 0.4,
+  top_p: 0.85,
 } as const
 
 export class WebLlmProvider implements TutorProvider {
