@@ -43,7 +43,9 @@ describe('evaluateMasteryTurn', () => {
       runResult: { ok: true, output: 'My dream is to build an app' },
     })
     expect(result?.kind).toBe('lesson-complete')
-    expect(result?.evidence?.quotedStrings).toContain('My dream is to build an app')
+    if (result?.kind === 'lesson-complete') {
+      expect(result.evidence?.quotedStrings).toContain('My dream is to build an app')
+    }
   })
 
   // Test 2: canned "Hello, PY101!" on welcome → demonstrated outcome 1 only (not complete)
@@ -115,7 +117,9 @@ describe('evaluateMasteryTurn', () => {
       runResult: { ok: true, output: 'Hello, world!' },
     })
     expect(result?.kind).toBe('lesson-complete')
-    expect(result?.evidence?.quotedStrings).toContain('Hello, world!')
+    if (result?.kind === 'lesson-complete') {
+      expect(result.evidence?.quotedStrings).toContain('Hello, world!')
+    }
   })
 
     // Bonus: print on 1st of 2 outcomes → demonstrated (not complete)
