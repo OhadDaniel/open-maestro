@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { flushSync } from 'react-dom'
 import type { TutorProvider } from '../../../ai/provider'
 import type { ProviderMessage } from '../../../ai/provider.types'
@@ -8,6 +8,7 @@ import { defaultHarnessDeps, handleTurn, openLesson } from '../../../harness/orc
 import type { LearnerProfile } from '../../../memory/learner-profile.types'
 import { masteryTracer } from '../../../harness/sense/masteryTracer'
 import type { ChatMessage } from '../lesson.types'
+import { saveThread } from '../thread-store'
 
 const HISTORY_LIMIT = 12
 
@@ -47,8 +48,9 @@ export function useTutorChat(
   profile: LearnerProfile,
   onProfileLearned: (profile: LearnerProfile) => void,
   onReplyComplete: (replyId: string) => void,
+  initialMessages?: ChatMessage[],
 ): UseTutorChat {
-  const [messages, setMessages] = useState<ChatMessage[]>([])
+  const [messages, setMessages] = useState<ChatMessage[]>(initialMessages ?? [])
   const [isStreaming, setIsStreaming] = useState(false)
   const [session, setSession] = useState<TutorSession>(initialSession)
   const sessionRef = useRef<TutorSession>(initialSession)
@@ -60,6 +62,13 @@ export function useTutorChat(
     sessionRef.current = updated
     setSession(updated)
   }, [])
+
+  // Fix 5: persist thread to localStorage after each complete turn
+  useEffect(() => {
+    if (!isStreaming && messages.length > 0) {
+      saveThread(baked.lesson.id, messages)
+    }
+  }, [isStreaming, messages, baked.lesson.id])
 
   // stuck-outcome tracking refs
   const lastPracticingIdxRef = useRef(-1)
